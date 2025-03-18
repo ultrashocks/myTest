@@ -1,0 +1,44 @@
+@use "modules";
+
+//공통
+body,
+html {
+  height: 100%;
+}
+
+body {  
+  overflow-x: auto;
+  overflow-y: hidden;
+  background-color: #757575;
+
+}
+
+#app,
+.wrap {
+  height: 100%;
+}
+
+.router-wrap {
+  background-color: #fff;
+  max-width: modules.$max-width;
+  min-width: modules.$min-width;
+  margin: 0 auto;
+  max-height: modules.$max-height;
+  height: 100%;
+  position: relative;
+}
+
+.sub-router,
+.sub-router__inner {
+  height: 100%;
+}
+
+.contents-wrap{
+  height: calc(100% - modules.$top-h);
+  box-sizing: border-box;
+  max-width: modules.$max-width;
+  margin: 0 auto;
+  .contents{
+    height: calc(100% - 57px);
+  }
+}

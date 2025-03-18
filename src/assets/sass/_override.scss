@@ -1,0 +1,127 @@
+@use "modules";
+
+.v-select,
+.vs__dropdown-toggle {
+  height: 32px;
+  padding: 0;  
+}
+.vs__dropdown-toggle {
+  border-radius: 4px;
+  border: 1px solid #666666;
+  background-color: #fff;
+  // border: 1px solid #666666;
+  // background-color: #F3F5F6;
+  &:hover{
+    border: 1px solid #000;
+  }
+}
+.vs--open{
+    .vs__dropdown-toggle {
+        border: 1px solid #000;
+    }
+}
+.vs__selected {
+  height: 32px;
+  margin: 0;
+  margin-left: 4px;
+  font-size: 14px !important; 
+  padding-left: 10px;
+}
+:root {
+  --vs-controls-size: 0.8;
+  --vs-actions-padding: 2px 7px 0 3px;
+}
+.vs__dropdown-menu{
+  font-size: 14px !important;
+}
+.v-select.drop-up.vs--open .vs__dropdown-toggle {
+  border-radius: 0 0 4px 4px;
+  border-top-color: transparent;
+  border-bottom-color: rgba(60, 60, 60, 0.26);
+}
+[data-popper-placement='top'] {
+  border-radius: 4px 4px 0 0;
+  border-top-style: solid;
+  border-bottom-style: none;
+  box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.15);
+}
+.vs__dropdown-menu {
+  min-width: 50px;
+  &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      background-color: #eee;
+  }
+  &::-webkit-scrollbar {
+      width: 6px;
+      background-color: #eee;
+  }
+  &::-webkit-scrollbar-thumb {
+      background-color: #727272;
+  }
+}
+.vs__actions{
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+.vs__open-indicator{
+  position: absolute;
+  right: 9px;
+  top: 10px;
+}
+.vs__search:focus{
+    border: none !important;
+}
+.icon-v-select{
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: url(../images/icon_selectbox_arrow.svg) no-repeat 50%;
+    position: absolute;
+    right: 7px;
+    top: 4px;    
+}
+.vs--open{
+    .icon-v-select{
+        transform: rotate(180deg);
+    }    
+}
+.v-select__wrap{
+    display: inline-block;    
+}
+.vs__dropdown-option--highlight{
+  background-color: modules.$focus-color;
+}
+.vs--unsearchable .vs__search {
+    opacity: 1;
+    height: 26px;
+}
+.vs--disabled{  
+  .vs__dropdown-toggle{
+    cursor: default;
+    opacity: 0.5;
+  }
+  &.readonly{
+    .vs__dropdown-toggle{
+      opacity: 1;
+    }    
+    .vs__selected{
+      color: #000;
+    }
+  }
+  
+} 
+
+.v-popper__popper.v-popper__popper--shown{
+  box-shadow: none;
+}
+.v-popper--theme-tooltip .v-popper__inner{
+  background-color: #575654;
+  color: #fff;
+}
+.v-popper--theme-tooltip .v-popper__arrow-outer{
+  border-color: #575654;
+}
+

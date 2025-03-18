@@ -1,0 +1,127 @@
+@keyframes loader-circle {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dialogbg {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes dialogShow {
+  from {
+    transform: scale(0.5, 0.5);
+  }
+  to {
+    transform: scale(1, 1);
+  }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.4s ease;  
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-loading-enter-active,
+.fade-loading-leave-active {
+  transition: all 0.6s ease;
+}
+.fade-loading-enter-from,
+.fade-loading-leave-to {
+  opacity: 0;
+}
+
+.fade-view-enter-active,
+.fade-view-leave-active {
+  transition: all 0.3s ease;
+}
+.fade-view-enter-from,
+.fade-view-leave-to {
+  opacity: 0;
+}
+
+.fade-infowindow-enter-active,
+.fade-infowindow-leave-active {
+  transition: all 0.3s ease;
+}
+.fade-infowindow-enter-from,
+.fade-infowindow-leave-to {
+  transform: translateY(10px);
+  opacity: 0;
+}
+
+.slider-view-enter-active,
+.slider-view-leave-active {
+  transition: all 0.6s ease;
+}
+.slider-view-enter-from,
+.slider-view-leave-to {
+  opacity: 0;
+  transform: translate(-50%, 60px);
+}
+
+.targeting-side-enter-active,
+.targeting-side-leave-active {
+  transition: all 0.4s ease;
+}
+.targeting-side-enter-from,
+.targeting-side-leave-to {
+  opacity: 0;
+  // flex: 0 0 0px;
+  transform: translateX(-270px);
+}
+
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.fade-prev-leave-active {
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+.fade-prev-leave-to {
+  transform: translateY(200px);
+  opacity: 0;
+}
+.fade-prev-enter-active {
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+.fade-prev-enter-from {
+  transform: translateY(-200px);
+  opacity: 0;
+}
+
+.fade-next-leave-active {
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+.fade-next-leave-to {
+  transform: translateY(-200px);
+  opacity: 0;
+}
+.fade-next-enter-active {
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+.fade-next-enter-from {
+  transform: translateY(200px);
+  opacity: 0;
+}

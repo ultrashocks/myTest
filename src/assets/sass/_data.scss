@@ -1,0 +1,63 @@
+@use 'sass:map'; 
+
+$base: 14px;
+$max-width: 1920px;
+$min-width: 1440px;
+$max-height: 945px;
+
+$focus-color: #E30084;
+$over-color: #f3269e;
+$gray-color: #66707A;
+$gray-over-color: #7e8994;
+$dark-default: #000;
+
+$top-h: 63px;
+$bottom-h: 37px;
+
+$color_primary: #E30084;
+$color_secondary: #000000;
+$color_statesSuccess: #00AA02;
+$color_statusWarning: #F86800;
+$color_white: #FFFFFF;
+$color_blueG_50: #F9FAFB;
+$color_blueG_100: #F3F5F6;
+$color_blueG_200: #F2F3F4;
+$color_blueG_300: #D4D5D7;
+$color_blueG_400: #A8B3BD;
+$color_blueG_500: #7D7D7D;
+$color_blueG_600: #666666;
+$color_blueG_700: #525960;
+$color_blueG_800: #3B4044;
+$color_statusError: #E22A21;
+$color_blusG_900: #181A1B;
+$color_bgRed: #FDEDF6;
+$color_hilight: #FFFBE9;
+$color_link: #007CDB;
+$color_v: #8553FE;
+$color_bgSelected: #FEF5FA;
+$color_link_hover: #003E6D;
+
+$font-styles: (
+  text_body14: (size: 14px, weight: 400),
+  text_body14_B: (size: 14px, weight: 600),
+  text_smb12: (size: 12px, weight: 600),
+  text_label_Wbtn14: (size: 14px, weight: 700),
+  text_smb13: (size: 13px, weight: 600),
+  text_smb14: (size: 14px, weight: 600),
+  text_smb18: (size: 18px, weight: 600),
+  text_smb20: (size: 20px, weight: 600),
+  text_m13: (size: 13px, weight: 500),
+  text_R12: (size: 12px, weight: 400),
+  text_R24: (size: 24px, weight: 400),
+  text_smb24: (size: 24px, weight: 600),
+  text_smb16: (size: 16px, weight: 600),
+);
+
+@mixin font-style($size) {
+    $style: map.get($font-styles, $size);
+    font-size: map.get($style, size); 
+    font-weight: map.get($style, weight);  
+}
+
+// @include modules.font-style(text_body14);
+// font-color: modules.$color_blueG_600;
