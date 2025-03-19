@@ -1,66 +1,36 @@
 <template>
   <div class="stage-items step2">
     <div class="item-row">
-      <div class="title-s">타겟 서비스 선택</div>
+      <div class="title-s">목표 타겟 건수 설정</div>
       <div class="title">
-        어떤 <strong class="red">서비스</strong>를
-        <strong>타겟</strong> 하시나요?
+        <strong>목표 타겟</strong> <strong class="red">건수</strong>가
+        있으신가요?
       </div>
       <div class="btn-radios">
         <label>
           <input
             type="radio"
             name="customer"
-            value="모바일"
+            value="1"
             v-model="selectedValue"
           />
-          <span class="btn-radio">모바일</span>
+          <span class="btn-radio">있어요</span>
         </label>
         <label>
           <input
             type="radio"
             name="customer"
-            value="인터넷"
+            value="0"
             v-model="selectedValue"
           />
-          <span class="btn-radio">인터넷</span>
+          <span class="btn-radio"
+            >없어요<span class="txt-s">(평균값 적용)</span></span
+          >
         </label>
-        <label>
-          <input
-            type="radio"
-            name="customer"
-            value="TV"
-            v-model="selectedValue"
-          />
-          <span class="btn-radio">TV</span>
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="customer"
-            value="스마트홈"
-            v-model="selectedValue"
-          />
-          <span class="btn-radio">스마트홈</span>
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="customer"
-            value="기타"
-            v-model="selectedValue"
-          />
-          <span class="btn-radio">기타</span>
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="customer"
-            value="기타2"
-            v-model="selectedValue"
-          />
-          <span class="btn-radio">기타2</span>
-        </label>
+      </div>
+      <div class="step-info mt16">
+        <i class="icon"></i>목표 타겟 없음을 선택하시면, 비슷한 타겟팅의
+        평균으로 자동 세팅됩니다.
       </div>
     </div>
     <div class="step2-controls">

@@ -18,34 +18,68 @@
     height: 36px;
     box-sizing: border-box;
     width: 100%;
+    &::placeholder{
+        color: modules.$color_blueG_500;
+    }
     
     &:read-only{
         border: 1px solid #666666;
         background-color: #F3F5F6;
-        color: #000;
+        color: #181A1B;
         &::placeholder{
             color: #181A1B;
         }
-        &:focus{
-            border: 1px solid #666666 !important;
-            background-color: #F3F5F6 !important;
-            box-shadow: none !important;
-        }      
-        &:hover{
-            border: 1px solid #666666 !important;
-            background-color: #F3F5F6 !important;
-            color: #000 !important;
-        }  
+        // &:focus{
+        //     border: 1px solid #666666 !important;
+        //     background-color: #F3F5F6 !important;
+        //     box-shadow: none !important;
+        // }      
+        // &:hover{
+        //     border: 1px solid #666666 !important;
+        //     background-color: #F3F5F6 !important;
+        //     color: #000 !important;
+        // }  
     }
     &:disabled{
-        border: 1px solid #D4D5D7;
-        background-color: #F3F5F6;
-        color: #7D7D7D;
-        &:hover{
-            border: 1px solid #D4D5D7 !important;
-            background-color: #F3F5F6 !important;
-            color: #7D7D7D !important;
-        }  
+        border: 1px solid #666666;
+        background-color: #fff;
+        color: #181A1B;
+        // &:hover{
+        //     border: 1px solid #D4D5D7 !important;
+        //     background-color: #F3F5F6 !important;
+        //     color: #7D7D7D !important;
+        // }  
+    }
+  }
+  .input-marketing__code{
+    input{
+        &:read-only{
+            border: 1px solid #666666;
+            background-color: #fff;
+            color: #181A1B;
+            &::placeholder{
+                color: #181A1B;
+            }
+            // &:focus{
+            //     border: 1px solid #666666 !important;
+            //     background-color: #F3F5F6 !important;
+            //     box-shadow: none !important;
+            // }      
+            &:hover{
+                border: 1px solid #666666;
+                background-color: #fff;
+                color: #181A1B;
+            }  
+        }
+        &:disabled{
+            border: 1px solid #666666;
+            background-color: #fff;
+            color: #181A1B;
+            &:hover{
+               border: 1px solid #666666;
+            background-color: #fff;
+            }  
+        }
     }
   }
 }
@@ -158,7 +192,7 @@
                 //padding: 16px 12px;
                 .label{
                     font-weight: 600;
-                    font-size: 22px;
+                    font-size: 18px;
                     color: #7D7D7D;
                     cursor: pointer;
                     transition: all ease 0.3s;
@@ -186,6 +220,17 @@
                 }
             }
         }
+        .btn {
+            border-radius: 4px;
+            padding: 4px;
+            border: 1px solid #2b2d42;
+            &:hover {
+                border: 1px solid #444;
+                color: #333;
+                background-color: #333;
+            }
+        }
+
     }
 
     .target-contents{
@@ -224,6 +269,58 @@
             }
         }
     }
+    .footer-button-box {
+        margin-top: 8px;
+        display: flex;
+        justify-content: space-between;
+        .footer-button-first-box {
+            display: flex;
+            gap: 8px;
+        }
+        .footer-button-last-box {
+            display: flex;
+            gap: 8px;
+            justify-content: end;
+        }
+        button {
+            font-size: 14px;
+            font-weight: 600;
+            color: modules.$color_secondary;
+            border-radius: 4px;
+            border: 1px solid modules.$color_blueG_600;
+            padding: 8px 16px;
+        }
+    }
+
+
+    // 필터 css
+    .filter-container {
+        margin-top: 16px;
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+        }
+        .btn-filter{
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid #666666;
+            color: #666666;
+            background-color: transparent;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            .cnt {
+                color: #000;
+            }
+        }
+        .divider {
+            width: 1px;
+            height: 12px;
+            background-color: #999;
+            margin: 0 16px;
+        }
+    }
+
 }
 
 //타겟팅
@@ -238,7 +335,6 @@
         border-bottom: 1px solid #A8B3BD;
         padding: 0 30px;      
         display: flex;  
-        opacity: 0;
     }
     .step-item{
         height: 100%;
@@ -363,7 +459,6 @@
             display: flex;
             gap: 8px;
         }
-        opacity: 0;
     }
     .btn-targeting{
         display: inline-flex;
@@ -452,7 +547,7 @@
 .stage-items{
      padding-top: 30px;
     &.step1{
-        width: 474px;
+        width: 480px;
     }
     .cms-use{
         display: flex;
@@ -526,6 +621,7 @@
             font-size: 24px;
             color: #000;
             margin-bottom: 20px;
+            letter-spacing: -0.5px;
             strong{
                 font-weight: 600;
                 &.red{
@@ -614,6 +710,19 @@
         &:disabled{
             background-color: #D4D5D7;
             cursor: default;
+        }
+    }
+    .step-info{
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 12px;
+        color: modules.$color_blueG_600;
+        .icon{
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background: url(../images/icon_info.svg) no-repeat 50%;
         }
     }
 }
@@ -734,11 +843,16 @@
         @include modules.custom-scrollbar();
         tr{
             cursor: default;
-            &:nth-child(2n){
-                background-color: #F3F5F6;
-            }
+            border-top: 1px solid modules.$color_blueG_200;
+            box-sizing: border-box;
+            // &:nth-child(2n){
+            //     background-color: #F3F5F6;
+            // }
             &.active{
                 background-color: #FFFBE9 !important;
+            }
+            &:hover{
+                background-color: modules.$color_blueG_100;
             }
         }
         td{
@@ -751,8 +865,8 @@
         }
         .td-col{             
             padding: 0 5px;         
-            min-height: 36px;
-            line-height: 36px;
+            min-height: 35px;
+            line-height: 35px;
             @include modules.textEllipsis(1);        
             &.radio{
                 display: flex;

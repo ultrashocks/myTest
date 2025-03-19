@@ -229,7 +229,6 @@ const isCompleteCheck = obj => {
       return isCompleteCheck(value);
     }
     return value !== '';
-    // return value !== '' && value !== 0;
   });
 };
 
@@ -246,8 +245,7 @@ watch(
   step1.value,
   () => {
     isComplete.value = isCompleteCheck(step1.value);
-    emit('stepComplete', { step: 1, complete: isComplete.value });
-    console.log('isComplete.value========', isComplete.value);
+    // emit('stepComplete', { step: 1, complete: isComplete.value });
     if (isComplete.value) disabledCorver.value = false;
   },
   { immediate: true },

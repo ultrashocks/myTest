@@ -13,6 +13,9 @@
         <div class="label" v-html="tab.label"></div>
       </div>
     </div>
+    <div class="btn">
+      <button class="">icon</button>
+    </div>
     <button class="btn-m target tab-right-btn">
       <div>신규 타겟팅</div>
       <i class="icon"></i>
@@ -25,16 +28,23 @@ import { ref } from 'vue';
 
 const emit = defineEmits(['update:currentTab']);
 
-const listCnt1 = ref(30);
-const listCnt2 = ref(20);
-const listCnt3 = ref(50);
-const listCnt4 = ref(60);
+// const listCnt1 = ref(30);
+// const listCnt2 = ref(20);
+// const listCnt3 = ref(50);
+// const listCnt4 = ref(60);
+//
+// const tabs = ref([
+//   { label: `나의 타겟 (<span class="count">${listCnt1.value}</span>)` },
+//   { label: `우리팀 타겟 (<span class="count">${listCnt2.value}</span>)` },
+//   { label: `공유 받은 타겟 (<span class="count">${listCnt3.value}</span>)` },
+//   { label: `모든 타겟 (<span class="count">${listCnt4.value}</span>)` },
+// ]);
 
 const tabs = ref([
-  { label: `나의 타겟 (<span class="count">${listCnt1.value}</span>)` },
-  { label: `우리팀 타겟 (<span class="count">${listCnt2.value}</span>)` },
-  { label: `공유 받은 타겟 (<span class="count">${listCnt3.value}</span>)` },
-  { label: `모든 타겟 (<span class="count">${listCnt4.value}</span>)` },
+  { label: `나의 타겟` },
+  { label: `우리팀 타겟` },
+  { label: `공유 받은 타겟` },
+  { label: `모든 타겟` },
 ]);
 
 const currentTab = ref(1);
@@ -45,10 +55,4 @@ const onTabClick = index => {
 };
 </script>
 
-<style scoped>
-.count {
-  font-size: 14px;
-  font-weight: bold;
-  color: red;
-}
-</style>
+<style scoped></style>

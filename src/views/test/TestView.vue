@@ -93,32 +93,16 @@
             <hr />
           </div>
           <div class="test-btns">
-            <button @click="alertView" v-tooltip="'Alert'">Alert</button>
-            <button
-              @click="confirmState.view = true"
-              v-tooltip.bottom-start="{
-                content: 'Bottom방향으로',
-                transition: false,
-                hideDelay: 0,
-              }"
-            >
-              Confrim
-            </button>
-            <button @click="onWindowView" v-tooltip.left="'Window'">
-              Window
-            </button>
-            <button @click="loaderView" v-tooltip.right="'Loader'">
-              Loader
-            </button>
+            <button @click="alertView">Alert</button>
+            <button @click="confirmState.view = true">Confrim</button>
+            <button @click="onWindowView">Window</button>
+            <button @click="loaderView">Loader</button>
             <button @click="toastView">Toast</button>
 
             <button
               v-tippy="{
-                content: '즉시 나타나는 툴팁',
-                animation: 'none',
-                placement: 'bottom-start',
-                hideDelay: 0,
-                duration: 0,
+                content: ' 툴팁',
+                placement: 'bottom',
               }"
             >
               마우스를 올려보세요
@@ -158,7 +142,8 @@ import { useSpinner } from '@/composables/spinner';
 import { useSlider } from '@/composables/slider';
 import { ref } from 'vue';
 import { reactive } from 'vue';
-import { readonly } from 'vue';
+import { directive as vTippy } from 'vue-tippy';
+
 const { setAlertStatus } = useAlert();
 const { setSpinnerStatus } = useSpinner();
 const { setSliderStatus } = useSlider();

@@ -335,39 +335,17 @@ strong {
 }
 
 ::placeholder {
-  color: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,1);
   opacity: 1;
 }
 /* placeholder 스타일 지정 */
 input::placeholder {
-  color: rgba(255,255,255,0.15);
-  opacity: 1; /* 파이어폭스에서 뿌옇게 나오는 현상을 방지하기 위한 css */
+  color: rgba(255,255,255,1);
+  opacity: 1; 
 }
-input::-webkit-input-placeholder {
-  color: rgba(255,255,255,0.15);
-  font-weight: 300;
-}
-/* IE */
-input:-ms-input-placeholder {
-  color: rgba(255,255,255,0.15) !important;
-}
-/* Firefox */
-input:-mos-input-placeholder {
-  color: rgba(255,255,255,0.15);
-}
-
 textarea::placeholder {
-  color: rgba(255,255,255,0.15);
-  opacity: 1; /* 파이어폭스에서 뿌옇게 나오는 현상을 방지하기 위한 css */
-}
-textarea::-webkit-input-placeholder {
-  color: rgba(255,255,255,0.15);
-}
-textarea:-ms-input-placeholder {
-  color: rgba(255,255,255,0.15);
-}
-textarea:-mos-input-placeholder {
-  color: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,1);
+  opacity: 1; 
 }
 
 // :-ms-input-placeholder { color: #bfbfbf; }
@@ -510,6 +488,10 @@ input::-webkit-inner-spin-button {
   }
 }
 
+.mt16{
+  margin-top: 16px !important;
+}
+
 /************** 
   공통 컴포넌트
 *************/
@@ -590,7 +572,7 @@ input::-webkit-inner-spin-button {
   z-index: 9000;
   left: 50%;
   top: 0;
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -924,62 +906,38 @@ input::-webkit-inner-spin-button {
   }
 }
 
-// 필터 css
-.filter-container {
-  margin-top: 16px;
-  .button-group {
-    display: flex;
-    justify-content: space-between;
-    gap: 8px;
-  }
-  .btn-filter{
-    padding: 4px 8px;
-    border-radius: 4px;
-    border: 1px solid #666666;
-    color: #666666;
-    background-color: transparent;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    .cnt {
-      color: #000;
-    }
-  }
-  .divider {
-    width: 1px;
-    height: 12px;
-    background-color: #999;
-    margin: 0 16px;
-  }
-}
-
 // 공통 테이블  css
 .table-container {
   //padding: 20px;
-  max-width: 100%;
-
+  overflow: auto;
+  max-height: 20vw;
   .table {
     width: 100%;
     border-collapse: collapse;
-    margin: 10px 0;
+    margin: 10px 0 0;
   }
 
   .table th {
     padding: 7px 8px;
-    border: 1px solid #ddd;
+    border: 1px solid modules.$color_blueG_200;
     //height: 36px;
     font-size: 13px;
   }
   .table td {
     padding: 7px 8px;
-    border: 1px solid #ddd;
+    border: 1px solid modules.$color_blueG_200;
+    border-right: 1px solid transparent;
     //height: 36px;
     font-size: 13px;
+    &:last-child {
+      border-right: 1px solid modules.$color_blueG_200;
+    }
   }
 
-  .table button {
-    font-size: 12px;
-    font-weight: 600;
-  }
+  //.table button {
+  //  font-size: 12px;
+  //  font-weight: 600;
+  //}
 
   .table tr:hover td {
     background-color: #F3F5F6;
@@ -996,12 +954,16 @@ input::-webkit-inner-spin-button {
   }
 
   button {
-    padding: 7px 8px;
+    //padding: 7px 8px;
     background-color: #fff;
     color: #3B4044;
     border: 1px solid #A8B3BD;
     cursor: pointer;
     border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    width: 58px !important;
+    height: 18px;
   }
 
   button:hover {
@@ -1012,11 +974,59 @@ input::-webkit-inner-spin-button {
 
   a {
     color: #007bff;
-    text-decoration: none;
+    text-decoration: underline;
   }
 
   a:hover {
     text-decoration: underline;
+    color: modules.$color_link_hover;
+  }
+}
+
+
+
+// 공통 페이징 css
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  //margin-top: 10px;
+  padding: 10px;
+  border-top: 1px solid modules.$color_blueG_400;
+  border-bottom: 1px solid modules.$color_blueG_400;
+
+  span {
+    cursor: pointer;
+    padding: 5px 10px;
+    //background: #f4f4f4;
+    border-radius: 4px;
+    color: #181A1B;
+  }
+
+  span.active {
+    background: modules.$color_bgRed;
+    color: modules.$color_primary;
+  }
+
+  button {
+    border: none;
+    //background: #007bff;
+    //padding: 5px 10px;
+    cursor: pointer;
+    width: initial !important;
+    height: initial !important;
+    color: modules.$color_blueG_600;
+    &:hover{
+      border: none;
+      color: modules.$color_blueG_600;
+    }
+  }
+
+  button:disabled {
+    // 임시
+    background: #eee;
+    color: #999;
+    cursor: not-allowed;
   }
 }
 

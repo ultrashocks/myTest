@@ -25,19 +25,27 @@
       </div>
       <div class="divider"></div>
       <div class="btn-filter">
+        <button @click="onWindowView">
+          <i class=""></i>
+        </button>
+      </div>
+      <div class="btn-filter" style="margin-left: auto">
         <button>
           <i class=""></i>
         </button>
       </div>
     </div>
+    <AppWindow v-model:view="windowView" width="650px" height="400px">
+      <WindowContent @cancel="windowView = false" @confirm="onWindowConfirm" />
+    </AppWindow>
   </div>
 </template>
 
 <script setup>
-import { ref, toRefs } from 'vue';
-import { reactive } from 'vue';
+import { ref, reactive } from 'vue';
 import AppSelectBox from '@/components/ui/AppSelectBox.vue';
-import AppSelectCode from '@/components/ui/AppSelectCode.vue';
+import AppWindow from '@/components/ui/AppWindow.vue';
+import WindowContent from '@/views/test/WindowContent.vue';
 
 const props = defineProps({
   modelValue: {
@@ -68,7 +76,14 @@ const optionsSelected = ref({ label: '15', value: 15 });
 
 // 인풋태그
 const selectCode = ref('전체');
-const onSearch = () => {
-  selectCode.value = '전체 눌림';
+
+// 모달1
+const windowView = ref(false);
+const onWindowView = () => {
+  windowView.value = true;
+};
+const onWindowConfirm = () => {
+  windowView.value = false;
+  alert('적용');
 };
 </script>

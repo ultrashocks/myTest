@@ -23,7 +23,11 @@
             </div>
             <div class="search-col">
               <label>마케팅 활동</label>
-              <AppInput style="width: 245px" v-model="searchData.marketing" />
+              <AppInput
+                style="width: 245px"
+                v-model="searchData.marketing"
+                placeholder="마케팅 활동코드 또는 활동명 입력"
+              />
             </div>
             <button class="btn-search"><i class="icon"></i>조회</button>
           </div>
@@ -145,7 +149,6 @@
 <script setup>
 import { ref } from 'vue';
 import { reactive } from 'vue';
-import 'tippy.js/dist/tippy.css';
 import { directive as vTippy } from 'vue-tippy';
 import AppSelectBox from '@/components/ui/AppSelectBox.vue';
 import AppInput from '@/components/ui/AppInput.vue';

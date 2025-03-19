@@ -5,17 +5,32 @@
       <FilterBar></FilterBar>
     </div>
     <div>
-      <GridComponent :headers="headers" :data="bodyData" :showCheckbox="true" />
+      <TableComponent
+        :headers="headers"
+        :data="bodyData"
+        :pagingData="pagingData"
+        :showCheckbox="true"
+      />
     </div>
+    <ul class="footer-button-box">
+      <li>
+        <button>삭제</button>
+      </li>
+      <li class="footer-button-last-box">
+        <button>수정</button>
+        <button>상태변경</button>
+        <button>공유</button>
+        <button>복사</button>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue';
-import { toRefs } from 'vue';
 
 import TargetTopInput from './TargetTopInput.vue';
-import GridComponent from '@/views/CommonGrid.vue';
+import TableComponent from '@/views/CommonTable.vue';
 import FilterBar from './FilterBar.vue';
 
 const props = defineProps({
@@ -75,7 +90,221 @@ const tableData = ref([
     segment_management: '세그확인',
     created_at: '2024-03-16',
   },
+  {
+    target_id: 'A0010004',
+    target_name: '스마트홈_신규_구글패키지_가입',
+    target_group: '신규유치',
+    cms_yn: 'CMS전송',
+    target_status: '중지',
+    target_type: '스마트홈/요금제/신규가입',
+    channel_detail: '고객센터',
+    channel_detail02: 'IB',
+    schedule_type: '한번',
+    target_count: '50,000',
+    round: '6/365회',
+    segment_recommendation: 'AI추천',
+    segment_management: '세그확인',
+    created_at: '2024-03-16',
+  },
+  {
+    target_id: 'A0010004',
+    target_name: '스마트홈_신규_구글패키지_가입',
+    target_group: '신규유치',
+    cms_yn: 'CMS전송',
+    target_status: '중지',
+    target_type: '스마트홈/요금제/신규가입',
+    channel_detail: '고객센터',
+    channel_detail02: 'IB',
+    schedule_type: '한번',
+    target_count: '50,000',
+    round: '6/365회',
+    segment_recommendation: 'AI추천',
+    segment_management: '세그확인',
+    created_at: '2024-03-16',
+  },
+  {
+    target_id: 'A0010004',
+    target_name: '스마트홈_신규_구글패키지_가입',
+    target_group: '신규유치',
+    cms_yn: 'CMS전송',
+    target_status: '중지',
+    target_type: '스마트홈/요금제/신규가입',
+    channel_detail: '고객센터',
+    channel_detail02: 'IB',
+    schedule_type: '한번',
+    target_count: '50,000',
+    round: '6/365회',
+    segment_recommendation: 'AI추천',
+    segment_management: '세그확인',
+    created_at: '2024-03-16',
+  },
+  {
+    target_id: 'A0010004',
+    target_name: '스마트홈_신규_구글패키지_가입',
+    target_group: '신규유치',
+    cms_yn: 'CMS전송',
+    target_status: '중지',
+    target_type: '스마트홈/요금제/신규가입',
+    channel_detail: '고객센터',
+    channel_detail02: 'IB',
+    schedule_type: '한번',
+    target_count: '50,000',
+    round: '6/365회',
+    segment_recommendation: 'AI추천',
+    segment_management: '세그확인',
+    created_at: '2024-03-16',
+  },
+  {
+    target_id: 'A0010004',
+    target_name: '스마트홈_신규_구글패키지_가입',
+    target_group: '신규유치',
+    cms_yn: 'CMS전송',
+    target_status: '중지',
+    target_type: '스마트홈/요금제/신규가입',
+    channel_detail: '고객센터',
+    channel_detail02: 'IB',
+    schedule_type: '한번',
+    target_count: '50,000',
+    round: '6/365회',
+    segment_recommendation: 'AI추천',
+    segment_management: '세그확인',
+    created_at: '2024-03-16',
+  },
+  {
+    target_id: 'A0010004',
+    target_name: '스마트홈_신규_구글패키지_가입',
+    target_group: '신규유치',
+    cms_yn: 'CMS전송',
+    target_status: '중지',
+    target_type: '스마트홈/요금제/신규가입',
+    channel_detail: '고객센터',
+    channel_detail02: 'IB',
+    schedule_type: '한번',
+    target_count: '50,000',
+    round: '6/365회',
+    segment_recommendation: 'AI추천',
+    segment_management: '세그확인',
+    created_at: '2024-03-16',
+  },
+  {
+    target_id: 'A0010004',
+    target_name: '스마트홈_신규_구글패키지_가입',
+    target_group: '신규유치',
+    cms_yn: 'CMS전송',
+    target_status: '중지',
+    target_type: '스마트홈/요금제/신규가입',
+    channel_detail: '고객센터',
+    channel_detail02: 'IB',
+    schedule_type: '한번',
+    target_count: '50,000',
+    round: '6/365회',
+    segment_recommendation: 'AI추천',
+    segment_management: '세그확인',
+    created_at: '2024-03-16',
+  },
+  {
+    target_id: 'A0010004',
+    target_name: '스마트홈_신규_구글패키지_가입',
+    target_group: '신규유치',
+    cms_yn: 'CMS전송',
+    target_status: '중지',
+    target_type: '스마트홈/요금제/신규가입',
+    channel_detail: '고객센터',
+    channel_detail02: 'IB',
+    schedule_type: '한번',
+    target_count: '50,000',
+    round: '6/365회',
+    segment_recommendation: 'AI추천',
+    segment_management: '세그확인',
+    created_at: '2024-03-16',
+  },
+  {
+    target_id: 'A0010004',
+    target_name: '스마트홈_신규_구글패키지_가입',
+    target_group: '신규유치',
+    cms_yn: 'CMS전송',
+    target_status: '중지',
+    target_type: '스마트홈/요금제/신규가입',
+    channel_detail: '고객센터',
+    channel_detail02: 'IB',
+    schedule_type: '한번',
+    target_count: '50,000',
+    round: '6/365회',
+    segment_recommendation: 'AI추천',
+    segment_management: '세그확인',
+    created_at: '2024-03-16',
+  },
+  {
+    target_id: 'A0010004',
+    target_name: '스마트홈_신규_구글패키지_가입',
+    target_group: '신규유치',
+    cms_yn: 'CMS전송',
+    target_status: '중지',
+    target_type: '스마트홈/요금제/신규가입',
+    channel_detail: '고객센터',
+    channel_detail02: 'IB',
+    schedule_type: '한번',
+    target_count: '50,000',
+    round: '6/365회',
+    segment_recommendation: 'AI추천',
+    segment_management: '세그확인',
+    created_at: '2024-03-16',
+  },
+  {
+    target_id: 'A0010004',
+    target_name: '스마트홈_신규_구글패키지_가입',
+    target_group: '신규유치',
+    cms_yn: 'CMS전송',
+    target_status: '중지',
+    target_type: '스마트홈/요금제/신규가입',
+    channel_detail: '고객센터',
+    channel_detail02: 'IB',
+    schedule_type: '한번',
+    target_count: '50,000',
+    round: '6/365회',
+    segment_recommendation: 'AI추천',
+    segment_management: '세그확인',
+    created_at: '2024-03-16',
+  },
+  {
+    target_id: 'A0010004',
+    target_name: '스마트홈_신규_구글패키지_가입',
+    target_group: '신규유치',
+    cms_yn: 'CMS전송',
+    target_status: '중지',
+    target_type: '스마트홈/요금제/신규가입',
+    channel_detail: '고객센터',
+    channel_detail02: 'IB',
+    schedule_type: '한번',
+    target_count: '50,000',
+    round: '6/365회',
+    segment_recommendation: 'AI추천',
+    segment_management: '세그확인',
+    created_at: '2024-03-16',
+  },
+  {
+    target_id: 'A0010004',
+    target_name: '스마트홈_신규_구글패키지_가입',
+    target_group: '신규유치',
+    cms_yn: 'CMS전송',
+    target_status: '중지',
+    target_type: '스마트홈/요금제/신규가입',
+    channel_detail: '고객센터',
+    channel_detail02: 'IB',
+    schedule_type: '한번',
+    target_count: '50,000',
+    round: '6/365회',
+    segment_recommendation: 'AI추천',
+    segment_management: '세그확인',
+    created_at: '2024-03-16',
+  },
 ]);
+
+const pagingData = {
+  max: '100',
+  current: '2',
+  perPage: '10',
+};
 
 /*바꾸고 싶은 컬럼은 여기에 넣으세요.*/
 const columnTransformations = {
@@ -85,7 +314,7 @@ const columnTransformations = {
       return {
         type: 'button',
         label: value,
-        action: () => console.log(`${value} 설정`),
+        action: () => alert(`${value} 설정`),
         align: 'center',
       };
     }
@@ -94,12 +323,12 @@ const columnTransformations = {
 
   schedule_type: (value, row) => {
     // 열 전체를 바꾸고싶으면 if 빼세요.
-    if (row && row.target_id === 'A0010004') {
+    if (row && row.target_id === 'A0010005') {
       return {
-        type: 'link',
+        type: 'button',
         label: value,
         url: `https://link.com?name=${value}`,
-        align: 'right',
+        align: 'center',
       };
     }
     return value;
@@ -140,12 +369,17 @@ const bodyData = computed(() => {
 .table-container .table tbody tr td:nth-child(3) {
   text-align: left !important;
 }
-
-.table-container .table tbody tr td:nth-child(4) {
-  text-align: center !important;
+.table-container .table tbody tr td:nth-child(10) {
+  text-align: right !important;
 }
 
-.table-container .table tbody tr td:nth-child(5) {
+.table-container .table tbody tr td:nth-child(4),
+.table-container .table tbody tr td:nth-child(5),
+.table-container .table tbody tr td:nth-child(6),
+.table-container .table tbody tr td:nth-child(7),
+.table-container .table tbody tr td:nth-child(8),
+.table-container .table tbody tr td:nth-child(9),
+.table-container .table tbody tr td:nth-child(11) {
   text-align: center !important;
 }
 </style>

@@ -114,14 +114,17 @@
   
 } 
 
-.v-popper__popper.v-popper__popper--shown{
-  box-shadow: none;
-}
-.v-popper--theme-tooltip .v-popper__inner{
-  background-color: #575654;
-  color: #fff;
-}
-.v-popper--theme-tooltip .v-popper__arrow-outer{
-  border-color: #575654;
-}
+// .v-popper__popper.v-popper__popper--shown{
+//   box-shadow: none;
+// }
+// .v-popper--theme-tooltip .v-popper__inner{
+//   background-color: #575654;
+//   color: #fff;
+// }
+// .v-popper--theme-tooltip .v-popper__arrow-outer{
+//   border-color: #575654;
+// }
 
+.tippy-box{
+  font-size: 13px;
+}
