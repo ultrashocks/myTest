@@ -1,55 +1,28 @@
 <template>
   <div class="stage-items step2">
     <div class="item-row">
-      <div class="title-s">타겟 서비스 선택</div>
+      <div class="title-s">타겟 상세 채널 선택</div>
       <div class="title">
-        어떤 <strong class="red">서비스</strong>를
-        <strong>타겟</strong> 하시나요?
+        <strong class="red">상세 채널</strong>은 <strong>무엇</strong>인가요?
       </div>
       <div class="btn-radios">
         <label>
           <input
             type="radio"
             name="customer"
-            value="모바일"
-            v-model="customer"
+            value="OB"
+            v-model="selectedValue"
           />
-          <span class="btn-radio">모바일</span>
+          <span class="btn-radio">OB</span>
         </label>
         <label>
           <input
             type="radio"
             name="customer"
-            value="인터넷"
-            v-model="customer"
+            value="IB"
+            v-model="selectedValue"
           />
-          <span class="btn-radio">인터넷</span>
-        </label>
-        <label>
-          <input type="radio" name="customer" value="TV" v-model="customer" />
-          <span class="btn-radio">TV</span>
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="customer"
-            value="스마트홈"
-            v-model="customer"
-          />
-          <span class="btn-radio">스마트홈</span>
-        </label>
-        <label>
-          <input type="radio" name="customer" value="기타" v-model="customer" />
-          <span class="btn-radio">기타</span>
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="customer"
-            value="기타2"
-            v-model="customer"
-          />
-          <span class="btn-radio">기타2</span>
+          <span class="btn-radio">IB</span>
         </label>
       </div>
     </div>
@@ -57,7 +30,11 @@
       <button class="btn-top" :disabled="false" @click="$emit('prev')">
         <i class="icon"></i>
       </button>
-      <button class="btn-bottom" :disabled="false" @click="$emit('next')">
+      <button
+        class="btn-bottom"
+        :disabled="!selectedValue"
+        @click="$emit('next')"
+      >
         <i class="icon"></i>
       </button>
     </div>
@@ -71,5 +48,5 @@ const props = defineProps({});
 
 const emit = defineEmits(['prev', 'next']);
 
-const customer = ref('');
+const selectedValue = ref('');
 </script>

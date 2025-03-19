@@ -26,37 +26,20 @@ const props = defineProps({
 
 const step2Complete = reactive({
   currentStep: 1,
-  steps: [
-    { label: '서비스', complete: false },
-    { label: '상품', complete: false },
-    { label: '업무', complete: false },
-    { label: '업무 상세 활동', complete: false },
-    { label: '채널 ', complete: false },
-    { label: '상세 채널', complete: false },
-    { label: '건수', complete: false },
-    { label: '세그수', complete: false },
-    { label: '타겟정보', complete: false },
-  ],
+  // steps: [
+  //   { label: '서비스', complete: false },
+  //   { label: '상품', complete: false },
+  //   { label: '업무', complete: false },
+  //   { label: '업무 상세 활동', complete: false },
+  //   { label: '채널 ', complete: false },
+  //   { label: '상세 채널', complete: false },
+  //   { label: '건수', complete: false },
+  //   { label: '세그수', complete: false },
+  //   { label: '타겟정보', complete: false },
+  // ],
 });
 
-const { step2 } = toRefs(props.modelValue);
-// step2: {
-//     service: '',
-//     product: '',
-//     work: '',
-//     workDetail: '',
-//     channel: '',
-//     detailChannel: '',
-//     number: {
-//       category: '',
-//       target: '',
-//       controlGroup: '',
-//     },
-//     segNumber: {
-//       category: '',
-//       maxSeg: '',
-//     },
-//   },
+// const { step2 } = toRefs(props.modelValue);
 
 /*
  * Step별 다이나믹 컴포넌트

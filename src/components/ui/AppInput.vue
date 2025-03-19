@@ -68,6 +68,8 @@ const bindNumber = $event => {
     }
   }
   if (props.type === 'price') {
+    const currency = +value.replace(/[^\d]/g, '').toString();
+    value = Intl.NumberFormat().format(currency);
     checkPriceComma();
   }
   emit('update:modelValue', value);
@@ -89,7 +91,6 @@ const onBlur = () => {
   emit('blur');
 };
 const checkPriceComma = () => {
-  console.log('price~~');
   let priceValue = String(props.modelValue);
   var currency = +priceValue.replace(/[^\d]/g, '').toString();
   priceValue = Intl.NumberFormat().format(currency);

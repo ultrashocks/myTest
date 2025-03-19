@@ -36,14 +36,14 @@ import { useDynamicComponents } from './composables/dynamicComponents';
 const stepsComplete = reactive({
   currentStep: 2,
   steps: [
-    { label: '설정 시작', complete: false },
-    { label: '기본 정보 입력', complete: false },
-    { label: '성공 기준', complete: false },
-    { label: '상세 조건', complete: false },
-    { label: '타겟 추천', complete: false },
-    { label: '세그 구분', complete: false },
-    { label: '타겟 생성', complete: false },
-    { label: '일정/연동타겟', complete: false },
+    { label: '설정 시작', complete: true },
+    { label: '기본 정보 입력', complete: true },
+    { label: '성공 기준', complete: true },
+    { label: '상세 조건', complete: true },
+    { label: '타겟 추천', complete: true },
+    { label: '세그 구분', complete: true },
+    { label: '타겟 생성', complete: true },
+    { label: '일정/연동타겟', complete: true },
   ],
 });
 const onSelectStep = step => {

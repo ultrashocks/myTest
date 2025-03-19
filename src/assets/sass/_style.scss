@@ -1,4 +1,4 @@
-@use "modules";color_primary
+@use "modules";
 
 // AppInput, AppSelectbox 라벨
 .select-label__comp{
@@ -463,8 +463,33 @@
         justify-content: center;
         position: relative;
         .item-row{
-            width: 1024px;
-        }
+            width: 400px;
+            .btn-radios{
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+            }
+            &.col-6{
+                width: 1024px;
+                .btn-radios{
+                    display: grid;
+                    grid-template-columns: repeat(6, 1fr);
+                }
+            }
+            &.col-3{
+                width: 680px;
+                .btn-radios{
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                }
+            }
+            &.col-4{
+                width: 680px;
+                .btn-radios{
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                }
+            }
+        } 
     }
 
 } 

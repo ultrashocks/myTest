@@ -35,6 +35,12 @@
             <div style="margin-bottom: 10px">
               <AppInput
                 style="width: 150px"
+                type="price"
+                labelName="가격"
+                v-model="inputValue2"
+              />
+              <AppInput
+                style="width: 150px"
                 type="text"
                 labelName="서비스"
                 v-model="inputValue"
@@ -202,6 +208,7 @@ const optionsSelected = ref({ label: '전체', value: 0 });
 
 // Input
 const inputValue = ref('테스트입니다.');
+const inputValue2 = ref(1500);
 
 // 마케팅 활동 코드 (테스트용이라 검색버튼 클릭시 강제로 값들어가게 테스트 처리)
 const selectCode = ref('MK010');
