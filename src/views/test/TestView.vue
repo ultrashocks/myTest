@@ -96,7 +96,11 @@
             <button @click="alertView" v-tooltip="'Alert'">Alert</button>
             <button
               @click="confirmState.view = true"
-              v-tooltip.bottom="'Confrim'"
+              v-tooltip.bottom-start="{
+                content: 'Bottom방향으로',
+                transition: false,
+                hideDelay: 0,
+              }"
             >
               Confrim
             </button>
@@ -107,6 +111,18 @@
               Loader
             </button>
             <button @click="toastView">Toast</button>
+
+            <button
+              v-tippy="{
+                content: '즉시 나타나는 툴팁',
+                animation: 'none',
+                placement: 'bottom-start',
+                hideDelay: 0,
+                duration: 0,
+              }"
+            >
+              마우스를 올려보세요
+            </button>
           </div>
         </div>
       </div>
@@ -217,7 +233,7 @@ const onSearch = () => {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .test-wrap {
   height: 100%;
   display: flex;

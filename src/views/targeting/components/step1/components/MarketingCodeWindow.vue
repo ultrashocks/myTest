@@ -29,7 +29,7 @@
           </div>
         </div>
         <div class="table-row">
-          <div class="table-scroll">
+          <div class="table-scroll" ref="tooltipContainer">
             <div class="table-header">
               <table>
                 <colgroup>
@@ -90,8 +90,33 @@
                     <td>
                       <div class="td-col">{{ item.marketingCode }}</div>
                     </td>
-                    <td>
-                      <div class="td-col" v-tooltip.bottom="item.marketingName">
+                    <td class="td-left">
+                      <!-- <div
+                        class="td-col"
+                        v-tooltip.bottom-start="{
+                          content: item.marketingName,
+                          transition: false,
+                          hideDelay: 0,
+                        }"
+                      >
+                        {{ item.marketingName }}
+                      </div> -->
+                      <div
+                        class="td-col"
+                        v-tippy="{
+                          content: item.marketingName,
+                          animation: 'none',
+                          placement: 'bottom-start',
+                          hideDelay: 0,
+                          duration: 0,
+                          appendTo: tooltipContainer,
+                          trigger: 'mouseenter focus',
+                          maxWidth: 'none',
+                          onShow(instance) {
+                            tooltipInstance = instance;
+                          },
+                        }"
+                      >
                         {{ item.marketingName }}
                       </div>
                     </td>
@@ -120,10 +145,29 @@
 <script setup>
 import { ref } from 'vue';
 import { reactive } from 'vue';
+import 'tippy.js/dist/tippy.css';
+import { directive as vTippy } from 'vue-tippy';
 import AppSelectBox from '@/components/ui/AppSelectBox.vue';
 import AppInput from '@/components/ui/AppInput.vue';
 import { useAlert } from '@/composables/alert';
+import { onMounted, onUnmounted } from 'vue';
 const { setAlertStatus } = useAlert();
+
+const tooltipContainer = ref(null);
+let tooltipInstance = null;
+const hideTooltip = () => {
+  if (tooltipInstance) {
+    tooltipInstance.hide(); // 마우스 휠 작동 시 툴팁 숨김
+  }
+};
+
+onMounted(() => {
+  window.addEventListener('wheel', hideTooltip);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('wheel', hideTooltip);
+});
 
 /**
  * 검색 조건

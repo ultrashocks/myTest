@@ -25,7 +25,7 @@
             <div
               class="result-input__msg"
               :class="checkMsg.state"
-              v-if="checkMsg.state"
+              v-if="checkMsg.state && step1.targetingName.length > 0"
             >
               {{ checkMsg.message }}
             </div>
