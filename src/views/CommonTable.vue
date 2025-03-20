@@ -16,8 +16,16 @@
           </th>
         </tr>
       </thead>
-      <tbody>
-        <tr v-for="(row, rowIndex) in data" :key="rowIndex">
+    </table>
+  </div>
+  <div class="table-container">
+    <table class="table" style="margin-top: 0">
+      <tbody style="">
+        <tr
+          v-for="(row, rowIndex) in data"
+          :key="rowIndex"
+          :class="{ 'selected-row': selectedRows[rowIndex] }"
+        >
           <!-- 체크박스 셀을 조건부로 렌더링 -->
           <td v-if="showCheckbox || false" :style="{ textAlign: 'center' }">
             <input

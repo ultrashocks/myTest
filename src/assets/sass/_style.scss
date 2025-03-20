@@ -158,7 +158,49 @@
 }
 
 //타겟관리
-.target-wrap{
+.target-wrap {
+    padding: 0 30px;
+    .target-row {
+        background-color: modules.$color_hilight;
+    }
+    .flex-center-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .footer-noti {
+        span {
+            font-size: 12px;
+            color: modules.$color_blueG_600;
+        }
+    }
+    //아이콘
+    button {
+        i {
+            &.icon{
+                display: inline-block;
+                margin-left: auto;
+                width: 40px;
+                height: 18px;
+                border-radius: 4px;
+                border: 1px solid;
+                &.up_arrow {
+                    background: url(../images/icon_up_arrow.svg) no-repeat center;
+                }
+                &.down_arrow {
+                    background: url(../images/icon_down_arrow.svg) no-repeat center;
+                }
+                &.circle_info {
+                    background: url(../images/icon_info.svg) no-repeat center;
+                    display: inline-block;
+                    margin-left: 0;
+                    width: 18px;
+                    height: 18px;
+                    border: 0;
+                }
+            }
+        }
+    }
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -168,12 +210,13 @@
         box-sizing: border-box;
         //background-color: #F2F3F4;
         border-bottom: 1px solid #A8B3BD;
-        padding: 30px 30px 0;
+        padding: 30px 0 0;
         display: flex;
         position: relative;
         .tab-right-btn{
-            position: absolute;
-            right: 30px;
+            //position: absolute;
+            //right: 30px;
+            //margin-left: auto;
         }
         .top-tab{
             height: 100%;
@@ -221,16 +264,29 @@
             }
         }
         .btn {
-            border-radius: 4px;
+            margin-left: auto;
+            margin-right: 8px;
+            border-radius: 50%;
             padding: 4px;
             border: 1px solid #2b2d42;
+            background-color: #333;
+            cursor: pointer;
             &:hover {
                 border: 1px solid #444;
                 color: #333;
                 background-color: #333;
             }
+            .btn-target {
+                display: inline-block;
+                margin-left: auto;
+                width: 21px;
+                height: 21px;
+                background: url(../images/icon_circle_arrow.svg) no-repeat 50%;
+            }
+            &:hover {
+                background-color: modules.$color_secondary;
+            }
         }
-
     }
 
     .target-contents{
@@ -238,9 +294,9 @@
         overflow: hidden;
         position: relative;
         //display: flex;
-        padding: 16px 30px;
+        padding: 16px 0px;
         .target-top-input-wrap{
-            flex: 0 0 92px;
+            flex: 0 0;
             box-sizing: border-box;
             background-color: #F2F3F4;
             //border-bottom: 1px solid #A8B3BD;
@@ -292,7 +348,6 @@
         }
     }
 
-
     // 필터 css
     .filter-container {
         margin-top: 16px;
@@ -301,7 +356,47 @@
             justify-content: space-between;
             gap: 8px;
         }
-        .btn-filter{
+        .btn-filter {
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid #666666;
+            color: #666666;
+            background-color: transparent;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            .cnt {
+                color: #000;
+            }
+            &.open-modal {
+                padding: 0;
+                .btn-op-modal {
+                    display: inline-block;
+                    margin-left: auto;
+                    width: calc(22px * 0.9);
+                    height: calc(11px * 1);
+                    background-color: modules.$color_blueG_600;
+                    mask: url(../images/icon_filter.svg) no-repeat 50%;
+                    &:hover {
+                        background-color: modules.$color_primary;
+                    }
+                }
+                }
+            &:hover {
+                border-color: modules.$color_primary;
+                color: modules.$color_primary;
+                > button {
+                    color: modules.$color_primary;
+                }
+                i {
+                    color: modules.$color_primary;
+                }
+            }
+            &.selected {
+                border-color: modules.$color_primary;
+                color: modules.$color_primary;
+            }
+        }
+        .btn-reset {
             padding: 4px 8px;
             border-radius: 4px;
             border: 1px solid #666666;
@@ -321,6 +416,122 @@
         }
     }
 
+
+    //타겟 관리 필터 모달
+    .modal-body {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        position: relative;
+        .accordion-item {
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            &:last-child {
+                border-bottom: none;
+            }
+            .accordion-header {
+                padding: 16px 20px;
+                background: #f8f9fa;
+                cursor: pointer;
+                font-weight: 600;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 18px;
+                color: #000;
+                &:hover {
+                    background: #e9ecef;
+                }
+                .icon {
+                    transition: transform 0.3s ease;
+                }
+                &.active {
+                    .icon {
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+
+            .accordion-body {
+                //max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease, padding 0.3s ease;
+                padding: 0 20px 16px;
+                .body-item {
+                    display: flex;
+                    align-items: center;
+                    .title {
+                        width: 120px;
+                        text-align: start;
+                        font-size: 14px;
+                        font-weight: 600;
+                        padding-left: 16px;
+                        color: modules.$color_secondary;
+                    }
+                    .contents {
+                        padding: 16px 20px;
+                        .btn {
+                            border-radius: 4px;
+                            border: 1px solid #333;
+                            width: 100px;
+                            height: 37px;
+                            margin-right: 8px;
+                        }
+
+                    }
+                    &.open {
+                        //max-height: 200px;
+                        padding: 12px 16px;
+                    }
+                }
+            }
+        }
+    }
+
+    //타겟 그룹 관리 모달
+    .modal-body {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        position: relative;
+        .info-box {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 16px;
+            margin-bottom: 4px;
+            > div:last-child {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 8px;
+            }
+            button {
+                width: 61px;
+                height: 28px;
+                border-radius: 4px;
+                border: 1px solid;
+                span {
+                    color: modules.$color-primary;
+                }
+            }
+        }
+        .table-row {
+            height: 357px;
+        }
+    }
+    // 이모달은 높이값 조정
+    .footer-noti {
+        flex: 0 0 50px;
+        border-top: 1px solid #A8B3BD;
+        display: flex;
+        align-items: center;
+        margin-left: 10px;
+    }
+    .dialog-box .dialog-body {
+        max-height: 100% !important;
+    }
 }
 
 //타겟팅
@@ -334,7 +545,7 @@
         background-color: #F2F3F4;
         border-bottom: 1px solid #A8B3BD;
         padding: 0 30px;      
-        display: flex;          
+        display: flex;  
     }
     .step-item{
         height: 100%;
@@ -944,6 +1155,46 @@
         border-radius: 50%;            
         background-color: #fff;   
         border: 1px solid #A8B3BD;   
+        box-sizing: border-box;
+        position: absolute;
+        cursor: pointer;
+        left: 0;
+        top: 0;
+    }
+}
+
+.custom-checkbox {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    font-size: 14px;
+    user-select: none;
+    input[type="checkbox"]{
+        display: none;
+        &:checked + .icon {
+            background: modules.$color_primary;
+            border-color: modules.$color_primary;
+            &::after{
+                content:'';
+                display: inline-block;
+                width: 100%;
+                height: 100%;
+                background: url(../images/icon_radio_checked.svg) no-repeat 50%;
+                position: absolute;
+                left: 0;
+                top: 0;
+                z-index: 2;
+            }
+        }
+    }
+    .icon {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background: #ddd;
+        border-radius: 4px;
+        background-color: #fff;
+        border: 1px solid #A8B3BD;
         box-sizing: border-box;
         position: absolute;
         cursor: pointer;

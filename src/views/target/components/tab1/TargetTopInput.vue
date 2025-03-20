@@ -64,6 +64,4 @@ const selectCode = ref('전체');
 const onSearch = () => {
   selectCode.value = '전체 눌림';
 };
-
-const { step1 } = toRefs(props.modelValue);
 </script>

@@ -912,11 +912,17 @@ input::-webkit-inner-spin-button {
 .table-container {
   //padding: 20px;
   overflow: auto;
-  max-height: 20vw;
+  max-height: 17vw;
   .table {
     width: 100%;
     border-collapse: collapse;
     margin: 10px 0 0;
+    .selected-row {
+      background-color: modules.$color_hilight !important;
+    }
+    .table-body {
+
+    }
   }
 
   .table th {
@@ -1003,6 +1009,9 @@ input::-webkit-inner-spin-button {
     //background: #f4f4f4;
     border-radius: 4px;
     color: #181A1B;
+    &:hover {
+      background-color: #FDEDF6;
+    }
   }
 
   span.active {

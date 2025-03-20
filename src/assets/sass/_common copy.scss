@@ -335,39 +335,17 @@ strong {
 }
 
 ::placeholder {
-  color: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,1);
   opacity: 1;
 }
 /* placeholder 스타일 지정 */
 input::placeholder {
-  color: rgba(255,255,255,0.15);
-  opacity: 1; /* 파이어폭스에서 뿌옇게 나오는 현상을 방지하기 위한 css */
+  color: rgba(255,255,255,1);
+  opacity: 1; 
 }
-input::-webkit-input-placeholder {
-  color: rgba(255,255,255,0.15);
-  font-weight: 300;
-}
-/* IE */
-input:-ms-input-placeholder {
-  color: rgba(255,255,255,0.15) !important;
-}
-/* Firefox */
-input:-mos-input-placeholder {
-  color: rgba(255,255,255,0.15);
-}
-
 textarea::placeholder {
-  color: rgba(255,255,255,0.15);
-  opacity: 1; /* 파이어폭스에서 뿌옇게 나오는 현상을 방지하기 위한 css */
-}
-textarea::-webkit-input-placeholder {
-  color: rgba(255,255,255,0.15);
-}
-textarea:-ms-input-placeholder {
-  color: rgba(255,255,255,0.15);
-}
-textarea:-mos-input-placeholder {
-  color: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,1);
+  opacity: 1; 
 }
 
 // :-ms-input-placeholder { color: #bfbfbf; }
@@ -396,31 +374,6 @@ input:-webkit-autofill:active {
 
 .non-border {
   border: none !important;
-}
-
-.ml-8 {
-  margin-left: 8px;
-}
-.ml20 {
-  margin-left: 20px;
-}
-.ml30 {
-  margin-left: 30px;
-}
-.pt35 {
-  padding-top: 35px;
-}
-.mt35 {
-  margin-top: 35px;
-}
-.pb0 {
-  padding-bottom: 0 !important;
-}
-.mb0 {
-  margin-bottom: 0 !important;
-}
-.ml0 {
-  margin-left: 0 !important;
 }
 
 input::-webkit-outer-spin-button,
@@ -510,6 +463,37 @@ input::-webkit-inner-spin-button {
   }
 }
 
+.ml-8 {
+  margin-left: 8px;
+}
+.ml20 {
+  margin-left: 20px;
+}
+.ml30 {
+  margin-left: 30px;
+}
+.pt35 {
+  padding-top: 35px;
+}
+.mt35 {
+  margin-top: 35px;
+}
+.pb0 {
+  padding-bottom: 0 !important;
+}
+.mb0 {
+  margin-bottom: 0 !important;
+}
+.ml0 {
+  margin-left: 0 !important;
+}
+.mt16{
+  margin-top: 16px !important;
+}
+.mt32{
+  margin-top: 32px !important;
+}
+
 /************** 
   공통 컴포넌트
 *************/
@@ -590,7 +574,7 @@ input::-webkit-inner-spin-button {
   z-index: 9000;
   left: 50%;
   top: 0;
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -780,7 +764,7 @@ input::-webkit-inner-spin-button {
 
   .window-body {
     flex: 1;
-    padding: 0 20px;
+    // padding: 0 20px;
   }
 
   .window-footer {
@@ -916,49 +900,136 @@ input::-webkit-inner-spin-button {
   &.justify-between {
     justify-content: space-between;
   }
+  &.align-item {
+    align-items: center;
+  }
+  &.gap-16px {
+    gap: 16px;
+  }
 }
 
-// 그리드 css
-.grid-container {
+// 공통 테이블  css
+.table-container {
   //padding: 20px;
-  max-width: 100%;
-
+  overflow: auto;
+  max-height: 20vw;
   .table {
     width: 100%;
     border-collapse: collapse;
-    margin: 10px 0;
+    margin: 10px 0 0;
   }
 
-  .table th,
+  .table th {
+    padding: 7px 8px;
+    border: 1px solid modules.$color_blueG_200;
+    //height: 36px;
+    font-size: 13px;
+  }
   .table td {
-    padding: 8px 12px;
-    text-align: left;
-    border: 1px solid #ddd;
+    padding: 7px 8px;
+    border: 1px solid modules.$color_blueG_200;
+    border-right: 1px solid transparent;
+    //height: 36px;
+    font-size: 13px;
+    &:last-child {
+      border-right: 1px solid modules.$color_blueG_200;
+    }
+  }
+
+  //.table button {
+  //  font-size: 12px;
+  //  font-weight: 600;
+  //}
+
+  .table tr:hover td {
+    background-color: #F3F5F6;
   }
 
   .table th {
     background-color: #000000;
     color: #fff;
   }
+  /* 체크된 상태 */
+  input[type="checkbox"]:checked {
+    background-color: #E30084 !important;
+    border-color: #E30084 !important;
+  }
 
   button {
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
+    //padding: 7px 8px;
+    background-color: #fff;
+    color: #3B4044;
+    border: 1px solid #A8B3BD;
     cursor: pointer;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    width: 58px !important;
+    height: 18px;
   }
 
   button:hover {
-    background-color: #0056b3;
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
   }
 
   a {
     color: #007bff;
-    text-decoration: none;
+    text-decoration: underline;
   }
 
   a:hover {
     text-decoration: underline;
+    color: modules.$color_link_hover;
   }
 }
+
+
+
+// 공통 페이징 css
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  //margin-top: 10px;
+  padding: 10px;
+  border-top: 1px solid modules.$color_blueG_400;
+  border-bottom: 1px solid modules.$color_blueG_400;
+
+  span {
+    cursor: pointer;
+    padding: 5px 10px;
+    //background: #f4f4f4;
+    border-radius: 4px;
+    color: #181A1B;
+  }
+
+  span.active {
+    background: modules.$color_bgRed;
+    color: modules.$color_primary;
+  }
+
+  button {
+    border: none;
+    //background: #007bff;
+    //padding: 5px 10px;
+    cursor: pointer;
+    width: initial !important;
+    height: initial !important;
+    color: modules.$color_blueG_600;
+    &:hover{
+      border: none;
+      color: modules.$color_blueG_600;
+    }
+  }
+
+  button:disabled {
+    // 임시
+    background: #eee;
+    color: #999;
+    cursor: not-allowed;
+  }
+}
+
+

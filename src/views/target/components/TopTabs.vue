@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="btn">
-      <button class="">icon</button>
+      <button class="btn-target"></button>
     </div>
     <button class="btn-m target tab-right-btn">
       <div>신규 타겟팅</div>

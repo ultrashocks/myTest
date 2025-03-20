@@ -32,9 +32,7 @@ const currentPage = computed(() => props.current);
 
 watch(
   () => currentPage.value,
-  (newPage, oldPage) => {
-    console.log(`자식쪽 currentPage 변경됨: ${oldPage} -> ${newPage}`);
-  },
+  (newPage, oldPage) => {},
   { immediate: true },
 );
 
