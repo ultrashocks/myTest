@@ -1,66 +1,55 @@
 <template>
   <div class="stage-items step2">
     <div class="item-row">
-      <div class="title-s">타겟 서비스 선택</div>
+      <div class="title-s">목표 최대 세그 수 설정</div>
       <div class="title">
-        어떤 <strong class="red">서비스</strong>를
-        <strong>타겟</strong> 하시나요?
+        <strong>목표 최대</strong> <strong class="red">세그 수</strong>가
+        있으신가요?
       </div>
       <div class="btn-radios">
         <label>
           <input
             type="radio"
             name="customer"
-            value="모바일"
+            value="1"
             v-model="selectedValue"
           />
-          <span class="btn-radio">모바일</span>
+          <span class="btn-radio">있어요</span>
         </label>
         <label>
           <input
             type="radio"
             name="customer"
-            value="인터넷"
+            value="0"
             v-model="selectedValue"
           />
-          <span class="btn-radio">인터넷</span>
+          <span class="btn-radio"
+            >없어요<span class="txt-s">(AI 추천)</span></span
+          >
         </label>
-        <label>
-          <input
-            type="radio"
-            name="customer"
-            value="TV"
-            v-model="selectedValue"
+      </div>
+      <div class="step-info mt16">
+        <i class="icon"></i>목표 타겟 없음을 선택하시면, 비슷한 타겟팅의
+        평균으로 자동 세팅됩니다.
+      </div>
+      <div class="more-infos" v-if="selectedValue == 1">
+        <div class="btn-radios mt32">
+          <AppInput
+            type="price"
+            v-model="inputValue"
+            labelName="타겟 건수"
+            placeholder="숫자만 입력"
           />
-          <span class="btn-radio">TV</span>
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="customer"
-            value="스마트홈"
-            v-model="selectedValue"
+          <AppSelectBox
+            :options="selectOptions"
+            v-model:optionsSelected="optionsSelected"
+            labelName="대조군 건수"
           />
-          <span class="btn-radio">스마트홈</span>
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="customer"
-            value="기타"
-            v-model="selectedValue"
-          />
-          <span class="btn-radio">기타</span>
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="customer"
-            value="기타2"
-            v-model="selectedValue"
-          />
-          <span class="btn-radio">기타2</span>
-        </label>
+        </div>
+        <div class="step-info mt16">
+          <i class="icon"></i>목표 타겟 건수는 1~999,999,999까지만 입력
+          가능합니다.
+        </div>
       </div>
     </div>
     <div class="step2-controls">
@@ -79,11 +68,21 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-
-const props = defineProps({});
+import AppSelectBox from '@/components/ui/AppSelectBox.vue';
+import AppInput from '@/components/ui/AppInput.vue';
+import { reactive, ref } from 'vue';
 
 const emit = defineEmits(['prev', 'next']);
 
 const selectedValue = ref('');
+
+// 타겟 건수
+const inputValue = ref('');
+// 대조군 건수
+const selectOptions = reactive([
+  { label: '전체', value: 0 },
+  { label: '대조군1', value: 1 },
+  { label: '대조군2', value: 2 },
+]);
+const optionsSelected = ref({ label: '전체', value: 0 });
 </script>

@@ -25,7 +25,7 @@ const props = defineProps({
 });
 
 const step2Complete = reactive({
-  currentStep: 1,
+  currentStep: 8,
   // steps: [
   //   { label: '서비스', complete: false },
   //   { label: '상품', complete: false },

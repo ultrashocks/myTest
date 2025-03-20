@@ -42,7 +42,7 @@
     }
     &:disabled{
         border: 1px solid #666666;
-        background-color: #fff;
+        background-color: #F3F5F6;
         color: #181A1B;
         // &:hover{
         //     border: 1px solid #D4D5D7 !important;
@@ -334,7 +334,7 @@
         background-color: #F2F3F4;
         border-bottom: 1px solid #A8B3BD;
         padding: 0 30px;      
-        display: flex;  
+        display: flex;          
     }
     .step-item{
         height: 100%;
@@ -668,6 +668,14 @@
                     border: 2px solid modules.$color_primary;
                     color: modules.$color_primary;
                     background-color: #FEF3F9;
+                }
+            }
+            input[type='radio']:disabled {
+                 + .btn-radio{
+                    border: 1px solid modules.$color_blueG_300;
+                    color: #A8B3BD;
+                    background-color: modules.$color_blueG_100;
+                    cursor: default;
                 }
             }
 

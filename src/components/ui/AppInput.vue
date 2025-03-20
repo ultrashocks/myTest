@@ -83,17 +83,17 @@ const onFocus = () => {
   }
 };
 const onBlur = () => {
-  if (props.type === 'number' || props.type === 'price') {
-    if (props.modelValue == 0) {
-      emit('update:modelValue', 0);
-    }
-  }
-  emit('blur');
+  // if (props.type === 'number' || props.type === 'price') {
+  //   if (props.modelValue == 0) {
+  //     emit('update:modelValue', 0);
+  //   }
+  // }
 };
 const checkPriceComma = () => {
   let priceValue = String(props.modelValue);
   var currency = +priceValue.replace(/[^\d]/g, '').toString();
   priceValue = Intl.NumberFormat().format(currency);
+  if (priceValue == 0) return;
   emit('update:modelValue', priceValue);
 };
 

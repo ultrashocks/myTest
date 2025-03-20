@@ -29,6 +29,7 @@
             type="radio"
             name="customer"
             value="단말"
+            :disabled="true"
             v-model="selectedValue"
           />
           <span class="btn-radio">단말</span>
