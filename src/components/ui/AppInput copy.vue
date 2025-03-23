@@ -67,37 +67,22 @@ const bindNumber = $event => {
       emit('update:modelValue', '');
     }
   }
-  // if (props.type === 'price') {
-  //   const currency = +value.replace(/[^\d]/g, '').toString();
-  //   value = Intl.NumberFormat().format(currency);
-  //   checkPriceComma();
-  // }
+  if (props.type === 'price') {
+    const currency = +value.replace(/[^\d]/g, '').toString();
+    value = Intl.NumberFormat().format(currency);
+    checkPriceComma();
+  }
   emit('update:modelValue', value);
 };
 
-const onFocus = $event => {
-  var value = $event.target.value;
+const onFocus = () => {
   if (props.type === 'number' || props.type === 'price') {
     if (props.modelValue == 0) {
       emit('update:modelValue', '');
     }
   }
-  if (props.type === 'price') {
-    let result = value.replace(/[^0-9]/g, '');
-    emit('update:modelValue', result);
-  }
 };
-const onBlur = $event => {
-  var value = $event.target.value;
-  if (props.type === 'price') {
-    //문자만 입력된 경우
-    let result = value.replace(/[^0-9]/g, '');
-    emit('update:modelValue', result);
-
-    const currency = result.replace(/[^\d]/g, '').toString();
-    value = Intl.NumberFormat().format(currency);
-    checkPriceComma();
-  }
+const onBlur = () => {
   // if (props.type === 'number' || props.type === 'price') {
   //   if (props.modelValue == 0) {
   //     emit('update:modelValue', 0);

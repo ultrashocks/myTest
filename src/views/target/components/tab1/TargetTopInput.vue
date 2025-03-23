@@ -60,8 +60,5 @@ const selectOptions = reactive([
 const optionsSelected = ref({ label: '전체', value: 0 });
 
 // 인풋태그
-const selectCode = ref('전체');
-const onSearch = () => {
-  selectCode.value = '전체 눌림';
-};
+const selectCode = ref('');
 </script>

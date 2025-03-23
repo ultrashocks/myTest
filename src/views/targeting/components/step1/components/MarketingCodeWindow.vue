@@ -33,7 +33,7 @@
           </div>
         </div>
         <div class="table-row">
-          <div class="table-scroll" ref="tooltipContainer">
+          <div class="table-scroll">
             <div class="table-header">
               <table>
                 <colgroup>
@@ -67,7 +67,7 @@
                   <tr
                     v-for="item in tableData"
                     :key="item.id"
-                    :class="{ active: item.id == selectRadioValues }"
+                    :class="{ active: item.id === selectRadioValues }"
                     @click="onSelectRow(item)"
                   >
                     <td>
@@ -95,17 +95,10 @@
                       <div class="td-col">{{ item.marketingCode }}</div>
                     </td>
                     <td class="td-left">
-                      <!-- <div
-                        class="td-col"
-                        v-tooltip.bottom-start="{
-                          content: item.marketingName,
-                          transition: false,
-                          hideDelay: 0,
-                        }"
-                      >
+                      <div class="td-col" :title="item.marketingName">
                         {{ item.marketingName }}
-                      </div> -->
-                      <div
+                      </div>
+                      <!-- <div
                         class="td-col"
                         v-tippy="{
                           content: item.marketingName,
@@ -122,7 +115,7 @@
                         }"
                       >
                         {{ item.marketingName }}
-                      </div>
+                      </div> -->
                     </td>
                   </tr>
                 </tbody>
@@ -149,28 +142,12 @@
 <script setup>
 import { ref } from 'vue';
 import { reactive } from 'vue';
-import { directive as vTippy } from 'vue-tippy';
 import AppSelectBox from '@/components/ui/AppSelectBox.vue';
 import AppInput from '@/components/ui/AppInput.vue';
 import { useAlert } from '@/composables/alert';
 import { onMounted, onUnmounted } from 'vue';
 const { setAlertStatus } = useAlert();
 
-const tooltipContainer = ref(null);
-let tooltipInstance = null;
-const hideTooltip = () => {
-  if (tooltipInstance) {
-    tooltipInstance.hide(); // 마우스 휠 작동 시 툴팁 숨김
-  }
-};
-
-onMounted(() => {
-  window.addEventListener('wheel', hideTooltip);
-});
-
-onUnmounted(() => {
-  window.removeEventListener('wheel', hideTooltip);
-});
 
 /**
  * 검색 조건
@@ -201,7 +178,7 @@ const selectedRowData = ref({});
 const tableData = ref([]);
 const attachData = () => {
   let testData = [];
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 5; i++) {
     const randomData = {
       id: i,
       activity: 'up-sell',

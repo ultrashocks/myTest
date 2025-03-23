@@ -20,7 +20,7 @@
           <input
             type="radio"
             name="customer"
-            value="0"
+            value="2"
             v-model="selectedValue"
           />
           <span class="btn-radio"
@@ -58,7 +58,7 @@
       </button>
       <button
         class="btn-bottom"
-        :disabled="!selectedValue"
+        :disabled="!checkActiveBtn()"
         @click="$emit('next')"
       >
         <i class="icon"></i>
@@ -86,4 +86,13 @@ const selectOptions = reactive([
   { label: '30%', value: 30 },
 ]);
 const optionsSelected = ref({ label: '전체', value: 0 });
+
+const checkActiveBtn = () => {
+  if (
+    selectedValue.value == 2 ||
+    (selectedValue.value == 1 && inputValue.value !== '')
+  ) {
+    return true;
+  }
+};
 </script>

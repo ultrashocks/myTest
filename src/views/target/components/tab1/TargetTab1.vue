@@ -1,17 +1,17 @@
 <template>
   <div>
     <TargetTopInput></TargetTopInput>
-    <div>
-      <FilterBar></FilterBar>
-    </div>
-    <div>
-      <TableComponent
-        :headers="headers"
-        :data="bodyData"
-        :pagingData="pagingData"
-        :showCheckbox="true"
-      />
-    </div>
+
+
+    <FilterBar></FilterBar>
+
+    <TableComponent
+      :headers="headers"
+      :data="bodyData"
+      :pagingData="pagingData"
+      :showCheckbox="true"
+    />
+
     <ul class="footer-button-box">
       <li>
         <button>삭제</button>
@@ -32,6 +32,7 @@ import { ref, computed } from 'vue';
 import TargetTopInput from './TargetTopInput.vue';
 import TableComponent from '@/views/CommonTable.vue';
 import FilterBar from './FilterBar.vue';
+import router from '@/router/index.js';
 
 const props = defineProps({
   modelValue: {
@@ -40,7 +41,7 @@ const props = defineProps({
   },
 });
 
-/* 헤더 key는 컬럼에 맞게 맞춰 주세요 */
+/* 헤더 key는 컬럼에 맞게 맞춰 주세요. 이부분은 직접 입력 하셔야합니다!*/
 const headers = ref([
   { label: '타겟 ID', key: 'target_id' },
   { label: '타겟 명', key: 'target_name' },
@@ -59,35 +60,52 @@ const headers = ref([
 
 const tableData = ref([
   {
-    target_id: 'A0010005',
+    target_id: 'A0010001',
     target_name: '인터넷_업셀_기가(1G)_디지털인터넷_업셀_기가(1G)_디지털',
     target_group: '업셀',
     cms_yn: '타겟저장종료',
     target_status: '실행대기',
     target_type: 'TV/요금제/상품변경/업셀',
-    channel_detail: '디지털',
-    channel_detail02: 'IB',
+    channel_detail: '디지털/IB',
+    //channel_detail02: 'IB',
     schedule_type: '일정입력',
-    target_count: '30,000',
+    target_count: '30,0000000000000000000000',
     round: '1/1회',
     segment_recommendation: 'AI추천',
     segment_management: '수정',
     created_at: '2024-03-17',
   },
   {
-    target_id: 'A0010004',
-    target_name: '스마트홈_신규_구글패키지_가입',
+    target_id: 'A0010002',
+    target_name:
+      '스마트홈_신규_구글패키지_가입 인터넷_업셀_기가(1G)_디지털인터넷_업셀_기가(1G)_디지털',
     target_group: '신규유치',
     cms_yn: 'CMS전송',
     target_status: '중지',
     target_type: '스마트홈/요금제/신규가입',
-    channel_detail: '고객센터',
-    channel_detail02: 'IB',
+    channel_detail: '고객센터/IB',
+    //channel_detail02: 'IB',
     schedule_type: '한번',
     target_count: '50,000',
     round: '6/365회',
     segment_recommendation: 'AI추천',
-    segment_management: '세그확인',
+    segment_management: '',
+    created_at: '2024-03-16',
+  },
+  {
+    target_id: 'A0010003',
+    target_name: '스마트홈_신규_구글패키지_가입',
+    target_group: '일이삼사오륙칠팔구십일이삼사오륙칠팔구십',
+    cms_yn: 'CMS전송',
+    target_status: '중지',
+    target_type: '모바일+홈/매뉴얼 관리/관계형성/월정액 업셀',
+    channel_detail: '디지털/앱푸시',
+    //channel_detail02: 'IB',
+    schedule_type: '한번',
+    target_count: '50,000',
+    round: '9,999/9,999회',
+    segment_recommendation: 'AI추천',
+    segment_management: '',
     created_at: '2024-03-16',
   },
   {
@@ -96,9 +114,9 @@ const tableData = ref([
     target_group: '신규유치',
     cms_yn: 'CMS전송',
     target_status: '중지',
-    target_type: '스마트홈/요금제/신규가입',
-    channel_detail: '고객센터',
-    channel_detail02: 'IB',
+    target_type: '인터넷/요금제/상품변경/기가업셀',
+    channel_detail: '고객센터/IB',
+    //channel_detail02: 'IB',
     schedule_type: '한번',
     target_count: '50,000',
     round: '6/365회',
@@ -107,14 +125,14 @@ const tableData = ref([
     created_at: '2024-03-16',
   },
   {
-    target_id: 'A0010004',
+    target_id: 'A0010005',
     target_name: '스마트홈_신규_구글패키지_가입',
     target_group: '신규유치',
     cms_yn: 'CMS전송',
     target_status: '중지',
     target_type: '스마트홈/요금제/신규가입',
-    channel_detail: '고객센터',
-    channel_detail02: 'IB',
+    channel_detail: '고객센터/IB',
+    //channel_detail02: 'IB',
     schedule_type: '한번',
     target_count: '50,000',
     round: '6/365회',
@@ -123,14 +141,15 @@ const tableData = ref([
     created_at: '2024-03-16',
   },
   {
-    target_id: 'A0010004',
-    target_name: '스마트홈_신규_구글패키지_가입',
+    target_id: 'A0010006',
+    target_name:
+      '인터넷_업셀_기가(1G)_디지털인터넷_업셀_기가(1G)_디지털인터넷_업셀_기가(1G)_디지털인터넷_업셀_기가(1G)_디지털인터넷_업셀_기가(1G)_디지털인터넷_업셀_기가(1G)_디지털',
     target_group: '신규유치',
     cms_yn: 'CMS전송',
     target_status: '중지',
     target_type: '스마트홈/요금제/신규가입',
-    channel_detail: '고객센터',
-    channel_detail02: 'IB',
+    channel_detail: '고객센터/IB',
+    //channel_detail02: 'IB',
     schedule_type: '한번',
     target_count: '50,000',
     round: '6/365회',
@@ -139,14 +158,14 @@ const tableData = ref([
     created_at: '2024-03-16',
   },
   {
-    target_id: 'A0010004',
+    target_id: 'A0010007',
     target_name: '스마트홈_신규_구글패키지_가입',
     target_group: '신규유치',
     cms_yn: 'CMS전송',
     target_status: '중지',
     target_type: '스마트홈/요금제/신규가입',
-    channel_detail: '고객센터',
-    channel_detail02: 'IB',
+    channel_detail: '고객센터/IB',
+    //channel_detail02: 'IB',
     schedule_type: '한번',
     target_count: '50,000',
     round: '6/365회',
@@ -155,14 +174,14 @@ const tableData = ref([
     created_at: '2024-03-16',
   },
   {
-    target_id: 'A0010004',
+    target_id: 'A0010008',
     target_name: '스마트홈_신규_구글패키지_가입',
     target_group: '신규유치',
     cms_yn: 'CMS전송',
     target_status: '중지',
     target_type: '스마트홈/요금제/신규가입',
-    channel_detail: '고객센터',
-    channel_detail02: 'IB',
+    channel_detail: '고객센터/IB',
+    //channel_detail02: 'IB',
     schedule_type: '한번',
     target_count: '50,000',
     round: '6/365회',
@@ -171,14 +190,14 @@ const tableData = ref([
     created_at: '2024-03-16',
   },
   {
-    target_id: 'A0010004',
+    target_id: 'A0010009',
     target_name: '스마트홈_신규_구글패키지_가입',
     target_group: '신규유치',
     cms_yn: 'CMS전송',
     target_status: '중지',
     target_type: '스마트홈/요금제/신규가입',
-    channel_detail: '고객센터',
-    channel_detail02: 'IB',
+    channel_detail: '고객센터/IB',
+    //channel_detail02: 'IB',
     schedule_type: '한번',
     target_count: '50,000',
     round: '6/365회',
@@ -187,14 +206,14 @@ const tableData = ref([
     created_at: '2024-03-16',
   },
   {
-    target_id: 'A0010004',
+    target_id: 'A0010010',
     target_name: '스마트홈_신규_구글패키지_가입',
     target_group: '신규유치',
     cms_yn: 'CMS전송',
     target_status: '중지',
     target_type: '스마트홈/요금제/신규가입',
-    channel_detail: '고객센터',
-    channel_detail02: 'IB',
+    channel_detail: '고객센터/IB',
+    //channel_detail02: 'IB',
     schedule_type: '한번',
     target_count: '50,000',
     round: '6/365회',
@@ -203,14 +222,14 @@ const tableData = ref([
     created_at: '2024-03-16',
   },
   {
-    target_id: 'A0010004',
+    target_id: 'A0010011',
     target_name: '스마트홈_신규_구글패키지_가입',
     target_group: '신규유치',
     cms_yn: 'CMS전송',
     target_status: '중지',
     target_type: '스마트홈/요금제/신규가입',
-    channel_detail: '고객센터',
-    channel_detail02: 'IB',
+    channel_detail: '고객센터/IB',
+    //channel_detail02: 'IB',
     schedule_type: '한번',
     target_count: '50,000',
     round: '6/365회',
@@ -219,14 +238,14 @@ const tableData = ref([
     created_at: '2024-03-16',
   },
   {
-    target_id: 'A0010004',
+    target_id: 'A0010012',
     target_name: '스마트홈_신규_구글패키지_가입',
     target_group: '신규유치',
     cms_yn: 'CMS전송',
     target_status: '중지',
     target_type: '스마트홈/요금제/신규가입',
-    channel_detail: '고객센터',
-    channel_detail02: 'IB',
+    channel_detail: '고객센터/IB',
+    //channel_detail02: 'IB',
     schedule_type: '한번',
     target_count: '50,000',
     round: '6/365회',
@@ -235,14 +254,14 @@ const tableData = ref([
     created_at: '2024-03-16',
   },
   {
-    target_id: 'A0010004',
+    target_id: 'A0010013',
     target_name: '스마트홈_신규_구글패키지_가입',
     target_group: '신규유치',
     cms_yn: 'CMS전송',
     target_status: '중지',
     target_type: '스마트홈/요금제/신규가입',
-    channel_detail: '고객센터',
-    channel_detail02: 'IB',
+    channel_detail: '고객센터/IB',
+    //channel_detail02: 'IB',
     schedule_type: '한번',
     target_count: '50,000',
     round: '6/365회',
@@ -251,46 +270,30 @@ const tableData = ref([
     created_at: '2024-03-16',
   },
   {
-    target_id: 'A0010004',
+    target_id: 'A0010014',
     target_name: '스마트홈_신규_구글패키지_가입',
     target_group: '신규유치',
     cms_yn: 'CMS전송',
     target_status: '중지',
     target_type: '스마트홈/요금제/신규가입',
-    channel_detail: '고객센터',
-    channel_detail02: 'IB',
+    channel_detail: '고객센터/IB',
+    //channel_detail02: 'IB',
     schedule_type: '한번',
     target_count: '50,000',
     round: '6/365회',
     segment_recommendation: 'AI추천',
-    segment_management: '세그확인',
+    segment_management: '',
     created_at: '2024-03-16',
   },
   {
-    target_id: 'A0010004',
+    target_id: 'A0010015',
     target_name: '스마트홈_신규_구글패키지_가입',
     target_group: '신규유치',
     cms_yn: 'CMS전송',
     target_status: '중지',
     target_type: '스마트홈/요금제/신규가입',
-    channel_detail: '고객센터',
-    channel_detail02: 'IB',
-    schedule_type: '한번',
-    target_count: '50,000',
-    round: '6/365회',
-    segment_recommendation: 'AI추천',
-    segment_management: '세그확인',
-    created_at: '2024-03-16',
-  },
-  {
-    target_id: 'A0010004',
-    target_name: '스마트홈_신규_구글패키지_가입',
-    target_group: '신규유치',
-    cms_yn: 'CMS전송',
-    target_status: '중지',
-    target_type: '스마트홈/요금제/신규가입',
-    channel_detail: '고객센터',
-    channel_detail02: 'IB',
+    channel_detail: '고객센터/IB',
+    //channel_detail02: 'IB',
     schedule_type: '한번',
     target_count: '50,000',
     round: '6/365회',
@@ -300,6 +303,8 @@ const tableData = ref([
   },
 ]);
 
+// 조회해서 데이터 가지고왔을때 필요한값
+// 총 로우수, 현재 클릭한 페이지 번호, 한 페이지에 몇개의 로우를 보여줄지
 const pagingData = {
   max: '100',
   current: '2',
@@ -308,26 +313,36 @@ const pagingData = {
 
 /*바꾸고 싶은 컬럼은 여기에 넣으세요.*/
 const columnTransformations = {
+  //타겟명
+  target_name: (value, row) => {
+    return {
+      type: 'text',
+      label: value,
+      align: 'left',
+    };
+  },
+
   segment_management: (value, row) => {
     // 열 전체를 바꾸고싶으면 if 빼세요.
-    if (row && row.segment_management != '-') {
+    if (row && row.segment_management !== '') {
       return {
         type: 'button',
         label: value,
-        action: () => alert(`${value} 설정`),
+        action: () =>
+          router.push({ name: 'business', params: { id: row.target_id } }),
         align: 'center',
       };
     }
-    return value;
+    return '-';
   },
 
   schedule_type: (value, row) => {
     // 열 전체를 바꾸고싶으면 if 빼세요.
-    if (row && row.target_id === 'A0010005') {
+    if (row && row.schedule_type === '일정입력') {
       return {
         type: 'button',
         label: value,
-        url: `https://link.com?name=${value}`,
+        // action: () => modal(),
         align: 'center',
       };
     }
@@ -341,10 +356,27 @@ const columnTransformations = {
         type: 'link',
         label: value,
         url: `https://link.com?name=${value}`,
-        align: 'right',
+        // align: 'right',
       };
     }
     return value;
+  },
+
+  round: (value, row) => {
+    return {
+      type: 'link',
+      label: value,
+      url: `https://link.com?name=${value}`,
+      // align: 'right',
+    };
+  },
+
+  target_count: (value, row) => {
+    return {
+      type: 'text',
+      label: value,
+      align: 'right',
+    };
   },
 };
 
@@ -363,23 +395,3 @@ const bodyData = computed(() => {
   });
 });
 </script>
-
-<!-- 그리 컬럼 전체의 행을 바꾸고 싶다면 여기서 처리 -->
-<style>
-.table-container .table tbody tr td:nth-child(3) {
-  text-align: left !important;
-}
-.table-container .table tbody tr td:nth-child(10) {
-  text-align: right !important;
-}
-
-.table-container .table tbody tr td:nth-child(4),
-.table-container .table tbody tr td:nth-child(5),
-.table-container .table tbody tr td:nth-child(6),
-.table-container .table tbody tr td:nth-child(7),
-.table-container .table tbody tr td:nth-child(8),
-.table-container .table tbody tr td:nth-child(9),
-.table-container .table tbody tr td:nth-child(11) {
-  text-align: center !important;
-}
-</style>

@@ -24,27 +24,34 @@
         </div>
       </div>
       <div class="divider"></div>
-      <div class="btn-filter open-modal">
-        <button @click="ontargetModal01">
-          <i class="btn-op-modal"></i>
+      <button class="btn-filter-open-modal" @click="ontargetModal01">
+        <i class="icon"></i>
+      </button>
+      <div style="margin-left: auto">
+        <button class="btn-common" @click="onTargetModal03">
+          타겟그룹지정
+        </button>
+        <button class="btn-common" @click="handleTargetModal" style="margin-left: 8px">
+          타겟그룹설정
         </button>
       </div>
-      <div
-        class="btn-filter"
-        style="margin-left: auto"
-        @click="handleTargetModal(index)"
-        :class="{ selected: selectedButton === index }"
-      >
-        <button>타겟 그룹 설정</button>
-      </div>
     </div>
-    <AppWindow v-model:view="targetModal01" width="650px" height="600px">
-      <FilterModal @cancel="targetModal01 = false" @confirm="onWindowConfirm" />
+    <AppWindow v-model:view="targetModal01" width="1000px" height="600px">
+      <FilterModal
+        @cancel="targetModal01 = false"
+        @confirm="onWindowConfirm"
+      />
     </AppWindow>
     <AppWindow v-model:view="targetModal02" width="650px" height="680px">
       <TargetGroupModal
         @cancel="targetModal02 = false"
         @confirm="onWindowConfirm02"
+      />
+    </AppWindow>
+    <AppWindow v-model:view="targetModal03" width="650px" height="680px">
+      <TargetFocusModal
+        @cancel="targetModal03 = false"
+        @confirm="onWindowConfirm03"
       />
     </AppWindow>
   </div>
@@ -56,6 +63,7 @@ import AppSelectBox from '@/components/ui/AppSelectBox.vue';
 import AppWindow from '@/components/ui/AppWindow.vue';
 import FilterModal from '@/views/target/components/modal/FilterModal.vue';
 import TargetGroupModal from '@/views/target/components/modal/TargetGroupModal.vue';
+import TargetFocusModal from '@/views/target/components/modal/TargetFocusModal.vue';
 
 const props = defineProps({
   modelValue: {
@@ -76,8 +84,7 @@ const buttons = ref([
 
 const selectedButton = ref(null);
 
-const handleTargetModal = index => {
-  selectedButton.value = index;
+const handleTargetModal = type => {
   onTargetModal02();
 };
 
@@ -107,6 +114,18 @@ const onTargetModal02 = () => {
 };
 const onWindowConfirm02 = () => {
   targetModal02.value = false;
+  selectedButton.value = null;
+  alert('적용');
+};
+
+// 모달 03
+const targetModal03 = ref(false);
+const onTargetModal03 = () => {
+  selectedButton.value = null;
+  targetModal03.value = true;
+};
+const onWindowConfirm03 = () => {
+  targetModal03.value = false;
   selectedButton.value = null;
   alert('적용');
 };

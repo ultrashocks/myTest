@@ -1,45 +1,73 @@
 <template>
   <div class="table-container">
     <table class="table">
+      <colgroup>
+        <col width="38px" />
+        <col width="79px" />
+        <col width="16.2637%" />
+        <col width="14.4322%" />
+        <col width="95px" />
+        <col width="66px" />
+        <col width="10%" />
+        <col width="89px" />
+        <col width="75px" />
+        <col width="94px" />
+        <col width="93px" />
+        <col width="62px" />
+        <col width="75px" />
+        <col width="89px" />
+      </colgroup>
       <thead>
         <tr>
           <!-- 체크박스 열을 조건부로 렌더링 -->
-          <th v-if="showCheckbox || false">
-            <input
-              type="checkbox"
-              v-model="selectAll"
-              @change="toggleSelectAll"
-            />
+          <th
+            v-if="showCheckbox || false"
+            :style="{ textAlign: 'center', padding: '7px 8px' }"
+          >
+            <div class="td-col radio">
+              <div class="custom-checkbox">
+                <label>
+                  <input
+                    type="checkbox"
+                    v-model="selectAll"
+                    @change="toggleSelectAll"
+                  />
+                  <i class="icon"></i>
+                </label>
+              </div>
+            </div>
           </th>
           <th v-for="header in headers" :key="header.key">
             {{ header.label }}
           </th>
         </tr>
       </thead>
-    </table>
-  </div>
-  <div class="table-container">
-    <table class="table" style="margin-top: 0">
-      <tbody style="">
+      <tbody>
         <tr
           v-for="(row, rowIndex) in data"
           :key="rowIndex"
           :class="{ 'selected-row': selectedRows[rowIndex] }"
         >
-          <!-- 체크박스 셀을 조건부로 렌더링 -->
           <td v-if="showCheckbox || false" :style="{ textAlign: 'center' }">
-            <input
-              type="checkbox"
-              v-model="selectedRows[rowIndex]"
-              @change="updateSelectedRows"
-            />
+            <div class="td-col radio">
+              <div class="custom-checkbox">
+                <label>
+                  <input
+                    type="checkbox"
+                    v-model="selectedRows[rowIndex]"
+                    @change="updateSelectedRows"
+                  />
+                  <i class="icon"></i>
+                </label>
+              </div>
+            </div>
           </td>
           <td
             v-for="(header, cellIndex) in headers"
             :key="cellIndex"
-            :style="{
-              textAlign: (row[header.key] && row[header.key].align) || 'left',
-            }"
+            :style="
+              row[header.key].align ? { textAlign: row[header.key].align } : {}
+            "
           >
             <template v-if="row[header.key]">
               <!-- 버튼인 경우 -->
@@ -55,27 +83,38 @@
                 v-else-if="row[header.key].type === 'link'"
                 :href="row[header.key].url"
                 target="_blank"
+                :ref="el => setTextElement(el, rowIndex, header.key)"
+                :title="
+                  isOverflow[rowIndex]?.[header.key]
+                    ? row[header.key].label
+                    : ''
+                "
               >
                 {{ row[header.key].label }}
               </a>
-
-              <!-- 체널상세 분기 잡음 -->
-              <template v-else-if="header.key === 'channel_detail'">
-                <span style="padding: 0 8px; text-align: left; flex: 1">
-                  {{ row.channel_detail || ' ' }}
-                </span>
-                <span
-                  style="padding: 0 8px; text-align: center; color: #999999"
-                >
-                  |
-                </span>
-                <span style="padding: 0 8px; text-align: right; flex: 1">
-                  {{ row.channel_detail02 || ' ' }}
-                </span>
-              </template>
+              <!-- 기본 텍스트 정렬이 들어갈 경우 -->
+              <span
+                v-else-if="row[header.key].type === 'text'"
+                :ref="el => setTextElement(el, rowIndex, header.key)"
+                :title="
+                  isOverflow[rowIndex]?.[header.key]
+                    ? row[header.key].label
+                    : ''
+                "
+              >
+                {{ row[header.key].label }}
+              </span>
 
               <!-- 기본 텍스트 -->
-              <span v-else>{{ row[header.key] }}</span>
+              <span
+                v-else
+                :ref="el => setTextElement(el, rowIndex, header.key)"
+                :title="
+                  isOverflow[rowIndex]?.[header.key] ? row[header.key] : ''
+                "
+              >
+                {{ row[header.key] }}
+              </span>
             </template>
           </td>
         </tr>
@@ -93,10 +132,37 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted, nextTick } from 'vue';
 import TablePaging from '@/views/TablePaging.vue';
 
 let currentPage = ref(1);
+const textElements = ref({});
+const isOverflow = ref({});
+
+const setTextElement = (el, rowIndex, headerKey) => {
+  if (!el) return;
+  if (!textElements.value[rowIndex]) {
+    textElements.value[rowIndex] = {};
+  }
+  textElements.value[rowIndex][headerKey] = el;
+};
+
+const checkOverflow = () => {
+  const newOverflowState = {};
+  Object.entries(textElements.value).forEach(([rowIndex, fields]) => {
+    newOverflowState[rowIndex] = {};
+    Object.entries(fields).forEach(([headerKey, el]) => {
+      newOverflowState[rowIndex][headerKey] = el.scrollWidth > el.clientWidth;
+    });
+  });
+  isOverflow.value = newOverflowState;
+};
+
+onMounted(() => {
+  nextTick(() => {
+    checkOverflow();
+  });
+});
 
 const updateCurrentPage = page => {
   currentPage.value = page;
@@ -147,8 +213,11 @@ const updateSelectedRows = () => {
   selectAll.value = selectedRows.value.every(row => row);
 };
 
+// 가지고온 버튼 클릭 이벤트
 const handleButtonClick = action => {
-  console.log('버튼 클릭:', action);
+  if (typeof action === 'function') {
+    action();
+  }
 };
 </script>
 

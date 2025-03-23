@@ -74,6 +74,7 @@ video {
   border: 0;
   outline: 0;
   background: transparent;
+  box-sizing: border-box;
 }
 body {
   line-height: 1;
@@ -376,6 +377,31 @@ input:-webkit-autofill:active {
   border: none !important;
 }
 
+.ml-8 {
+  margin-left: 8px;
+}
+.ml20 {
+  margin-left: 20px;
+}
+.ml30 {
+  margin-left: 30px;
+}
+.pt35 {
+  padding-top: 35px;
+}
+.mt35 {
+  margin-top: 35px;
+}
+.pb0 {
+  padding-bottom: 0 !important;
+}
+.mb0 {
+  margin-bottom: 0 !important;
+}
+.ml0 {
+  margin-left: 0 !important;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -487,8 +513,17 @@ input::-webkit-inner-spin-button {
 .ml0 {
   margin-left: 0 !important;
 }
+.mt5{
+  margin-top: 5px !important;
+}
 .mt16{
   margin-top: 16px !important;
+}
+.mt17{
+  margin-top: 17px !important;
+}
+.mt18{
+  margin-top: 18px !important;
 }
 .mt32{
   margin-top: 32px !important;
@@ -908,38 +943,89 @@ input::-webkit-inner-spin-button {
   }
 }
 
+// 조건없을경우 일반 적인 공통 버튼 css
+.btn-common {
+  padding: 0;
+  width: 100px;
+  height: 28px;
+  text-align: center;
+  border-radius: 4px;
+  border: 1px solid modules.$color_blueG_600;
+  color: modules.$color_secondary;
+  //background-color: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    border-color: modules.$color_primary;
+    color: modules.$color_primary;
+  }
+  &:disabled {
+    border-color: modules.$color_blueG_100;
+    color: modules.$color_blueG_100;
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
 // 공통 테이블  css
 .table-container {
   //padding: 20px;
   overflow: auto;
-  max-height: 17vw;
+  //max-height: 20vw;
+  max-height:calc(100% - 227px);
+  position:relative;
   .table {
     width: 100%;
     border-collapse: collapse;
-    margin: 10px 0 0;
-    .selected-row {
+    //margin: 10px 0 0;
+    .selected-row td {
       background-color: modules.$color_hilight !important;
     }
-    .table-body {
+    table-layout: fixed;
+  }
 
-    }
+  .table thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
   }
 
   .table th {
-    padding: 7px 8px;
-    border: 1px solid modules.$color_blueG_200;
+    padding: 7px 6px;
+    background-color: modules.$color_secondary;
+    border-left: 1px solid modules.$color_blueG_200;
+    border-right: 1px solid modules.$color_blueG_200;
     //height: 36px;
     font-size: 13px;
+    font-weight:500;
+    color: modules.$color_white;
   }
+
   .table td {
     padding: 7px 8px;
     border: 1px solid modules.$color_blueG_200;
     border-right: 1px solid transparent;
     //height: 36px;
     font-size: 13px;
+    text-align: center;
     &:last-child {
       border-right: 1px solid modules.$color_blueG_200;
     }
+  }
+  .table td > span {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .table td > a {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   //.table button {
@@ -948,13 +1034,14 @@ input::-webkit-inner-spin-button {
   //}
 
   .table tr:hover td {
-    background-color: #F3F5F6;
+    background-color: modules.$color_blueG_100;
   }
 
-  .table th {
-    background-color: #000000;
-    color: #fff;
+  .table tr:hover td > span {
+    color: modules.$color_secondary;
   }
+  
+
   /* 체크된 상태 */
   input[type="checkbox"]:checked {
     background-color: #E30084 !important;
@@ -1008,15 +1095,15 @@ input::-webkit-inner-spin-button {
     padding: 5px 10px;
     //background: #f4f4f4;
     border-radius: 4px;
-    color: #181A1B;
+    color: modules.$color_secondary;
     &:hover {
-      background-color: #FDEDF6;
+      background-color: modules.$color_bgRed;
     }
   }
 
   span.active {
-    background: modules.$color_bgRed;
-    color: modules.$color_primary;
+    background: modules.$color_primary ;
+    color: modules.$color_white;
   }
 
   button {
@@ -1029,14 +1116,14 @@ input::-webkit-inner-spin-button {
     color: modules.$color_blueG_600;
     &:hover{
       border: none;
-      color: modules.$color_blueG_600;
+      color: modules.$color_secondary;
     }
   }
 
   button:disabled {
     // 임시
-    background: #eee;
-    color: #999;
+    background: modules.$color_white;
+    color: modules.$color_blueG_400;
     cursor: not-allowed;
   }
 }

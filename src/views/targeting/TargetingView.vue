@@ -4,7 +4,13 @@
       <TopSteps :data="stepsComplete" @selectStep="onSelectStep" />
       <div class="targeting-contents">
         <Transition name="targeting-side">
-          <SideTargeting v-if="stepsComplete.currentStep > 1" />
+          <SideTargeting
+            v-if="stepsComplete.currentStep > 1"
+            v-model:selectStep2Scene="selectStep2Scene"
+            v-model:selectStep="stepsComplete.currentStep"
+            @moveStep2="onMoveStep2"
+            @moveStep3="onMoveStep3"
+          />
         </Transition>
         <Transition
           :name="transitionStyle"
@@ -15,6 +21,7 @@
             v-model="stepData"
             :is="getAsyncComponents[currentComponent]"
             @stepComplete="onStepComplete"
+            v-model:selectStep2Scene="selectStep2Scene"
           />
         </Transition>
       </div>
@@ -34,7 +41,7 @@ import { useDynamicComponents } from './composables/dynamicComponents';
  * 상단 현재 Step 상태보기
  */
 const stepsComplete = reactive({
-  currentStep: 1,
+  currentStep: 2,
   steps: [
     { label: '설정 시작', complete: true },
     { label: '기본 정보 입력', complete: true },
@@ -131,6 +138,16 @@ const stepData = ref({
   step7: { data: 'test7' },
   step8: { data: 'test8' },
 });
+
+const selectStep2Scene = ref(1);
+const onMoveStep2 = step => {
+  onSelectStep(2);
+  selectStep2Scene.value = step;
+};
+
+const onMoveStep3 = () => {
+  onSelectStep(3);
+};
 
 // Step 변경시 마다 실행
 watch(

@@ -13,7 +13,7 @@
         <div class="label" v-html="tab.label"></div>
       </div>
     </div>
-    <div class="btn">
+    <div title="초기화" class="btn">
       <button class="btn-target"></button>
     </div>
     <button class="btn-m target tab-right-btn">

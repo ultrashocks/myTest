@@ -4,6 +4,7 @@ $base: 14px;
 $max-width: 1920px;
 $min-width: 1440px;
 $max-height: 945px;
+$side-width: 272px;
 
 $focus-color: #E30084;
 $over-color: #f3269e;
@@ -11,7 +12,7 @@ $gray-color: #66707A;
 $gray-over-color: #7e8994;
 $dark-default: #000;
 
-$top-h: 63px;
+$top-h: 62px; //톱 메뉴 폰트 사이즈 변경으로 63 -> 62로 수정
 $bottom-h: 37px;
 
 $color_primary: #E30084;
