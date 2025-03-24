@@ -189,7 +189,7 @@ pre {
   font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   color: #3B4044;
   font-weight: 400;
-  padding-left: 16px;
+  padding: 0 8px;
   &:hover{
     border: 1px solid #000 !important;   
   }
@@ -441,7 +441,8 @@ input::-webkit-inner-spin-button {
   gap: 6px;
   transition: background-color ease 0.4s;
   &:hover{
-    background-color: modules.$over-color;
+    background-color: modules.$color_secondary;
+    //background-color: modules.$over-color;
   }
   //CMS 바로가기
   &.cms{
@@ -477,14 +478,14 @@ input::-webkit-inner-spin-button {
   &.gray{
     background-color: modules.$gray-color;
     &:hover{
-      background-color: modules.$gray-over-color;
+      background-color: modules.$color_secondary;
     }
   }
   &.red {
     background-color: modules.$focus-color;
 
     &:hover {
-      background-color: modules.$over-color;
+      background-color: modules.$color_secondary;
     }
   }
 }
@@ -528,6 +529,9 @@ input::-webkit-inner-spin-button {
 .mt32{
   margin-top: 32px !important;
 }
+.font-primary {
+  color: modules.$color_primary;
+}
 
 /************** 
   공통 컴포넌트
@@ -552,7 +556,7 @@ input::-webkit-inner-spin-button {
   .preloader {
     width: 45px;
     aspect-ratio: 0.75;
-    --c: no-repeat linear-gradient(#E30084 0 0);
+    --c: no-repeat linear-gradient(modules.$color_primary 0 0);
     background: var(--c) 0% 50%, var(--c) 50% 50%, var(--c) 100% 50%;
     animation: preloading 1s infinite linear alternate;
   }
@@ -1044,8 +1048,8 @@ input::-webkit-inner-spin-button {
 
   /* 체크된 상태 */
   input[type="checkbox"]:checked {
-    background-color: #E30084 !important;
-    border-color: #E30084 !important;
+    background-color: modules.$color_primary !important;
+    border-color: modules.$color_primary !important;
   }
 
   button {

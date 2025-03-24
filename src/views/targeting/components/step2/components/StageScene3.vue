@@ -1,9 +1,9 @@
 <template>
   <div class="stage-items step2">
-    <div class="item-row col-6">
+    <div class="item-row col-5">
       <div class="title-s">타겟 업무 선택</div>
       <div class="title">
-        어떤 <strong color="red">업무</strong>를 <strong>타겟</strong> 하시나요?
+        어떤 <strong class="red">업무</strong>를 <strong>타겟</strong> 하시나요?
       </div>
       <div class="btn-radios">
         <label>
@@ -87,11 +87,15 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 const props = defineProps({});
 
 const emit = defineEmits(['prev', 'next']);
 
 const selectedValue = ref('');
+
+watch(selectedValue, () => {
+  emit('next');
+});
 </script>

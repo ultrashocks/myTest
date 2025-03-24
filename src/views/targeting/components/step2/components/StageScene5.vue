@@ -51,11 +51,15 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 const props = defineProps({});
 
 const emit = defineEmits(['prev', 'next']);
 
 const selectedValue = ref('');
+
+watch(selectedValue, () => {
+  emit('next');
+});
 </script>

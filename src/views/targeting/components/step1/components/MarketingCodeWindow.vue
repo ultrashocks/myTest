@@ -65,10 +65,11 @@
                 </colgroup>
                 <tbody>
                   <tr
-                    v-for="item in tableData"
+                    v-for="(item, rowIndex) in tableData"
                     :key="item.id"
                     :class="{ active: item.id === selectRadioValues }"
                     @click="onSelectRow(item)"
+                    @mouseover="checkEllipsis($event, rowIndex)"
                   >
                     <td>
                       <div class="td-col radio">
@@ -92,30 +93,17 @@
                       <div class="td-col">{{ item.service }}</div>
                     </td>
                     <td>
-                      <div class="td-col">{{ item.marketingCode }}</div>
+                      <div class="td-col">
+                        {{ item.marketingCode }}
+                      </div>
                     </td>
                     <td class="td-left">
-                      <div class="td-col" :title="item.marketingName">
-                        {{ item.marketingName }}
-                      </div>
-                      <!-- <div
+                      <div
                         class="td-col"
-                        v-tippy="{
-                          content: item.marketingName,
-                          animation: 'none',
-                          placement: 'bottom-start',
-                          hideDelay: 0,
-                          duration: 0,
-                          appendTo: tooltipContainer,
-                          trigger: 'mouseenter focus',
-                          maxWidth: 'none',
-                          onShow(instance) {
-                            tooltipInstance = instance;
-                          },
-                        }"
+                        :title="isEll[rowIndex] ? item.marketingName : ''"
                       >
                         {{ item.marketingName }}
-                      </div> -->
+                      </div>
                     </td>
                   </tr>
                 </tbody>
@@ -140,14 +128,13 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, nextTick } from 'vue';
 import { reactive } from 'vue';
 import AppSelectBox from '@/components/ui/AppSelectBox.vue';
 import AppInput from '@/components/ui/AppInput.vue';
 import { useAlert } from '@/composables/alert';
 import { onMounted, onUnmounted } from 'vue';
 const { setAlertStatus } = useAlert();
-
 
 /**
  * 검색 조건
@@ -177,19 +164,43 @@ const selectRadioValues = ref('');
 const selectedRowData = ref({});
 const tableData = ref([]);
 const attachData = () => {
-  let testData = [];
-  for (let i = 0; i < 5; i++) {
-    const randomData = {
-      id: i,
+  // let testData = [];
+  // for (let i = 0; i < 1; i++) {
+  //   const randomData = {
+  //     id: i,
+  //     activity: 'up-sell',
+  //     service: '모바일',
+  //     marketingCode: 'MK000',
+  //     marketingName:
+  //       '모바일 요금제 x VAS 업셀 모바일 요금제 x VAS 업셀 모바일 요금제x VAS 업셀 모바일 요금제 x VAS 업셀',
+  //   };
+  //   testData.push(randomData);
+  // }
+  // tableData.value = testData;
+  tableData.value = [
+    {
+      id: 1,
       activity: 'up-sell',
       service: '모바일',
       marketingCode: 'MK000',
       marketingName:
         '모바일 요금제 x VAS 업셀 모바일 요금제 x VAS 업셀 모바일 요금제x VAS 업셀 모바일 요금제 x VAS 업셀',
-    };
-    testData.push(randomData);
-  }
-  tableData.value = testData;
+    },
+    {
+      id: 2,
+      activity: 'up-sell',
+      service: '모바일2',
+      marketingCode: 'MK000',
+      marketingName: '모바일 요금제',
+    },
+    {
+      id: 3,
+      activity: 'up-sell',
+      service: '모바일3',
+      marketingCode: 'MK000',
+      marketingName: '모바일 요금제',
+    },
+  ];
 };
 
 attachData();
@@ -205,6 +216,15 @@ const onCancel = () => {
   emit('cancel');
 };
 
+const isEll = ref([]);
+const checkEllipsis = (event, index) => {
+  const el = event.target;
+  if (el.scrollWidth > el.clientWidth) {
+    isEll.value[index] = true;
+  } else {
+    isEll.value[index] = false;
+  }
+};
 const onConfirm = () => {
   if (Object.keys(selectedRowData.value).length === 0) {
     setAlertStatus({
@@ -216,4 +236,10 @@ const onConfirm = () => {
     emit('cancel');
   }
 };
+
+onMounted(() => {
+  nextTick(() => {
+    // checkOverflow();
+  });
+});
 </script>

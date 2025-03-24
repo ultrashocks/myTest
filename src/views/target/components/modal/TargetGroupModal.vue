@@ -67,6 +67,7 @@
                   :key="item.id"
                   :class="{ active: selectedRows.includes(item.id) }"
                   @dblclick="changeInputRow(item)"
+                  class="type2"
                 >
                   <td>
                     <div class="td-col radio">

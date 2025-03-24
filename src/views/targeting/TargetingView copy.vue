@@ -38,12 +38,13 @@ import TopSteps from './components/TopSteps.vue';
 import BottomControlls from './components/BottomControlls.vue';
 import SideTargeting from './components/SideTargeting.vue';
 import { useDynamicComponents } from './composables/dynamicComponents';
+import { emit } from 'npm';
 
 /*
  * 상단 현재 Step 상태보기
  */
 const stepsComplete = reactive({
-  currentStep: 1,
+  currentStep: 2,
   steps: [
     { label: '설정 시작', complete: true },
     { label: '기본 정보 입력', complete: true },
@@ -156,7 +157,8 @@ const onSideShowHide = () => {
   sideShow.value = !sideShow.value;
 };
 
-const windowWidth = ref(window.innerWidth);
+//사이드메뉴 리사이징 이벤트(1440이하인경우 사이드 접기 강제실행)
+/* const windowWidth = ref(window.innerWidth);
 const handleResize = () => {
   windowWidth.value = window.innerWidth;
   if (windowWidth.value < 1440) {
@@ -164,12 +166,12 @@ const handleResize = () => {
   }
 };
 onMounted(() => {
-  handleResize();
   window.addEventListener('resize', handleResize);
 });
+
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize);
-});
+}); */
 
 // Step 변경시 마다 실행
 watch(

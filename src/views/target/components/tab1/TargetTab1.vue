@@ -1,7 +1,6 @@
 <template>
-  <div>
+  <div style="height: 100%">
     <TargetTopInput></TargetTopInput>
-
 
     <FilterBar></FilterBar>
 
@@ -334,6 +333,16 @@ const columnTransformations = {
       };
     }
     return '-';
+  },
+
+  target_group: (value, row) => {
+    // 열 전체를 바꾸고싶으면 if 빼세요.
+    return {
+      type: 'text',
+      label: value,
+      // action: () => modal(),
+      align: 'left',
+    };
   },
 
   schedule_type: (value, row) => {

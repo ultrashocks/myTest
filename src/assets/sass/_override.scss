@@ -114,17 +114,12 @@
   
 } 
 
-// .v-popper__popper.v-popper__popper--shown{
-//   box-shadow: none;
-// }
-// .v-popper--theme-tooltip .v-popper__inner{
-//   background-color: #575654;
-//   color: #fff;
-// }
-// .v-popper--theme-tooltip .v-popper__arrow-outer{
-//   border-color: #575654;
-// }
-
 .tippy-box{
   font-size: 13px;
+}
+.tippy-box[data-placement^='top'] > .tippy-arrow::before, .tippy-box[data-placement^='bottom']
+  > .tippy-arrow::before, .tippy-box[data-placement^='left']
+  > .tippy-arrow::before, .tippy-box[data-placement^='right']
+  > .tippy-arrow::before  {
+  display: none;
 }
