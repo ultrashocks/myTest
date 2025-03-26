@@ -3,7 +3,11 @@
     <div class="dialog-wrapper window" v-if="view">
       <div class="dialog-box" :style="{ width: width }">
         <span class="btn-close" @click="onClose">닫기</span>
-        <div class="dialog-body" :style="{ height: height }">
+        <div
+          class="dialog-body"
+          :class="{ 'auto-h': height === 'auto' }"
+          :style="{ height: height }"
+        >
           <slot></slot>
         </div>
         <div class="dialog-footer" v-if="useFooter">

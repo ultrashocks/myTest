@@ -170,20 +170,20 @@ const selectRadioValues = ref('');
 const selectedRowData = ref({});
 const tableData = ref([]);
 const attachData = () => {
-  // let testData = [];
-  // for (let i = 0; i < 1; i++) {
-  //   const randomData = {
-  //     id: i,
-  //     activity: 'up-sell',
-  //     service: '모바일',
-  //     marketingCode: 'MK000',
-  //     marketingName:
-  //       '모바일 요금제 x VAS 업셀 모바일 요금제 x VAS 업셀 모바일 요금제x VAS 업셀 모바일 요금제 x VAS 업셀',
-  //   };
-  //   testData.push(randomData);
-  // }
-  // tableData.value = testData;
-  tableData.value = [
+  let testData = [];
+  for (let i = 0; i < 100; i++) {
+    const randomData = {
+      id: i,
+      activity: 'up-sell',
+      service: '모바일',
+      marketingCode: 'MK000',
+      marketingName:
+        '모바일 요금제 x VAS 업셀 모바일 요금제 x VAS 업셀 모바일 요금제x VAS 업셀 모바일 요금제 x VAS 업셀',
+    };
+    testData.push(randomData);
+  }
+  tableData.value = testData;
+  /* tableData.value = [
     {
       id: 1,
       activity: 'up-sell',
@@ -206,7 +206,7 @@ const attachData = () => {
       marketingCode: 'MK000',
       marketingName: '모바일 요금제',
     },
-  ];
+  ]; */
 };
 
 attachData();

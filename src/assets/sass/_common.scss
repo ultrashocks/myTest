@@ -225,8 +225,10 @@ input[type="radio"] {
   margin-right: 2px;
   vertical-align: middle;
 }
-input[readonly="readonly"] {
-  background: #fbf9e4;
+input:read-only , textarea:read-only  {
+  border: 1px solid modules.$color_blueG_600;
+  background-color: modules.$color_blueG_100;
+  color: #181A1B;
 }
 input[readonly="readonly"].validatebox-readonly {
   background: #ffffff;
@@ -245,7 +247,7 @@ textarea {
   overflow-y: auto;
   outline: none;
   border: 1px solid #58585e;
-  background-color: #29292b;
+  background-color: #fff;
   width: 100%;
   box-sizing: border-box;
   border-radius: 4px;
@@ -482,11 +484,34 @@ input::-webkit-inner-spin-button {
     }
   }
   &.red {
-    background-color: modules.$focus-color;
+    background-color: modules.$color_primary;
 
     &:hover {
       background-color: modules.$color_secondary;
     }
+  }
+  &:disabled{
+    background-color: modules.$color_blueG_300;
+    color: modules.$color_white;
+    cursor: default;
+    &:hover{
+      background-color: modules.$color_blueG_300;
+      color: modules.$color_white;
+    }
+  }
+}
+
+.btn-b{
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  &.black{
+    background-color: modules.$color_blusG_900;
   }
 }
 
@@ -640,6 +665,9 @@ input::-webkit-inner-spin-button {
       .dialog-body {
         padding: 0;
         display: block;
+        // &.auto-h{
+          
+        // }
       }
     }
     .btn-close {

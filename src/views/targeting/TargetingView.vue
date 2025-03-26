@@ -43,7 +43,7 @@ import { useDynamicComponents } from './composables/dynamicComponents';
  * 상단 현재 Step 상태보기
  */
 const stepsComplete = reactive({
-  currentStep: 1,
+  currentStep: 3,
   steps: [
     { label: '설정 시작', complete: true },
     { label: '기본 정보 입력', complete: true },

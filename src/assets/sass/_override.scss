@@ -15,6 +15,14 @@
     border: 1px solid #000;
   }
 }
+.v-select{
+  input{
+    &:read-only{
+      border: none;
+      background: none;
+    } 
+  }
+}
 .vs--open{
     .vs__dropdown-toggle {
         border: 1px solid #000;
