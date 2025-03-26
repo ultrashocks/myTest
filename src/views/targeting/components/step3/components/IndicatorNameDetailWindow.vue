@@ -1,55 +1,72 @@
 <template>
   <div class="window-contents">
-    <div class="window-header">마케팅 활동코드</div>
+    <div class="window-header">상품 조회</div>
     <div class="window-body">
       <div class="search-table">
+        <div class="tabs-row">
+          <div class="top-tabs">
+            <div
+              class="top-tab"
+              :class="{ active: selectTab == item.id }"
+              @click="onSelectTab(item.id)"
+              v-for="item in tabData"
+              :key="item.id"
+            >
+              <div class="item">
+                <div class="label">{{ item.title }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="search-row">
           <div class="search-box">
             <div class="search-col">
-              <label>활동구분</label>
+              <label>구분</label>
               <AppSelectBox
-                :options="activityOptions"
-                v-model:optionsSelected="searchData.activitySelected"
+                :options="typeOptions"
+                v-model:optionsSelected="searchData.typeSelected"
                 style="width: 114px"
               />
             </div>
             <div class="search-col">
-              <label>서비스 구분</label>
+              <label>조건 그룹</label>
               <AppSelectBox
-                :options="serviceOptions"
-                v-model:optionsSelected="searchData.serviceSelected"
+                :options="groupOptions"
+                v-model:optionsSelected="searchData.groupSelected"
                 style="width: 114px"
               />
             </div>
             <div class="search-col">
-              <label>마케팅 활동</label>
+              <label>조건명</label>
               <AppInput
-                style="width: 245px"
-                v-model="searchData.marketing"
-                placeholder="마케팅 활동코드 또는 활동명 입력"
+                style="width: 315px"
+                v-model="searchData.title"
+                placeholder="조건명 입력"
               />
             </div>
             <button class="btn-search"><i class="icon"></i>조회</button>
           </div>
         </div>
-        <div class="table-row">
+        <div class="table-row use-tab">
           <div class="table-scroll">
             <div class="table-header">
               <table>
                 <colgroup>
                   <col width="4%" />
                   <col width="10%" />
-                  <col width="10%" />
-                  <col width="15%" />
+                  <col width="16%" />
                   <col width="" />
+                  <col width="10%" />
+                  <col width="25%" />
                 </colgroup>
                 <thead>
                   <tr>
                     <th></th>
-                    <th>활동구분</th>
-                    <th>서비스구분</th>
-                    <th>마케팅 활동코드</th>
-                    <th>마케팅 활동명</th>
+                    <th>구분</th>
+                    <th>상품코드</th>
+                    <th>상품명</th>
+                    <th>기본료</th>
+                    <th>그룹명</th>
                   </tr>
                 </thead>
               </table>
@@ -59,9 +76,10 @@
                 <colgroup>
                   <col width="4%" />
                   <col width="10%" />
-                  <col width="10%" />
-                  <col width="15%" />
+                  <col width="16%" />
                   <col width="" />
+                  <col width="10%" />
+                  <col width="25%" />
                 </colgroup>
                 <tbody>
                   <tr
@@ -87,22 +105,43 @@
                       </div>
                     </td>
                     <td>
-                      <div class="td-col">{{ item.activity }}</div>
+                      <div
+                        class="td-col"
+                        :title="isEll[rowIndex] ? item.type : ''"
+                      >
+                        {{ item.type }}
+                      </div>
                     </td>
                     <td>
-                      <div class="td-col">{{ item.service }}</div>
-                    </td>
-                    <td>
-                      <div class="td-col">
-                        {{ item.marketingCode }}
+                      <div
+                        class="td-col"
+                        :title="isEll[rowIndex] ? item.prdCode : ''"
+                      >
+                        {{ item.prdCode }}
                       </div>
                     </td>
                     <td class="td-left">
                       <div
                         class="td-col"
-                        :title="isEll[rowIndex] ? item.marketingName : ''"
+                        :title="isEll[rowIndex] ? item.prdName : ''"
                       >
-                        {{ item.marketingName }}
+                        {{ item.prdName }}
+                      </div>
+                    </td>
+                    <td class="td-right">
+                      <div
+                        class="td-col"
+                        :title="isEll[rowIndex] ? item.price : ''"
+                      >
+                        {{ item.price }}
+                      </div>
+                    </td>
+                    <td class="td-left">
+                      <div
+                        class="td-col"
+                        :title="isEll[rowIndex] ? item.group : ''"
+                      >
+                        {{ item.group }}
                       </div>
                     </td>
                   </tr>
@@ -143,24 +182,37 @@ import { onMounted, onUnmounted } from 'vue';
 // const { setAlertStatus } = useAlert();
 
 /**
+ * 탭
+ */
+const selectTab = ref(1);
+const tabData = ref([
+  { id: 1, title: '모바일' },
+  { id: 2, title: '홈' },
+]);
+const onSelectTab = id => {
+  selectTab.value = id;
+  console.log('selectTab.value=>', selectTab.value);
+};
+
+/**
  * 검색 조건
  */
-// 활동구분
-const activityOptions = reactive([
-  { label: '전체', value: 0 },
-  { label: '활동#1', value: 1 },
-  { label: '활동#2', value: 2 },
-]);
-// 서비스 구분
-const serviceOptions = reactive([
+// 구분
+const typeOptions = reactive([
   { label: '전체', value: 0 },
   { label: '구분#1', value: 1 },
   { label: '구분#2', value: 2 },
 ]);
+// 조건 그룹
+const groupOptions = reactive([
+  { label: '전체', value: 0 },
+  { label: '그룹#1', value: 1 },
+  { label: '그룹#2', value: 2 },
+]);
 const searchData = ref({
-  activitySelected: { label: '전체', value: 0 },
-  serviceSelected: { label: '전체', value: 0 },
-  marketing: '',
+  typeSelected: { label: '전체', value: 0 },
+  groupSelected: { label: '전체', value: 0 },
+  title: '',
 });
 
 /**
@@ -170,43 +222,45 @@ const selectRadioValues = ref('');
 const selectedRowData = ref({});
 const tableData = ref([]);
 const attachData = () => {
-  let testData = [];
+  /*  let testData = [];
   for (let i = 0; i < 100; i++) {
     const randomData = {
       id: i,
       activity: 'up-sell',
       service: '모바일',
-      marketingCode: 'MK000',
+      marketingCode: 'MK00' + i,
       marketingName:
         '모바일 요금제 x VAS 업셀 모바일 요금제 x VAS 업셀 모바일 요금제x VAS 업셀 모바일 요금제 x VAS 업셀',
     };
     testData.push(randomData);
   }
-  tableData.value = testData;
-  /* tableData.value = [
+  tableData.value = testData; */
+  tableData.value = [
     {
       id: 1,
-      activity: 'up-sell',
-      service: '모바일',
-      marketingCode: 'MK000',
-      marketingName:
-        '모바일 요금제 x VAS 업셀 모바일 요금제 x VAS 업셀 모바일 요금제x VAS 업셀 모바일 요금제 x VAS 업셀',
+      type: '요금제',
+      prdCode: 'LPZ0000333',
+      prdName: '(리얼글래스) 5G 시그니처',
+      price: '118.302',
+      group: '제휴요금제 그룹 A',
     },
     {
       id: 2,
-      activity: 'up-sell',
-      service: '모바일2',
-      marketingCode: 'MK000',
-      marketingName: '모바일 요금제',
+      type: '요금제',
+      prdCode: 'LPZ0000555',
+      prdName: '(리얼글래스) 5G 시그니처',
+      price: '118,100',
+      group: '금액 GROUP6: 10~11만원',
     },
     {
       id: 3,
-      activity: 'up-sell',
-      service: '모바일3',
-      marketingCode: 'MK000',
-      marketingName: '모바일 요금제',
+      type: '부가서비스',
+      prdCode: 'LPZ0000409',
+      prdName: '넷플릭스 프리미엄',
+      price: '17,000',
+      group: '미디어 서비스',
     },
-  ]; */
+  ];
 };
 
 attachData();
@@ -234,14 +288,5 @@ const checkEllipsis = (event, index) => {
 const onConfirm = () => {
   emit('confirm', selectedRowData.value);
   emit('cancel');
-  // if (Object.keys(selectedRowData.value).length === 0) {
-  //   setAlertStatus({
-  //     view: true,
-  //     message: `항목을 1개 선택해주세요.`,
-  //   });
-  // } else {
-  //   emit('confirm', selectedRowData.value);
-  //   emit('cancel');
-  // }
 };
 </script>

@@ -283,11 +283,6 @@ a,
 button {
   outline: none;
 }
-button:disabled {
-  background-color: modules.$color_blueG_300 !important;
-  color: modules.$color_white !important;
-  pointer-events: none;
-}
 strong {
   font-weight: 500;
 }
@@ -489,7 +484,7 @@ input::-webkit-inner-spin-button {
     }
   }
   &.red {
-    background-color: modules.$focus-color;
+    background-color: modules.$color_primary;
 
     &:hover {
       background-color: modules.$color_secondary;
@@ -579,68 +574,44 @@ input::-webkit-inner-spin-button {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   max-width: modules.$max-width;
   min-width: modules.$min-width;
   max-height: modules.$max-height;
   transform: translateX(-50%);
   .preloader {
-    width: 50px;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: 
-      radial-gradient(farthest-side,modules.$color_primary 94%,#0000) top/8px 8px no-repeat,
-      conic-gradient(#0000 30%,modules.$color_primary);
-    mask: radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);
-    animation: ai-loader 1s infinite linear;
+    width: 45px;
+    aspect-ratio: 0.75;
+    --c: no-repeat linear-gradient(modules.$color_primary 0 0);
+    background: var(--c) 0% 50%, var(--c) 50% 50%, var(--c) 100% 50%;
+    animation: preloading 1s infinite linear alternate;
   }
-  .preloader-text {
-    color: modules.$color_primary;
-    margin-top: 8px;
-    animation: blank 1s infinite linear;
-    font-weight: 500;
+  @keyframes preloading {
+    0% {
+      background-size: 20% 50%, 20% 50%, 20% 50%;
+      opacity: 0.5;
+    }
+    20% {
+      background-size: 20% 20%, 20% 50%, 20% 50%;
+    }
+    40% {
+      background-size: 20% 100%, 20% 20%, 20% 50%;      
+    }
+    50%{
+      opacity: 1;
+    }
+    60% {
+      background-size: 20% 50%, 20% 100%, 20% 20%;
+    }
+    80% {
+      background-size: 20% 50%, 20% 50%, 20% 100%;
+    }
+    100% {
+      background-size: 20% 50%, 20% 50%, 20% 50%;
+      opacity: 0.5;
+    }
   }
-  @keyframes ai-loader{ 
-    100%{transform: rotate(1turn)}
-  }
-  @keyframes blank{ 
-    0%{opacity: 0.2}
-    50%{opacity: 1}
-    100%{opacity: 0.2}
-  }
-  // .preloader {
-  //   width: 45px;
-  //   aspect-ratio: 0.75;
-  //   --c: no-repeat linear-gradient(modules.$color_primary 0 0);
-  //   background: var(--c) 0% 50%, var(--c) 50% 50%, var(--c) 100% 50%;
-  //   animation: preloading 1s infinite linear alternate;
-  // }
-  // @keyframes preloading {
-  //   0% {
-  //     background-size: 20% 50%, 20% 50%, 20% 50%;
-  //     opacity: 0.5;
-  //   }
-  //   20% {
-  //     background-size: 20% 20%, 20% 50%, 20% 50%;
-  //   }
-  //   40% {
-  //     background-size: 20% 100%, 20% 20%, 20% 50%;      
-  //   }
-  //   50%{
-  //     opacity: 1;
-  //   }
-  //   60% {
-  //     background-size: 20% 50%, 20% 100%, 20% 20%;
-  //   }
-  //   80% {
-  //     background-size: 20% 50%, 20% 50%, 20% 100%;
-  //   }
-  //   100% {
-  //     background-size: 20% 50%, 20% 50%, 20% 50%;
-  //     opacity: 0.5;
-  //   }
-  // }
 }
+
 
 // .pop-preloading .preloader {
 //   content: "";
@@ -694,6 +665,9 @@ input::-webkit-inner-spin-button {
       .dialog-body {
         padding: 0;
         display: block;
+        // &.auto-h{
+          
+        // }
       }
     }
     .btn-close {
@@ -857,6 +831,7 @@ input::-webkit-inner-spin-button {
 
   .window-body {
     flex: 1;
+    // padding: 0 20px;
   }
 
   .window-footer {
@@ -992,69 +967,13 @@ input::-webkit-inner-spin-button {
   &.justify-between {
     justify-content: space-between;
   }
-  &.justify-center {
-    justify-content: center;
-  }
-  &.align-center {
+  &.align-item {
     align-items: center;
-  }
-  &.gap-8px {
-    gap: 8px;
   }
   &.gap-16px {
     gap: 16px;
   }
-  &.flex-column {
-    flex-direction: column;
-  }
-  &.col-12 {
-    width: 100%;
-    flex: 1;
-  }
 }
-// 영역 css 일부
-.px-18px {
-  padding-right: 18px;
-  padding-left: 18px;
-}
-.ps-10px{
-  padding-left: 10px;
-}
-.ps-8px{
-  padding-left: 8px;
-}
-.pe-10px {
-  padding-right: 10px;
-}
-.pe-8px {
-  padding-right: 8px;
-}
-.w-44px {
-  width: 44px;
-}
-.h-18px {
-  height: 18px;
-}
-.font-size-12 {
-  font-size: 12px;
-}
-
-//배경 css
-.bg-blusG_100 {
-  background-color: modules.$color_blueG_100;
-}
-.bg-blusG_400 {
-  background-color: modules.$color_blueG_400;
-}
-
-// 폰트 컬러 CSS
-.font-color-blusG_100 {
-  color: modules.$color_blueG_100;
-}
-.font-color-blusG_400 {
-  color: modules.$color_blueG_400;
-}
-
 
 // 조건없을경우 일반 적인 공통 버튼 css
 .btn-common {

@@ -27,12 +27,14 @@
               <button
                 class="btn-b black"
                 @click="onDetailSearch"
-                v-if="step3Data.success.id > 13"
+                v-if="step3Data.success.id > 0 && step3Data.success.id < 15"
               >
                 상세
               </button>
             </div>
-            <template v-if="step3Data.success.id > 13">
+            <template
+              v-if="step3Data.success.id > 0 && step3Data.success.id < 15"
+            >
               <div class="row mt18">
                 <AppInput
                   v-model="step3Data.success.detailStandard"
@@ -43,16 +45,23 @@
               <div class="row mt18">
                 <div class="select-label__comp">같은 그룹 상품코드</div>
                 <textarea
-                  v-model="step3Data.success.detailStandard"
+                  v-model="step3Data.success.prdCode"
                   style="height: 177px"
                   :readonly="true"
                 ></textarea>
+              </div>
+              <div class="row mt18">
+                <AppInput
+                  v-model="step3Data.success.targetValue"
+                  labelName="목표값 (선택)"
+                  placeholder="선택 입력 항목입니다."
+                />
               </div>
             </template>
             <template v-else>
               <div class="row mt18">
                 <AppInput
-                  v-model="step3Data.success.detailStandard"
+                  v-model="step3Data.success.detailStandard_select"
                   labelName="지표 상세 기준 (선택)"
                 />
               </div>
@@ -99,7 +108,7 @@
         <AppWindow
           v-model:view="assistanceWindowView"
           width="895px"
-          height="600px"
+          height="676px"
         >
           <IndicatorNameDetailWindow
             @cancel="assistanceWindowView = false"
@@ -119,6 +128,9 @@ import IndicatorNameWindow from '@/views/targeting/components/step3/components/I
 import IndicatorNameDetailWindow from '@/views/targeting/components/step3/components/IndicatorNameDetailWindow.vue';
 import { ref } from 'vue';
 import StepStage from '../StepStage.vue';
+import { useSpinner } from '@/composables/spinner';
+
+const { setSpinnerStatus } = useSpinner();
 
 const props = defineProps({
   modelValue: {
@@ -134,13 +146,16 @@ const step3Data = ref({
     id: 0,
     name: '',
     standard: '',
+    detailStandard_select: '',
     detailStandard: '',
     prdCode: '',
+    targetValue: '',
   },
   assistance: {
     id: 0,
     name: '',
     standard: '',
+    detailStandard_select: '',
     detailStandard: '',
     prdCode: '',
   },
@@ -148,7 +163,7 @@ const step3Data = ref({
 
 // 지표명 검색창
 const selectType = ref('');
-const successWindowView = ref(true);
+const successWindowView = ref(false);
 const onSuccessSearch = type => {
   successWindowView.value = true;
   selectType.value = type;
@@ -156,8 +171,10 @@ const onSuccessSearch = type => {
 const onSuccessRemove = () => {
   step3Data.value.success.id = 0;
   step3Data.value.success.standard = '';
+  step3Data.value.success.detailStandard_select = '';
   step3Data.value.success.detailStandard = '';
   step3Data.value.success.prdCode = '';
+  step3Data.value.success.targetValue = '';
 };
 const onAssistanceRemove = () => {
   step3Data.value.assistance.id = 0;
@@ -186,8 +203,21 @@ const onDetailSearch = () => {
 };
 
 const onAssistanceConfirm = value => {
-  const { marketingCode, marketingName } = value;
-  step3Data.value.assistance.name = marketingCode;
-  step3Data.value.assistance.standard = marketingName;
+  const { prdCode, prdName, group } = value;
+  step3Data.value.success.detailStandard = `${prdCode}|${prdName}|${group}`;
+  step3Data.value.success.prdCode =
+    'LPZ0002555 (리얼글래스) 5G 시그니처, LPZ0002557 (갤럭시 워치) 5G 시그니처, LPZ0002558 (롯데카드제휴) 5G 시그니처, LPZ0002555 (리얼글래스) 5G 시그니처, LPZ0002557 (갤럭시 워치) 5G 시그니처, LPZ0002558 (롯데카드제휴) 5G 시그니처';
 };
+
+// Loader 테스트
+const loaderView = () => {
+  //loader 보이게
+  setSpinnerStatus(true);
+  //loader 사라지게(2초후 사라지게 임시 setTimeout 사용)
+  setTimeout(() => {
+    setSpinnerStatus(false);
+  }, 2000);
+};
+
+loaderView();
 </script>

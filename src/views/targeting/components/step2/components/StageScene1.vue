@@ -52,7 +52,7 @@
           />
           <span class="btn-radio">기타</span>
         </label>
-        <label>
+        <!-- <label>
           <input
             type="radio"
             name="customer"
@@ -60,7 +60,7 @@
             v-model="selectedValue"
           />
           <span class="btn-radio">기타2</span>
-        </label>
+        </label> -->
       </div>
     </div>
     <div class="step2-controls">

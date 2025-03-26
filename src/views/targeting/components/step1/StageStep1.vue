@@ -144,7 +144,7 @@
       </div>
     </div>
 
-    <AppWindow v-model:view="marketingWindowView" width="895px" height="600px">
+    <AppWindow v-model:view="marketingWindowView" width="895px" height="617px">
       <MarketingCodeWindow
         @cancel="marketingWindowView = false"
         @confirm="onWindowConfirm"

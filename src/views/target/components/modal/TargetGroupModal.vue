@@ -48,7 +48,7 @@
                       </div>
                     </div>
                   </th>
-                  <th colspan="10">활동구분</th>
+                  <th colspan="10">타겟 그룹명</th>
                 </tr>
               </thead>
             </table>
@@ -125,6 +125,16 @@
                 </tr>
               </tbody>
             </table>
+
+            <!-- 조회 결과가 없는 경우에 보이게 처리 -->
+            <!-- <div class="non-table__data">
+              <div class="msg-box">
+                <i class="icon"></i>
+                <div class="msg">
+                  등록된 타겟 그룹이 없습니다.<br />그룹을 등록해 주세요.
+                </div>
+              </div>
+            </div> -->
           </div>
         </div>
       </div>

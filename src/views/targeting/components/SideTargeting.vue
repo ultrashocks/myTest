@@ -27,13 +27,13 @@
           <div class="step-navi">
             <ul class="lv1">
               <li>
-                <div class="lv1-info" :class="{ active: naviControl.step1 }">
+                <div
+                  class="lv1-info"
+                  :class="{ active: naviControl.step1 }"
+                  @click="naviControl.step1 = !naviControl.step1"
+                >
                   <div class="title">기본정보</div>
-                  <span
-                    class="btn-show"
-                    @click="naviControl.step1 = !naviControl.step1"
-                    ><i class="icon"></i
-                  ></span>
+                  <span class="btn-show"><i class="icon"></i></span>
                 </div>
                 <ul class="lv2">
                   <li>
@@ -152,13 +152,13 @@
                 </ul>
               </li>
               <!-- <li>
-                <div class="lv1-info" :class="{ active: naviControl.step2 }">
+                <div
+                  class="lv1-info"
+                  :class="{ active: naviControl.step2 }"
+                  @click="naviControl.step2 = !naviControl.step2"
+                >
                   <div class="title">성공기준</div>
-                  <span
-                    class="btn-show"
-                    @click="naviControl.step2 = !naviControl.step2"
-                    ><i class="icon"></i
-                  ></span>
+                  <span class="btn-show"><i class="icon"></i></span>
                 </div>
                 <ul class="lv2">
                   <li>

@@ -1,6 +1,6 @@
 <template>
   <div class="filter-container">
-    <div class="d-flex align-item">
+    <div class="d-flex align-center">
       <div class="inner-item">
         <AppSelectBox
           :options="selectOptions"
@@ -31,16 +31,17 @@
         <button class="btn-common" @click="onTargetModal03">
           타겟그룹지정
         </button>
-        <button class="btn-common" @click="handleTargetModal" style="margin-left: 8px">
+        <button
+          class="btn-common"
+          @click="handleTargetModal"
+          style="margin-left: 8px"
+        >
           타겟그룹설정
         </button>
       </div>
     </div>
-    <AppWindow v-model:view="targetModal01" width="1000px" height="600px">
-      <FilterModal
-        @cancel="targetModal01 = false"
-        @confirm="onWindowConfirm"
-      />
+    <AppWindow v-model:view="targetModal01" width="1000px" height="680px">
+      <FilterModal @cancel="targetModal01 = false" @confirm="onWindowConfirm" />
     </AppWindow>
     <AppWindow v-model:view="targetModal02" width="650px" height="680px">
       <TargetGroupModal
@@ -48,7 +49,7 @@
         @confirm="onWindowConfirm02"
       />
     </AppWindow>
-    <AppWindow v-model:view="targetModal03" width="650px" height="680px">
+    <AppWindow v-model:view="targetModal03" width="590px" height="381px">
       <TargetFocusModal
         @cancel="targetModal03 = false"
         @confirm="onWindowConfirm03"

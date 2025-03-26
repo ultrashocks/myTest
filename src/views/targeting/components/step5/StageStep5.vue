@@ -1,13 +1,20 @@
 <template>
   <StepStage>
-    <h1>Stage5</h1>
-    {{ step5.data }}
+    <div class="stage-area">
+      <transition name="fade" mode="out-in">
+        <component
+          :is="getAsyncComponents[currentComponent]"
+          @confirm="onConfirmNext"
+        />
+      </transition>
+    </div>
   </StepStage>
 </template>
 
 <script setup>
-import { toRefs } from 'vue';
+import { ref } from 'vue';
 import StepStage from '../StepStage.vue';
+import { useDynamicComponents } from './composables/dynamicComponents';
 
 const props = defineProps({
   modelValue: {
@@ -16,5 +23,11 @@ const props = defineProps({
   },
 });
 
-const { step5 } = toRefs(props.modelValue);
+// const { step5 } = toRefs(props.modelValue);
+const { getAsyncComponents } = useDynamicComponents();
+const currentComponent = ref('LoaderScene'); //LoaderScene,  = 'StageScene'
+
+const onConfirmNext = () => {
+  currentComponent.value = 'StageScene';
+};
 </script>
