@@ -76,6 +76,7 @@ const bindNumber = $event => {
 };
 
 const onFocus = $event => {
+  if (props.readonly) return;
   var value = $event.target.value;
   if (props.type === 'number' || props.type === 'price') {
     if (props.modelValue == 0) {
@@ -88,6 +89,7 @@ const onFocus = $event => {
   }
 };
 const onBlur = $event => {
+  if (props.readonly) return;
   var value = $event.target.value;
   if (props.type === 'price') {
     //문자만 입력된 경우
@@ -106,7 +108,7 @@ const onBlur = $event => {
 };
 const checkPriceComma = () => {
   let priceValue = String(props.modelValue);
-  var currency = +priceValue.replace(/[^\d]/g, '').toString();
+  var currency = priceValue.replace(/[^\d]/g, '').toString();
   priceValue = Intl.NumberFormat().format(currency);
   if (priceValue == 0) return;
   emit('update:modelValue', priceValue);

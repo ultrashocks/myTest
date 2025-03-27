@@ -29,14 +29,14 @@
       </button>
       <div style="margin-left: auto">
         <button class="btn-common" @click="onTargetModal03">
-          타겟그룹지정
+          타겟 그룹 지정
         </button>
         <button
           class="btn-common"
           @click="handleTargetModal"
           style="margin-left: 8px"
         >
-          타겟그룹설정
+          타겟 그룹 관리
         </button>
       </div>
     </div>

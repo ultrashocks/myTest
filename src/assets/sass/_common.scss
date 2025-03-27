@@ -520,8 +520,8 @@ input::-webkit-inner-spin-button {
   }
 }
 
-.ml-8 {
-  margin-left: 8px;
+.ml16 {
+  margin-left: 16px;
 }
 .ml20 {
   margin-left: 20px;
@@ -985,6 +985,17 @@ input::-webkit-inner-spin-button {
   }
 }
 
+
+// display
+.opacity-0 {
+  opacity: 0;
+}
+.d-none {
+  display: none !important;
+}
+.d-inline-block {
+  display: inline-block;
+}
 // flex class
 .d-flex{
   flex: 0 0;
@@ -1241,4 +1252,7 @@ input::-webkit-inner-spin-button {
   }
 }
 
+.blank-flex{
+  flex: 1;
+}
 

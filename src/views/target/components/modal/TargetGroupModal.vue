@@ -1,6 +1,6 @@
 <template>
   <div class="window-contents">
-    <div class="window-header">타겟 그룹 설정</div>
+    <div class="window-header">타겟 그룹 관리</div>
     <div class="modal-body" style="padding: 16px !important">
       <div class="target-top-input-wrap">
         <div

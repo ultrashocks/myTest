@@ -7,6 +7,8 @@
     color: modules.$color_blueG_700;
     margin-bottom: 5px;
     padding-left: 7px;
+    text-align: left;
+    line-height: normal;
 }
 
 // AppInput
@@ -870,6 +872,47 @@
             }    
         }
         
+    }
+}
+
+.table-normal{
+    table{
+        table-layout:fixed;
+    }
+    thead{
+        height: 36px;
+        tr{
+            border-top: 1px solid modules.$color_secondary;
+            border-bottom: 1px solid modules.$color_blueG_400;
+        }
+        th{
+            height: 34px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #181A1B;
+        }
+    }
+    tbody{
+        tr{
+            cursor: default;
+            border-top: 1px solid modules.$color_blueG_200;
+            box-sizing: border-box;          
+            background-color: modules.$color_white;
+        }
+        td{
+            font-size: 13px;
+            font-weight: 500;
+            color: modules.$color_blueG_800;
+			border-bottom: 1px solid modules.$color_blueG_200;
+            height: 36px;
+            padding: 0 8px;
+            &.td-left{
+                text-align: left;
+            }
+            &.td-right{
+                text-align: right;
+            }
+        }       
     }
 }
 

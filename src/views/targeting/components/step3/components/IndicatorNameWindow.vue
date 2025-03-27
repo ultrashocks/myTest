@@ -16,7 +16,7 @@
             <button class="btn-search"><i class="icon"></i>조회</button>
           </div>
         </div>
-        <div class="succes-items__row">
+        <div class="succes-items__row" style="height: 445px">
           <div
             class="item"
             :class="{ active: selectedData.id === item.id }"
@@ -27,6 +27,14 @@
             <div class="item-name">{{ item.name }}</div>
             <div class="item-standard">{{ item.standard }}</div>
           </div>
+
+          <!-- 조회 결과가 없는 경우에 보이게 처리 -->
+          <!-- <div class="non-table__data">
+            <div class="msg-box">
+              <i class="icon"></i>
+              <div class="msg">조회 결과가 없습니다.</div>
+            </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -75,6 +83,12 @@ const attachData = () => {
     '업셀성공율',
     '업셀성공율',
     '업셀성공율',
+    '업셀성공율',
+    '유치성공율_유형기준',
+    '업셀성공율',
+    '업셀성공율',
+    '업셀성공율',
+    '업셀성공율',
   ];
   const standard = [
     '상품(모바일요금제)',
@@ -95,9 +109,14 @@ const attachData = () => {
     '순액증대(인터넷요금제)',
     '순액증대(U+tv요금제)',
     '순액증대(모바일부가서비스)',
+    '상품(U+tv부가서비스)',
+    '순액증대(모바일요금제)',
+    '순액증대(인터넷요금제)',
+    '순액증대(U+tv요금제)',
+    '순액증대(모바일부가서비스)',
   ];
   let testData = [];
-  for (let i = 0; i < 18; i++) {
+  for (let i = 0; i < 22; i++) {
     testData.push({
       id: i + 1,
       name: name[i],
