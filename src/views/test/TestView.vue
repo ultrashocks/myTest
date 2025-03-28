@@ -2,113 +2,12 @@
   <div class="wrap">
     <div class="contents-wrap">
       <div class="test-wrap">
-        <div>
-          <div class="test-components" style="margin-bottom: 30px">
-            <div style="margin-bottom: 10px">
-              <AppSelectCode
-                style="width: 150px"
-                labelName="마케팅 활동 코드"
-                v-model="selectCode"
-                @search="onSearch"
-                placeholder="조회"
-              />
-            </div>
-            <div style="margin-bottom: 10px">
-              <AppSelectCode
-                style="width: 150px"
-                v-model="selectCode"
-                @search="onSearch"
-                placeholder="조회"
-                :disabled="true"
-              />
-            </div>
-            <div style="margin-bottom: 10px">
-              <AppSelectCode
-                style="width: 150px"
-                v-model="selectCode"
-                @search="onSearch"
-                placeholder="조회"
-                :readonly="true"
-              />
-            </div>
-            <hr />
-            <div style="margin-bottom: 10px">
-              <AppInput
-                style="width: 150px"
-                type="price"
-                labelName="가격"
-                v-model="inputValue2"
-              />
-              <AppInput
-                style="width: 150px"
-                type="text"
-                labelName="서비스"
-                v-model="inputValue"
-              />
-            </div>
-            <div style="margin-bottom: 10px">
-              <AppInput
-                style="width: 150px"
-                type="text"
-                v-model="inputValue"
-                :readonly="true"
-              />
-            </div>
-            <div style="margin-bottom: 10px">
-              <AppInput
-                style="width: 150px"
-                type="text"
-                v-model="inputValue"
-                :disabled="true"
-              />
-            </div>
-            <hr />
-            <div style="margin-bottom: 10px">
-              <!-- comboBox -->
-              <AppSelectBox
-                :options="selectOptions"
-                v-model:optionsSelected="optionsSelected"
-                style="width: 150px"
-              />
-            </div>
-            <div style="margin-bottom: 10px">
-              <!-- labelName값을 넘겨주면 상단에 라벨명 생성 -->
-              <AppSelectBox
-                :options="selectOptions"
-                v-model:optionsSelected="optionsSelected"
-                labelName="타겟 이름"
-                style="width: 150px"
-                :disabled="true"
-              />
-            </div>
-            <div>
-              <!-- comboBox -->
-              <AppSelectBox
-                :options="selectOptions"
-                v-model:optionsSelected="optionsSelected"
-                style="width: 150px"
-                :readonly="true"
-              />
-            </div>
-            <hr />
-          </div>
-          <div class="test-btns">
-            <button @click="alertView">Alert</button>
-            <button @click="confirmState.view = true">Confrim</button>
-            <button @click="onWindowView">Window</button>
-            <button @click="loaderView">Loader</button>
-            <button @click="toastView">Toast</button>
-
-            <button
-              v-tippy="{
-                content: ' 툴팁',
-                placement: 'bottom',
-              }"
-            >
-              마우스를 올려보세요
-            </button>
-          </div>
-        </div>
+        {{ timeValue }}
+        <AppDateTimeFromToPicker
+          v-model:fromDate="fromDate"
+          v-model:toDate="toDate"
+        />
+        <AppTimePicker v-model:time="timeValue" />
       </div>
 
       <!-- Confrim창 -->
@@ -143,6 +42,8 @@ import { useSlider } from '@/composables/slider';
 import { ref } from 'vue';
 import { reactive } from 'vue';
 import { directive as vTippy } from 'vue-tippy';
+import AppDateTimeFromToPicker from '@/components/calendar/AppDateTimeFromToPicker.vue';
+import AppTimePicker from '../../components/calendar/AppTimePicker.vue';
 
 const { setAlertStatus } = useAlert();
 const { setSpinnerStatus } = useSpinner();
@@ -216,6 +117,14 @@ const selectCode = ref('MK010');
 const onSearch = () => {
   selectCode.value = 'MD123';
 };
+
+const timeValue = ref({
+  hours: new Date().getHours(),
+  minutes: new Date().getMinutes(),
+});
+
+const fromDate = ref(new Date());
+const toDate = ref(new Date());
 </script>
 
 <style lang="scss">
