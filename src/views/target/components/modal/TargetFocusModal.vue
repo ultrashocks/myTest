@@ -3,18 +3,21 @@
     <div class="window-header">타겟 그룹 지정</div>
     <div class="window-body pd-wrap-lr">
       <div class="sub-title">타겟 그룹명</div>
-      <div class="scroll-box tg-name">
+      <div class="scroll-box" style="height: 225px">
+        <!-- 높이 조정해야 할 경우 높이 조정 -->
         <ul class="radio-list">
           <li
             v-for="(item, rowIndex) in groupData"
             :key="item.id"
             :class="{ active: item.id === selectRadioValues }"
             @click="onSelectRow(item)"
-            @mouseover="checkEllipsis($event, rowIndex)"
           >
             <div class="custom-radio">
-              <label>
-                <span @mouseover="checkEllipsis($event, rowIndex)">
+              <label
+                :title="isEll[rowIndex] ? item.groupName : ''"
+                @mouseover="checkEllipsis($event, rowIndex)"
+              >
+                <span>
                   {{ item.groupName }}
                 </span>
                 <input
@@ -39,24 +42,26 @@
     </div>
     <div class="window-footer">
       <button class="btn-s gray" @click="onCancel">취소</button>
-      <button class="btn-s red" @click="onConfirm" disabled>적용</button>
-      <!-- 항목 선택되면 disabled 속성 제거, 아래 참조
-        <button class="btn-s red" @click="onConfirm">적용</button>
-      -->
+      <button
+        class="btn-s red"
+        @click="onConfirm"
+        :disabled="selectRadioValues === ''"
+      >
+        적용
+      </button>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, nextTick } from 'vue';
-import { useAlert } from '@/composables/alert';
 import { onMounted, onUnmounted } from 'vue';
-const { setAlertStatus } = useAlert();
 
 /**
  * 테이블
  */
 const selectRadioValues = ref('');
+const selectedRowData = ref({});
 const groupData = ref([]);
 const attachData = () => {
   groupData.value = [
@@ -111,13 +116,33 @@ const onCancel = () => {
   emit('cancel');
 };
 
+const onSelectRow = value => {
+  const { id } = value;
+  selectedRowData.value = { ...value };
+  selectRadioValues.value = id;
+};
+
+// const isEll = ref(false);
+// const checkEllipsis = event => {
+//   const el = event.target;
+//   if (el.scrollHeight > el.clientHeight) {
+//     isEll.value = true;
+//     console.log(isEll.value);
+//   } else {
+//     console.log(isEll.value);
+//   }
+
+// };
+
 const isEll = ref([]);
 const checkEllipsis = (event, index) => {
   const el = event.target;
   if (el.scrollWidth > el.clientWidth) {
     isEll.value[index] = true;
+    console.log(isEll.value);
   } else {
     isEll.value[index] = false;
+    console.log(isEll.value);
   }
 };
 

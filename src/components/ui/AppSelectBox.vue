@@ -1,5 +1,5 @@
 <template>
-  <div class="v-select__wrap">
+  <div class="v-select__wrap" :class="direction">
     <div class="select-label__comp" v-if="labelName !== ''">
       {{ labelName }}
     </div>
@@ -14,6 +14,7 @@
       :clearable="false"
       :disabled="readonly || disabled"
       :class="{ readonly: readonly }"
+      dropdown-position="top"
     >
       <template #open-indicator>
         <span class="icon-v-select"></span>
@@ -45,6 +46,10 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     default: false,
+  },
+  direction: {
+    type: String,
+    default: 'down',
   },
 });
 

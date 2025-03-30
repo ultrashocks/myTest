@@ -10,7 +10,7 @@
             readonly
           />
         </div>
-        <div class="row-flex mt18">
+        <div class="row-flex mt16">
           <AppInput
             v-model="step1Data.customer"
             labelName="대상 고객"
@@ -69,7 +69,7 @@
       <div class="item-row col-2">
         <div class="item-col">
           <div class="title-item">타겟 채널</div>
-          <div class="row-flex mt18">
+          <div class="row-flex mt16">
             <AppSelectBox
               labelName="채널"
               :options="channelOptions"
@@ -84,7 +84,7 @@
         </div>
         <div class="item-col">
           <div class="title-item">목표 타겟</div>
-          <div class="row-flex mt18">
+          <div class="row-flex mt16">
             <AppInput
               type="price"
               v-model="step2Data.targetNumber"

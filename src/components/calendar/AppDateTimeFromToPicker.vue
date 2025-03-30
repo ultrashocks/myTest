@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <!-- :close-on-auto-apply="false" -->
+  <div class="date-picker">
+    <div class="select-label__comp" v-if="labelName !== ''">
+      {{ labelName }}
+    </div>
     <VueDatePicker
       v-model="dateValue"
       locale="ko"
@@ -24,7 +26,9 @@
       range
       :multi-calendars="true"
     >
-      <template #input-icon></template>
+      <template #input-icon>
+        <i class="icon"></i>
+      </template>
     </VueDatePicker>
   </div>
 </template>
@@ -64,6 +68,10 @@ const props = defineProps({
   teleport: {
     type: Boolean,
     default: false,
+  },
+  labelName: {
+    type: String,
+    default: '',
   },
 });
 

@@ -1,32 +1,12 @@
 <template>
   <StepStage :style="customBoxContentStyle">
-    <ul class="targeting-detail-condition-wrap">
-      <div class="mosu-loading-page">
-        <ul class="mosu-loading-wrap" style="width: 480px; height: 100%;">
-          <li>
-            박스 이미지
-          </li>
-          <li>
-            <span>모수 체크 중이예요.</span> 잠시만 기다려 주세요.
-          </li>
-          <li>
-            조건에 따른 모수 체크까지 시간이 소요될 수 있습니다.
-          </li>
-          <li class="md-line">
-            요상한 선---
-          </li>
-          <li class="noti">
-            <i class="icon"></i>[나중에 확인하기] 버튼을 누르시면 현재 상태로 임시 저장되며 목록으로 이동됩니다.
-          </li>
-          <li class="noti">
-            <i class="icon"></i>타겟 추출이 완료되면, 메일과 문자로 알림이 전송됩니다.
-          </li>
-          <li class="나중에 확인하기">나중에 확인하기</li>
-        </ul>
-      </div>
+    <LoaderScene v-if="displayYn" v-model:displayYn="displayYn"></LoaderScene>
+    <ul v-else class="targeting-detail-condition-wrap">
       <li class="mosu-chk-btn-wrap">
-        <div class="mosu-chk-btn" @click="moduChk()">모수 체크</div>
-        <div class="mosu-chk-btn-noti"><i class="icon"></i>타겟 추전 전에 “모수 체크”는 필수 확인 사항입니다.</div>
+        <div class="mosu-chk-btn" @click="displayYn = true">모수 체크</div>
+        <div class="mosu-chk-btn-noti">
+          <i class="icon"></i>타겟 추전 전에 “모수 체크”는 필수 확인 사항입니다.
+        </div>
       </li>
       <li class="left-box-inner">
         <ul class="title-card">
@@ -138,8 +118,8 @@
                 >그룹
                 <span class="font-primary">{{
                   (groupIndex + 1).toString().padStart(2, '0')
-                }}</span></span
-              >
+                }}</span>
+              </span>
               <button class="btn-limit" @click="addLimitItem(groupIndex)">
                 제한조건 추가
               </button>
@@ -186,11 +166,7 @@
                   <div class="table-body">
                     <div
                       class="d-flex justify-center align-center btn-case"
-                      style="
-                        height: 36px;
-                        font-weight: 500;
-                        background-color: rgb(255, 255, 255);
-                      "
+                      v-if="index !== 0"
                     >
                       <div class="bg-blusG_100" style="">
                         <button
@@ -234,9 +210,26 @@
                           </td>
                           <td style="text-align: center">
                             <div class="td-col">
-                              <span v-bind:title="item.operation">{{
-                                item.operation
-                              }}</span>
+                              <span
+                                v-if="changeCondGo !== item.id"
+                                @dblclick="startEditing(item.id)"
+                              >
+                                {{ item.operation }}
+                              </span>
+                              <select
+                                v-else
+                                v-model="item.operation"
+                                @change="event => saveOperation(item, event)"
+                                @blur="changeCondGo = null"
+                              >
+                                <option
+                                  v-for="option in operationOptions"
+                                  :key="option.value"
+                                  :value="option.value"
+                                >
+                                  {{ option.value }}
+                                </option>
+                              </select>
                             </div>
                           </td>
                           <td style="text-align: center">
@@ -263,25 +256,35 @@
                 </div>
               </VueDraggable>
             </div>
-
-            <ul class="limit-no-group-body" v-else>
-              <li class="">
-                <div class="limit-img"></div>
-              </li>
-              <li
-                class="d-flex flex-column col-12 gap-8px"
-                style="font-size: 13px; font-weight: 600"
-              >
-                <span
-                  >다른 그룹의 조건을 드래그 앤 드롭으로 옮길 수 있습니다.</span
+            <VueDraggable
+              v-model="group.conditions"
+              animation="150"
+              ghostClass="ghost"
+              group="limitGroup"
+              filter=".limit-no-group-body"
+              @dragover="onDragover"
+              v-else
+            >
+              <ul class="limit-no-group-body">
+                <li class="">
+                  <div class="limit-img"></div>
+                </li>
+                <li
+                  class="d-flex flex-column col-12 gap-8px"
+                  style="font-size: 13px; font-weight: 600"
                 >
-                <span>그룹과 그룹은 기본 OR 조건으로 설정됩니다.</span>
-                <span
-                  >그룹에 조건이 담긴 상태에서 그룹을 삭제하시면 조건도
-                  삭제됩니다.</span
-                >
-              </li>
-            </ul>
+                  <span
+                    >다른 그룹의 조건을 드래그 앤 드롭으로 옮길 수
+                    있습니다.</span
+                  >
+                  <span>그룹과 그룹은 기본 OR 조건으로 설정됩니다.</span>
+                  <span
+                    >그룹에 조건이 담긴 상태에서 그룹을 삭제하시면 조건도
+                    삭제됩니다.</span
+                  >
+                </li>
+              </ul>
+            </VueDraggable>
           </div>
         </div>
       </li>
@@ -298,12 +301,15 @@ import {
   onBeforeUnmount,
   h,
   watch,
+  reactive,
 } from 'vue';
 import StepStage from '../StepStage.vue';
 import { VueDraggable } from 'vue-draggable-plus';
+import LoaderScene from '@/views/targeting/components/step4/components/LoaderScene.vue';
+import AppSelectBox from '@/components/ui/AppSelectBox.vue';
 
 const tableData = ref([]);
-const tableData02 = ref([]);
+const displayYn = ref(false);
 const props = defineProps({
   modelValue: {
     type: Object,
@@ -322,7 +328,7 @@ const tableHeaders = ref([
 
 const deleteItem = id => {
   tableData.value = tableData.value.filter(item => item.id !== id);
-  removeFirstBtnCase();
+  // removeFirstBtnCase();
 };
 
 const attachData = () => {
@@ -390,7 +396,6 @@ const btnAndOrEvent = ($this, and) => {
   if (and) {
     const limitGroup = $this.currentTarget.closest('.limit-group-body');
     limitGroup.querySelectorAll('.btn-case').forEach(btnCase => {
-      console.log(btnCase);
       btnCase.querySelectorAll('.active').forEach(target => {
         target.classList.remove('active');
       });
@@ -425,25 +430,6 @@ const deleteGroup = groupIndex => {
   groupList.value.splice(groupIndex, 1);
 };
 
-// 그룹의 제한조건 추가 삭제 될떄 감지 요소를 삭제하는 함수
-const removeFirstBtnCase = () => {
-  nextTick(() => {
-    document.querySelectorAll('.limit-group-body').forEach(groupBody => {
-      if (groupBody) {
-        const firstGroupItem = groupBody.querySelector(
-          '.limit-group-item .table-body',
-        );
-        if (firstGroupItem) {
-          const firstDiv = firstGroupItem.querySelector('div');
-          if (firstDiv && firstDiv.classList.contains('btn-case')) {
-            firstDiv.remove();
-          }
-        }
-      }
-    });
-  });
-};
-
 // 그룹의 제한조건 삭제
 // limit-group-item의 유니크한 id로 배열에서도 같이 삭제
 const deleteGroupItem = ($this, groupIndex, id) => {
@@ -462,10 +448,10 @@ const deleteGroupItem = ($this, groupIndex, id) => {
       groupBody.querySelectorAll('.limit-group-item').length === 0
     ) {
       // tableHeader.remove();
-      tableHeader.style.display = 'none'; // 숨기게 되면 나중에 sql문으로 바꿀때 맨 처음 조건식은 지워야 합니다.
+      tableHeader.style.display = 'none'; // sql문으로 바꿀때 맨 처음 조건식은 지워야 합니다. (ex : and - 제한조건그룹 - and - 제한조건그룹) -> (제한조건그룹 - and - 제한조건그룹)
       groupList.value[groupIndex].conditions = [];
     }
-    removeFirstBtnCase();
+    // removeFirstBtnCase();
   });
 };
 
@@ -488,43 +474,23 @@ const choiceConditions = target => {
   if (conditionsBtn.style.height === '64px') {
     if (target.currentTarget.textContent.trim() === 'OR') {
       const allCondBtn = document.querySelectorAll('.conditions-btn');
-      allCondBtn.forEach( target => {
+      allCondBtn.forEach(target => {
         target.querySelector('.top-cond').innerHTML = 'OR <i class="icon"></i>';
-        target.querySelector('.bottom-cond').innerHTML = 'AND <i class="icon d-none"></i> ';
-      })
+        target.querySelector('.bottom-cond').innerHTML =
+          'AND <i class="icon d-none"></i> ';
+      });
     } else {
       const allCondBtn = document.querySelectorAll('.conditions-btn');
-      allCondBtn.forEach( target => {
-        target.querySelector('.bottom-cond').innerHTML = 'OR <i class="icon d-none"></i>';
-        target.querySelector('.top-cond').innerHTML = 'AND <i class="icon"></i> ';
-      })
+      allCondBtn.forEach(target => {
+        target.querySelector('.bottom-cond').innerHTML =
+          'OR <i class="icon d-none"></i>';
+        target.querySelector('.top-cond').innerHTML =
+          'AND <i class="icon"></i> ';
+      });
     }
     conditionsBtn.style.height = '32px';
-    conditionsBtn.querySelector('.top-cond .icon').style.transform = 'rotate(0deg)';
-  }
-};
-
-// 모수 체크 버튼
-const moduChk = () => {
-  document.querySelector('.mosu-chk-btn-wrap').style.opacity = '0';
-  setTimeout(() => {
-    document.querySelector('.mosu-chk-btn-wrap').style.display = 'none';
-  }, 400);
-
-  const loadingPage = document.querySelector('.mosu-loading-page');
-
-  if (loadingPage) {
-    loadingPage.style.display = 'flex';
-    loadingPage.style.opacity = '1';
-    loadingPage.style.transition = 'opacity 0.4s ease';
-
-    setTimeout(() => {
-      loadingPage.style.opacity = '0';
-
-      setTimeout(() => {
-        loadingPage.style.display = 'none';
-      }, 400);
-    }, 2000);
+    conditionsBtn.querySelector('.top-cond .icon').style.transform =
+      'rotate(0deg)';
   }
 };
 
@@ -534,7 +500,7 @@ watch(
   groupList,
   async () => {
     await nextTick();
-    removeFirstBtnCase();
+    // removeFirstBtnCase();
   },
   { deep: true },
 );
@@ -562,6 +528,28 @@ onBeforeUnmount(() => {
     padding: '0',
   };
 });
+
+const onDragover = event => {
+  event.currentTarget.querySelector('.limit-no-group-body').style.display = 'none';
+};
+
+// 편집 중인 행 ID 저장
+const changeCondGo = ref(null);
+
+// 가능한 선택 옵션
+const operationOptions = [{ value: '=' }, { value: '<' }, { value: '>' }];
+
+const startEditing = id => {
+  changeCondGo.value = id;
+};
+
+const saveOperation = (item, event) => {
+  console.log(item);
+  console.log(event.target.value);
+
+  item.operation = event.target.value;
+  changeCondGo.value = null;
+};
 
 const { step4 } = toRefs(props.modelValue);
 </script>

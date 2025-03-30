@@ -26,6 +26,9 @@ export function useDynamicComponents() {
     StageStep8: defineAsyncComponent(() =>
       import('@/views/targeting/components/step8/StageStep8.vue'),
     ),
+    StageComplete: defineAsyncComponent(() =>
+      import('@/views/targeting/components/complete/StageComplete.vue'),
+    ),
   };
   return {
     getAsyncComponents,

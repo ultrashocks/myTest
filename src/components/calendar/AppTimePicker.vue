@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div class="time-picker">
+    <div class="select-label__comp" v-if="labelName !== ''">
+      {{ labelName }}
+    </div>
     <VueDatePicker
       v-model="timeData"
       locale="ko"
@@ -7,16 +10,21 @@
       :disabled="disabled"
       :readonly="readonly"
       autocomplete="off"
-      :clearable="true"
+      :clearable="false"
       :teleport="teleport"
+      :is-24="false"
+      cancelText="취소"
+      selectText="적용"
       time-picker
     >
-      <template #input-icon></template>
+      <template #input-icon>
+        <i class="icon"></i>
+      </template>
     </VueDatePicker>
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import VueDatePicker from '@vuepic/vue-datepicker';
 import { onMounted, ref, watch } from 'vue';
 
@@ -40,7 +48,12 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  labelName: {
+    type: String,
+    default: '',
+  },
 });
+
 const emit = defineEmits(['update:time']);
 
 const timeValue = ref({ ...props.time });

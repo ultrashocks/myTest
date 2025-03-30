@@ -535,6 +535,9 @@ input::-webkit-inner-spin-button {
 .mt35 {
   margin-top: 35px;
 }
+.mb30 {
+  margin-bottom: 30px !important;
+}
 .pb0 {
   padding-bottom: 0 !important;
 }
@@ -1064,6 +1067,9 @@ input::-webkit-inner-spin-button {
 }
 .font-color-blusG_400 {
   color: modules.$color_blueG_400;
+}
+.font-primary {
+  color: modules.$color_primary;
 }
 
 

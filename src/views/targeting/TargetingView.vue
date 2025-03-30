@@ -23,11 +23,17 @@
             v-model="stepData"
             :is="getAsyncComponents[currentComponent]"
             @stepComplete="onStepComplete"
+            @new="onNewStep"
             v-model:selectStep2Scene="selectStep2Scene"
           />
         </Transition>
       </div>
-      <BottomControlls :btnState="stepBtnState" @changeStep="onChangeStep" />
+      <BottomControlls
+        :currentStep="stepsComplete.currentStep"
+        :btnState="stepBtnState"
+        @changeStep="onChangeStep"
+        @complete="onComplete"
+      />
     </section>
   </div>
 </template>
@@ -51,7 +57,7 @@ const stepsComplete = reactive({
     { label: '상세 조건', complete: true },
     { label: '타겟 추천', complete: true },
     { label: '세그 구분', complete: true },
-    { label: '타겟 생성', complete: true },
+    { label: '타겟 저장', complete: true },
     { label: '일정/연동타겟', complete: true },
   ],
 });
@@ -95,6 +101,7 @@ const onAfterEnter = () => {
 // 버튼 활성화 제어
 const stepBtnState = reactive({ prev: false, next: false });
 const checkStepBtn = () => {
+  if (stepsComplete.currentStep === 0) return;
   const currentComplete =
     stepsComplete.steps[stepsComplete.currentStep - 1].complete;
   switch (stepsComplete.currentStep) {
@@ -117,6 +124,15 @@ const onStepComplete = value => {
   console.log(value);
   const { step, complete } = value;
   stepsComplete.steps[Number(step) - 1].complete = complete;
+};
+
+//설정 저장 완료
+const onComplete = () => {
+  stepsComplete.currentStep = 0;
+  stepsComplete.steps.forEach(step => {
+    step.complete = false;
+  });
+  currentComponent.value = `StageComplete`;
 };
 
 // Step별 데이터
@@ -163,6 +179,16 @@ const handleResize = () => {
     sideShow.value = false;
   }
 };
+
+const onNewStep = () => {
+  //임시용 버튼 활성화를 위해 실행(실 작업시 삭제)
+  stepsComplete.steps.forEach(step => {
+    step.complete = true;
+  });
+
+  onChangeStep(1);
+};
+
 onMounted(() => {
   handleResize();
   window.addEventListener('resize', handleResize);

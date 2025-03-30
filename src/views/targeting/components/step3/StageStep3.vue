@@ -35,14 +35,14 @@
             <template
               v-if="step3Data.success.id > 0 && step3Data.success.id < 15"
             >
-              <div class="row mt18">
+              <div class="row mt16">
                 <AppInput
                   v-model="step3Data.success.detailStandard"
                   labelName="지표 상세 기준"
                   :readonly="true"
                 />
               </div>
-              <div class="row mt18">
+              <div class="row mt16">
                 <div class="select-label__comp">같은 그룹 상품코드</div>
                 <textarea
                   v-model="step3Data.success.prdCode"
@@ -50,7 +50,7 @@
                   :readonly="true"
                 ></textarea>
               </div>
-              <div class="row mt18">
+              <div class="row mt16">
                 <AppInput
                   v-model="step3Data.success.targetValue"
                   labelName="목표값 (선택)"
@@ -59,7 +59,7 @@
               </div>
             </template>
             <template v-else>
-              <div class="row mt18">
+              <div class="row mt16">
                 <AppInput
                   v-model="step3Data.success.detailStandard_select"
                   labelName="지표 상세 기준 (선택)"
@@ -90,7 +90,7 @@
                 style="flex: 1"
               />
             </div>
-            <div class="row mt18">
+            <div class="row mt16">
               <AppInput
                 v-model="step3Data.assistance.detailStandard"
                 labelName="지표 상세 기준"

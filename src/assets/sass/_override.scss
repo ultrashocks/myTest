@@ -131,3 +131,83 @@
   > .tippy-arrow::before  {
   display: none;
 }
+
+.dp__selection_preview{
+  display: none;
+}
+.dp__input{
+   font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  padding-right: 10px;
+  height: 36px;
+  border: 1px solid modules.$color_blueG_600;
+  font-size: 14px;
+}
+.time-picker{
+  .icon{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url(../images/icon_time_picker.svg) no-repeat 50%;
+  }
+  .dp__instance_calendar{
+    height: 150px;
+  }
+  .dp__menu_inner{
+    height: 150px;
+  }
+  .dp__calendar{
+    > div{
+      height: 150px !important;
+    }
+  }
+}
+.date-picker{
+  .icon{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url(../images/icon_date_picker.svg) no-repeat 50%;
+  }
+}
+.dp__input_icon{
+  transform: translate(9px, -10px);
+}
+.dp__pm_am_button{
+ background-color: modules.$color_primary;
+}
+.dp__action_button{
+  &.dp__action_select{
+    background-color: modules.$color_blueG_600;
+    &:hover{
+      background-color: modules.$color_secondary;
+    }
+  }
+} 
+.dp__inc_dec_button:hover{
+  background-color: modules.$color_blueG_300;
+  color: modules.$color_secondary;
+}
+.dp__action_cancel:hover{
+  border-color: modules.$color_blueG_700;
+}
+
+.v-select__wrap{
+  &.up{
+    .v-select .vs__dropdown-menu {
+      bottom: 100% !important;
+      top: auto;
+      border-bottom: none;
+      border-radius: 4px 4px 0 0;
+      border-top: 1px solid rgba(60, 60, 60, .26);
+    }
+  }
+}
+
+.dp__action_buttons {
+    display: flex;
+    flex: auto;
+    align-items: center;
+    justify-content: center;
+    margin-left: inherit;
+    width: 100%;
+}
