@@ -125,12 +125,12 @@
 .tippy-box{
   font-size: 13px;
 }
-.tippy-box[data-placement^='top'] > .tippy-arrow::before, .tippy-box[data-placement^='bottom']
-  > .tippy-arrow::before, .tippy-box[data-placement^='left']
-  > .tippy-arrow::before, .tippy-box[data-placement^='right']
-  > .tippy-arrow::before  {
-  display: none;
-}
+// .tippy-box[data-placement^='top'] > .tippy-arrow::before, .tippy-box[data-placement^='bottom']
+//   > .tippy-arrow::before, .tippy-box[data-placement^='left']
+//   > .tippy-arrow::before, .tippy-box[data-placement^='right']
+//   > .tippy-arrow::before  {
+//   display: none;
+// }
 
 .dp__selection_preview{
   display: none;

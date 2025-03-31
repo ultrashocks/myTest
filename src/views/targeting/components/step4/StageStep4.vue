@@ -10,9 +10,23 @@
       </li>
       <li class="left-box-inner">
         <ul class="title-card">
-          <li class="title-box">제외조건 <i class="icon"></i></li>
+          <li class="title-box">
+            제외조건
+            <button
+              class="btn-info ml0"
+              v-tippy="{
+                content:
+                  '도움말<br>도움말<br>도움말 <br>&quot;도움말&quot;도움말',
+                placement: 'right-start',
+                allowHTML: true,
+                maxWidth: 500,
+              }"
+            >
+              <span>도움말</span>
+            </button>
+          </li>
           <li>
-            <button class="btn-exc">제외조건 추가</button>
+            <button class="btn-exc" @click="onExCondAddModal">제외조건 추가</button>
           </li>
         </ul>
         <div class="exc-body" style="overflow: auto">
@@ -51,27 +65,67 @@
                   </colgroup>
                   <tbody>
                     <tr
-                      v-for="(item, index) in tableData"
+                      v-for="item in tableData"
                       :key="item.id"
                       :style="{ textAlign: 'start' }"
                     >
-                      <td
-                        v-for="header in tableHeaders"
-                        :key="header.key"
-                        :style="{
-                          textAlign:
-                            header.key === 'conditionName' ? 'start' : 'center',
-                        }"
-                      >
+                      <td style="text-align: center">
+                        <div class="td-col">
+                          <span title="">{{ item.category }}</span>
+                        </div>
+                      </td>
+                      <td class="text-start text-overflow-nowrap">
+                        <div class="td-col">
+                          <span v-bind:title="item.conditionName">
+                            {{ item.conditionName }}
+                          </span>
+                        </div>
+                      </td>
+                      <td style="text-align: center">
                         <div class="td-col">
                           <span
-                            v-if="header.key !== 'delete'"
-                            :title="item[header.key]"
+                            v-if="changeCondGo !== item.id"
+                            @dblclick="startEditing(item.id)"
                           >
-                            {{ item[header.key] }}
+                            {{ item.operation }}
                           </span>
-                          <button
+                          <select
                             v-else
+                            v-model="item.operation"
+                            @change="event => saveOperation(item, event)"
+                            @blur="changeCondGo = null"
+                          >
+                            <option
+                              v-for="option in operationOptions"
+                              :key="option.value"
+                              :value="option.value"
+                            >
+                              {{ option.value }}
+                            </option>
+                          </select>
+                        </div>
+                      </td>
+                      <td style="text-align: center">
+                        <div class="td-col">
+                          <span
+                            v-bind:title="item.conditionValue"
+                            v-if="changeTextGo !== item.id"
+                            @dblclick="startTextGo(item.id)"
+                          >
+                            {{ item.conditionValue }}
+                          </span>
+                          <input
+                            v-else
+                            v-model="item.conditionValue"
+                            @blur="saveText(item)"
+                            @keydown.enter="saveText(item)"
+                            class="custom-cond-input"
+                          />
+                        </div>
+                      </td>
+                      <td style="text-align: center">
+                        <div class="td-col">
+                          <button
                             @click="deleteItem(item.id)"
                             class="btn-delete"
                           >
@@ -89,7 +143,21 @@
       </li>
       <li class="right-box-inner">
         <ul class="title-card">
-          <li class="title-box">제한조건 <i class="icon"></i></li>
+          <li class="title-box">
+            제한조건
+            <button
+              class="btn-info ml0"
+              v-tippy="{
+                content:
+                  '도움말<br>도움말<br>도움말 <br>&quot;도움말&quot;도움말',
+                placement: 'right-start',
+                allowHTML: true,
+                maxWidth: 500,
+              }"
+            >
+              <span>도움말</span>
+            </button>
+          </li>
           <li>
             <button class="btn-limit-group" @click="addGroup">
               그룹추가 <span class="font-primary">+</span>
@@ -120,7 +188,10 @@
                   (groupIndex + 1).toString().padStart(2, '0')
                 }}</span>
               </span>
-              <button class="btn-limit" @click="addLimitItem(groupIndex)">
+              <button
+                class="btn-limit"
+                @click="addLimitItem(groupIndex, $event)"
+              >
                 제한조건 추가
               </button>
             </div>
@@ -157,10 +228,11 @@
                 animation="150"
                 ghostClass="ghost"
                 group="limitGroup"
+                @end="endDrag"
               >
                 <div
                   v-for="(item, index) in group.conditions"
-                  :key="groupIndex + '' + index + '' + Date.now()"
+                  :key="index"
                   class="limit-group-item"
                 >
                   <div class="table-body">
@@ -201,7 +273,7 @@
                               <span title="">{{ item.category }}</span>
                             </div>
                           </td>
-                          <td style="text-align: start">
+                          <td class="text-start text-overflow-nowrap">
                             <div class="td-col">
                               <span v-bind:title="item.conditionName">
                                 {{ item.conditionName }}
@@ -234,7 +306,20 @@
                           </td>
                           <td style="text-align: center">
                             <div class="td-col">
-                              <span v-bind:title="item.conditionValue">Y</span>
+                              <span
+                                v-bind:title="item.conditionValue"
+                                v-if="changeTextGo !== item.id"
+                                @dblclick="startTextGo(item.id)"
+                              >
+                                {{ item.conditionValue }}
+                              </span>
+                              <input
+                                v-else
+                                v-model="item.conditionValue"
+                                @blur="saveText(item)"
+                                @keydown.enter="saveText(item)"
+                                class="custom-cond-input"
+                              />
                             </div>
                           </td>
                           <td style="text-align: center">
@@ -287,6 +372,17 @@
             </VueDraggable>
           </div>
         </div>
+        <!-- 제외조건 추가 모달 -->
+        <AppWindow
+          v-model:view="openViewExCondAddModal"
+          width="895px"
+          height="676px"
+        >
+          <ExCondAddModal
+            @cancel="openViewExCondAddModal = false"
+            @confirm="onExCondAddModalData"
+          />
+        </AppWindow>
       </li>
     </ul>
   </StepStage>
@@ -306,7 +402,9 @@ import {
 import StepStage from '../StepStage.vue';
 import { VueDraggable } from 'vue-draggable-plus';
 import LoaderScene from '@/views/targeting/components/step4/components/LoaderScene.vue';
-import AppSelectBox from '@/components/ui/AppSelectBox.vue';
+import { directive as vTippy } from 'vue-tippy';
+import AppWindow from '@/components/ui/AppWindow.vue';
+import ExCondAddModal from '@/views/targeting/components/step4/components/modals/ExCondAddModal.vue';
 
 const tableData = ref([]);
 const displayYn = ref(false);
@@ -337,7 +435,7 @@ const attachData = () => {
     testData.push({
       id: i,
       category: 'AI 추천',
-      conditionName: `[고객ID]상담 거부 이력(최근 3개월) - ${i}`,
+      conditionName: `[고객ID- ${i}]상담 거부 이력(최근 3개월)`,
       operation: '=',
       conditionValue: 'Y',
     });
@@ -349,7 +447,7 @@ attachData();
 let customBoxContentStyle = ref({});
 
 // 모달에서 데이터를 이함수에 내려주면 됨 모달은 어떤 그룹의 제한조건인지 groupIndex만 들고 올라가면됨
-const addLimitItem = groupIndex => {
+const addLimitItem = (groupIndex, div) => {
   const testData = {
     id: groupIndex + '' + Date.now() || 0,
     category: '+',
@@ -360,6 +458,22 @@ const addLimitItem = groupIndex => {
     conditionValue: 'Y',
   };
   groupList.value[groupIndex].conditions.push(testData);
+
+  console.log(
+    div.currentTarget.closest('.limit-group').querySelector('.table-scroll'),
+  );
+
+  // 생성시 스크롤 맨 아래로 이동
+  const container = div.currentTarget.closest('.limit-group');
+  const scrollElement = container?.querySelector('.table-scroll');
+  setTimeout(() => {
+    if (scrollElement) {
+      scrollElement.scrollTo({
+        top: scrollElement.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
+  }, 0);
 };
 
 // 최초에 AI추천이 들어올때
@@ -425,7 +539,7 @@ const btnAndOrEvent = ($this, and) => {
   }
 };
 
-// 그룹 삭제
+// 그룹 삭제R
 const deleteGroup = groupIndex => {
   groupList.value.splice(groupIndex, 1);
 };
@@ -528,27 +642,67 @@ onBeforeUnmount(() => {
     padding: '0',
   };
 });
-
+// ----------- 드래그 이벤트
 const onDragover = event => {
-  event.currentTarget.querySelector('.limit-no-group-body').style.display = 'none';
+  event.currentTarget.querySelector('.limit-no-group-body').style.display =
+    'none';
+};
+const endDrag = () => {
+  document.querySelectorAll('.limit-no-group-body').forEach(target => {
+    target.style.display = 'flex';
+  });
 };
 
-// 편집 중인 행 ID 저장
+//  드래그 끝---
+
 const changeCondGo = ref(null);
-
-// 가능한 선택 옵션
 const operationOptions = [{ value: '=' }, { value: '<' }, { value: '>' }];
-
-const startEditing = id => {
+// const startEditing = id => {
+//   changeCondGo.value = id;
+// };
+const startEditing = async id => {
   changeCondGo.value = id;
+  await nextTick();
+
+  const selectElement = document.querySelector('.td-col select');
+  if (selectElement) {
+    selectElement.focus();
+  }
+};
+const startTextGo = async id => {
+  changeTextGo.value = id;
+
+  await nextTick();
+
+  const inputElement = document.querySelector('.custom-cond-input');
+  if (inputElement) {
+    inputElement.focus();
+    inputElement.select();
+  }
 };
 
 const saveOperation = (item, event) => {
-  console.log(item);
-  console.log(event.target.value);
-
   item.operation = event.target.value;
   changeCondGo.value = null;
+};
+
+const changeTextGo = ref(null);
+const saveText = item => {
+  console.log('저장된 값:', item.conditionValue);
+  changeTextGo.value = null;
+};
+
+// 모달이벤트 시작- >>>
+// 제외조건 추가 모달 모달 시작
+const openViewExCondAddModal = ref(false);
+const onExCondAddModal = () => {
+  openViewExCondAddModal.value = true;
+};
+// 모달에서 선택한 데이터 콜백
+const onExCondAddModalData = value => {
+  console.log(value)
+  // const { prdCode, prdName, group } = value;
+  // step3Data.value.success.detailStandard = `${prdCode}|${prdName}|${group}`;
 };
 
 const { step4 } = toRefs(props.modelValue);

@@ -1,6 +1,20 @@
 <template>
   <div class="window-contents">
-    <div class="window-header">상품 조회</div>
+    <div class="window-header">
+      상품 조회
+      <button
+        class="btn-info"
+        v-tippy="{
+          content:
+            '하나의 상품코드가 여러 그룹에 속할 수 있으니 그룹을 보시고, 선택해 주십시오.<br>선택한 상품 그룹의 모든 상품이 타겟 추천 및 성과 측정에 포함됩니다.<br>타겟 추천 및 성과 측정에 원치 않은 상품은 제외조건에서 <br>&quot;To-be 요금제 제외 목록&quot; 조건의 조건값에 상품코드를 입력하여 제외해주시기 바랍니다.',
+          placement: 'right-start',
+          allowHTML: true,
+          maxWidth: 500,
+        }"
+      >
+        <span>도움말</span>
+      </button>
+    </div>
     <div class="window-body">
       <div class="search-table">
         <div class="tabs-row">
@@ -180,6 +194,7 @@ import AppInput from '@/components/ui/AppInput.vue';
 import { onMounted, onUnmounted } from 'vue';
 // import { useAlert } from '@/composables/alert';
 // const { setAlertStatus } = useAlert();
+import { directive as vTippy } from 'vue-tippy';
 
 /**
  * 탭

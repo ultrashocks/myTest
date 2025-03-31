@@ -10,6 +10,7 @@
       autocomplete="off"
       :readonly="readonly"
       :disabled="disabled"
+      :maxlength="maxLength"
       @input="bindNumber"
       @focus="onFocus"
       @blur="onBlur"
@@ -43,6 +44,10 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     default: false,
+  },
+  maxLength: {
+    type: [String, Number],
+    default: null,
   },
 });
 

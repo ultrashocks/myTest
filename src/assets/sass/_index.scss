@@ -1,0 +1,167 @@
+@use "modules";
+$main-top-h: 243px;
+
+.main-wrap{
+    background-color: modules.$color_blueG_100;
+    height: 100%;
+    // display: flex;
+    // flex-direction: column;
+    .row-top{
+        // flex: 0 0  $main-top-h;
+        height: $main-top-h;
+        background-color: modules.$color_white;
+        box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+        box-sizing: border-box;
+        padding:  30px 30px 10px 30px;
+        display: flex;
+        gap: 30px;
+        .top-l{
+            flex: 0 0 600px;            
+        }
+        .top-r{
+            flex: 1;            
+            box-sizing: border-box;
+            border-left: 1px solid modules.$color_blueG_300;
+        }
+    }
+    .row-bottom{
+        // flex: 1;
+        height: calc(100% - $main-top-h);
+        box-sizing: border-box;
+        // padding: 30px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        @include modules.custom-scrollbar();
+    }
+    .my-layout{
+        display: grid;
+        grid-template-columns: 1fr 600px;
+        // grid-auto-rows: 291px minmax(260px,auto);
+        grid-auto-rows: 291px 282px;
+        gap: 30px;
+        box-sizing: border-box;
+        // height: 100%;
+        padding: 30px;
+    }
+    .team-layout{
+        padding: 30px;
+    }
+    .layout-box {
+        background-color: modules.$color_white;
+        border: 1px solid modules.$color_blueG_400;
+        border-radius: 8px;
+        &.team{
+            height: 1000px;
+        }
+    }
+
+    .my-infos{
+        .info-title{
+            height: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            .title-l{
+                display: flex;
+                align-items: center;
+                .user-name{
+                    font-size: 20px;
+                    color: modules.$color_secondary;
+                    font-weight: 400;
+                    padding: 0 8px;
+                    strong{
+                        font-weight: 600;
+                    }
+                }
+                .divide-line{
+                    display: inline-block;
+                    width: 1px;
+                    height: 14px;
+                    background-color: modules.$color_blueG_400;
+                }
+                .btns{
+                    margin-left: 8px;
+                    display: flex;
+                    .btn-type{
+                        height: 18px;
+                        background-color: modules.$color_blueG_100;
+                        font-size: 12px;
+                        color: modules.$color_blueG_400;
+                        display: inline-flex;
+                        align-items: center;
+                        padding: 0 9px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        &.my{
+                            border-radius: 8px 0 0 8px;
+                        }      
+                        &.team{
+                            border-radius: 0 8px 8px 0;
+                        }    
+                        &.active{
+                            background-color: modules.$color_bgRed;
+                            color: modules.$color_primary;
+                        }                    
+                    }
+                }
+            }
+            .title-r{
+                .btn-new__targeting{
+                    display: inline-flex;
+                    align-items: center;
+                    height: 28px;
+                    background-color: modules.$color_blueG_100;
+                    border-radius: 28px;
+                    padding: 0 9px 0 12px;
+                    gap: 2px;
+                    font-size: 13px;
+                    font-weight: 600;
+                    color: modules.$color_blueG_800;
+                    cursor: pointer;
+                    .icon{
+                        display: inline-block;
+                        width: 10px;
+                        height: 10px;
+                        background: url(../images/icon_main_btn_arrow.svg) no-repeat 50%;
+                    }
+                }
+            }
+        }
+        .infos-row{
+            display: flex;
+            gap: 8px;
+            height: 130px;
+            .info-box{
+                flex: 1;
+                border-radius: 8px;
+                color: modules.$color_white;
+                box-sizing: border-box;
+                padding: 18px 16px;
+                .label{
+                    font-size: 13px;
+                    font-weight: 600;
+                }
+                .count{
+                    padding-top: 25px;
+                }
+                .num{
+                    color: modules.$color_white;
+                    font-size: 48px;
+                    font-weight: 600;
+                    display: flex;
+                    justify-content: flex-end;
+                }
+                &:nth-child(1){
+                    background-color: #EB69B4;
+                }
+                &:nth-child(2){
+                    background-color: #D270C2;
+                }
+                &:nth-child(3){
+                    background-color: #BB7CE5;
+                }
+            }
+        }
+    }
+}

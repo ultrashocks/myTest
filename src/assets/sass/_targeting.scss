@@ -287,6 +287,12 @@ ul.targeting-detail-condition-wrap {
             }
         }
     }
+    .custom-cond-input {
+        width: 70px;
+        text-align: center;
+        font-weight: 600;
+        border-radius: 4px;
+    }
     // 좌측 시작
     .left-box-inner {
         //border: 1px solid ;
@@ -352,6 +358,11 @@ ul.targeting-detail-condition-wrap {
         display: flex;
         flex-direction: column;
         overflow: auto;
+        .text-overflow-nowrap {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
         .title-card {
             height: 28px;
             display: flex;
@@ -412,6 +423,7 @@ ul.targeting-detail-condition-wrap {
                 border: 1px dashed;
                 padding: 16px 16px 20px;
                 width: 100%;
+                min-height: 180px;
                 max-height: 300px;
                 margin-bottom: 1px;
                 .conditions-btn {
@@ -577,6 +589,54 @@ ul.targeting-detail-condition-wrap {
                 }
             }
         }
+        // 상세조건에서 쓰는 모달창 일부 class
+        .add-box {
+            width: 698px;
+            height: 455px;
+            margin: 30px auto 0;
+            //border: 1px solid;
+            .sqlAddWrap {
+                height: 291px;
+                display: flex;
+                justify-content: space-between;
+                flex-direction: column;
+                .sqlAddMid {
+                    border: 1px solid modules.$color_blueG_400;
+                    padding: 7px 16px;
+                    width: 100%;
+                    height: 225px;
+                    border-radius: 4px;
+                    textarea {
+                        height: 100%;
+                        width: 100%;
+                        padding: 0;
+                        border: none;
+                        outline: none;
+                        resize: none;
+                        background: transparent;
+
+                        &:hover,
+                        &:focus {
+                            border: none !important;
+                            outline: none !important;
+                            box-shadow: none !important;
+                        }
+                    }
+                }
+                .sqlAddBottom {
+                    width: 100%;
+                    height: 20px;
+                    display: flex;
+                    align-items: center;
+                    color: modules.$color_blueG_500;
+                    font-size: 12px;
+                }
+            }
+        }
+        // 모달 바디 수정
+        .dialog-body {
+            max-height: 100% !important;
+        }
     }
     .btn-delete {
         padding: 0;
@@ -591,29 +651,29 @@ ul.targeting-detail-condition-wrap {
         cursor: pointer;
         transition: all 0.2s ease-in-out;
     }
-
-    //모수체크 로딩페이지
-    .mosu-loading-page {
-        width: 100%;
-        height: 100%;
-        background-color: #fff;
-        position: absolute;
-        z-index: 9999;
-        border-radius: 8px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        display: none;
-        .mosu-loading-wrap {
-            width: 480px;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            background-color: #555;
-        }
-    }
+    //
+    ////모수체크 로딩페이지
+    //.mosu-loading-page {
+    //    width: 100%;
+    //    height: 100%;
+    //    background-color: #fff;
+    //    position: absolute;
+    //    z-index: 9999;
+    //    border-radius: 8px;
+    //    display: flex;
+    //    justify-content: center;
+    //    align-items: center;
+    //    display: none;
+    //    .mosu-loading-wrap {
+    //        width: 480px;
+    //        height: 100%;
+    //        display: flex;
+    //        justify-content: center;
+    //        align-items: center;
+    //        flex-direction: column;
+    //        background-color: #555;
+    //    }
+    //}
 }
 // 타겟팅 상세 조건 (4단계) -- 끝
 

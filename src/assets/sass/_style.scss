@@ -150,6 +150,8 @@
             mask: url(../images/icon_code_search.svg) no-repeat 50%;
         }
         &:hover{
+            background-color: rgba(255,255,255,0);
+            
             .icon{
                 background-color: modules.$color_secondary;
             }
@@ -627,13 +629,12 @@
 .btn-search{
     display: inline-flex;
     align-items: center;
-    height: 33px;
-    padding: 0 16px;
+    height: 36px;
+    padding: 0 12px;
     background-color: modules.$color_blueG_800;
     border-radius: 4px;
     color: modules.$color_white;
-    font-size: 14px;
-    font-weight: 500;
+    @include modules.font-style(text_body14_B);
     gap: 6px;
     transition: background-color ease 0.4s;
     .icon{
@@ -645,10 +646,7 @@
         mask: url(../images/icon_code_search.svg) no-repeat 50%;
     }
     &:hover{
-        color: #ddd;
-        .icon{
-            background-color: #ddd;
-        }
+        background-color: modules.$color_secondary;
     }
     &:disabled{
         cursor: default;
@@ -1047,5 +1045,18 @@
         cursor: pointer;
         left: 0;
         top: 0;
+    }
+}
+
+.btn-info {
+    display: inline-block;
+    margin-left: 8px;
+    width: 24px;
+    height: 24px;
+    background: url("/src/assets/images/icon_circle_question.svg") no-repeat center center;
+    text-indent: -99999px;
+
+    &:hover {
+        background: url("/src/assets/images/icon_circle_question_o.svg") no-repeat center center;
     }
 }

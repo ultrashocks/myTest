@@ -13,6 +13,29 @@ export const getRoutes = [
     meta: { auth: false, navi: false },
   },
   {
+    path: '/main',
+    component: () => import('@/views/SubRouterView.vue'),
+    redirect: '/main',
+    name: 'main',
+    meta: {
+      auth: false,
+      navi: true,
+      title: '메인',
+    },
+    children: [
+      {
+        path: '/main',
+        component: () => import('@/views/main/MainView.vue'),
+        name: 'Main',
+        meta: {
+          auth: false,
+          navi: true,
+          title: '메인',
+        },
+      },
+    ],
+  },
+  {
     path: '/target',
     component: () => import('@/views/SubRouterView.vue'),
     redirect: '/target',

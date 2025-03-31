@@ -14,7 +14,15 @@
                   @remove="onSuccessRemove"
                   placeholder="조회"
                   :readonly="true"
-                  style="flex: 0 0 150px"
+                  style="flex: 0 0 205px"
+                  v-tippy="{
+                    content:
+                      '지표명이 조회되었을 경우 툴팁 나옴<br>유효응답자 수 / 타겟 등록건수',
+                    placement: 'bottom',
+                    allowHTML: true,
+                    offset: [0, -2],
+                    arrow: true,
+                  }"
                 />
                 <AppInput
                   type="text"
@@ -80,7 +88,15 @@
                 @remove="onAssistanceRemove"
                 placeholder="조회"
                 :readonly="true"
-                style="flex: 0 0 150px"
+                style="flex: 0 0 205px"
+                v-tippy="{
+                  content:
+                    '지표명이 조회되었을 경우 툴팁 나옴<br>유효응답자 수 / 타겟 등록건수',
+                  placement: 'bottom',
+                  allowHTML: true,
+                  offset: [0, -2],
+                  arrow: true,
+                }"
               />
               <AppInput
                 type="text"
@@ -129,6 +145,7 @@ import IndicatorNameDetailWindow from '@/views/targeting/components/step3/compon
 import { ref } from 'vue';
 import StepStage from '../StepStage.vue';
 import { useSpinner } from '@/composables/spinner';
+import { directive as vTippy } from 'vue-tippy';
 
 const { setSpinnerStatus } = useSpinner();
 

@@ -23,6 +23,13 @@
             v-for="item in itemData"
             :key="item.id"
             @click="onSelect(item)"
+            v-tippy="{
+              content: item.info,
+              placement: 'bottom',
+              arrow: true,
+              allowHTML: true,
+              offset: [0, 6],
+            }"
           >
             <div class="item-name">{{ item.name }}</div>
             <div class="item-standard">{{ item.standard }}</div>
@@ -54,6 +61,7 @@ import AppSelectBox from '@/components/ui/AppSelectBox.vue';
 import AppInput from '@/components/ui/AppInput.vue';
 import { onMounted, onUnmounted } from 'vue';
 import { computed } from 'vue';
+import { directive as vTippy } from 'vue-tippy';
 
 /**
  * 검색 조건
@@ -121,6 +129,11 @@ const attachData = () => {
       id: i + 1,
       name: name[i],
       standard: standard[i],
+      info: `특정 모바일 요금제로 신규<br>
+      가입 또는 변경하는 비중[산식]<br>
+      요금제 가입을 = 당월 해당<br>
+      모바일 요금제 가입/타겟<br> 등록건수
+     ${i + 1}`,
     });
   }
   itemData.value = testData;
