@@ -2,7 +2,10 @@
   <div class="my-infos">
     <div class="info-title">
       <div class="title-l">
-        <div class="user-name"><strong>홍길동</strong>님</div>
+        <div class="user-name">
+          <strong>{{ userName }}</strong
+          >님
+        </div>
         <span class="divide-line"></span>
         <div class="btns">
           <span
@@ -73,19 +76,30 @@
 <script setup>
 import NumberAnimation from 'vue-number-animation';
 import { inject, reactive } from 'vue';
+import { ref } from 'vue';
 
 const currentView = inject('currentView');
 const onSelect = value => {
   currentView.value = value;
 };
 
-const data = reactive({
-  myTarget: Math.floor(Math.random() * 100),
-  teamTarget: Math.floor(Math.random() * 100),
-  shareTarget: Math.floor(Math.random() * 100),
-});
-
 const formatNumber = value => {
   return `${Number(value).toFixed(0)}`;
 };
+
+const userName = ref('');
+const data = reactive({
+  myTarget: 0,
+  teamTarget: 0,
+  shareTarget: 0,
+});
+
+const attachData = () => {
+  userName.value = '홍길동';
+  data.myTarget = Math.floor(Math.random() * 100);
+  data.teamTarget = Math.floor(Math.random() * 100);
+  data.shareTarget = Math.floor(Math.random() * 100);
+};
+
+attachData();
 </script>

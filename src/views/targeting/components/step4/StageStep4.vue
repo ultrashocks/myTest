@@ -26,7 +26,9 @@
             </button>
           </li>
           <li>
-            <button class="btn-exc" @click="onExCondAddModal">제외조건 추가</button>
+            <button class="btn-exc" @click="onExCondAddModal">
+              제외조건 추가
+            </button>
           </li>
         </ul>
         <div class="exc-body" style="overflow: auto">
@@ -188,9 +190,10 @@
                   (groupIndex + 1).toString().padStart(2, '0')
                 }}</span>
               </span>
+<!--              @click="addLimitItem(groupIndex, $event)"-->
               <button
                 class="btn-limit"
-                @click="addLimitItem(groupIndex, $event)"
+                @click="onLimitCondAddModal(groupIndex, $event)"
               >
                 제한조건 추가
               </button>
@@ -380,7 +383,20 @@
         >
           <ExCondAddModal
             @cancel="openViewExCondAddModal = false"
-            @confirm="onExCondAddModalData"
+            @callBeck="onExCondAddModalData"
+          />
+        </AppWindow>
+        <!-- 제한조건 추가 모달 -->
+        <AppWindow
+          v-model:view="openViewLimitCondAddModal"
+          width="895px"
+          height="676px"
+        >
+          <LimitCondAddModal
+            v-model:groupIndex="groupIndex"
+            v-model:div="div"
+            @cancel="openViewLimitCondAddModal = false"
+            @callBeck="onLimitCondAddModalData"
           />
         </AppWindow>
       </li>
@@ -405,9 +421,11 @@ import LoaderScene from '@/views/targeting/components/step4/components/LoaderSce
 import { directive as vTippy } from 'vue-tippy';
 import AppWindow from '@/components/ui/AppWindow.vue';
 import ExCondAddModal from '@/views/targeting/components/step4/components/modals/ExCondAddModal.vue';
+import LimitCondAddModal from '@/views/targeting/components/step4/components/modals/LimitCondAddModal.vue';
 
 const tableData = ref([]);
 const displayYn = ref(false);
+
 const props = defineProps({
   modelValue: {
     type: Object,
@@ -446,35 +464,34 @@ attachData();
 
 let customBoxContentStyle = ref({});
 
-// 모달에서 데이터를 이함수에 내려주면 됨 모달은 어떤 그룹의 제한조건인지 groupIndex만 들고 올라가면됨
-const addLimitItem = (groupIndex, div) => {
-  const testData = {
-    id: groupIndex + '' + Date.now() || 0,
-    category: '+',
-    conditionName: `${
-      groupIndex + '' + Date.now() || 0
-    } - [고객ID]상담 거부 이력(최근 3개월)`,
-    operation: '=',
-    conditionValue: 'Y',
-  };
-  groupList.value[groupIndex].conditions.push(testData);
-
-  console.log(
-    div.currentTarget.closest('.limit-group').querySelector('.table-scroll'),
-  );
-
-  // 생성시 스크롤 맨 아래로 이동
-  const container = div.currentTarget.closest('.limit-group');
-  const scrollElement = container?.querySelector('.table-scroll');
-  setTimeout(() => {
-    if (scrollElement) {
-      scrollElement.scrollTo({
-        top: scrollElement.scrollHeight,
-        behavior: 'smooth',
-      });
-    }
-  }, 0);
-};
+// const addLimitItem = (groupIndex, div) => {
+//   // 해당 그룹의 인덱스 가지고 모달을 띄움
+//   // 선택한 모달에서 타겟그룹 인덱스 가지고 감\
+//
+//   const testData = {
+//     id: groupIndex + '' + Date.now() || 0,
+//     category: '+',
+//     conditionName: `${
+//       groupIndex + '' + Date.now() || 0
+//     } - [고객ID]상담 거부 이력(최근 3개월)`,
+//     operation: '=',
+//     conditionValue: 'Y',
+//   };
+//
+//   groupList.value[groupIndex].conditions.push(testData);
+//
+//   // 생성시 스크롤 맨 아래로 이동
+//   const container = div.currentTarget.closest('.limit-group');
+//   const scrollElement = container?.querySelector('.table-scroll');
+//   setTimeout(() => {
+//     if (scrollElement) {
+//       scrollElement.scrollTo({
+//         top: scrollElement.scrollHeight,
+//         behavior: 'smooth',
+//       });
+//     }
+//   }, 0);
+// };
 
 // 최초에 AI추천이 들어올때
 const initLimitItem = () => {
@@ -699,10 +716,90 @@ const onExCondAddModal = () => {
   openViewExCondAddModal.value = true;
 };
 // 모달에서 선택한 데이터 콜백
-const onExCondAddModalData = value => {
-  console.log(value)
-  // const { prdCode, prdName, group } = value;
-  // step3Data.value.success.detailStandard = `${prdCode}|${prdName}|${group}`;
+const onExCondAddModalData = data => {
+  if (data.length > 0) {
+    data.forEach(row => {
+      let addData = [];
+
+      addData.push({
+        id: row.id,
+        category: row.type,
+        conditionName: row.marketingName,
+        operation: '=',
+        conditionValue: 'Y',
+      });
+
+      console.log(addData[0]);
+      tableData.value.push(addData[0]);
+      console.log(tableData);
+    });
+  }
+};
+// 제한조건 추가 모달 시작
+const openViewLimitCondAddModal = ref(false);
+
+const div = ref(null);
+const groupIndex = ref(0);
+
+const onLimitCondAddModal = (index, element) => {
+  groupIndex.value = index;
+  console.log(element.currentTarget)
+  div.value = element;
+  openViewLimitCondAddModal.value = true;
+};
+// // 모달에서 선택한 데이터 콜백
+// const onLimitCondAddModalData = data => {
+//   if (data.length > 0) {
+//     data.forEach(row => {
+//       let addData = [];
+//
+//       addData.push({
+//         id: row.id,
+//         category: row.type,
+//         conditionName: row.marketingName,
+//         operation: '=',
+//         conditionValue: 'Y',
+//       });
+//
+//       console.log(addData[0]);
+//       tableData.value.push(addData[0]);
+//       console.log(tableData);
+//     });
+//   }
+// };
+
+// const addLimitItem = (groupIndex, div) => {
+const onLimitCondAddModalData = (data, groupIndex, div) => {
+  // 해당 그룹의 인덱스 가지고 모달을 띄움
+  // 선택한 모달에서 타겟그룹 인덱스 가지고 감\
+
+  // console.log(data);
+  // console.log(groupIndex);
+  // console.log(div.currentTarget);
+
+  const testData = {
+    id: groupIndex + '' + Date.now() || 0,
+    category: '+',
+    conditionName: `${
+        groupIndex + '' + Date.now() || 0
+    } - [고객ID]상담 거부 이력(최근 3개월)`,
+    operation: '=',
+    conditionValue: 'Y',
+  };
+
+  groupList.value[groupIndex].conditions.push(testData);
+
+  // 생성시 스크롤 맨 아래로 이동
+  const container = div.currentTarget.closest('.limit-group');
+  const scrollElement = container?.querySelector('.table-scroll');
+  setTimeout(() => {
+    if (scrollElement) {
+      scrollElement.scrollTo({
+        top: scrollElement.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
+  }, 0);
 };
 
 const { step4 } = toRefs(props.modelValue);

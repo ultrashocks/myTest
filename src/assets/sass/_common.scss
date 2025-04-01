@@ -1024,6 +1024,9 @@ input::-webkit-inner-spin-button {
   &.align-center {
     align-items: center;
   }
+  &.gap-4px {
+    gap: 4px;
+  }
   &.gap-8px {
     gap: 8px;
   }
@@ -1155,6 +1158,62 @@ input::-webkit-inner-spin-button {
     cursor: not-allowed;
   }
 }
+
+// 제한 조건 제외 조건 수정 버튼이 사용
+.btn-type2 {
+  padding: 0;
+  width: 37px;
+  height: 18px;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 12px;
+  border: 1px solid modules.$color_blueG_600;
+  color: modules.$color_white;
+  background-color: modules.$color_blueG_600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    background-color: modules.$color_secondary;
+    border-color: modules.$color_secondary;
+  }
+}
+// 제한 조건 제외 조건 sql 확인 버튼이 사용
+.btn-type3 {
+  padding: 0;
+  width: 63px;
+  height: 18px;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 12px;
+  border: 1px solid modules.$color_blueG_400;
+  color: modules.$color_blueG_800;
+  background-color: modules.$color_white;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    background-color: modules.$color_blueG_200;
+    border-color: modules.$color_blueG_400;
+  }
+}
+// 공통 닫기
+.sql-body .btn-close {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  right: 10px;
+  top: 7px;
+  cursor: pointer;
+  z-index: 2;
+  @include modules.textIndent();
+  background-color: #7F8A94;
+  mask: url(../images/icon_window_close.svg) no-repeat 50%;
+  &:hover {
+    background-color: #3B4044;
+  }
+}
+
+
 
 // 공통 테이블  css
 .table-container {

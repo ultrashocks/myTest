@@ -637,6 +637,17 @@ ul.targeting-detail-condition-wrap {
         .dialog-body {
             max-height: 100% !important;
         }
+        // SQL 확인 모달 CSS
+        .sql-view-modal {
+            .sqlAddMid {
+                padding: 16px;
+                background-color: modules.$color_blueG_100;
+                height: 100%;
+                textarea {
+                    height: 100%;
+                }
+            }
+        }
     }
     .btn-delete {
         padding: 0;
@@ -650,6 +661,10 @@ ul.targeting-detail-condition-wrap {
         background-color: modules.$color_blueG_600;
         cursor: pointer;
         transition: all 0.2s ease-in-out;
+        &:hover {
+            background-color: modules.$color_secondary;
+            border-color: modules.$color_secondary;
+        }
     }
     //
     ////모수체크 로딩페이지

@@ -162,6 +162,128 @@ $main-top-h: 243px;
                     background-color: #BB7CE5;
                 }
             }
+            .team-list{
+                flex: 1;
+                border-top: 1px solid modules.$color_blueG_200;
+                li{
+                    display: flex;
+                    border-bottom: 1px solid modules.$color_blueG_200;
+                    height: 32px;
+                    .name, .num{
+                        flex: 1;                        
+                        color: modules.$color_blueG_800;                        
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                }
+            }
+        }
+        &.status{
+            padding-left: 30px;
+            .infos-row{
+                gap: 16px;
+                height: 130px;
+                position: relative;
+                .info-box{
+                    background-color: modules.$color_blueG_100;
+                    .label{
+                        font-size: 13px;
+                        font-weight: 600;
+                        color: modules.$color_blueG_600;
+                    }
+                    .count{
+                        padding-top: 10px;
+                    }
+                    .num{
+                        padding-top: 25px;
+                        color: modules.$color_blueG_800;
+                        font-size: 36px;
+                    }
+                    &:nth-child(1), &:nth-child(2){
+                        flex: 0 0 165px;
+                    }
+                    &.table{
+                        padding: 10px 16px;
+                        flex: 1;
+                        &.scroll{
+                            overflow-y: hidden;
+                            overflow-x: auto;
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            width: 100%;
+                            height: 100%;
+                            @include modules.custom-scrollbar(round);
+                            .info-table{
+                                width: max-content;
+                            }
+                        }
+                    }
+                }
+            }
+            .info-table{
+                height: 100%;
+                
+                th, td{
+                    font-weight: 600;
+                    height: 36px;
+                    border: 2px solid modules.$color_white;                    
+                }
+                th{                    
+                    font-size: 13px;
+                    color: modules.$color_blueG_600;
+                }
+                td{                   
+                    font-size: 18px;
+                    color: modules.$color_blusG_900;
+                    text-align: right;
+                    padding: 0 16px;
+                }
+                th, td{
+                    &:first-child{
+                        border-left: none;
+                    }
+                    &:last-child{
+                        border-right: none;
+                    }
+                }
+                thead{
+                    th{
+                        border-top: none;                        
+                    }
+                }
+                tbody{
+                    tr{
+                        &:last-child{
+                            th, td{
+                                border-bottom: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .main-title{
+        height: 27px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 10px 0 13px 0;
+        .title-l{
+            display: flex;
+            align-items: flex-end;
+            gap: 15px;
+            .title{
+                font-size: 18px;
+                color: modules.$color_secondary;
+                font-weight: 600;                
+            }
+            .info{
+                font-size: 12px;
+                color: modules.$color_blueG_800
+            }            
         }
     }
 }

@@ -329,6 +329,18 @@ const onSelectTab = id => {
   selectTab.value = id;
 };
 
+const prop = defineProps({
+  groupIndex: {
+    type: Number,
+    default: 0,
+    required: true,
+  },
+  div: {
+    type: Object,
+    required: true,
+  },
+});
+
 /**
  * 검색 조건
  */
@@ -400,7 +412,7 @@ const checkEllipsis = (event, index) => {
   }
 };
 const onConfirmTab01 = () => {
-  emit('callBeck', selectedRowsData.value);
+  emit('callBeck', selectedRowsData.value, prop.groupIndex, prop.div);
   emit('cancel');
 };
 const onConfirmTab02 = () => {
