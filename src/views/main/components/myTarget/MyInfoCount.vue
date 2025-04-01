@@ -72,19 +72,11 @@
 
 <script setup>
 import NumberAnimation from 'vue-number-animation';
-import { reactive } from 'vue';
+import { inject, reactive } from 'vue';
 
-const props = defineProps({
-  currentView: {
-    type: String,
-    default: 'My',
-  },
-});
-
-const emit = defineEmits(['update:currentView']);
-
+const currentView = inject('currentView');
 const onSelect = value => {
-  emit('update:currentView', value);
+  currentView.value = value;
 };
 
 const data = reactive({
