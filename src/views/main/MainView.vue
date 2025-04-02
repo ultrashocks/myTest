@@ -2,10 +2,14 @@
   <div class="contents-wrap">
     <section class="main-wrap">
       <article class="row-top">
-        <!-- <component :is="getAsyncComponents[`${currentView}Info`]" /> -->
+        <transition name="fade" mode="out-in">
+          <component :is="getAsyncComponents[`${currentView}Info`]" />
+        </transition>
       </article>
       <article class="row-bottom">
-        <component :is="getAsyncComponents[`${currentView}Target`]" />
+        <transition name="fade" mode="out-in">
+          <component :is="getAsyncComponents[`${currentView}Target`]" />
+        </transition>
       </article>
     </section>
   </div>
@@ -17,6 +21,6 @@ import { useDynamicComponents } from './composables/dynamicComponents';
 
 const { getAsyncComponents } = useDynamicComponents();
 
-const currentView = ref('My');
+const currentView = ref('Team');
 provide('currentView', currentView);
 </script>

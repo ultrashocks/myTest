@@ -1,9 +1,11 @@
 <template>
-  <div class="top-l">
-    <TeamInfoCount />
-  </div>
-  <div class="top-r">
-    <TeamInfoStatus />
+  <div class="top-row">
+    <div class="top-l">
+      <TeamInfoCount />
+    </div>
+    <div class="top-r">
+      <TeamInfoStatus />
+    </div>
   </div>
 </template>
 

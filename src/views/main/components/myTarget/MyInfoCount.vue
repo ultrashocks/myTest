@@ -23,7 +23,7 @@
         </div>
       </div>
       <div class="title-r">
-        <span class="btn-new__targeting">신규 타겟팅<i class="icon"></i></span>
+        <span class="btn-more">신규 타겟팅<i class="icon"></i></span>
       </div>
     </div>
     <div class="infos-row">

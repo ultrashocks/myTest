@@ -1,6 +1,6 @@
 <template>
   <div class="layout-box cms">
-    <div class="main-title" style="opacity: 0">
+    <div class="main-title">
       <div class="title-l">
         <span class="title"
           >CMS 전송 타겟 (<strong>{{ count }}</strong
@@ -124,12 +124,12 @@
             </tbody>
           </table>
           <!-- 조회 결과가 없는경우에 보이게 처리 -->
-          <!-- <div class="non-table__data">
-              <div class="msg-box">
-                <i class="icon"></i>
-                <div class="msg">조회 결과가 없습니다.</div>
-              </div>
-            </div> -->
+          <div class="non-table__data" v-if="tableData.length < 1">
+            <div class="msg-box">
+              <i class="icon"></i>
+              <div class="msg">조회 결과가 없습니다.</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -145,10 +145,9 @@ const tableData = ref([]);
 
 const attachData = () => {
   searchDate.value = '25-05-31 ~ 25-06-29';
-  count.value = 7;
 
   let testData = [];
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 8; i++) {
     testData.push({
       id: i,
       targetId: `A001000${i}`,
@@ -162,6 +161,7 @@ const attachData = () => {
     });
   }
   tableData.value = testData;
+  count.value = testData.length;
 };
 
 attachData();

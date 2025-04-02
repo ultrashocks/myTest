@@ -196,6 +196,18 @@ const router = createRouter({
   },
 });
 
+const data = [
+  {
+    id: 1,
+    itemtype: '타겟 유형',
+    sub: [
+      { title: '구분', sub: [{ title: '자사' }, { title: '타사' }] },
+      { title: '서비스', sub: [] },
+    ],
+    checkvalue: '모바일',
+  },
+];
+
 router.beforeEach((to, from, next) => {
   //Spinner
   const { setSpinnerStatus } = useSpinner();

@@ -1,9 +1,11 @@
 <template>
-  <div class="top-l">
-    <MyInfoCount />
-  </div>
-  <div class="top-r">
-    <MyInfoStatus />
+  <div class="top-row">
+    <div class="top-l">
+      <MyInfoCount />
+    </div>
+    <div class="top-r">
+      <MyInfoStatus />
+    </div>
   </div>
 </template>
 
