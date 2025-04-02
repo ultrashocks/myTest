@@ -1,8 +1,15 @@
 <template>
   <div class="my-layout">
-    <div class="layout-box cms">cms</div>
-    <div class="layout-box error">error</div>
-    <div class="layout-box today">today</div>
-    <div class="layout-box notice">notice</div>
+    <MyTargetCms />
+    <MyTargetError />
+    <MyTargetToday />
+    <MyTargetNotice />
   </div>
 </template>
+
+<script setup>
+import MyTargetCms from './MyTargetCms.vue';
+import MyTargetError from './MyTargetError.vue';
+import MyTargetToday from './MyTargetToday.vue';
+import MyTargetNotice from './MyTargetNotice.vue';
+</script>

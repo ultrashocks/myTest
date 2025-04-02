@@ -858,10 +858,14 @@
             color: modules.$color_blueG_800;
 			border-bottom: 1px solid modules.$color_blueG_200;
             &.td-left{
-                text-align: left;
+                .td-col{
+                    text-align: left !important;
+                }
             }
             &.td-right{
-                text-align: right;
+                .td-col{
+                    text-align: right !important;
+                }
             }
         }
         .td-col{             
@@ -869,6 +873,7 @@
             min-height: 35px;
             line-height: 35px;
             @include modules.textEllipsis(1);        
+            text-align: center;
             &.radio{
                 display: flex;
                 align-items: center;

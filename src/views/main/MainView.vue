@@ -2,7 +2,7 @@
   <div class="contents-wrap">
     <section class="main-wrap">
       <article class="row-top">
-        <component :is="getAsyncComponents[`${currentView}Info`]" />
+        <!-- <component :is="getAsyncComponents[`${currentView}Info`]" /> -->
       </article>
       <article class="row-bottom">
         <component :is="getAsyncComponents[`${currentView}Target`]" />
@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { provide, ref, watch } from 'vue';
+import { provide, ref } from 'vue';
 import { useDynamicComponents } from './composables/dynamicComponents';
 
 const { getAsyncComponents } = useDynamicComponents();

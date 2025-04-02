@@ -11,59 +11,22 @@
       <div class="info-box table scroll">
         <table class="info-table">
           <colgroup>
-            <col width="130px" />
-            <col width="130px" />
-            <col width="130px" />
-            <col width="130px" />
-            <col width="130px" />
-            <col width="130px" />
-            <col width="130px" />
-            <col width="130px" />
-            <col width="130px" />
-            <col width="130px" />
-            <col width="130px" />
+            <col
+              width="130px"
+              v-for="(col, index) in tableData.colums"
+              :key="index"
+            />
           </colgroup>
           <thead>
             <tr>
-              <th>모바일-자사 홈단톡</th>
-              <th>모바일-타사</th>
-              <th>모바일-적정요금제</th>
-              <th>인터넷-일반</th>
-              <th>인터넷-기가업셀</th>
-              <th>TV-주셋탑</th>
-              <th>TV-주셋탑</th>
-              <th>TV-주셋탑</th>
-              <th>TV-주셋탑</th>
-              <th>TV-주셋탑</th>
-              <th>TV-주셋탑</th>
+              <th v-for="(col, index) in tableData.colums" :key="index">
+                {{ col }}
+              </th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th>CMS 전송</th>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <th>타겟 저장 후 종료</th>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
+            <tr v-for="(col, rowIndex) in tableData.rowData" :key="rowIndex">
+              <td v-for="(item, tdIndex) in col" :key="tdIndex">{{ item }}</td>
             </tr>
           </tbody>
         </table>
@@ -76,9 +39,30 @@
 import { ref } from 'vue';
 
 const searchDate = ref('');
+const tableData = ref({});
 
 const attachData = () => {
   searchDate.value = '25-05-31 ~ 25-06-29';
+  let sampleData = {
+    colums: [
+      '모바일-자사 홈단톡',
+      '모바일-타사',
+      '모바일-적정요금제',
+      '모바일-일반',
+      '모바일-기가업셀',
+      'TV-주셋탑',
+      'TV-주셋탑',
+      'TV-주셋탑',
+      'TV-주셋탑',
+      'TV-주셋탑',
+      'TV-주셋탑',
+    ],
+    rowData: [
+      ['CMS 전송', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      ['타겟 저장 후 종료', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    ],
+  };
+  tableData.value = sampleData;
 };
 attachData();
 </script>

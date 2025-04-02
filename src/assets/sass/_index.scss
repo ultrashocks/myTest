@@ -1,6 +1,6 @@
 @use "modules";
 $main-top-h: 243px;
-
+$contents-top-h: 59px;
 .main-wrap{
     background-color: modules.$color_blueG_100;
     height: 100%;
@@ -50,8 +50,20 @@ $main-top-h: 243px;
         background-color: modules.$color_white;
         border: 1px solid modules.$color_blueG_400;
         border-radius: 8px;
+        box-sizing: border-box;
+        padding: 0 30px 20px 30px;
+        .main-title{
+            height: 27px;
+            margin: 20px 0 12px 0;
+        }
+        .box-contents{
+            height: calc(100% - $contents-top-h);            
+        }
         &.team{
             height: 1000px;
+        }
+        &.error, &.notice, &.today{
+            opacity: 0;
         }
     }
 
@@ -261,6 +273,12 @@ $main-top-h: 243px;
                             }
                         }
                     }
+                    td{
+                        &:first-child{
+                            font-size: 13px;
+                            color: modules.$color_blueG_600;
+                        }
+                    }
                 }
             }
         }
@@ -278,7 +296,10 @@ $main-top-h: 243px;
             .title{
                 font-size: 18px;
                 color: modules.$color_secondary;
-                font-weight: 600;                
+                font-weight: 600;     
+                strong{
+                    color: modules.$color_primary;
+                }           
             }
             .info{
                 font-size: 12px;
