@@ -21,7 +21,7 @@
                     placement: 'bottom',
                     allowHTML: true,
                     offset: [0, -2],
-                    arrow: true,
+                    arrow: false,
                   }"
                 />
                 <AppInput
@@ -95,7 +95,7 @@
                   placement: 'bottom',
                   allowHTML: true,
                   offset: [0, -2],
-                  arrow: true,
+                  arrow: false,
                 }"
               />
               <AppInput

@@ -12,7 +12,13 @@
       <div class="notice-list">
         <ul>
           <li v-for="item in listData" :key="item.id">
-            <div class="title">{{ item.title }}</div>
+            <div class="title">
+              <div class="icons">
+                <span class="important" v-if="item.important">중요</span>
+                <span class="new" v-if="item.new">N</span>
+              </div>
+              {{ item.title }}
+            </div>
             <div class="date">{{ item.date }}</div>
           </li>
         </ul>
@@ -38,6 +44,8 @@ const attachData = () => {
       id: i,
       title: '시스템 정기 점검(6월 20일 20:00 ~ 6월 21일 06:00)',
       date: '25-06-15',
+      important: Math.floor(Math.random() * 2),
+      new: Math.floor(Math.random() * 2),
     });
   }
   listData.value = testData;

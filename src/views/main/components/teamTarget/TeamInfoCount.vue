@@ -1,5 +1,5 @@
 <template>
-  <div class="my-infos">
+  <div class="my-infos team-count">
     <div class="info-title">
       <div class="title-l">
         <div class="user-name">
@@ -23,7 +23,7 @@
         </div>
       </div>
       <div class="title-r">
-        <span class="btn-new__targeting">신규 타겟팅<i class="icon"></i></span>
+        <span class="btn-more">신규 타겟팅<i class="icon"></i></span>
       </div>
     </div>
     <div class="infos-row">
@@ -79,6 +79,10 @@ const attachData = () => {
     { id: 2, name: '김철수', num: 30 },
     { id: 3, name: '장필수', num: 40 },
     { id: 4, name: '홍길동', num: 50 },
+    { id: 5, name: '김유플', num: 20 },
+    { id: 6, name: '김철수', num: 30 },
+    { id: 7, name: '장필수', num: 40 },
+    { id: 8, name: '홍길동', num: 50 },
   ];
   teamList.value = testData;
 };

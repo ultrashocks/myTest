@@ -13,6 +13,7 @@
               v-tippy="{
                 content: isEll ? sideTitle : '',
                 placement: 'bottom',
+                arrow: false,
               }"
             >
               {{ sideTitle }}

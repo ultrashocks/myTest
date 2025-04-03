@@ -1,5 +1,5 @@
 <template>
-  <div class="my-infos">
+  <div class="my-infos count">
     <div class="info-title">
       <div class="title-l">
         <div class="user-name">

@@ -881,6 +881,16 @@ input::-webkit-inner-spin-button {
     align-items: center;
     gap: 8px;
     justify-content: center;
+    background-color: modules.$color_white;
+  }
+  &.v-scroll {
+    overflow: hidden;
+
+    .window-body {
+      height: calc(100% - 110px);
+      overflow-y: auto;
+      @include modules.custom-scrollbar(round);
+    }
   }
 }
 

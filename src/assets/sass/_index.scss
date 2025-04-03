@@ -63,11 +63,9 @@ $contents-top-h: 59px;
             position: relative;          
         }
         &.team{
-            height: 1000px;
+            height: 203px;
+            position: relative;
         }
-        // &.error, &.notice, &.today{
-        //     opacity: 0;
-        // }
     }
 
     .my-infos{
@@ -133,6 +131,8 @@ $contents-top-h: 59px;
                 color: modules.$color_white;
                 box-sizing: border-box;
                 padding: 18px 16px;
+                cursor: pointer;   
+                transition: all ease 0.4s;             
                 .label{
                     font-size: 13px;
                     font-weight: 600;
@@ -152,14 +152,29 @@ $contents-top-h: 59px;
                 }
                 &:nth-child(2){
                     background-color: #D270C2;
+
                 }
                 &:nth-child(3){
                     background-color: #BB7CE5;
                 }
+                // &:hover{
+                //     background-color:  modules.$color_white;
+                //     .label{
+                //         color: modules.$color_blueG_600;
+                //     }
+                // }
             }
             .team-list{
+                overflow-y: auto;
+                overflow-x: hidden;
+                // position: absolute;
+                // left: 0;
+                // top: 0;
+                width: 100%;
+                height: 100%;
                 flex: 1;
                 border-top: 1px solid modules.$color_blueG_200;
+                @include modules.custom-scrollbar(round);
                 li{
                     display: flex;
                     border-bottom: 1px solid modules.$color_blueG_200;
@@ -172,6 +187,65 @@ $contents-top-h: 59px;
                         align-items: center;
                     }
                 }
+            }            
+        }
+        &.count{
+            .info-box{       
+                &:nth-child(1){
+                    background-color: #EB69B4;
+                    border: 2px solid #EB69B4; 
+                    &:hover{
+                        .num{
+                            color: modules.$color_primary;
+                        }
+                    }
+                }
+                &:nth-child(2){
+                    background-color: #D270C2;
+                    border: 2px solid #D270C2;  
+                    &:hover{
+                        .num{
+                            color: #C52BAC;
+                        }
+                    } 
+                }
+                &:nth-child(3){
+                    background-color: #BB7CE5;
+                    border: 2px solid #BB7CE5;   
+                    &:hover{
+                        .num{
+                            color: #7021A5;
+                        }
+                    }
+                }
+                &:hover{
+                    background-color:  modules.$color_white;
+                    .label{
+                        color: modules.$color_blueG_600;
+                    }
+                }
+            }
+        }    
+        &.team-count{
+            .info-box{   
+                &:nth-child(1){
+                    background-color: #EB69B4;
+                    border: 2px solid #EB69B4; 
+                    &:hover{
+                        .num{
+                            color: modules.$color_primary;
+                        }
+                    }
+                } 
+                &:hover{
+                    background-color:  modules.$color_white;
+                    .label{
+                        color: modules.$color_blueG_600;
+                    }
+                }
+            }
+            .infos-row{
+                gap: 20px;
             }
         }
         &.status{
@@ -328,6 +402,11 @@ $contents-top-h: 59px;
             font-weight: 600; 
             margin: 10px 0 20px 0;
             @include modules.textEllipsis(1);
+            cursor: pointer;
+            &:hover{
+                text-decoration: underline;
+                color: modules.$color_secondary;
+            }            
         }
         .state{
             font-size: 12px;
@@ -349,15 +428,36 @@ $contents-top-h: 59px;
         li{
             position: relative;
             height: 126px;
+            border: 1px solid modules.$color_blueG_400;            
+            border-radius: 8px;
+            box-sizing: border-box;
+            transition: all ease 0.3s;
+            &:hover{
+                border: 1px solid modules.$color_primary;   
+                .title{
+                    color: modules.$color_secondary;
+                }
+            }    
         }
         .item{
-            border: 1px solid modules.$color_blueG_400;            
+            position: absolute;
+            left: 0;
+            top: 0;
+            border: 1px solid rgba(255,255,255,0);            
             border-radius: 8px;
             box-sizing: border-box;
             padding: 16px;
             position: absolute;
             width: 100%;   
-            height: 100%;         
+            height: 100%;     
+            cursor: pointer;
+            transition: all ease 0.3s;
+            &:hover{
+                border: 1px solid modules.$color_primary;   
+                .title{
+                    color: modules.$color_secondary;
+                }
+            }    
             .code{
                 font-size: 12px;
                 color: modules.$color_blueG_500;
@@ -378,7 +478,7 @@ $contents-top-h: 59px;
                 color: modules.$color_blueG_800;
                 font-weight: 400; 
             }
-
+            
         }
     }
     .notice-list{
@@ -395,11 +495,38 @@ $contents-top-h: 59px;
                 margin-top: 22px;
             }
             .title{
+                cursor: pointer;
                 flex: 1;
                 @include modules.textEllipsis(1);
+                &:hover{
+                    text-decoration: underline;
+                    color: modules.$color_secondary;
+                }
             }
             .date{
                 flex: 0 0 62px;
+            }
+            .icons{
+                display: inline-flex;
+                gap: 4px;
+                align-items: center;
+            }
+            .important, .new{
+                background-color: modules.$color_bgRed;
+                color: modules.$color_primary;
+                font-size: 12px;
+                font-weight: 600;
+                display: inline-flex;
+                height: 18px;
+                justify-content: center;
+                align-items: center;
+                border-radius: 4px;
+            }
+            .important{
+                width: 29px;
+            }
+            .new{
+                width: 17px;
             }
         }
     }
@@ -421,5 +548,114 @@ $contents-top-h: 59px;
             height: 10px;
             background: url(../images/icon_main_btn_arrow.svg) no-repeat 50%;
         }
+        &:hover{
+            color: modules.$color_primary;
+            background-color: modules.$color_bgRed;
+        }
+    }
+    .table-scroll .table-body tr{
+        cursor: pointer;
+        &:hover{
+            td{
+                color: modules.$color_secondary;
+                &:first-child{
+                    text-decoration: underline;
+                    color: modules.$color_link;
+                }
+            }
+        }
+    }
+    .team-target__count{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding-top: 7px;
+        position: relative;
+        .count-box{
+            position: relative;
+            height: 114px;
+            background-color: modules.$color_blueG_100;
+            border-radius: 8px;
+            flex: 1;
+            box-sizing: border-box;
+            padding: 15px 16px;
+            border: 2px solid modules.$color_blueG_100;
+            cursor: pointer;
+            transition: all ease 0.4s;
+            &:hover, &.active{
+                background-color: modules.$color_white;
+                border-color: modules.$color_primary;
+                .count{
+                    color: modules.$color_primary;
+                }
+            }
+            &.active{
+                &:after{
+                    content:'';
+                    display: inline-block;
+                    width: 0; 
+                    height: 0; 
+                    border-left: 9px solid transparent;
+                    border-right: 9px solid transparent;                    
+                    border-bottom: 12px solid modules.$color_primary;
+                    position: absolute;
+                    left: 50%;
+                    bottom: -13px;
+                    transform: translateX(-50%);
+                }
+            }
+        }
+        .label{
+            font-size: 13px;
+            font-weight: 600;
+            color: modules.$color_blueG_600;
+        }
+        .count{
+            font-size: 48px;
+            font-weight: 600;
+            color: modules.$color_secondary;
+            text-align: right;
+            margin-top: 18px;
+            transition: all ease 0.4s;
+        }
+    }
+    .team-target__table{        
+        width: 100%;
+        height: 295px;
+        background-color: modules.$color_white;
+        border: 2px solid modules.$color_primary;
+        box-sizing: border-box;
+        border-radius: 8px;
+        position: relative;
+        z-index: 2;
+        margin-top: -11px;
+    }
+    .target-table__wrap{
+        padding: 0 30px 20px 30px;
+        height: 100%;
+        box-sizing: border-box;
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        .main-title{
+            margin: 19px 0 13px 0;
+        }
+        .table-row{
+            height: calc(100% - 59px);
+        }
+        .table-scroll{
+            .table-body{
+                tr{
+                    cursor: default;
+                    &:hover{
+                        td:first-child {
+                            text-decoration: none;
+                            color: modules.$color_blueG_800;
+                        }     
+                    }
+                }  
+            }
+        }    
     }
 }

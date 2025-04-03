@@ -21,6 +21,7 @@
                 allowHTML: true,
                 maxWidth: 500,
               }"
+              ref="tooltipButton"
             >
               <span>도움말</span>
             </button>
@@ -51,7 +52,7 @@ const goAiSeg = () => {
 };
 
 const changedSegView = () => {
-  if (currentComponent.value === `SegScene2`) {
+  if ( currentComponent.value === `SegScene2` ){
     currentComponent.value = `SegScene1`;
   } else {
     currentComponent.value = `SegScene2`;
@@ -70,13 +71,26 @@ onMounted(() => {
   goAiSeg();
 });
 
+const tooltipButton = ref(null);
+// onMounted(() => {
+//   if (props.currentStep == 8) {
+//     setTimeout(() => {
+//       const tooltip = tooltipButton.value._tippy;
+//       tooltip.hide();
+//     }, 3000);
+//   }
+// });
+
 //체크박스 이벤트
 const chkFunction = e => {
-  if (e.target.checked) {
-    alert("체크상태")
+  if (e.target.checked){
+    // alert("체크상태")
   } else {
-    alert("비체크상태 여기서 말머리 나오게")
-
+    const tooltip = tooltipButton.value._tippy;
+    tooltip.show();
+    setTimeout(() => {
+      tooltip.hide();
+    }, 2000);
   }
 };
 
