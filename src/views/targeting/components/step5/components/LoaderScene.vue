@@ -2,7 +2,7 @@
   <div class="stage-items scene-loader">
     <div class="scene-loader__wrap">
       <div class="loader-content">
-        <div class="loader-symbol"></div>
+        <div class="loader-symbol"><span class="loader"></span></div>
         <div class="title">
           <strong>AI가 타겟 추출 중이예요.</strong> 잠시만 기다려 주세요.
         </div>
@@ -17,13 +17,17 @@
             </li>
             <li>
               <i class="icon"></i>타겟 추출이 완료되면, 메일과 문자로 알림이
-              전송됩니다..
+              전송됩니다.
             </li>
+            <!-- [수정 0404] AI 응답이 완료되기 전 화면 재진힙 시 display
+            <li>
+              <i class="icon"></i>완료 알림을 받으셨다면, [새로고침]해 주세요.
+            </li> -->
           </ul>
         </div>
         <button class="btn-confirm" @click="$emit('confirm')">
           <!-- 퍼블에서는 클릭해서 다음화면으로 진행
-          **** 개발시 타겟 관리 목록으로 이동동
+          **** 개발시 화면설계서 기준으로 개발 요망
           -->
           나중에 확인하기
         </button>

@@ -1,6 +1,11 @@
 @use "vue-select/dist/vue-select.css";
 @use 'tippy.js/dist/tippy.css';
 @use '@vuepic/vue-datepicker/dist/main.css';
+@use 'swiper/css';
+@use 'swiper/css/free-mode';
+@use 'swiper/css/pagination';
+@use 'swiper/css/scrollbar';
+@use 'swiper/css/autoplay';
 @use "common";
 @use "animation";
 @use "override";

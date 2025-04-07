@@ -21,6 +21,6 @@ import { useDynamicComponents } from './composables/dynamicComponents';
 
 const { getAsyncComponents } = useDynamicComponents();
 
-const currentView = ref('Team');
+const currentView = ref('My');
 provide('currentView', currentView);
 </script>

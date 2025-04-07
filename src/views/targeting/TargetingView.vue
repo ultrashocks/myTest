@@ -126,6 +126,26 @@ const onStepComplete = value => {
   stepsComplete.steps[Number(step) - 1].complete = complete;
 };
 
+// 내일 현우 책임님 전달할 부분
+// const onStepComplete = value => {
+//   console.log(value);
+//
+//   const { step, complete } = value;
+//
+//   // 변경 후 nextTick으로 DOM 업데이트 보장
+//   setTimeout(() => {
+//     nextTick(() => {
+//       stepsComplete.currentStep = 4;
+//       stepsComplete.steps.forEach(step => {
+//         step.complete = true;
+//       });
+//
+//       currentComponent.value = `StageStep${step}`;
+//       console.log('변경된 컴포넌트:', currentComponent.value);
+//     });
+//   }, 1000);
+// };
+
 //설정 저장 완료
 const onComplete = () => {
   stepsComplete.currentStep = 0;

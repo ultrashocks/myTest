@@ -152,7 +152,7 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue';
+import { ref, reactive, watch } from 'vue';
 import StepStage from '../StepStage.vue';
 import AppInput from '@/components/ui/AppInput.vue';
 import AppSelectBox from '@/components/ui/AppSelectBox.vue';
@@ -222,4 +222,22 @@ const onWindowConfirm = value => {
   data.target.code = targetId;
   data.target.name = targetName;
 };
+
+watch(
+  () => data.targetIdUse,
+  () => {
+    console.log('변경');
+    if (data.targetIdUse == 1) {
+      const contentArea = document.querySelector('.content-area');
+      if (contentArea) {
+        setTimeout(() => {
+          contentArea.scrollTo({
+            top: contentArea.scrollHeight,
+            behavior: 'smooth',
+          });
+        });
+      }
+    }
+  },
+);
 </script>

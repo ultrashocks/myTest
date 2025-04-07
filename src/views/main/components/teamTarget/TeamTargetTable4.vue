@@ -14,31 +14,32 @@
               <col width="10%" />
               <col width="" />
               <col width="15%" />
-              <col width="15%" />
-              <col width="15%" />
-              <col width="15%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="8px" v-if="hasVerticalScroll" />
             </colgroup>
             <thead>
               <tr>
                 <th>타겟 ID</th>
                 <th>타겟명</th>
                 <th>타겟유형</th>
-                <th>상세 단계</th>
-                <th>마켓팅 활동 유형</th>
+                <th>실행 시작일시</th>
+                <th>목표타겟 수</th>
                 <th>담당자</th>
               </tr>
             </thead>
           </table>
         </div>
-        <div class="table-body">
+        <div class="table-body" ref="scrollContainer">
           <table>
             <colgroup>
               <col width="10%" />
               <col width="" />
               <col width="15%" />
-              <col width="15%" />
-              <col width="15%" />
-              <col width="15%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
             </colgroup>
             <tbody>
               <tr
@@ -71,8 +72,8 @@
                   </div>
                 </td>
                 <td>
-                  <div class="td-col" :title="isEll[rowIndex] ? item.step : ''">
-                    {{ item.step }}
+                  <div class="td-col" :title="isEll[rowIndex] ? item.date : ''">
+                    {{ item.date }}
                   </div>
                 </td>
                 <td>
@@ -98,7 +99,7 @@
           <div class="non-table__data" v-if="tableData.length < 1">
             <div class="msg-box">
               <i class="icon"></i>
-              <div class="msg">조회 결과가 없습니다.</div>
+              <div class="msg">타겟이 없습니다.</div>
             </div>
           </div>
         </div>
@@ -108,10 +109,10 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, nextTick, onMounted } from 'vue';
 
 const tableData = ref([]);
-const attachData = () => {
+const attachData = async () => {
   let testData = [];
   for (let i = 0; i < 8; i++) {
     testData.push({
@@ -119,15 +120,16 @@ const attachData = () => {
       targetId: `A001000${i}`,
       targetName: `인터넷업셀_인터넷업셀_인터넷업셀_인터넷업셀_인터넷업셀_인터넷업셀_인터넷업셀_인터넷업셀_인터넷업셀_${i}`,
       targetCategory: 'TV/요금제/상품변경/업셀',
-      step: '기본정보',
-      marketing: '업셀',
+      date: '25-06-30 11:00',
+      marketing: '999,999,999',
       manager: '홍길동',
     });
   }
   tableData.value = testData;
-};
 
-attachData();
+  await nextTick();
+  checkScroll();
+};
 
 const isEll = ref([]);
 const checkEllipsis = (event, index) => {
@@ -138,4 +140,17 @@ const checkEllipsis = (event, index) => {
     isEll.value[index] = false;
   }
 };
+
+//스크롤 유무 체크
+const scrollContainer = ref(null);
+const hasVerticalScroll = ref(false);
+const checkScroll = () => {
+  const el = scrollContainer.value;
+  if (!el) return;
+  hasVerticalScroll.value = el.scrollHeight > el.clientHeight;
+};
+
+onMounted(() => {
+  attachData();
+});
 </script>

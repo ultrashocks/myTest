@@ -3,6 +3,9 @@
     <div class="sub-router">
       <div class="wrap">
         <Header />
+        <transition name="fade" mode="out-in">
+          <SideNavi v-if="showSideNavi" />
+        </transition>
         <router-view v-slot="{ Component }">
           <transition name="fade" mode="out-in">
             <component :is="Component" />
@@ -15,9 +18,16 @@
 </template>
 
 <script setup>
-import { defineAsyncComponent } from 'vue';
+import { defineAsyncComponent, computed } from 'vue';
+import { useRoute } from 'vue-router';
 import Header from '@/components/header/Header.vue';
 const AppSlider = defineAsyncComponent(() =>
   import('@/components/ui/AppSlider.vue'),
 );
+
+const route = useRoute();
+const showSideNavi = computed(() => {
+  const path = route.path;
+  return path.includes('/standard') || path.includes('/system');
+});
 </script>

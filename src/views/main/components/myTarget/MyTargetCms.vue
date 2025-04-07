@@ -21,16 +21,17 @@
               <col width="10%" />
               <col width="10%" />
               <col width="10%" />
+              <col width="116px" />
               <col width="10%" />
-              <col width="10%" />
+              <col width="8px" v-if="hasVerticalScroll" />
             </colgroup>
             <thead>
               <tr>
                 <th>타겟 ID</th>
-                <th>캠페인 ID</th>
+                <th>캠페인 CODE</th>
                 <th>캠페인명</th>
                 <th>타겟추출건수</th>
-                <th>TV회차정보</th>
+                <th>TA회차정보</th>
                 <th>전송상태</th>
                 <th>적재완료시간</th>
                 <th>CMS적재건수</th>
@@ -38,7 +39,7 @@
             </thead>
           </table>
         </div>
-        <div class="table-body">
+        <div class="table-body" ref="scrollContainer">
           <table>
             <colgroup>
               <col width="10%" />
@@ -47,7 +48,7 @@
               <col width="10%" />
               <col width="10%" />
               <col width="10%" />
-              <col width="10%" />
+              <col width="116px" />
               <col width="10%" />
             </colgroup>
             <tbody>
@@ -123,11 +124,11 @@
               </tr>
             </tbody>
           </table>
-          <!-- 조회 결과가 없는경우에 보이게 처리 -->
+          <!-- 조회 결과가 없는 경우에 보이게 처리 -->
           <div class="non-table__data" v-if="tableData.length < 1">
             <div class="msg-box">
               <i class="icon"></i>
-              <div class="msg">조회 결과가 없습니다.</div>
+              <div class="msg">타겟이 없습니다.</div>
             </div>
           </div>
         </div>
@@ -137,14 +138,14 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, nextTick, onMounted } from 'vue';
 
 const searchDate = ref('');
 const count = ref(0);
 const tableData = ref([]);
 
-const attachData = () => {
-  searchDate.value = '25-05-31 ~ 25-06-29';
+const attachData = async () => {
+  searchDate.value = '25-06-29 ~ 25-07-05';
 
   let testData = [];
   for (let i = 0; i < 8; i++) {
@@ -152,7 +153,7 @@ const attachData = () => {
       id: i,
       targetId: `A001000${i}`,
       campainId: `C0000011${i}`,
-      campainName: `인터넷업셀_${i}`,
+      campainName: `인터넷업셀인터넷업셀인터넷업셀인터넷업셀_${i}`,
       targetCount: '200,000',
       tvInfo: '실행대기',
       transStatus: '전송완료',
@@ -162,9 +163,10 @@ const attachData = () => {
   }
   tableData.value = testData;
   count.value = testData.length;
-};
 
-attachData();
+  await nextTick();
+  checkScroll();
+};
 
 const isEll = ref([]);
 const checkEllipsis = (event, index) => {
@@ -175,4 +177,18 @@ const checkEllipsis = (event, index) => {
     isEll.value[index] = false;
   }
 };
+
+//스크롤 유무 체크
+const scrollContainer = ref(null);
+const hasVerticalScroll = ref(false);
+const checkScroll = () => {
+  const el = scrollContainer.value;
+  console.log(el);
+  if (!el) return;
+  hasVerticalScroll.value = el.scrollHeight > el.clientHeight;
+};
+
+onMounted(() => {
+  attachData();
+});
 </script>

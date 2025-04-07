@@ -9,7 +9,7 @@ import { useAlert } from '@/composables/alert';
 export const getRoutes = [
   {
     path: '/',
-    redirect: '/target',
+    redirect: '/main',
     meta: { auth: false, navi: false },
   },
   {
@@ -19,7 +19,7 @@ export const getRoutes = [
     name: 'main',
     meta: {
       auth: false,
-      navi: true,
+      navi: false,
       title: '메인',
     },
     children: [
@@ -29,7 +29,7 @@ export const getRoutes = [
         name: 'Main',
         meta: {
           auth: false,
-          navi: true,
+          navi: false,
           title: '메인',
         },
       },
@@ -107,7 +107,7 @@ export const getRoutes = [
   {
     path: '/standard',
     component: () => import('@/views/SubRouterView.vue'),
-    redirect: '/standard',
+    redirect: '/standard/basic',
     name: 'standard',
     meta: {
       auth: false,
@@ -116,13 +116,43 @@ export const getRoutes = [
     },
     children: [
       {
-        path: '/standard',
-        component: () => import('@/views/standard/StandardInfoMngView.vue'),
-        name: 'Standard',
+        path: '/standard/basic',
+        component: () => import('@/views/standard/BasicTargetView.vue'),
+        name: 'Basic',
         meta: {
           auth: false,
           navi: true,
-          title: '기준정보관리',
+          title: '기본 타겟유형 관리',
+        },
+      },
+      {
+        path: '/standard/success',
+        component: () => import('@/views/standard/SuccessAssistanceView.vue'),
+        name: 'Success',
+        meta: {
+          auth: false,
+          navi: true,
+          title: '성공/보조지표 관리',
+        },
+      },
+      {
+        path: '/standard/exclude',
+        component: () => import('@/views/standard/ExcludeLimitsView.vue'),
+        name: 'Exclude',
+        meta: {
+          auth: false,
+          navi: true,
+          title: '제외/제한조건 관리',
+        },
+      },
+      {
+        path: '/standard/seg',
+        component: () => import('@/views/standard/SegmentationView.vue'),
+        name: 'Seg',
+        meta: {
+          auth: false,
+          navi: true,
+          title: '세그구분 관리',
         },
       },
     ],
@@ -130,22 +160,72 @@ export const getRoutes = [
   {
     path: '/system',
     component: () => import('@/views/SubRouterView.vue'),
-    redirect: '/system',
-    name: 'system',
+    redirect: '/system/notice',
+    name: 'System',
     meta: {
       auth: false,
       navi: true,
-      title: '시스템관리',
+      title: '시스템 관리',
     },
     children: [
       {
-        path: '/system',
-        component: () => import('@/views/system/SystemMngView.vue'),
-        name: 'System',
+        path: '/system/notice',
+        component: () => import('@/views/system/NoticeMngView.vue'),
+        name: 'Notice',
         meta: {
           auth: false,
           navi: true,
-          title: '시스템관리',
+          title: '공지사항 관리',
+        },
+      },
+      {
+        path: '/system/manual',
+        component: () => import('@/views/system/ManualMngView.vue'),
+        name: 'Manual',
+        meta: {
+          auth: false,
+          navi: true,
+          title: '메뉴얼 관리',
+        },
+      },
+      {
+        path: '/system/user',
+        component: () => import('@/views/system/UserSearchView.vue'),
+        name: 'User',
+        meta: {
+          auth: false,
+          navi: true,
+          title: '사용자 조회',
+        },
+      },
+      {
+        path: '/system/menu',
+        component: () => import('@/views/system/MenuMngView.vue'),
+        name: 'Menu',
+        meta: {
+          auth: false,
+          navi: true,
+          title: '메뉴 관리',
+        },
+      },
+      {
+        path: '/system/program',
+        component: () => import('@/views/system/ProgramListMngView.vue'),
+        name: 'Program',
+        meta: {
+          auth: false,
+          navi: true,
+          title: '프로그램 목록 관리',
+        },
+      },
+      {
+        path: '/system/code',
+        component: () => import('@/views/system/CommonCodeMngView.vue'),
+        name: 'Code',
+        meta: {
+          auth: false,
+          navi: true,
+          title: '공통코드 관리',
         },
       },
     ],

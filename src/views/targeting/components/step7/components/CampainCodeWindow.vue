@@ -109,6 +109,7 @@
                                   name="flowRadio"
                                   v-model="flowchartRadioValues"
                                   :value="item.id"
+                                  :disabled="item.disabled"
                                 />
                                 <i class="icon"></i>
                               </label>
@@ -186,6 +187,7 @@ const attachData = () => {
       id: i,
       code: '12345' + 1,
       name: '혜택안내 1개월',
+      disabled: Math.floor(Math.random() * 2),
     };
     testData2.push(randomData);
   }
@@ -202,7 +204,8 @@ const onSelectCampainRow = value => {
 };
 
 const onSelectFlowchartRow = value => {
-  const { id } = value;
+  const { id, disabled } = value;
+  if (disabled) return;
   flowchartRowData.value = { ...value };
   flowchartRadioValues.value = id;
 };

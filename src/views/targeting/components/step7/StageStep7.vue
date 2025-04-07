@@ -33,7 +33,7 @@
         <div class="item-row" v-if="selectedValue == 1">
           <div class="row-flex flex-1">
             <AppSelectCode
-              labelName="캠페인 코드"
+              labelName="캠페인 CODE"
               v-model="data.campainCode"
               @search="onSearch"
               @remove="onRemove"

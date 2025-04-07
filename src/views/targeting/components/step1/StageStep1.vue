@@ -48,7 +48,7 @@
         <div class="item-row" :class="{ 'disabled-corver': disabledCorver }">
           <div class="title-s">대상고객 선택</div>
           <div class="title">
-            <strong class="red">어떤 고객</strong>을 <strong>대상</strong>으로
+            <strong class="red">어떤 고객</strong>을 <strong>대상</strong>으
             진행할 예정이신가요?
           </div>
           <div class="btn-radios">
@@ -247,6 +247,18 @@ watch(
     isComplete.value = isCompleteCheck(step1.value);
     // emit('stepComplete', { step: 1, complete: isComplete.value });
     if (isComplete.value) disabledCorver.value = false;
+
+    if (step1.value.cms == 1) {
+      const contentArea = document.querySelector('.content-area');
+      if (contentArea) {
+        setTimeout(() => {
+          contentArea.scrollTo({
+            top: contentArea.scrollHeight,
+            behavior: 'smooth',
+          });
+        });
+      }
+    }
   },
   { immediate: true },
 );

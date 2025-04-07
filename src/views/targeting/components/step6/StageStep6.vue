@@ -47,7 +47,7 @@ const transitionStyle = ref('fade-none');
 const currentComponent = ref('');
 
 const goAiSeg = () => {
-  transitionStyle.value = 'fade-next';
+  // transitionStyle.value = 'fade-next';
   currentComponent.value = `SegScene1`;
 };
 
@@ -72,18 +72,10 @@ onMounted(() => {
 });
 
 const tooltipButton = ref(null);
-// onMounted(() => {
-//   if (props.currentStep == 8) {
-//     setTimeout(() => {
-//       const tooltip = tooltipButton.value._tippy;
-//       tooltip.hide();
-//     }, 3000);
-//   }
-// });
 
 //체크박스 이벤트
 const chkFunction = e => {
-  if (e.target.checked){
+  if (e.target.checked) {
     // alert("체크상태")
   } else {
     const tooltip = tooltipButton.value._tippy;
@@ -94,5 +86,11 @@ const chkFunction = e => {
   }
 };
 
-const { step6 } = toRefs(props.modelValue);
+// const emit = defineEmits(['stepComplete']);
+//
+// onMounted(() => {
+//   emit('stepComplete', { step: 4, complete: 4 });
+// });
+//
+// const { step6 } = toRefs(props.modelValue);
 </script>
