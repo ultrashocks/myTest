@@ -1,10 +1,9 @@
 <template>
   <div class="contents-wrap">
     <div class="contents-layout">
-      <!-- <SideNavi /> -->
       <section class="contents-section">
-        <Location />
         <MainTitle />
+        <Location />
       </section>
     </div>
   </div>

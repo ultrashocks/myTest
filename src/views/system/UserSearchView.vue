@@ -1,13 +1,18 @@
 <template>
   <div class="contents-wrap">
     <div class="contents-layout">
-      <!-- <SideNavi /> -->
       <section class="contents-section">
-        <Location />
+        {{ getSideActive }}
         <MainTitle />
+        <Location />
       </section>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useUiStore } from '@/stores/ui';
+import { storeToRefs } from 'pinia';
+const uiStore = useUiStore();
+const { getSideActive } = storeToRefs(uiStore);
+</script>

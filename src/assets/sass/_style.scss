@@ -1196,7 +1196,9 @@
 .contents-layout{
     display: flex;
     height: 100%;
-    padding-left: 240px;
+    &.side-active{
+        padding-left: 240px;
+    }    
 }
 .contents-section{
     flex: 1;
@@ -1221,6 +1223,7 @@
         font-size: 22px;
         font-weight: 600;
         color: modules.$color_white;
+        transform: translateY(5px);
     }
 }
 .side-navi-list{
