@@ -1,7 +1,7 @@
 <template>
   <div class="window-contents">
     <div class="window-header">타겟 그룹 관리</div>
-    <div class="modal-body" style="padding: 16px !important">
+    <div class="modal-body">
       <div class="target-top-input-wrap">
         <div
           class="input-inner"
@@ -24,8 +24,10 @@
       <div class="info-box">
         <div>전체 {{ cnt }}</div>
         <div>
-          <button @click="addRow">추가 <span>+</span></button>
-          <button @click="deleteSelected">삭제 <span>-</span></button>
+          <button class="btn-common add" @click="addRow">추가<i></i></button>
+          <button class="btn-common del" @click="deleteSelected">
+            삭제<i></i>
+          </button>
         </div>
       </div>
       <div class="table-row">

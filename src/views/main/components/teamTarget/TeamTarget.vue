@@ -107,7 +107,7 @@ const attachData = () => {
   searchDate.value = '최근 30일 (25-05-31 ~ 25-06-29)';
   let testData = [];
   const labels = [
-    '입력중',
+    '작성중',
     'AI 추천중',
     '작성완료',
     '대기중',

@@ -3,7 +3,7 @@
     <div class="sub-router">
       <div class="wrap">
         <Header />
-        <transition name="fade" mode="out-in">
+        <transition name="side-fade" mode="out-in">
           <SideNavi v-if="showSideNavi" />
         </transition>
         <router-view v-slot="{ Component }">
@@ -28,6 +28,10 @@ const AppSlider = defineAsyncComponent(() =>
 const route = useRoute();
 const showSideNavi = computed(() => {
   const path = route.path;
-  return path.includes('/standard') || path.includes('/system');
+  return (
+    path.includes('/business') ||
+    path.includes('/standard') ||
+    path.includes('/system')
+  );
 });
 </script>

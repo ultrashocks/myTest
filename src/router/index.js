@@ -84,7 +84,7 @@ export const getRoutes = [
   {
     path: '/business',
     component: () => import('@/views/SubRouterView.vue'),
-    redirect: '/business',
+    redirect: '/business/menu1',
     name: 'business',
     meta: {
       auth: false,
@@ -93,13 +93,33 @@ export const getRoutes = [
     },
     children: [
       {
-        path: '/business',
-        component: () => import('@/views/business/BusinessSupportView.vue'),
-        name: 'Business',
+        path: '/business/menu1',
+        component: () => import('@/views/business/BusinessMenu1View.vue'),
+        name: 'menu1',
         meta: {
           auth: false,
           navi: true,
-          title: '업무지원',
+          title: '업무지원 메뉴1',
+        },
+      },
+      {
+        path: '/business/menu2',
+        component: () => import('@/views/business/BusinessMenu2View.vue'),
+        name: 'menu2',
+        meta: {
+          auth: false,
+          navi: true,
+          title: '업무지원 메뉴2',
+        },
+      },
+      {
+        path: '/business/menu3',
+        component: () => import('@/views/business/BusinessMenu3View.vue'),
+        name: 'menu3',
+        meta: {
+          auth: false,
+          navi: true,
+          title: '업무지원 메뉴3',
         },
       },
     ],

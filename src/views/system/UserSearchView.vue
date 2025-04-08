@@ -1,10 +1,9 @@
 <template>
   <div class="contents-wrap">
-    <div class="contents-layout">
+    <div class="contents-layout" :class="{ 'side-active': getSideActive }">
       <section class="contents-section">
-        {{ getSideActive }}
-        <MainTitle />
-        <Location />
+        <ContentHeader />
+        <div class="contents-view"></div>
       </section>
     </div>
   </div>

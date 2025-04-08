@@ -1,9 +1,14 @@
 <template>
   <transition name="fade" mode="out-in">
-    <aside class="side-navi" :key="firstLevelPath">
+    <aside
+      class="side-navi"
+      :key="firstLevelPath"
+      :class="{ 'side-active': getSideActive }"
+    >
       <div class="side-navi-wrap">
         <div class="side-navi-title">
-          <span>{{ naviTitle }}</span>
+          <span class="title">{{ naviTitle }}</span>
+          <span class="btn-show" @click="onSideClick"></span>
         </div>
         <div class="side-navi-list">
           <ul>
@@ -26,12 +31,13 @@
 <script setup>
 import { ref, watch, computed } from 'vue';
 import { useRoute } from 'vue-router';
+import { useUiStore } from '@/stores/ui';
+import { storeToRefs } from 'pinia';
 
 const naviTitle = ref('');
 const naviData = ref([]);
 const route = useRoute();
 
-// 1레벨 경로를 추출하는 computed 속성
 const firstLevelPath = computed(() => {
   const path = route.path;
   const parts = path.split('/');
@@ -51,17 +57,14 @@ const updateMenu = () => {
 
 updateMenu();
 
+const uiStore = useUiStore();
+const { getSideActive } = storeToRefs(uiStore);
+const { setSideActive } = uiStore;
+const onSideClick = () => {
+  setSideActive(!getSideActive.value);
+};
+
 watch(firstLevelPath, () => {
   updateMenu();
 });
 </script>
-
-<style scoped>
-.side-navi {
-  transition: all 0.4s ease-in-out;
-}
-
-.side-navi-wrap {
-  transition: opacity 0.4s ease-in-out;
-}
-</style>

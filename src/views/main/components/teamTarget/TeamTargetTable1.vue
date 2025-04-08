@@ -2,7 +2,7 @@
   <div class="target-table__wrap">
     <div class="main-title">
       <div class="title-l">
-        <span class="title">입력중 타겟 현황</span>
+        <span class="title">작성중 타겟 현황</span>
       </div>
       <div class="title-r"></div>
     </div>

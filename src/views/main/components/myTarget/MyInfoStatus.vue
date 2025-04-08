@@ -14,7 +14,7 @@
     <div class="infos-row">
       <div class="box-col">
         <div class="info-box input-ai">
-          <div class="label">입력중</div>
+          <div class="label">작성중</div>
           <div class="count">
             <span class="num">
               <NumberAnimation

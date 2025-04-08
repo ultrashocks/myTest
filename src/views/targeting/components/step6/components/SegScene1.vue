@@ -79,7 +79,7 @@
                 :key="index"
               >
                 <div class="d-flex deps-row">
-                  <div class="delete-deps3" v-if="index === 0">
+                  <div class="delete-deps" v-if="index === 0">
                     <div
                       class="btn-add-deps"
                       @click="removeSeg03Deps(deps2index)"
@@ -108,7 +108,7 @@
       </div>
     </div>
     <!-- 제한조건 추가 모달 -->
-    <AppWindow v-model:view="toggleModal" width="895px" height="676px">
+    <AppWindow v-model:view="toggleModal" width="900px" height="676px">
       <AddSegChoice
         v-model:groupIndex="groupIndex"
         @callBeck="callModalData"
@@ -217,60 +217,78 @@ const onSegAddModal = (index, deps03) => {
 };
 
 const callModalData = (data, groupIndex) => {
-  // 기존에 데이터가 있으면 삭제
-  groupList2deps.value[0].rowObj[groupIndex].deps03 = [];
+  console.log(data);
+  console.log(groupIndex);
 
-  // 가지고 온 값으로 파싱
-  console.log(data.detailData.code);
-  // 가지고온 코드로 무슨 그룹인치 체크 해서 그거에 맞게 배열을 조회해서 만들어줍니다.
+  // 기존에 데이터가 있으면 삭제
+  const target = groupList2deps.value?.[0]?.rowObj?.[groupIndex];
+  if (target) {
+    target.deps03 = [];
+  }
+
   let result = [];
-  if (data.detailData.code === 'C00000111') {
-    // 5살 단위 그룹
-    result = [
-      { id: 5, label: '5대 이하' },
-      { id: 10, label: '10대' },
-      { id: 15, label: '15대' },
-      { id: 20, label: '20대' },
-      { id: 25, label: '25대' },
-      { id: 30, label: '30대' },
-      { id: 35, label: '35대' },
-      { id: 40, label: '40대' },
-      { id: 45, label: '45대' },
-      { id: 50, label: '50대' },
-      { id: 55, label: '55대' },
-      { id: 60, label: '60대 이상' },
-    ];
-  } else if (data.detailData.code === 'C00000112') {
-    result = [
-      { id: 10, label: '10대 이하' },
-      { id: 20, label: '20대' },
-      { id: 30, label: '30대' },
-      { id: 40, label: '40대' },
-      { id: 50, label: '50대' },
-      { id: 60, label: '60대 이상' },
-    ];
-  } else if (data.detailData.code === 'C00000211') {
-    result = [
-      { id: 1, label: '남성' },
-      { id: 2, label: '여성' },
-    ];
-  } else {
-    result = [
-      { id: 100001, label: '테스트1' },
-      { id: 100020, label: '테스트2' },
-      { id: 200030, label: '테스트3' },
-      { id: 30040, label: '테스트4' },
-      { id: 400050, label: '테스트5' },
-      { id: 500060, label: '테스트6' },
-    ];
+
+  //data.detailData 이 파라미터가 있는지 없는지로 어떤 모달의 파라미터인지 체크합니다.
+  if (data.detailData) {
+    if (data.detailData.code === 'C00000111') {
+      // 5살 단위 그룹
+      result = [
+        { id: 5, label: '5대 이하' },
+        { id: 10, label: '10대' },
+        { id: 15, label: '15대' },
+        { id: 20, label: '20대' },
+        { id: 25, label: '25대' },
+        { id: 30, label: '30대' },
+        { id: 35, label: '35대' },
+        { id: 40, label: '40대' },
+        { id: 45, label: '45대' },
+        { id: 50, label: '50대' },
+        { id: 55, label: '55대' },
+        { id: 60, label: '60대 이상' },
+      ];
+    } else if (data.detailData.code === 'C00000112') {
+      result = [
+        { id: 10, label: '10대 이하' },
+        { id: 20, label: '20대' },
+        { id: 30, label: '30대' },
+        { id: 40, label: '40대' },
+        { id: 50, label: '50대' },
+        { id: 60, label: '60대 이상' },
+      ];
+    } else if (data.detailData.code === 'C00000211') {
+      result = [
+        { id: 1, label: '남성' },
+        { id: 2, label: '여성' },
+      ];
+    } else {
+      result = [
+        { id: 100001, label: '테스트1' },
+        { id: 100020, label: '테스트2' },
+        { id: 200030, label: '테스트3' },
+        { id: 300400, label: '테스트4' },
+        { id: 400050, label: '테스트5' },
+        { id: 500060, label: '테스트6' },
+      ];
+    }
+  } else if (data.customSegData) {
+    console.log(data.customSegData);
+    data.customSegData.forEach((row, idx) => {
+      const dataArr = {
+        id: row.id || 0,
+        label: row.name || '고객세그' + idx,
+        cnt: row.cnt,
+      };
+      result.push(dataArr);
+    });
+
+    console.log(result);
   }
 
   result.forEach(row => {
-    console.log(row);
     const dataArr = {
       id: row.id || 0,
       name: row.label,
-      cnt: 100,
+      cnt: row.cnt || 100,
     };
     groupList2deps.value[0].rowObj[groupIndex].deps03.push(dataArr);
   });

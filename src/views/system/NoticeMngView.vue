@@ -3,6 +3,7 @@
     <div class="contents-layout" :class="{ 'side-active': getSideActive }">
       <section class="contents-section">
         <ContentHeader />
+        <div class="contents-view"></div>
       </section>
     </div>
   </div>

@@ -26,10 +26,8 @@
             </li> -->
           </ul>
         </div>
-        <button class="btn-confirm" @click="emit('update:displayYn', false)">
-          <!-- 퍼블에서는 클릭해서 다음화면으로 진행
-          **** 개발시 화면설계서 기준으로 개발 요망
-          -->
+        <!--        <button class="btn-confirm" @click="emit('update:displayYn', false)">-->
+        <button class="btn-confirm" @click="movePage()">
           나중에 확인하기
         </button>
       </div>
@@ -38,9 +36,17 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
 const props = defineProps({
   displayYn: Boolean,
 });
 
-const emit = defineEmits(['update:displayYn']);
+const movePage = () => {
+  router.push({ name: 'target', params: { id: 123 } });
+};
+
+const emit = defineEmits(['update:displayYn', 'movePage']);
 </script>

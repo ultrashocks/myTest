@@ -16,12 +16,20 @@
         <button>삭제</button>
       </li>
       <li class="footer-button-last-box">
-        <button>수정</button>
-        <button>상태변경</button>
-        <button>공유</button>
+        <button>실행재개</button>
+        <button>중지</button>
+        <button>실행종료</button>
+        <button @click="onShareModal">공유</button>
         <button>복사</button>
       </li>
     </ul>
+    <!-- 제한조건 추가 모달 -->
+    <AppWindow v-model:view="toggleShareModal" width="900px" height="640px">
+      <TargetSharingModal
+        @callBeck="callModalData"
+        @cancel="toggleShareModal = false"
+      />
+    </AppWindow>
   </div>
 </template>
 
@@ -32,6 +40,8 @@ import TargetTopInput from './TargetTopInput.vue';
 import TableComponent from '@/views/CommonTable.vue';
 import FilterBar from './FilterBar.vue';
 import router from '@/router/index.js';
+import AppWindow from '@/components/ui/AppWindow.vue';
+import TargetSharingModal from '@/views/targeting/components/step4/components/modals/TargetSharingModal.vue';
 
 const props = defineProps({
   modelValue: {
@@ -403,4 +413,13 @@ const bodyData = computed(() => {
     return newRow;
   });
 });
+
+// 푸터 공유 버튼 모달 및 이벤트
+const toggleShareModal = ref(false);
+const onShareModal = idx => {
+  toggleShareModal.value = true;
+};
+
+// 모달에서 데이터 내려받을때
+const callModalData = (data, groupIndex) => {}
 </script>

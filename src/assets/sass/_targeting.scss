@@ -143,14 +143,18 @@
         box-sizing: border-box;
         border: 1px solid modules.$color_blueG_600;
         background-color: modules.$color_white;
-        font-size: 16px;
+        @include modules.font-style( text_smb16);
         color: modules.$color_secondary;
-        font-weight: 500;
         justify-content: center;
         align-items: center;
         padding: 0 16px;
         min-width: 81px;
         border-radius: 4px;
+
+        &:hover{
+            color: modules.$color_primary;
+            border-color: modules.$color_primary;
+        }
     }
     .btn-step{
         display: inline-flex;
@@ -215,6 +219,7 @@
                 padding: 0 4px;
                 position: relative;
                 .content-area{
+                    padding-top: 30px;
                     height: 100%;
                     overflow-y: auto;
                     overflow-x: hidden;
@@ -820,6 +825,39 @@ ul.targeting-detail-condition-wrap {
                 font-size: 14px;
                 font-weight: 600;
                 border-radius: 8px 8px 0 0;
+                position: relative;
+                &.deps1-box-header {
+                    .btn-add-deps {
+                        background-color: modules.$color_blueG_600;
+                        width: 24px;
+                        height: 24px;
+                        position: absolute;
+                        right: -12px;
+                        border-radius: 50%;
+
+                        .icon {
+                            display: inline-block;
+                            width: 24px;
+                            height: 24px;
+                            position: absolute;
+                            right: 0;
+                            top: 0;
+                            cursor: pointer;
+                            z-index: 2;
+                            background-color: modules.$color_white;
+                            @include modules.textIndent();
+                            mask: url(../images/icon_plus.svg) no-repeat 50%;
+                            mask-size: 16px 16px;
+                            &.icon-add-seg {
+                                mask: url(../images/icon-seg-progress.svg) no-repeat 50%;
+                            }
+                        }
+
+                        &:hover {
+                            background-color: #3B4044;
+                        }
+                    }
+                }
             }
             .box-body {
                 display: flex;
@@ -962,35 +1000,6 @@ ul.targeting-detail-condition-wrap {
                             }
                         }
                     }
-                    .delete-deps3 {
-                        position: relative;
-                        .btn-add-deps {
-                            background-color: modules.$color_blueG_600;
-                            width: 24px;
-                            height: 24px;
-                            position: absolute;
-                            left: 40px;
-                            top: 7px;
-                            border-radius: 50%;
-                            .icon{
-                                display: inline-block;
-                                width: 24px;
-                                height: 24px;
-                                position: absolute;
-                                right: 0;
-                                top: 0;
-                                cursor: pointer;
-                                z-index: 2;
-                                background-color: modules.$color_white;
-                                @include modules.textIndent();
-                                mask: url(../images/icon_code_remove.svg) no-repeat 50%;
-                                mask-size: 28px 28px;
-                            }
-                            &:hover {
-                                background-color: #3B4044;
-                            }
-                        }
-                    }
                     display: flex;
                     flex-direction: column;
                     min-height: 96px;
@@ -1061,6 +1070,35 @@ ul.targeting-detail-condition-wrap {
                     .deps3-box-list:first-child:last-child .line {
                         height: calc(100% - 32px); width: 50%; position: absolute; top: 0; left: 50%; border-left: 0px solid modules.$color_blueG_600;
                     }
+                }
+            }
+        }
+        .delete-deps {
+            position: relative;
+            .btn-add-deps {
+                background-color: modules.$color_blueG_600;
+                width: 24px;
+                height: 24px;
+                position: absolute;
+                left: 40px;
+                top: 7px;
+                border-radius: 50%;
+                .icon{
+                    display: inline-block;
+                    width: 24px;
+                    height: 24px;
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    cursor: pointer;
+                    z-index: 2;
+                    background-color: modules.$color_white;
+                    @include modules.textIndent();
+                    mask: url(../images/icon_code_remove.svg) no-repeat 50%;
+                    mask-size: 28px 28px;
+                }
+                &:hover {
+                    background-color: #3B4044;
                 }
             }
         }
@@ -1147,9 +1185,26 @@ ul.targeting-detail-condition-wrap {
     }
     // 두분쨰 비율 모달창 수정
     .seg-ratio {
+        height: 360px;
+        .table-body {
+            overflow-x: hidden;
+            overflow-y: auto;
+            height: 272px !important;
+            position: relative;
+            background-color: #F9FAFB;
+            //border-bottom: 1px solid;
+        }
+        .selectTab02 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 16px;
+            position: relative;
+        }
         .title-row {
             display: flex;
-            padding: 0 20px;
+            padding: 0 30px 8px;
             justify-content: space-between;
             font-size: 18px;
             font-weight: 600;
@@ -1162,20 +1217,72 @@ ul.targeting-detail-condition-wrap {
                 width: 332px;
             }
         }
-        //tr {
-        //    td:first-child {
-        //        input{
-        //            max-width: 500px;
-        //            width: 100%;
-        //        }
-        //    }
-        //    td:last-child {
-        //        input {
-        //            max-width: 332px;
-        //            width: 100%;
-        //        }
-        //    }
-        //}
+        input {
+            box-sizing: border-box;
+            height: 36px;
+            padding: 7px 16px;
+            font-size: 14px;
+            border-radius: 4px;
+            border: 1px solid;
+            &::placeholder {
+                color: modules.$color_blueG_500;
+                opacity: 1;
+            }
+        }
+        .table-row {
+            padding: 0 30px;
+        }
+        .seg-warring {
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            padding: 16px 30px;
+            font-size: 12px;
+            font-weight: 400;
+            color: modules.$color_statusError;
+            border-bottom: 1px solid modules.$color_blueG_400;
+        }
+        .seg-info {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            padding: 16px 30px;
+            font-weight: 400;
+            color: modules.$color_blueG_600;
+            font-size: 12px;
+            .seg-info-img {
+                background-color: modules.$color_white;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                .icon {
+                    display: inline-block;
+                    width: 18px;
+                    height: 18px;
+                    cursor: inherit;
+                    background-color: modules.$color_statusWarning;
+                    @include modules.textIndent();
+                    mask: url(../images/icon_info.svg) no-repeat 50%;
+                    mask-size: 18px 18px;
+                }
+            }
+        }
+        .info-img {
+            background-color: modules.$color_white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            .icon{
+                display: inline-block;
+                width: 32px;
+                height: 32px;
+                cursor: inherit;
+                background-color: modules.$color_blueG_400;
+                @include modules.textIndent();
+                mask: url(../images/icon_info.svg) no-repeat 50%;
+                mask-size: 24px 24px;
+            }
+        }
     }
 
     // 모달 바디 수정

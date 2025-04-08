@@ -177,24 +177,22 @@
           <div class="search-row">
             <div class="search-box">
               <div class="search-col">
-                <label>조건 그룹</label>
+                <label>세그 개수</label>
                 <AppSelectBox
-                  :options="groupOptions"
-                  v-model:optionsSelected="searchData.groupSelected"
+                  :options="createSegOptions"
+                  v-model:optionsSelected="searchData.segCntSelected"
                   style="width: 114px"
                 />
               </div>
-              <div class="search-col">
-                <label>조건명</label>
-                <AppInput
-                  style="width: 315px"
-                  v-model="searchData.title"
-                  placeholder="조건명 입력"
-                />
-              </div>
-              <button class="btn-search"><i class="icon"></i>조회</button>
+              <button
+                class="btn-search"
+                @click="createSegCnt(searchData.segCntSelected)"
+              >
+                생성
+              </button>
             </div>
           </div>
+          <!-- 두분쨰 비율 모달창 수정 -->
           <div class="seg-ratio">
             <div class="ratio">
               <div class="title-row">
@@ -204,28 +202,64 @@
               <div class="table-row">
                 <div class="table-scroll non-header">
                   <div class="table-body">
-                    <table>
-                      <tbody class="">
-                        <tr
-                          v-for="(item, rowIndex) in ratioData"
-                          :key="rowIndex"
+                    <div class="selectTab02">
+                      <div
+                        v-if="ratioData.length === 0"
+                        class="text-center py-4 text-gray-500 d-flex flex-column justify-center align-center"
+                        style="margin-top: 120px"
+                      >
+                        <div class="info-img">
+                          <i class="icon"></i>
+                        </div>
+                        <div>세그를 먼저 생성해 주세요.</div>
+                      </div>
+
+                      <div
+                        class="row d-flex justify-between"
+                        v-for="(item, rowIndex) in ratioData"
+                        :key="rowIndex"
+                      >
+                        <div class="left" style="max-width: 500px; width: 100%">
+                          <input
+                            class="left-01"
+                            style="width: 100%"
+                            type="text"
+                            v-model="item.name"
+                            placeholder="20자까지 가능"
+                          />
+                        </div>
+                        <div
+                          class=""
+                          style="max-width: 332px; width: 100%; display: flex"
                         >
-                          <td class="" style="width: 500px">
-                            <input
-                              class="d-flex"
-                              type="text"
-                              v-model="item.name"
-                            />
-                          </td>
-                          <td class="d-flex" style="width: 332px">
-                            <input type="text" v-model="item.value" /> %
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                          <input
+                            class="left-02 mr-8"
+                            style="width: 100%"
+                            type="number"
+                            v-model="item.cnt"
+                            placeholder="숫자만 입력"
+                          />
+                          <span
+                            class="font-size-16 d-flex flex-column justify-center"
+                            >%</span
+                          >
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
+                <div class="seg-warring">
+                  세그 비율의 합은 100이어야 합니다.
+                </div>
               </div>
+            </div>
+
+            <div class="seg-info">
+              <div class="seg-info-img">
+                <i class="icon"></i>
+              </div>
+              세그명은 선택 입력 사항으로 입력하지 않으시면, 고객세그1,
+              고객세그2... 로 자동 생성됩니다.
             </div>
           </div>
         </div>
@@ -281,7 +315,6 @@
       <button
         class="btn-s red"
         @click="onConfirmTab02"
-        :disabled="!isTextEntered"
       >
         적용
       </button>
@@ -332,9 +365,25 @@ const groupOptions = reactive([
   { label: '그룹#1', value: 1 },
   { label: '그룹#2', value: 2 },
 ]);
+// 생성 세그 카운트
+const createSegOptions = reactive([
+  { label: '선택', value: 0 },
+  { label: '1', value: 1 },
+  { label: '2', value: 2 },
+  { label: '3', value: 3 },
+  { label: '4', value: 4 },
+  { label: '5', value: 5 },
+  { label: '6', value: 6 },
+  { label: '7', value: 7 },
+  { label: '8', value: 8 },
+  { label: '9', value: 9 },
+  { label: '10', value: 10 },
+]);
+
 const searchData = ref({
   typeSelected: { label: '전체', value: 0 },
   groupSelected: { label: '전체', value: 0 },
+  segCntSelected: { label: '선택', value: 0 },
   title: '',
 });
 
@@ -503,10 +552,6 @@ const onConfirmTab01 = () => {
   emit('callBeck', selectData, prop.groupIndex);
   emit('cancel');
 };
-const onConfirmTab02 = () => {
-  emit('callBeck', selectedRows.value);
-  emit('cancel');
-};
 
 // 체크박스 이벤트
 const selectedRows = ref([]);
@@ -519,14 +564,23 @@ watchEffect(() => {
   isTextEntered.value = sqlText.value.trim().length > 0;
 });
 
-// 제외조건 추가 모달
-const addCondName = () => {
-  condNameChk.value = !condNameChk.value;
+// 비율탭 세그 추가 이벤트
+const ratioData = ref([]);
+
+const createSegCnt = target => {
+  const count = Number(target.value);
+
+  // 기존 값 초기화하고 새로 채움
+  ratioData.value = Array.from({ length: count }, () => ({
+    id: Math.floor(Math.random() * 100000),
+    name: '',
+    cnt: '',
+  }));
 };
 
-const ratioData = ref([
-  { name: '남성', value: '40%' },
-  { name: '여성', value: '60%' },
-  { name: '기타', value: '0%' },
-]);
+const onConfirmTab02 = () => {
+  // 최대 10개의 로우
+  emit('callBeck', { customSegData: ratioData.value }, prop.groupIndex);
+  emit('cancel');
+};
 </script>
