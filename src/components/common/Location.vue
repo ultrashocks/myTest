@@ -1,7 +1,6 @@
 <template>
   <div class="location-wrap">
     <div class="location-box">
-      <!-- <EventSlideText /> -->
       <ul class="location">
         <li>Home</li>
         <li v-for="(item, index) in location" :key="index">
@@ -9,7 +8,6 @@
         </li>
       </ul>
     </div>
-    <span class="vixwin-logo"></span>
   </div>
 </template>
 
@@ -25,9 +23,9 @@ route.matched.map(match => {
   location.value.push(match.meta.title);
 });
 
-// if (location.value.length === 3 && location.value[1] === location.value[2]) {
-//   location.value.pop();
-// }
+if (location.value.length === 3 && location.value[1] === location.value[2]) {
+  location.value.pop();
+}
 </script>
 
 <style></style>

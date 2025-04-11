@@ -180,7 +180,7 @@ export const getRoutes = [
   {
     path: '/system',
     component: () => import('@/views/SubRouterView.vue'),
-    redirect: '/system/notice',
+    redirect: '/system/notice/',
     name: 'System',
     meta: {
       auth: false,
@@ -189,15 +189,39 @@ export const getRoutes = [
     },
     children: [
       {
-        path: '/system/notice',
-        component: () => import('@/views/system/NoticeMngView.vue'),
-        name: 'Notice',
+        path: '/system/notice/',
+        component: () => import('@/views/SubRouterInnerView.vue'),
+        redirect: '/system/notice/view',
+        name: '공지사항',
         meta: {
           auth: false,
           navi: true,
           title: '공지사항 관리',
         },
+        children: [
+          {
+            path: '/system/notice/view',
+            component: () => import('@/views/system/NoticeDetailView.vue'),
+            name: '공지사항 보기',
+            meta: {
+              auth: false,
+              navi: true,
+              title: '공지사항 관리',
+            },
+          },
+          {
+            path: '/system/notice/write',
+            component: () => import('@/views/system/NoticeWriteView.vue'),
+            name: '공지사항 등록/수정',
+            meta: {
+              auth: false,
+              navi: false,
+              title: '공지사항 관리',
+            },
+          },
+        ],
       },
+
       {
         path: '/system/manual',
         component: () => import('@/views/system/ManualMngView.vue'),
