@@ -1,14 +1,14 @@
 <template>
   <div class="filebox button">
-    <label :for="`file-btn${id}`" class="blue mr5">{{ label }}</label>
-    <input
-      type="file"
-      :id="`file-btn${id}`"
-      class="upload-hidden"
-      :accept="accept"
-      @change="onSelectFile"
-      ref="fileInput"
-    />
+    <label class="blue mr5">
+      <input
+        type="file"
+        class="upload-hidden"
+        :accept="accept"
+        @change="onSelectFile"
+        ref="fileInput" />
+      {{ label }}<i class="icon"></i
+    ></label>
   </div>
 </template>
 

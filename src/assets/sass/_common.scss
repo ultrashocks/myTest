@@ -209,6 +209,7 @@ button {
   color: #3B4044;
   font-weight: 400;
   cursor: pointer;
+  border-radius: 4px;
 }
 input {
   vertical-align: middle;
@@ -487,38 +488,6 @@ input::-webkit-inner-spin-button {
 }
 
 //모달 팝업 취소, 적용 버튼
-.btn-s{
-  display: inline-flex;
-  align-items: center;
-  height: 33px;
-  padding: 0 24px;
-  border-radius: 4px;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 500;
-  &.gray{
-    background-color: modules.$gray-color;
-    &:hover{
-      background-color: modules.$color_secondary;
-    }
-  }
-  &.red {
-    background-color: modules.$color_primary;
-
-    &:hover {
-      background-color: modules.$color_secondary;
-    }
-  }
-  &:disabled{
-    background-color: modules.$color_blueG_300;
-    color: modules.$color_white;
-    cursor: default;
-    &:hover{
-      background-color: modules.$color_blueG_300;
-      color: modules.$color_white;
-    }
-  }
-}
 
 .btn-b{
   display: inline-flex;
@@ -532,22 +501,6 @@ input::-webkit-inner-spin-button {
   &.black{
     background-color: modules.$color_blueG_900;
   }
-}
-
-.btn-textR {
-    display: inline-flex;
-    align-items: center;
-    height: 28px;
-    background-color: modules.$color_blueG_100;
-    color: modules.$color_blueG_800;
-    border-radius: 28px;
-    padding:0 12px;
-    @include modules.font-style(text_smb13);
-
-    &:hover {
-      background-color: modules.$color_bgRed;
-      color: modules.$color_primary;
-    }
 }
 
 .ml16 {
@@ -670,7 +623,12 @@ input::-webkit-inner-spin-button {
         right: 3px;
         top: 1px;
       }
+      .dialog-footer .ui-button{
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
     }
+
   }
 
   &.window {
@@ -804,13 +762,14 @@ input::-webkit-inner-spin-button {
         &:nth-child(1) {
           border-left: 1px solid rgba(224, 224, 224, 0.2);
           background-color: modules.$gray-color;
-      
+          border-radius: 0 0 0 8px ;
           &:hover {
             background-color: modules.$gray-over-color;
           }
         }
         &:nth-child(2) {
           background-color: modules.$color_primary;
+           border-radius: 0 0 8px 0;
           &:hover {
             background-color: modules.$over-color;
           }
@@ -851,8 +810,6 @@ input::-webkit-inner-spin-button {
           margin-right: 0;
         }
       }
-
-      
     }
   }
 
@@ -868,6 +825,7 @@ input::-webkit-inner-spin-button {
     gap: 8px;
     justify-content: center;
     background-color: modules.$color_white;
+    border-radius: 0 0 8px 8px;
   }
   &.v-scroll {
     overflow: hidden;
@@ -1050,6 +1008,10 @@ input::-webkit-inner-spin-button {
 .px-18px {
   padding-right: 18px;
   padding-left: 18px;
+}
+.px16 {
+  padding-right: 16px !important;
+  padding-left: 16px !important;
 }
 .ps-10px{
   padding-left: 10px;
@@ -1237,6 +1199,12 @@ input::-webkit-inner-spin-button {
     &:last-child {
       border-right: 1px solid modules.$color_blueG_200;
     }
+    &.td-left {
+      text-align: start;
+    }
+    &.td-right {
+      text-align: end;
+    }
   }
   .table td > span {
     display: block;
@@ -1284,11 +1252,11 @@ input::-webkit-inner-spin-button {
     color: modules.$color_blueG_800;
     border: 1px solid modules.$color_blueG_400;
     border-radius: 4px;
-    @include modules.font-style(text_smb13);
+    @include modules.font-style(text_smb12);
 
     &:hover {
       color: modules.$color_secondary;
-      border-color: modules.$color_secondary;
+      border-color: modules.$color_blueG_600;
     }
   }
 
@@ -1359,7 +1327,106 @@ input::-webkit-inner-spin-button {
 
 // 버튼 정리
 //----------------------
-.target-wrap .footer-button-box button,
+.btn-m {
+  display: inline-flex;
+  align-items: center;
+  height: 33px;
+  padding: 0 16px;
+  background-color: modules.$color_primary;
+  border-radius: 33px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  gap: 6px;
+  transition: background-color ease 0.4s;
+  &:hover{
+    background-color: modules.$color_secondary;
+    //background-color: modules.$over-color;
+  }
+  //CMS 바로가기
+  &.cms{
+    .icon{
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      background-color: #fff;
+      mask: url(../images/icon_cms.svg) no-repeat 50%;
+    }
+  }
+  //타겟관리 신규 타겟팅
+  &.target{
+    .icon{
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      background-color: #fff;
+      mask: url(../images/icon_next_arrow.svg) no-repeat 50%;
+    }
+  }
+}
+
+//모달 팝업 취소, 적용 버튼
+.btn-s{
+  display: inline-flex;
+  align-items: center;
+  height: 33px;
+  padding: 0 24px;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  &.gray{
+    background-color: modules.$gray-color;
+    &:hover{
+      background-color: modules.$color_secondary;
+    }
+  }
+  &.red {
+    background-color: modules.$color_primary;
+
+    &:hover {
+      background-color: modules.$color_secondary;
+    }
+  }
+  &:disabled{
+    background-color: modules.$color_blueG_300;
+    color: modules.$color_white;
+    cursor: default;
+    &:hover{
+      background-color: modules.$color_blueG_300;
+      color: modules.$color_white;
+    }
+  }
+}
+
+.btn-textR {
+    display: inline-flex;
+    align-items: center;
+    height: 28px;
+    background-color: modules.$color_blueG_100;
+    color: modules.$color_blueG_800;
+    border-radius: 28px;
+    padding:0 12px;
+    @include modules.font-style(text_smb13);
+    gap: 4px;
+
+    &:hover {
+      background-color: modules.$color_bgRed;
+      color: modules.$color_primary;
+    }
+
+    &.plus{
+      i {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background-color: modules.$color_primary;
+        mask: url(../images/icon_plus.svg) no-repeat 50%;
+      }
+    }
+}
+
+.footer-button-box button,
 .btn-crud {
     display: inline-flex;
     height: 37px;
@@ -1378,6 +1445,28 @@ input::-webkit-inner-spin-button {
       color: modules.$color_primary;
       border-color: modules.$color_primary;
     }
+
+    &.emph {
+      color: modules.$color_white;
+      border-color: modules.$color_blueG_900;
+      background-color: modules.$color_blueG_800;
+
+      &:hover {
+        border-color: modules.$color_secondary;
+        background-color: modules.$color_blueG_900;
+      }
+    }
+}
+.footer-button-box button{
+  &.black{
+    border: 1px solid modules.$color_blueG_900;
+    background-color: modules.$color_blueG_800;
+    color: modules.$color_white;
+    &:hover{
+      border-color: modules.$color_secondary;
+      background-color: modules.$color_secondary;
+    }
+  }
 }
 
 // 조건없을경우 일반 적인 공통 버튼 css, table 상단 우측 버튼
@@ -1386,7 +1475,7 @@ input::-webkit-inner-spin-button {
   justify-content: center;
   align-items: center;
   gap: 4px;
-  padding: 0 16px;
+  padding: 0 8px;
   height: 28px;
   border-radius: 4px;
   border: 1px solid modules.$color_blueG_600;
@@ -1404,7 +1493,6 @@ input::-webkit-inner-spin-button {
     cursor: not-allowed;
   }
   &.add {
-    padding: 0 12px;
     i {
       display: inline-block;
       width: 10px;
@@ -1414,7 +1502,6 @@ input::-webkit-inner-spin-button {
     }
   }
   &.del {
-    padding: 0 12px;
     i {
       display: inline-block;
       width: 10px;
@@ -1422,6 +1509,146 @@ input::-webkit-inner-spin-button {
       background-color: modules.$color_primary;
       mask: url(../images/icon_minus.svg) no-repeat 50%;
     }
+  }
+}
+
+.btn-move {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 16px;
+  height: 18px;
+  background-color: modules.$color_white;
+  border: 1px solid modules.$color_blueG_400;
+  border-radius: 4px;
+  text-indent: -999999px;
+  overflow: hidden;
+
+  i {
+      display: inline-block;
+      width: 8px;
+      height: 5px;
+      background-color: modules.$color_blueG_600;
+  }
+
+  &.up{
+    i {      
+      mask: url(../images/icon_up_arrow.svg) no-repeat 50%;
+    }
+  }
+
+  &.down{
+    i {
+      mask: url(../images/icon_down_arrow.svg) no-repeat 50%;
+    }
+  }
+  
+  &:hover{
+    border-color: modules.$color_blueG_600;
+
+    i {
+      background-color: modules.$color_blueG_800;
+    }
+  }
+
+  &:disabled{
+    i {
+      background-color: modules.$color_blueG_500;
+    }
+  }
+}
+
+.btn-lnb-link {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    @include modules.font-style(text_smb14);
+    color: modules.$color_blueG_800;
+    border: 1px solid modules.$color_blueG_400;
+    margin-bottom: 16px;;
+
+    i{
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        background-color: modules.$color_blueG_600;
+        mask: url(../images/icon_cms.svg) no-repeat 50%;
+    }
+
+    &:hover {
+        color: modules.$color_secondary;
+        border-color: modules.$color_primary;
+
+        i {
+            background-color: modules.$color_primary;
+        }
+    }
+
+}
+
+// 설명문구
+.step-info{
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: modules.$color_blueG_600;
+  .icon{
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      background: url(../images/icon_info.svg) no-repeat 50%;
+  }
+}
+
+// 공지사항 중요, New 아이콘
+.icons {
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+
+    .important, .new{
+            background-color: modules.$color_bgRed;
+            color: modules.$color_primary;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-flex;
+            height: 18px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 4px;
+        }
+        .important{
+            width: 29px;
+        }
+        .new{
+            width: 17px;
+        }
+}
+
+.icon-inline{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  @include modules.textIndent();
+
+  &.lock{
+    width:12px;
+    height:16px;
+    background: url(../images/icon_security.svg) no-repeat 50%;
+  }
+  &.attach{
+    width:11px;
+    height:17px;
+    background: url(../images/icon_attach_file.svg) no-repeat 50%;
+  }
+  &.info{
+    width: 17px;
+    height: 17px;
+    mask: url('../images/icon_info_circle.svg') no-repeat center;
+    background-color: modules.$color_blueG_600;
   }
 }
 
@@ -1439,29 +1666,29 @@ input::-webkit-inner-spin-button {
     border: 0;
   }
   label {
-    display: inline-block;
-    width: auto;
-    height: 32px;
-    line-height: 32px;
-    border-radius: 2px;    
-    padding: 0 18px;
-    color: #fff !important;
-    font-size: 13px;
-    font-weight: 400 !important;
-    // border: 1px solid #565C67;
-    // background: #2E343E;
-    border: 1px solid #535b69;
-    background: #4c525e;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
-    font-weight: 700;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    padding: 0 8px;
+    height: 28px;
     border-radius: 4px;
+    border: 1px solid #666666;
+    font-size: 13px;
+    font-weight: 600;
+    color: #000000;
+    transition: all 0.2s ease-in-out;
     cursor: pointer;
-    box-sizing: border-box;
-    transition: all ease 0.4s;
+    .icon{
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background-color: modules.$color_primary;
+      mask: url(../images/icon_plus.svg) no-repeat 50%;
+    }
     &:hover{
-      border: 1px solid #656c79;
-      background: #383f4b;
-      color: #fff !important;
+      border-color: #E30084;
+      color: #E30084;
     }
   }
   .upload-name {
@@ -1500,4 +1727,8 @@ input::-webkit-inner-spin-button {
       z-index: 2;
     }
   }
+}
+
+.non-border-bottom{
+  border-bottom: none !important;
 }

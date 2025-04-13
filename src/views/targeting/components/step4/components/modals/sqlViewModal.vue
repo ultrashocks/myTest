@@ -1,5 +1,5 @@
 <template>
-  <div v-if="view" class="sql-view-modal" style="position: fixed; right: 0; top: 0; width: 80%; height: 100%; background-color: #fff; transform: translate(-10%); z-index: 3000;">
+  <div v-if="view" class="sql-view-modal" style="position: absolute; right: 0; top: 0; width: 100%; height: 100%; background-color: #fff; z-index: 3000;">
     <div class="m-auto" style="border-radius: 4px; border: 1px solid #333; height: 100%; padding: 16px 28px">
       <div class="window-contents m-auto  position relative" style="border-radius: 4px; border: 1px solid #333; height: 100%">
         <span class="btn-close" @click="onCancel">닫기</span>

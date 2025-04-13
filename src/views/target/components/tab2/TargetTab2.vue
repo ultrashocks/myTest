@@ -11,9 +11,9 @@
         <button>삭제</button>
       </li>
       <li class="footer-button-last-box">
-        <button>수정</button>
-        <button>상태변경</button>
-        <button>공유</button>
+        <button>실행재개</button>
+        <button>중지</button>
+        <button>실행종료</button>
         <button>복사</button>
       </li>
     </ul>

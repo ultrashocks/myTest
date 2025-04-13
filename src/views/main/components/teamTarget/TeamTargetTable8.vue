@@ -110,6 +110,15 @@
 
 <script setup>
 import { ref, nextTick, onMounted } from 'vue';
+import { useScrollChecker } from '@/composables/useScrollChecker';
+import { useEllipsisChecker } from '@/composables/useEllipsisChecker';
+
+// 스크롤 유무 체크
+const scrollContainer = ref(null);
+const { hasVerticalScroll, checkScroll } = useScrollChecker(scrollContainer);
+
+// // 툴팁 유무 체크
+const { isEll, checkEllipsis } = useEllipsisChecker();
 
 const tableData = ref([]);
 const attachData = async () => {
@@ -129,25 +138,6 @@ const attachData = async () => {
 
   await nextTick();
   checkScroll();
-};
-
-const isEll = ref([]);
-const checkEllipsis = (event, index) => {
-  const el = event.target;
-  if (el.scrollWidth > el.clientWidth) {
-    isEll.value[index] = true;
-  } else {
-    isEll.value[index] = false;
-  }
-};
-
-//스크롤 유무 체크
-const scrollContainer = ref(null);
-const hasVerticalScroll = ref(false);
-const checkScroll = () => {
-  const el = scrollContainer.value;
-  if (!el) return;
-  hasVerticalScroll.value = el.scrollHeight > el.clientHeight;
 };
 
 onMounted(() => {

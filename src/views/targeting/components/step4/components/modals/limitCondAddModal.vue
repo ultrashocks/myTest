@@ -1,7 +1,7 @@
 <template>
   <div class="window-contents">
     <div class="window-header">
-      제외조건 추가
+      제한조건 추가
       <button
         class="btn-info"
         v-tippy="{

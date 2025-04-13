@@ -41,7 +41,7 @@ import TableComponent from '@/views/CommonTable.vue';
 import FilterBar from './FilterBar.vue';
 import router from '@/router/index.js';
 import AppWindow from '@/components/ui/AppWindow.vue';
-import TargetSharingModal from '@/views/targeting/components/step4/components/modals/TargetSharingModal.vue';
+import TargetSharingModal from '@/views/target/components/modal/TargetSharingModal.vue';
 
 const props = defineProps({
   modelValue: {
@@ -338,7 +338,7 @@ const columnTransformations = {
         type: 'button',
         label: value,
         action: () =>
-          router.push({ name: 'business', params: { id: row.target_id } }),
+          router.push({ name: 'TargetUpdate', params: { id: row.target_id } }),
         align: 'center',
       };
     }

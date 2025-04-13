@@ -56,6 +56,17 @@ export const getRoutes = [
           title: '타겟관리',
         },
       },
+      {
+        path: 'update/:id',
+        component: () =>
+          import('@/views/target/components/updatepage/UpdatePage.vue'),
+        name: 'TargetUpdate',
+        meta: {
+          auth: false,
+          navi: true,
+          title: '타겟 관리 수정',
+        },
+      },
     ],
   },
   {
@@ -99,7 +110,7 @@ export const getRoutes = [
         meta: {
           auth: false,
           navi: true,
-          title: '업무지원 메뉴1',
+          title: '공지사항',
         },
       },
       {
@@ -109,17 +120,39 @@ export const getRoutes = [
         meta: {
           auth: false,
           navi: true,
-          title: '업무지원 메뉴2',
+          title: '메뉴얼',
         },
       },
+      // {
+      //   path: '/business/menu3',
+      //   component: () => import('@/views/business/BusinessMenu3View.vue'),
+      //   name: 'menu3',
+      //   meta: {
+      //     auth: false,
+      //     navi: true,
+      //     title: '업무지원 메뉴3',
+      //   },
+      // },
       {
-        path: '/business/menu3',
-        component: () => import('@/views/business/BusinessMenu3View.vue'),
-        name: 'menu3',
+        path: '/business/menu4',
+        component: () => import('@/views/business/BusinessMenu4View.vue'),
+        name: 'menu4',
         meta: {
           auth: false,
           navi: true,
-          title: '업무지원 메뉴3',
+          title: 'Q&A (소셜데스크)',
+          isButton: true,
+        },
+      },
+      {
+        path: '/business/menu5',
+        component: () => import('@/views/business/BusinessMenu5View.vue'),
+        name: 'menu5',
+        meta: {
+          auth: false,
+          navi: true,
+          title: '데이터 레이크',
+          isButton: true,
         },
       },
     ],
@@ -254,7 +287,7 @@ export const getRoutes = [
       },
       {
         path: '/system/program',
-        component: () => import('@/views/system/ProgramListMngView.vue'),
+        component: () => import('@/views/system/ProgramMngView.vue'),
         name: 'Program',
         meta: {
           auth: false,

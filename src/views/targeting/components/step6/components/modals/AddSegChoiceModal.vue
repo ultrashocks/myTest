@@ -2,7 +2,7 @@
   <div class="window-contents">
     <div class="window-header">
       세그 선택
-      <button
+      <!-- <button
         class="btn-info"
         v-tippy="{
           content: '도움말 도움말',
@@ -12,7 +12,7 @@
         }"
       >
         <span>도움말</span>
-      </button>
+      </button> -->
     </div>
     <div class="window-body">
       <div class="search-table">
@@ -52,11 +52,11 @@
                 />
               </div>
               <div class="search-col">
-                <label>조건명</label>
+                <label>세그명</label>
                 <AppInput
                   style="width: 315px"
                   v-model="searchData.title"
-                  placeholder="조건명 입력"
+                  placeholder="세그명 입력"
                 />
               </div>
               <button class="btn-search"><i class="icon"></i>조회</button>
@@ -111,6 +111,20 @@
                               :title="isEll[rowIndex] ? item.name : ''"
                             >
                               {{ item.name }}
+                            </div>
+                          </td>
+                          <td class="td-right">
+                            <div class="td-col icon">
+                              <span
+                                class="icon-inline info"
+                                v-tippy="{
+                                  content: `유지 사용을 해제하시면, 세그가 매 회자 변경됩니다.<br>CMS연동으로 타겟을 생성하시는 경우,<br>매 회차 CMS로 보내기를 진행해 주셔야 정상적으로<br>실행 정의를 진행하실 수 있으니 유지 여부를 확인해 주세요.`,
+                                  placement: 'right-start',
+                                  allowHTML: true,
+                                  maxWidth: 500,
+                                  delay: [0, 0],
+                                }"
+                              ></span>
                             </div>
                           </td>
                         </tr>
@@ -278,10 +292,10 @@
                       class="btn-info"
                       v-tippy="{
                         content:
-                          'SQL 작성 시 주의 사항 <br> 1) SELECT 절에는 최종적으로 ENTR_NO, CUST_NO 컬럼만 있어야 합니다.(타사 고객의 경우 ENTR_NO 대신 DCMP_CUST_ID) <br>2) From절에는 “qcp-prod-edp-lake” 의 테이블만 사용가능합니다.',
+                          'SQL 작성 시 주의 사항 <br><br> 1) SELECT 절에는 최종적으로 ENTR_NO, CUST_NO 컬럼만 있어야 합니다.<br>&nbsp;(타사 고객의 경우 ENTR_NO 대신 DCMP_CUST_ID) <br><br>2) From절에는 “qcp-prod-edp-lake” 의 테이블만 사용가능합니다.<br><br>',
                         placement: 'right-start',
                         allowHTML: true,
-                        maxWidth: 300,
+                        maxWidth: 500,
                       }"
                     >
                       <span>도움말</span>
@@ -312,12 +326,7 @@
     </div>
     <div class="window-footer" v-else>
       <button class="btn-s gray" @click="onCancel">취소</button>
-      <button
-        class="btn-s red"
-        @click="onConfirmTab02"
-      >
-        적용
-      </button>
+      <button class="btn-s red" @click="onConfirmTab02">적용</button>
     </div>
   </div>
 </template>

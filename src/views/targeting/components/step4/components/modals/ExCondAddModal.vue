@@ -359,7 +359,7 @@ const attachData = () => {
       id: 1 + 'pop' + Date.now(),
       type: '사용자정의',
       group: '캠페인',
-      marketingName: '툭정 캠페인 타겟 고객(CMS)',
+      marketingName: '특정 캠페인 타겟 고객(CMS)',
       userId: 'admin',
       sqlYn: '',
     },

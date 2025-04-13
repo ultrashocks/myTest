@@ -13,13 +13,33 @@
         <div class="side-navi-list">
           <ul>
             <li
-              v-for="item in naviData"
+              v-for="item in normalMenuItems"
               :key="item.name"
               class="side-navi-item"
             >
-              <router-link :to="item.path" class="nav-link">
+              <!-- 일반 라우터 링크 -->
+              <router-link
+                v-if="!item.meta.isButton"
+                :to="item.path"
+                class="nav-link"
+              >
                 {{ item.meta.title }}<i class="icon-arrow-right"></i>
               </router-link>
+            </li>
+          </ul>
+          <ul class="mt30 px16">
+            <li
+              v-for="item in buttonMenuItems"
+              :key="item.name"
+              class="side-navi-item"
+            >
+              <button
+                v-if="item.meta.isButton"
+                class="btn-lnb-link"
+                @click="onCustomMenuClick(item)"
+              >
+                {{ item.meta.title }}<i class="icon-arrow-right"></i>
+              </button>
             </li>
           </ul>
         </div>
@@ -30,13 +50,14 @@
 
 <script setup>
 import { ref, watch, computed } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useUiStore } from '@/stores/ui';
 import { storeToRefs } from 'pinia';
 
 const naviTitle = ref('');
 const naviData = ref([]);
 const route = useRoute();
+const router = useRouter();
 
 const firstLevelPath = computed(() => {
   const path = route.path;
@@ -63,6 +84,21 @@ const { setSideActive } = uiStore;
 const onSideClick = () => {
   setSideActive(!getSideActive.value);
 };
+
+const onCustomMenuClick = item => {
+  console.log('버튼 클릭됨:', item.name);
+  router.push(item.path);
+};
+
+// 일반 메뉴만 추림
+const normalMenuItems = computed(() =>
+  naviData.value.filter(item => !item.meta?.isButton),
+);
+
+// 버튼 메뉴만 추림
+const buttonMenuItems = computed(() =>
+  naviData.value.filter(item => item.meta?.isButton),
+);
 
 watch(firstLevelPath, () => {
   updateMenu();

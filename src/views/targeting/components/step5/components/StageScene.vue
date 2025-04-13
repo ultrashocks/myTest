@@ -3,11 +3,11 @@
     <div class="item-row targeting-infos">
       <div class="item-row">
         <div class="title-item">
-          타겟 모수
+          타겟 수
           <span
             class="btn-target-mosu ml16"
             @click="targetChangeWindowView = true"
-            >타겟 모수 늘려줘<i class="icon"></i
+            >타겟 수 늘려줘<i class="icon"></i
           ></span>
         </div>
         <div class="row-flex">

@@ -116,6 +116,10 @@ body {
   box-sizing: border-box;
   border-bottom: 1px solid modules.$color_blueG_400;
   padding-bottom: 20px;
+  position: sticky;
+  top: 0;
+  background-color: modules.$color_white;
+  z-index: 3;
 }
 
 .page-title{
@@ -178,6 +182,9 @@ body {
       top: 50%;
       transform: translateY(-50%) rotate(180deg);
       cursor: pointer;
+      &:hover{
+        background-color: modules.$color_blueG_800;
+      }
     }
 }
 .side-navi-list{
@@ -222,5 +229,19 @@ body {
         height: 12px;
         background-color: modules.$color_primary;
         mask: url(../images/icon_navi_arrow.svg) no-repeat 50%;
+    }
+    .btn-lnb-link{
+      .icon-arrow-right{
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        background-color: modules.$color_blueG_600;
+        mask: url(../images/icon_cms.svg) no-repeat 50%;
+      }
+      &:hover{
+        .icon-arrow-right{
+          background-color: modules.$color_primary;
+        }
+      }
     }
 }

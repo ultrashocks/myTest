@@ -3,10 +3,7 @@
     <div class="window-header">타겟 그룹 관리</div>
     <div class="modal-body">
       <div class="target-top-input-wrap">
-        <div
-          class="input-inner"
-          style="width: 100%; justify-content: space-between"
-        >
+        <div class="input-inner">
           <div class="inner-item">
             <div>그룹명</div>
             <AppSelectCode
@@ -105,22 +102,26 @@
                   <td>
                     <div class="flex-center-center">
                       <button
+                        class="btn-move up"
                         @click="moveUp(item)"
                         :disabled="tableData[0].id === item.id"
                       >
-                        <i class="icon down_arrow"></i>
+                        위로 이동
+                        <i></i>
                       </button>
                     </div>
                   </td>
                   <td>
                     <div class="flex-center-center">
                       <button
+                        class="btn-move down"
                         @click="moveDown(item)"
                         :disabled="
                           tableData[tableData.length - 1].id === item.id
                         "
                       >
-                        <i class="icon up_arrow"></i>
+                        아래로 이동
+                        <i></i>
                       </button>
                     </div>
                   </td>
@@ -142,13 +143,17 @@
       </div>
     </div>
     <div class="footer-noti">
-      <button>
+      <!-- <button>
         <i class="icon circle_info"></i>
       </button>
       <span style="font-size: 12px"
         >타겟 그룹을 삭제하시면, 그룹에 속해 있는 타겟은 ‘미지정’ 상태가 됩니다.
         [저장]을 누르셔야 변경 사항이 저장됩니다.</span
-      >
+      > -->
+      <div class="step-info">
+        <i class="icon"></i>타겟 그룹을 삭제하시면, 그룹에 속해 있는 타겟은
+        ‘미지정’ 상태가 됩니다. [저장]을 누르셔야 변경 사항이 저장됩니다.
+      </div>
     </div>
     <div class="window-footer">
       <button class="btn-s gray" @click="onCancel">취소</button>

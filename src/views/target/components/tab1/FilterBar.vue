@@ -43,7 +43,7 @@
     <AppWindow v-model:view="targetModal01" width="1000px" height="680px">
       <FilterModal @cancel="targetModal01 = false" @confirm="onWindowConfirm" />
     </AppWindow>
-    <AppWindow v-model:view="targetModal02" width="650px" height="680px">
+    <AppWindow v-model:view="targetModal02" width="650px" height="688px">
       <TargetGroupModal
         @cancel="targetModal02 = false"
         @confirm="onWindowConfirm02"

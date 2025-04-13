@@ -15,8 +15,7 @@
             <button
               class="btn-info ml0"
               v-tippy="{
-                content:
-                  '도움말<br>도움말<br>도움말 <br>&quot;도움말&quot;도움말',
+                content: '타겟팅에서 반드시 제외되어야 할 조건입니다.',
                 placement: 'right-start',
                 allowHTML: true,
                 maxWidth: 500,
@@ -26,30 +25,26 @@
             </button>
           </li>
           <li>
-            <button class="btn-exc" @click="onExCondAddModal">
+            <button class="btn-common" @click="onExCondAddModal">
               제외조건 추가
             </button>
           </li>
         </ul>
-        <div class="exc-body" style="overflow: auto">
+        <div class="exc-body">
           <div class="table-row">
-            <div class="table-scroll" ref="tooltipContainer">
+            <div class="table-scroll edit" ref="tooltipContainer">
               <div class="table-header">
                 <table>
                   <colgroup>
-                    <col width="20%" />
-                    <col width="20%" />
-                    <col width="20%" />
-                    <col width="20%" />
-                    <col width="20%" />
+                    <col width="8.2192%" />
+                    <col width="37.1233%" />
+                    <col width="10.0000%" />
+                    <col width="37.1233%" />
+                    <col width="8.6301%" />
                   </colgroup>
                   <thead>
                     <tr>
-                      <th
-                        v-for="header in tableHeaders"
-                        :key="header.key"
-                        :style="{ textAlign: 'center' }"
-                      >
+                      <th v-for="header in tableHeaders" :key="header.key">
                         {{ header.label }}
                       </th>
                     </tr>
@@ -59,36 +54,37 @@
               <div class="table-body">
                 <table>
                   <colgroup>
-                    <col width="20%" />
-                    <col width="20%" />
-                    <col width="20%" />
-                    <col width="20%" />
-                    <col width="20%" />
+                    <col width="8.2192%" />
+                    <col width="37.1233%" />
+                    <col width="10.0000%" />
+                    <col width="37.1233%" />
+                    <col width="8.6301%" />
                   </colgroup>
                   <tbody>
                     <tr
-                      v-for="item in tableData"
+                      v-for="(item, rowIndex) in tableData"
                       :key="item.id"
-                      :style="{ textAlign: 'start' }"
+                      @mouseover="checkEllipsis($event, rowIndex)"
+                      :class="{ 'tr-disabled': item.sqlYn === 'Y' }"
                     >
-                      <td style="text-align: center">
+                      <td>
                         <div class="td-col">
                           <span
-                            title=""
-                            :class="{ 'font-primary': item.category === '+' }"
-                            >{{ item.category }}</span
-                          >
+                            :class="{ 'icon-add-type': item.category === '+' }"
+                            :title="isEll[rowIndex] ? item.category : ''"
+                            >{{ item.category }}
+                          </span>
                         </div>
                       </td>
-                      <td class="text-start text-overflow-nowrap">
+                      <td class="td-left">
                         <div class="td-col">
                           <span v-bind:title="item.conditionName">
                             {{ item.conditionName }}
                           </span>
                         </div>
                       </td>
-                      <td style="text-align: center">
-                        <div class="td-col">
+                      <td class="editable">
+                        <div class="td-col" v-if="item.sqlYn !== 'Y'">
                           <span
                             v-if="changeCondGo !== item.id"
                             @dblclick="startEditing(item.id)"
@@ -111,8 +107,8 @@
                           </select>
                         </div>
                       </td>
-                      <td style="text-align: center">
-                        <div class="td-col">
+                      <td class="editable">
+                        <div class="td-col" v-if="item.sqlYn !== 'Y'">
                           <span
                             v-bind:title="item.conditionValue"
                             v-if="changeTextGo !== item.id"
@@ -129,7 +125,7 @@
                           />
                         </div>
                       </td>
-                      <td style="text-align: center">
+                      <td>
                         <div class="td-col">
                           <button
                             @click="deleteItem(item.id)"
@@ -140,6 +136,31 @@
                         </div>
                       </td>
                     </tr>
+<!--                    <tr class="tr-disabled">-->
+<!--                      <td>-->
+<!--                        <div class="td-col">-->
+<!--                          <span title="" class="icon-add-type">+</span>-->
+<!--                        </div>-->
+<!--                      </td>-->
+<!--                      <td class="td-left">-->
+<!--                        <div class="td-col">-->
+<!--                          <span title="넷플릭스 프리미엄"-->
+<!--                            >넷플릭스 프리미엄</span-->
+<!--                          >-->
+<!--                        </div>-->
+<!--                      </td>-->
+<!--                      <td class="editable">-->
+<!--                        <div class="td-col"><span>=</span></div>-->
+<!--                      </td>-->
+<!--                      <td class="editable">-->
+<!--                        <div class="td-col"><span title="Y">Y</span></div>-->
+<!--                      </td>-->
+<!--                      <td>-->
+<!--                        <div class="td-col">-->
+<!--                          <button class="btn-delete">삭제</button>-->
+<!--                        </div>-->
+<!--                      </td>-->
+<!--                    </tr>-->
                   </tbody>
                 </table>
               </div>
@@ -155,7 +176,7 @@
               class="btn-info ml0"
               v-tippy="{
                 content:
-                  '도움말<br>도움말<br>도움말 <br>&quot;도움말&quot;도움말',
+                  '타겟팅의 범위를 설정하기 위한 조건으로<br> 너무 많으면 모수가 적어질 수 있습니다.',
                 placement: 'right-start',
                 allowHTML: true,
                 maxWidth: 500,
@@ -165,8 +186,8 @@
             </button>
           </li>
           <li>
-            <button class="btn-limit-group" @click="addGroup">
-              그룹추가 <span class="font-primary">+</span>
+            <button class="btn-textR plus" @click="addGroup">
+              그룹추가<i></i>
             </button>
           </li>
         </ul>
@@ -190,12 +211,10 @@
             <div class="limit-group-title">
               <span
                 >그룹
-                <span class="font-primary">{{
-                  (groupIndex + 1).toString().padStart(2, '0')
-                }}</span>
+                <span>{{ (groupIndex + 1).toString().padStart(2, '0') }}</span>
               </span>
               <button
-                class="btn-limit"
+                class="btn-common"
                 @click="onLimitCondAddModal(groupIndex, $event)"
               >
                 제한조건 추가
@@ -203,26 +222,21 @@
             </div>
 
             <div
-              class="limit-group-body table-scroll"
-              style="overflow: auto"
+              class="limit-group-body table-scroll edit"
               v-if="group.conditions.length > 0"
             >
               <div class="table-header">
                 <table>
                   <colgroup>
-                    <col width="20%" />
-                    <col width="20%" />
-                    <col width="20%" />
-                    <col width="20%" />
-                    <col width="20%" />
+                    <col width="8.2192%" />
+                    <col width="37.1233%" />
+                    <col width="10.0000%" />
+                    <col width="37.1233%" />
+                    <col width="8.6301%" />
                   </colgroup>
                   <thead>
                     <tr>
-                      <th
-                        v-for="header in tableHeaders"
-                        :key="header.key"
-                        :style="{ textAlign: 'center' }"
-                      >
+                      <th v-for="header in tableHeaders" :key="header.key">
                         {{ header.label }}
                       </th>
                     </tr>
@@ -265,35 +279,35 @@
                     </div>
                     <table>
                       <colgroup>
-                        <col width="20%" />
-                        <col width="20%" />
-                        <col width="20%" />
-                        <col width="20%" />
-                        <col width="20%" />
+                        <col width="8.2192%" />
+                        <col width="37.1233%" />
+                        <col width="10.0000%" />
+                        <col width="37.1233%" />
+                        <col width="8.6301%" />
                       </colgroup>
                       <tbody>
-                        <tr style="text-align: start">
+                        <tr :class="{ 'tr-disabled': item.sqlYn === 'Y' }">
                           <td class="" style="display: none">{{ item.id }}</td>
-                          <td style="text-align: center">
+                          <td>
                             <div class="td-col">
                               <span
                                 title=""
                                 :class="{
-                                  'font-primary': item.category === '+',
+                                  'icon-add-type': item.category === '+',
                                 }"
                                 >{{ item.category }}</span
                               >
                             </div>
                           </td>
-                          <td class="text-start text-overflow-nowrap">
+                          <td class="td-left">
                             <div class="td-col">
                               <span v-bind:title="item.conditionName">
                                 {{ item.conditionName }}
                               </span>
                             </div>
                           </td>
-                          <td style="text-align: center">
-                            <div class="td-col">
+                          <td class="editable">
+                            <div class="td-col" v-if="item.sqlYn !== 'Y'">
                               <span
                                 v-if="changeCondGo !== item.id"
                                 @dblclick="startEditing(item.id)"
@@ -316,8 +330,8 @@
                               </select>
                             </div>
                           </td>
-                          <td style="text-align: center">
-                            <div class="td-col">
+                          <td class="editable">
+                            <div class="td-col" v-if="item.sqlYn !== 'Y'">
                               <span
                                 v-bind:title="item.conditionValue"
                                 v-if="changeTextGo !== item.id"
@@ -334,7 +348,7 @@
                               />
                             </div>
                           </td>
-                          <td style="text-align: center">
+                          <td>
                             <div class="td-col">
                               <button
                                 class="btn-delete"
@@ -710,12 +724,11 @@ const saveText = item => {
 };
 
 // 모달이벤트 시작- >>>
-// 제외조건 추가 모달 모달 시작
 const openViewExCondAddModal = ref(false);
 const onExCondAddModal = () => {
   openViewExCondAddModal.value = true;
 };
-// 모달에서 선택한 데이터 콜백
+// 모달에서 선택한 데이터 제외 조건에 콜백
 const onExCondAddModalData = data => {
   if (data.length > 0) {
     data.forEach(row => {
@@ -727,13 +740,14 @@ const onExCondAddModalData = data => {
         conditionName: row.marketingName,
         operation: '=',
         conditionValue: 'Y',
+        sqlYn: row.sqlYn,
       });
 
       tableData.value.push(addData[0]);
     });
     // 생성시 스크롤 맨 아래로 이동
     setTimeout(() => {
-      const box = document.querySelector('.exc-body');
+      const box = document.querySelector('.table-body');
       if (box) {
         box.scrollTo({
           top: box.scrollHeight,
@@ -754,17 +768,19 @@ const onLimitCondAddModal = (index, element) => {
 
   elDiv.value = element.currentTarget
     .closest('.limit-group')
-    ?.querySelector('.table-scroll');
+    ?.querySelector('.table-header + div');
   openViewLimitCondAddModal.value = true;
 };
 
 const onLimitCondAddModalData = (data, groupIndex, scrollElement) => {
+
   data.forEach(row => {
     const dataArr = {
       id: row.id || 0,
       category: '+',
       conditionName: row.marketingName,
       operation: '=',
+      sqlYn: row.sqlYn,
       conditionValue: 'Y',
     };
     groupList.value[groupIndex].conditions.push(dataArr);
@@ -778,6 +794,17 @@ const onLimitCondAddModalData = (data, groupIndex, scrollElement) => {
       });
     }
   }, 0);
+};
+
+// 마우스 오버시 타이틀 나오도록
+const isEll = ref([]);
+const checkEllipsis = (event, index) => {
+  const el = event.target;
+  if (el.scrollWidth > el.clientWidth) {
+    isEll.value[index] = true;
+  } else {
+    isEll.value[index] = false;
+  }
 };
 
 const { step4 } = toRefs(props.modelValue);

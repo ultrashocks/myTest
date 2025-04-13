@@ -20,15 +20,13 @@
                     작성일
                     <span class="date-value">{{ noticeData.writeDate }}</span>
                   </li>
-                  <li class="status">
-                    <i class="status-icon">{{ noticeData.status }}</i>
-                  </li>
-                  <li class="period">
-                    계시가간
+                  <li class="period" v-if="noticeData.important">
+                    <span class="status-icon">중요</span>
+                    게시기간
                     <span class="period-value">{{ noticeData.period }}</span>
                   </li>
-                  <li class="exposure">
-                    <i class="exposure-icon" v-if="noticeData.exposure"></i>
+                  <li class="exposure" v-if="noticeData.exposure">
+                    <i class="exposure-icon"></i>
                   </li>
                 </ul>
               </div>
@@ -38,7 +36,9 @@
                 <ul>
                   <li v-for="file in noticeData.files" :key="file.name">
                     <a :href="file.url" target="_blank"
-                      >{{ file.name }} ({{ file.size }}KB)</a
+                      ><i class="icon"></i>{{ file.name }} ({{
+                        file.size
+                      }}KB)</a
                     >
                   </li>
                 </ul>
@@ -50,26 +50,55 @@
             </div>
             <div class="notice-view-footer">
               <div class="footer-next">
-                <div class="next-title">다음</div>
-                <span class="next-title" @click="onNext">{{
-                  noticeData.next.title
-                }}</span>
+                <div class="label">다음</div>
+                <div class="title">
+                  <div class="title-text">
+                    {{
+                      noticeData.next.title === ''
+                        ? '다음 글이 없습니다.'
+                        : noticeData.next.title
+                    }}
+                  </div>
+                </div>
               </div>
               <div class="footer-prev">
-                <div class="prev-title">이전</div>
-                <button class="prev-title" @click="onPrev">
-                  {{ noticeData.prev.title }}
-                </button>
+                <div class="label">이전</div>
+                <div class="title">
+                  <div class="title-text">
+                    {{
+                      noticeData.prev.title === ''
+                        ? '이전 글이 없습니다.'
+                        : noticeData.prev.title
+                    }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bottom-btns__controls footer-button-box">
+              <div class="btn-l">
+                <button @click="onList">목록</button>
+              </div>
+              <div class="btn-r">
+                <button @click="onDelete">삭제</button>
+                <button @click="onEdit">수정</button>
               </div>
             </div>
           </div>
         </div>
       </section>
     </div>
+    <!-- Confrim창 -->
+    <AppDialog
+      v-model:view="confirmState.view"
+      :title="confirmState.title"
+      :message="confirmState.message"
+      @confirm="onConfrim"
+    />
   </div>
 </template>
 
 <script setup>
+import AppDialog from '@/components/ui/AppDialog.vue';
 import { useUiStore } from '@/stores/ui';
 import { storeToRefs } from 'pinia';
 import { reactive } from 'vue';
@@ -102,7 +131,7 @@ const attachData = () => {
   noticeData.user = '김유플(uplusadmin)';
   noticeData.views = 120;
   noticeData.writeDate = '2025-05-10';
-  noticeData.status = '중요';
+  noticeData.important = true;
   noticeData.period = '2025-05-10 ~ 2025-05-10';
   noticeData.exposure = true;
   noticeData.files = [
@@ -117,15 +146,16 @@ const attachData = () => {
       size: 100,
     },
   ];
-  noticeData.content = `시스템 서비스 개선에 대한 추가 공지입니다.
-자세한 사항은 첨부파일을 참고해 주시기 바랍니다.
+  noticeData.content = `시스템 서비스 개선에 대한 추가 공지입니다.<br>
+자세한 사항은 첨부파일을 참고해 주시기 바랍니다.<br>
+<br>
 
-[개선 사항]
-1. 성공지표 기준과 목표값 제공
-  - 성공지표명 제공에서 성공지표 기준과 목표값이 추가되었습니다.
+[개선 사항]<br>
+1. 성공지표 기준과 목표값 제공<br>
+  &nbsp;&nbsp;&nbsp;- 성공지표명 제공에서 성공지표 기준과 목표값이 추가되었습니다.<br>
 
-2. 세그 구분 정확도 상승
-  - 약 30개의 세그가 추가 되어 고객 성향 분석의 정확도가 상승되어 제공됩니다.`;
+2. 세그 구분 정확도 상승<br>
+  &nbsp;&nbsp;&nbsp;- 약 30개의 세그가 추가 되어 고객 성향 분석의 정확도가 상승되어 제공됩니다.`;
   noticeData.prev.title =
     '25년 6월 18(수) 서비스 점겸으로 인한 신규 타겟 등록 사용 제한 안내(07:00 ~ 09:00)';
   noticeData.prev.url = '';
@@ -138,9 +168,26 @@ attachData();
 const onNext = () => {
   console.log('next');
 };
-
 const onPrev = () => {
   console.log('prev');
+};
+const onEdit = () => {
   router.push('/system/notice/write');
+};
+const onList = () => {
+  router.push('/business/menu1');
+};
+
+// Confrim창
+const confirmState = reactive({
+  view: false,
+  title: '확인',
+  message: `게시물을 삭제하시겠습니까?`,
+});
+const onConfrim = () => {
+  alert('확인 실행');
+};
+const onDelete = () => {
+  confirmState.view = true;
 };
 </script>
