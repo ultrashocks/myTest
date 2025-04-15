@@ -28,14 +28,18 @@
         </div>
       </div>
       <div class="table-row">
-        <div class="table-scroll" ref="tooltipContainer">
+        <div class="table-scroll edit" ref="tooltipContainer">
           <div class="table-header">
             <table>
+              <colgroup>
+                <col width="35px" />
+                <col width="" />
+              </colgroup>
               <thead>
                 <tr>
                   <th>
                     <div class="td-col radio">
-                      <div class="custom-checkbox" style="margin-left: 14.5px">
+                      <div class="custom-checkbox">
                         <label>
                           <input
                             type="checkbox"
@@ -47,7 +51,7 @@
                       </div>
                     </div>
                   </th>
-                  <th colspan="10">타겟 그룹명</th>
+                  <th>타겟 그룹명</th>
                 </tr>
               </thead>
             </table>
@@ -55,10 +59,10 @@
           <div class="table-body">
             <table>
               <colgroup>
-                <col width="5.4%" />
-                <col width="50%" />
-                <col width="5%" />
-                <col width="6%" />
+                <col width="35px" />
+                <col width="" />
+                <col width="52px" />
+                <col width="60px" />
               </colgroup>
               <tbody>
                 <tr
@@ -66,7 +70,6 @@
                   :key="item.id"
                   :class="{ active: selectedRows.includes(item.id) }"
                   @dblclick="changeInputRow(item)"
-                  class="type2"
                 >
                   <td>
                     <div class="td-col radio">
@@ -85,7 +88,7 @@
                     </div>
                   </td>
                   <td
-                    class="td-left"
+                    class="td-left editable"
                     :class="{ 'target-row': editingRow === item.id }"
                   >
                     <div class="td-col">
@@ -99,8 +102,8 @@
                       <span v-else>{{ item.marketingName }}</span>
                     </div>
                   </td>
-                  <td>
-                    <div class="flex-center-center">
+                  <td class="td-right">
+                    <div class="td-col">
                       <button
                         class="btn-move up"
                         @click="moveUp(item)"
@@ -112,7 +115,7 @@
                     </div>
                   </td>
                   <td>
-                    <div class="flex-center-center">
+                    <div class="td-col">
                       <button
                         class="btn-move down"
                         @click="moveDown(item)"

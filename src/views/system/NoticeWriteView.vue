@@ -177,7 +177,7 @@
                 <button @click="onCancel">취소</button>
               </div>
               <div class="btn-r">
-                <button class="black" @click="onSave">저장</button>
+                <button class="emph" @click="onSave">저장</button>
               </div>
             </div>
           </div>

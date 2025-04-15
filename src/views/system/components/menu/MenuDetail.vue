@@ -122,7 +122,7 @@
     <div class="bottom-btns__controls footer-button-box">
       <div class="btn-l"><button @click="onCancel">취소</button></div>
       <div class="btn-r">
-        <button class="black" @click="onSave" :disabled="!isFormValid">
+        <button class="emph" @click="onSave" :disabled="!isFormValid">
           저장
         </button>
       </div>
@@ -198,7 +198,7 @@ const attachData = () => {
     menuModelName: '모델명',
     createDate: '2025-04-12 12:00:00',
     menuDesc: '메뉴 설명',
-    auth: ['일반(마케터)', '팀장', '일반'],
+    auth: ['일반(마케터)', '팀장'],
   };
   infoData.value = { ...sampleData };
 };
@@ -226,7 +226,8 @@ const isFormValid = computed(() => {
     infoData.value.useYn &&
     infoData.value.menuLevel &&
     infoData.value.menuOrder &&
-    infoData.value.menuModelName
+    infoData.value.menuModelName &&
+    infoData.value.auth.length > 0
   );
 });
 

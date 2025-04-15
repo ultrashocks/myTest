@@ -28,7 +28,7 @@
             <thead>
               <tr>
                 <th>타겟 ID</th>
-                <th>캠페인 CODE</th>
+                <th>캠페인 코드</th>
                 <th>캠페인명</th>
                 <th>타겟추출건수</th>
                 <th>TA회차정보</th>

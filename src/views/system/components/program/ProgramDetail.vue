@@ -128,7 +128,7 @@
     <div class="bottom-btns__controls footer-button-box">
       <div class="btn-l"><button @click="onCancel">취소</button></div>
       <div class="btn-r">
-        <button class="black" @click="onSave" :disabled="!isFormValid">
+        <button class="emph" @click="onSave" :disabled="!isFormValid">
           저장
         </button>
       </div>
@@ -196,7 +196,7 @@ const attachData = () => {
     prgName: '인터넷_업셀_기가(1G)',
     menuModelName: '모델명',
     actionUrl: '/web/target/components/tab4/TargetTab4.vue',
-    auth: ['일반(마케터)', '팀장', '일반'],
+    auth: ['일반(마케터)', '팀장', '거버넌트(현업)', 'IT(Admin)'],
     prgDesc: '프로그램 설명',
     createDate: '2025-04-12 12:00:00',
   };

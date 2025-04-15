@@ -15,6 +15,7 @@
       :disabled="readonly || disabled"
       :class="{ readonly: readonly }"
       dropdown-position="top"
+      :reduce="reduceFunction"
     >
       <template #open-indicator>
         <span class="icon-v-select"></span>
@@ -50,6 +51,10 @@ const props = defineProps({
   direction: {
     type: String,
     default: 'down',
+  },
+  reduceFunction: {
+    type: Function,
+    default: option => ({ label: option.label, value: option.value }),
   },
 });
 

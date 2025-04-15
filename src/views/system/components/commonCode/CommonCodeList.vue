@@ -2,7 +2,7 @@
   <div class="add-move__table">
     <div class="table-controls">
       <div class="table-controls__left">
-        <div class="sub-title">공통코드 목록 목록</div>
+        <div class="sub-title">공통코드 목록</div>
         <div class="table-total">
           전체 <strong>{{ total }}</strong>
         </div>

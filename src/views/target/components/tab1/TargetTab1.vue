@@ -20,7 +20,10 @@
         <button>중지</button>
         <button>실행종료</button>
         <button @click="onShareModal">공유</button>
-        <button>복사</button>
+        <button @click="onCopyModal">복사</button>
+        <button @click="onCmsTransInfoModal">CMS전송 정보</button>
+        <button @click="onTargetCountInfoModal">타겟 회차 정보</button>
+        <button @click="onTargetSegDetailModal">세그상세</button>
       </li>
     </ul>
     <!-- 제한조건 추가 모달 -->
@@ -28,6 +31,39 @@
       <TargetSharingModal
         @callBeck="callModalData"
         @cancel="toggleShareModal = false"
+      />
+    </AppWindow>
+
+    <AppWindow v-model:view="toggleCopyModal" width="520px" height="352px">
+      <TargetCopyModal
+        @callBeck="callModalData"
+        @cancel="toggleCopyModal = false"
+      />
+    </AppWindow>
+    <AppWindow v-model:view="toggleTransInfoModal" width="900px" height="333px">
+      <cmsTransInfoModal
+        @callBeck="callModalData"
+        @cancel="toggleTransInfoModal = false"
+      />
+    </AppWindow>
+    <AppWindow
+      v-model:view="toggleTargetCountInfoModal"
+      width="1000px"
+      height="562px"
+    >
+      <targetCountInfoModal
+        @callBeck="callModalData"
+        @cancel="toggleTransInfoModal = false"
+      />
+    </AppWindow>
+    <AppWindow
+      v-model:view="toggleTargetSegDetailModal"
+      width="1000px"
+      height="562px"
+    >
+      <targetSegDetailModal
+        @callBeck="callModalData"
+        @cancel="toggleTargetSegDetailModal = false"
       />
     </AppWindow>
   </div>
@@ -42,6 +78,10 @@ import FilterBar from './FilterBar.vue';
 import router from '@/router/index.js';
 import AppWindow from '@/components/ui/AppWindow.vue';
 import TargetSharingModal from '@/views/target/components/modal/TargetSharingModal.vue';
+import TargetCopyModal from '@/views/target/components/modal/TargetCopyModal.vue';
+import cmsTransInfoModal from '@/views/target/components/modal/cmsTransInfoModal.vue';
+import targetCountInfoModal from '@/views/target/components/modal/targetCountInfoModal.vue';
+import targetSegDetailModal from '@/views/target/components/modal/targetSegDetailModal.vue';
 
 const props = defineProps({
   modelValue: {
@@ -420,6 +460,26 @@ const onShareModal = idx => {
   toggleShareModal.value = true;
 };
 
+const toggleCopyModal = ref(false);
+const onCopyModal = idx => {
+  toggleCopyModal.value = true;
+};
+
+const toggleTransInfoModal = ref(false);
+const onCmsTransInfoModal = idx => {
+  toggleTransInfoModal.value = true;
+};
+
+const toggleTargetCountInfoModal = ref(false);
+const onTargetCountInfoModal = idx => {
+  toggleTargetCountInfoModal.value = true;
+};
+
+const toggleTargetSegDetailModal = ref(false);
+const onTargetSegDetailModal = idx => {
+  toggleTargetSegDetailModal.value = true;
+};
+
 // 모달에서 데이터 내려받을때
-const callModalData = (data, groupIndex) => {}
+const callModalData = (data, groupIndex) => {};
 </script>

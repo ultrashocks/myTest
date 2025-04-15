@@ -115,16 +115,8 @@
                           </td>
                           <td class="td-right">
                             <div class="td-col icon">
-                              <span
-                                class="icon-inline info"
-                                v-tippy="{
-                                  content: `유지 사용을 해제하시면, 세그가 매 회자 변경됩니다.<br>CMS연동으로 타겟을 생성하시는 경우,<br>매 회차 CMS로 보내기를 진행해 주셔야 정상적으로<br>실행 정의를 진행하실 수 있으니 유지 여부를 확인해 주세요.`,
-                                  placement: 'right-start',
-                                  allowHTML: true,
-                                  maxWidth: 500,
-                                  delay: [0, 0],
-                                }"
-                              ></span>
+                              <span class="icon-inline info"></span>
+                              <div class="tip-box"><div class="tip-header">게임 관심 고객 <div class="btn-tip-close"></div></div><div class="tip-body">최근 한 달 게임 접속일수가 전체 평균 대비 1.8배 높고, 게임 웹앱 접속일 수도 평균 대비 1.2배 높아 상위 10%에 속하는 고객입니다.</div></div>
                             </div>
                           </td>
                         </tr>

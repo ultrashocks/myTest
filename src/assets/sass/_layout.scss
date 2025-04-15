@@ -81,7 +81,7 @@ body {
     height: 14px;
     display: flex;
     align-items: center;
-    &:nth-child(3) {
+    &:nth-child(3),&:nth-child(4) {
       &::before {
         content: "";
         display: inline-block;

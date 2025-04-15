@@ -18,7 +18,7 @@
 .v-select{
   input{
     &:read-only{
-      border: none;
+      border: none !important;
       background: none;
     } 
   }
@@ -119,7 +119,22 @@
       color: #000;
     }
   }
-  
+  .vs__dropdown-toggle{
+    opacity: 1;
+    background-color: modules.$color_blueG_100;
+    border-color: modules.$color_blueG_300;
+  }
+  .icon-v-select{
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: none;
+    background-color: modules.$color_blueG_400;
+    mask: url(../images/icon_selectbox_arrow.svg) no-repeat 50%;
+  }
+  .vs__selected{
+    color: modules.$color_blueG_500;
+  }
 } 
 
 .tippy-box{

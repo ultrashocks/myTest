@@ -407,11 +407,17 @@ input:-webkit-autofill:active {
 .mb0 {
   margin-bottom: 0 !important;
 }
+.mb4 {
+  margin-bottom: 4px !important;
+}
 .mb74 {
   margin-bottom: 74px !important;
 }
 .mb8 {
   margin-bottom: 8px !important;
+}
+.mb40 {
+  margin-bottom: 40px !important;
 }
 .ml0 {
   margin-left: 0 !important;
@@ -532,6 +538,9 @@ input::-webkit-inner-spin-button {
 }
 .mt5{
   margin-top: 5px !important;
+}
+.mt8{
+  margin-top: 8px !important;
 }
 .mt16{
   margin-top: 16px !important;
@@ -810,6 +819,11 @@ input::-webkit-inner-spin-button {
           margin-right: 0;
         }
       }
+    }
+
+    .back-title{
+      display: inline-flex;
+      align-items: center;
     }
   }
 
@@ -1457,17 +1471,17 @@ input::-webkit-inner-spin-button {
       }
     }
 }
-.footer-button-box button{
-  &.black{
-    border: 1px solid modules.$color_blueG_900;
-    background-color: modules.$color_blueG_800;
-    color: modules.$color_white;
-    &:hover{
-      border-color: modules.$color_secondary;
-      background-color: modules.$color_secondary;
-    }
-  }
-}
+// .footer-button-box button{
+//   &.black{
+//     border: 1px solid modules.$color_blueG_900;
+//     background-color: modules.$color_blueG_800;
+//     color: modules.$color_white;
+//     &:hover{
+//       border-color: modules.$color_secondary;
+//       background-color: modules.$color_secondary;
+//     }
+//   }
+// }
 
 // 조건없을경우 일반 적인 공통 버튼 css, table 상단 우측 버튼
 .btn-common {
@@ -1586,6 +1600,39 @@ input::-webkit-inner-spin-button {
         }
     }
 
+}
+
+// 테이블 내 버튼
+.btn-intable {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 58px;
+    height: 20px;
+    background-color: modules.$color_white;
+    border: 1px solid modules.$color_blueG_400;
+    @include modules.font-style( text_smb12);
+    color: modules.$color_blueG_800;
+
+    &:hover{
+      color: modules.$color_secondary;
+      border-color: modules.$color_blueG_600;
+    }
+}
+
+.btn-back {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width:20px;
+  height:20px;
+  background-color: modules.$color_blueG_600;
+  mask: url('../images/icon_side_arrow.svg') no-repeat left center;
+  mask-size: 45%;
+  @include modules.textIndent();
+  &:hover{
+    background-color: modules.$color_secondary;
+  }
 }
 
 // 설명문구
@@ -1731,4 +1778,57 @@ input::-webkit-inner-spin-button {
 
 .non-border-bottom{
   border-bottom: none !important;
+}
+
+// 공통 모달용 툴팁창 ui css 0414
+.tip-box {
+  //display: none;
+  cursor: initial;
+  width: 360px;
+  padding: 16px 20px;
+  border-radius: 4px;
+  border: 1px solid modules.$color_primary;
+  //position: absolute;
+  top: 22px;
+  left: 0;
+  z-index: 10;
+  background-color: modules.$color_white;
+
+  .tip-header {
+    color: modules.$color_secondary;
+    height: 21px;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    border-bottom: 1px solid modules.$color_blueG_300;
+
+    .btn-tip-close {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      right: 10px;
+      top: 7px;
+      cursor: pointer;
+      z-index: 2;
+      @include modules.textIndent();
+      background-color: #7F8A94;
+      mask: url(../images/icon_window_close.svg) no-repeat 50%;
+      mask-size: 16px 16px;
+
+      &:hover {
+        background-color: #3B4044;
+      }
+    }
+  }
+
+  .tip-body {
+    margin-top: 8px;
+    line-height: 1.5;
+    font-size: 13px;
+    font-weight: 500;
+    color: modules.$color_blueG_800 !important;
+  }
 }

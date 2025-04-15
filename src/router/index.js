@@ -59,12 +59,23 @@ export const getRoutes = [
       {
         path: 'update/:id',
         component: () =>
-          import('@/views/target/components/updatepage/UpdatePage.vue'),
+          import('@/views/target/components/UpdatePage.vue'),
         name: 'TargetUpdate',
         meta: {
           auth: false,
           navi: true,
           title: '타겟 관리 수정',
+        },
+      },
+      {
+        path: 'detail/:id',
+        component: () =>
+            import('@/views/target/components/DetailPage.vue'),
+        name: 'TargetUpdate',
+        meta: {
+          auth: false,
+          navi: true,
+          title: '타겟 상세',
         },
       },
     ],
@@ -106,12 +117,27 @@ export const getRoutes = [
       {
         path: '/business/menu1',
         component: () => import('@/views/business/BusinessMenu1View.vue'),
-        name: 'menu1',
+        name: 'detailBoard',
         meta: {
           auth: false,
           navi: true,
           title: '공지사항',
         },
+        children: [
+          {
+            path: '/business/menu1/:targetId',
+            component: () =>
+              import(
+                '@/views/business/components/BusinessMenu1/NoticeDetailView.vue'
+              ),
+            name: 'menu1',
+            meta: {
+              auth: false,
+              navi: true,
+              title: '공지사항 상세',
+            },
+          },
+        ],
       },
       {
         path: '/business/menu2',

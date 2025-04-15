@@ -136,31 +136,31 @@
                         </div>
                       </td>
                     </tr>
-<!--                    <tr class="tr-disabled">-->
-<!--                      <td>-->
-<!--                        <div class="td-col">-->
-<!--                          <span title="" class="icon-add-type">+</span>-->
-<!--                        </div>-->
-<!--                      </td>-->
-<!--                      <td class="td-left">-->
-<!--                        <div class="td-col">-->
-<!--                          <span title="넷플릭스 프리미엄"-->
-<!--                            >넷플릭스 프리미엄</span-->
-<!--                          >-->
-<!--                        </div>-->
-<!--                      </td>-->
-<!--                      <td class="editable">-->
-<!--                        <div class="td-col"><span>=</span></div>-->
-<!--                      </td>-->
-<!--                      <td class="editable">-->
-<!--                        <div class="td-col"><span title="Y">Y</span></div>-->
-<!--                      </td>-->
-<!--                      <td>-->
-<!--                        <div class="td-col">-->
-<!--                          <button class="btn-delete">삭제</button>-->
-<!--                        </div>-->
-<!--                      </td>-->
-<!--                    </tr>-->
+                    <!--                    <tr class="tr-disabled">-->
+                    <!--                      <td>-->
+                    <!--                        <div class="td-col">-->
+                    <!--                          <span title="" class="icon-add-type">+</span>-->
+                    <!--                        </div>-->
+                    <!--                      </td>-->
+                    <!--                      <td class="td-left">-->
+                    <!--                        <div class="td-col">-->
+                    <!--                          <span title="넷플릭스 프리미엄"-->
+                    <!--                            >넷플릭스 프리미엄</span-->
+                    <!--                          >-->
+                    <!--                        </div>-->
+                    <!--                      </td>-->
+                    <!--                      <td class="editable">-->
+                    <!--                        <div class="td-col"><span>=</span></div>-->
+                    <!--                      </td>-->
+                    <!--                      <td class="editable">-->
+                    <!--                        <div class="td-col"><span title="Y">Y</span></div>-->
+                    <!--                      </td>-->
+                    <!--                      <td>-->
+                    <!--                        <div class="td-col">-->
+                    <!--                          <button class="btn-delete">삭제</button>-->
+                    <!--                        </div>-->
+                    <!--                      </td>-->
+                    <!--                    </tr>-->
                   </tbody>
                 </table>
               </div>
@@ -422,6 +422,19 @@
             @callBeck="onLimitCondAddModalData"
           />
         </AppWindow>
+
+        <!-- 모수 수정 모달 -->
+        <AppWindow
+          v-model:view="targetChangeModalView"
+          width="516px"
+          height="292px"
+        >
+          <TargetChangeModal
+            :targetValue="1234"
+            @cancel="targetChangeModalView = false"
+            @callback="targetChangeModalCallback"
+          />
+        </AppWindow>
       </li>
     </ul>
   </StepStage>
@@ -436,6 +449,7 @@ import { directive as vTippy } from 'vue-tippy';
 import AppWindow from '@/components/ui/AppWindow.vue';
 import ExCondAddModal from '@/views/targeting/components/step4/components/modals/ExCondAddModal.vue';
 import LimitCondAddModal from '@/views/targeting/components/step4/components/modals/LimitCondAddModal.vue';
+import TargetChangeModal from '@/views/targeting/components/step4/components/modals/TargetChangeModal.vue';
 
 const tableData = ref([]);
 const displayYn = ref(false);
@@ -773,7 +787,6 @@ const onLimitCondAddModal = (index, element) => {
 };
 
 const onLimitCondAddModalData = (data, groupIndex, scrollElement) => {
-
   data.forEach(row => {
     const dataArr = {
       id: row.id || 0,
@@ -808,4 +821,11 @@ const checkEllipsis = (event, index) => {
 };
 
 const { step4 } = toRefs(props.modelValue);
+
+// 모수 체크 모달 온오프
+const targetChangeModalView = ref(true);
+
+const targetChangeModalCallback = value => {
+  console.log(value);
+};
 </script>
