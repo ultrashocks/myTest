@@ -168,9 +168,14 @@
                 </div>
               </div>
             </div>
-            <div class="file-infos">
-              <i class="icon"></i> 가능한 파일형식을 확인해 주세요. (허용 : png,
-              PNG, txt, ppt, xls, xlsx, doc, docx, gif, jpg, bmp, zip, pdf)
+            <div class="detail-infos__list">
+              <ul>
+                <li>
+                  <i class="icon"></i> 가능한 파일형식을 확인해 주세요. (허용 :
+                  png, PNG, txt, ppt, xls, xlsx, doc, docx, gif, jpg, bmp, zip,
+                  pdf)
+                </li>
+              </ul>
             </div>
             <div class="bottom-btns__controls footer-button-box">
               <div class="btn-l">

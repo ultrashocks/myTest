@@ -222,7 +222,7 @@
         <div class="non-table__data" v-if="tableData.length < 1">
           <div class="msg-box">
             <i class="icon"></i>
-            <div class="msg">데이터가 없습니다.</div>
+            <div class="msg">조회 정보가 없습니다.</div>
           </div>
         </div>
       </div>

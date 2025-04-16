@@ -24,8 +24,11 @@
         <button @click="onCmsTransInfoModal">CMS전송 정보</button>
         <button @click="onTargetCountInfoModal">타겟 회차 정보</button>
         <button @click="onTargetSegDetailModal">세그상세</button>
+        <button @click="moveTargetDetailPage">타겟상세</button>
       </li>
     </ul>
+
+    <!--    @/views/target/components/DetailPage.vue-->
     <!-- 제한조건 추가 모달 -->
     <AppWindow v-model:view="toggleShareModal" width="900px" height="640px">
       <TargetSharingModal
@@ -41,7 +44,7 @@
       />
     </AppWindow>
     <AppWindow v-model:view="toggleTransInfoModal" width="900px" height="333px">
-      <cmsTransInfoModal
+      <CmsTransInfoModal
         @callBeck="callModalData"
         @cancel="toggleTransInfoModal = false"
       />
@@ -51,7 +54,7 @@
       width="1000px"
       height="562px"
     >
-      <targetCountInfoModal
+      <TargetCountInfoModal
         @callBeck="callModalData"
         @cancel="toggleTransInfoModal = false"
       />
@@ -61,7 +64,7 @@
       width="1000px"
       height="562px"
     >
-      <targetSegDetailModal
+      <TargetSegDetailModal
         @callBeck="callModalData"
         @cancel="toggleTargetSegDetailModal = false"
       />
@@ -70,7 +73,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, reactive } from 'vue';
 
 import TargetTopInput from './TargetTopInput.vue';
 import TableComponent from '@/views/CommonTable.vue';
@@ -79,9 +82,9 @@ import router from '@/router/index.js';
 import AppWindow from '@/components/ui/AppWindow.vue';
 import TargetSharingModal from '@/views/target/components/modal/TargetSharingModal.vue';
 import TargetCopyModal from '@/views/target/components/modal/TargetCopyModal.vue';
-import cmsTransInfoModal from '@/views/target/components/modal/cmsTransInfoModal.vue';
-import targetCountInfoModal from '@/views/target/components/modal/targetCountInfoModal.vue';
-import targetSegDetailModal from '@/views/target/components/modal/targetSegDetailModal.vue';
+import CmsTransInfoModal from '@/views/target/components/modal/CmsTransInfoModal.vue';
+import TargetCountInfoModal from '@/views/target/components/modal/TargetCountInfoModal.vue';
+import TargetSegDetailModal from '@/views/target/components/modal/TargetSegDetailModal.vue';
 
 const props = defineProps({
   modelValue: {
@@ -378,7 +381,10 @@ const columnTransformations = {
         type: 'button',
         label: value,
         action: () =>
-          router.push({ name: 'TargetUpdate', params: { id: row.target_id } }),
+          router.push({
+            name: 'TargetUpdate',
+            params: { id: row.target_id, tName: row.target_name },
+          }),
         align: 'center',
       };
     }
@@ -401,7 +407,11 @@ const columnTransformations = {
       return {
         type: 'button',
         label: value,
-        // action: () => modal(),
+        action: () =>
+          router.push({
+            name: 'InputDate',
+            params: { id: row.target_id, tName: row.target_name },
+          }),
         align: 'center',
       };
     }
@@ -478,6 +488,12 @@ const onTargetCountInfoModal = idx => {
 const toggleTargetSegDetailModal = ref(false);
 const onTargetSegDetailModal = idx => {
   toggleTargetSegDetailModal.value = true;
+};
+
+// 타겟 상세 보기 페이지 이동
+const ididid = ref('123');
+const moveTargetDetailPage = () => {
+  router.push('/target/detail/' + ididid.value);
 };
 
 // 모달에서 데이터 내려받을때

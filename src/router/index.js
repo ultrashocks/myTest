@@ -58,23 +58,23 @@ export const getRoutes = [
       },
       {
         path: 'update/:id',
-        component: () =>
-          import('@/views/target/components/UpdatePage.vue'),
+        component: () => import('@/views/target/components/UpdatePage.vue'),
         name: 'TargetUpdate',
+        props: true,
         meta: {
           auth: false,
-          navi: true,
+          navi: false,
           title: '타겟 관리 수정',
         },
       },
       {
         path: 'detail/:id',
-        component: () =>
-            import('@/views/target/components/DetailPage.vue'),
-        name: 'TargetUpdate',
+        component: () => import('@/views/target/components/DetailPage.vue'),
+        name: 'TargetDetail',
+        props: true,
         meta: {
           auth: false,
-          navi: true,
+          navi: false,
           title: '타겟 상세',
         },
       },
@@ -103,10 +103,11 @@ export const getRoutes = [
       },
     ],
   },
+
   {
     path: '/business',
     component: () => import('@/views/SubRouterView.vue'),
-    redirect: '/business/menu1',
+    redirect: '/business/menu1/list',
     name: 'business',
     meta: {
       auth: false,
@@ -116,8 +117,9 @@ export const getRoutes = [
     children: [
       {
         path: '/business/menu1',
-        component: () => import('@/views/business/BusinessMenu1View.vue'),
-        name: 'detailBoard',
+        component: () => import('@/views/SubRouterInnerView.vue'),
+        redirect: '/business/menu1/list',
+        name: 'menu1',
         meta: {
           auth: false,
           navi: true,
@@ -125,15 +127,25 @@ export const getRoutes = [
         },
         children: [
           {
+            path: '/business/menu1/list',
+            component: () => import('@/views/business/BusinessMenu1View.vue'),
+            name: 'menu1List',
+            meta: {
+              auth: false,
+              navi: true,
+              title: '공지사항',
+            },
+          },
+          {
             path: '/business/menu1/:targetId',
             component: () =>
               import(
                 '@/views/business/components/BusinessMenu1/NoticeDetailView.vue'
               ),
-            name: 'menu1',
+            name: 'menu1Detail',
             meta: {
               auth: false,
-              navi: true,
+              navi: false,
               title: '공지사항 상세',
             },
           },
@@ -141,27 +153,44 @@ export const getRoutes = [
       },
       {
         path: '/business/menu2',
-        component: () => import('@/views/business/BusinessMenu2View.vue'),
+        component: () => import('@/views/SubRouterInnerView.vue'),
+        redirect: '/business/menu2/list',
         name: 'menu2',
         meta: {
           auth: false,
           navi: true,
           title: '메뉴얼',
         },
+        children: [
+          {
+            path: '/business/menu2/list',
+            component: () => import('@/views/business/BusinessMenu2View.vue'),
+            name: 'menu2List',
+            meta: {
+              auth: false,
+              navi: true,
+              title: '메뉴얼',
+            },
+          },
+          {
+            path: '/business/menu2/:targetId',
+            component: () =>
+              import(
+                '@/views/business/components/BusinessMenu2/ManualDetailView.vue'
+              ),
+            name: 'menu2Detail',
+            meta: {
+              auth: false,
+              navi: false,
+              title: '메뉴얼 상세',
+            },
+          },
+        ],
       },
-      // {
-      //   path: '/business/menu3',
-      //   component: () => import('@/views/business/BusinessMenu3View.vue'),
-      //   name: 'menu3',
-      //   meta: {
-      //     auth: false,
-      //     navi: true,
-      //     title: '업무지원 메뉴3',
-      //   },
-      // },
       {
         path: '/business/menu4',
-        component: () => import('@/views/business/BusinessMenu4View.vue'),
+        component: () => import('@/views/SubRouterInnerView.vue'),
+        redirect: '/business/menu4/list',
         name: 'menu4',
         meta: {
           auth: false,
@@ -169,10 +198,23 @@ export const getRoutes = [
           title: 'Q&A (소셜데스크)',
           isButton: true,
         },
+        children: [
+          {
+            path: '/business/menu4/list',
+            component: () => import('@/views/business/BusinessMenu4View.vue'),
+            name: 'menu4List',
+            meta: {
+              auth: false,
+              navi: true,
+              title: 'Q&A (소셜데스크)',
+            },
+          },
+        ],
       },
       {
         path: '/business/menu5',
-        component: () => import('@/views/business/BusinessMenu5View.vue'),
+        component: () => import('@/views/SubRouterInnerView.vue'),
+        redirect: '/business/menu5/list',
         name: 'menu5',
         meta: {
           auth: false,
@@ -180,9 +222,22 @@ export const getRoutes = [
           title: '데이터 레이크',
           isButton: true,
         },
+        children: [
+          {
+            path: '/business/menu5/list',
+            component: () => import('@/views/business/BusinessMenu5View.vue'),
+            name: 'menu5List',
+            meta: {
+              auth: false,
+              navi: true,
+              title: '데이터 레이크',
+            },
+          },
+        ],
       },
     ],
   },
+
   {
     path: '/standard',
     component: () => import('@/views/SubRouterView.vue'),
@@ -196,14 +251,39 @@ export const getRoutes = [
     children: [
       {
         path: '/standard/basic',
-        component: () => import('@/views/standard/BasicTargetView.vue'),
-        name: 'Basic',
+        component: () => import('@/views/SubRouterInnerView.vue'),
+        redirect: '/standard/basic/view',
+        name: '기본 타겟유형 관리',
         meta: {
           auth: false,
           navi: true,
           title: '기본 타겟유형 관리',
         },
+        children: [
+          {
+            path: '/standard/basic/view',
+            component: () => import('@/views/standard/BasicTargetView.vue'),
+            name: '기본 타겟유형 관리 보기',
+            meta: {
+              auth: false,
+              navi: true,
+              title: '기본 타겟유형 관리',
+            },
+          },
+          {
+            path: '/standard/basic/marketing',
+            component: () =>
+              import('@/views/standard/MarketingMappingView.vue'),
+            name: '마케팅활동 매핑 관리',
+            meta: {
+              auth: false,
+              navi: true,
+              title: '마케팅활동 매핑 관리',
+            },
+          },
+        ],
       },
+
       {
         path: '/standard/success',
         component: () => import('@/views/standard/SuccessAssistanceView.vue'),
@@ -280,7 +360,6 @@ export const getRoutes = [
           },
         ],
       },
-
       {
         path: '/system/manual',
         component: () => import('@/views/system/ManualMngView.vue'),

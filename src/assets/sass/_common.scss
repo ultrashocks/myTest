@@ -1635,6 +1635,20 @@ input::-webkit-inner-spin-button {
   }
 }
 
+.btn-target {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width:36px;
+    height:36px;
+    border-radius: 18px;
+    background: modules.$color_blueG_600 url('../images/icon_circle_arrow.svg') no-repeat center 6px;
+    @include modules.textIndent();
+  &:hover {
+      background-color: modules.$color_secondary;
+  }
+}
+
 // 설명문구
 .step-info{
   display: flex;

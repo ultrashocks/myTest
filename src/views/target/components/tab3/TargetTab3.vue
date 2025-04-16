@@ -18,17 +18,17 @@
             </label>
           </div>
           <span class="font-size-14"
-          >추천 및 추가한 세그를 회차마다 유지하여 사용하겠습니다.</span
+            >추천 및 추가한 세그를 회차마다 유지하여 사용하겠습니다.</span
           >
           <button
-              class="btn-info ml0"
-              v-tippy="{
-                content: `유지 사용을 해제하시면, 세그가 매 회자 변경됩니다.<br>CMS연동으로 타겟을 생성하시는 경우,<br>매 회차 CMS로 보내기를 진행해 주셔야 정상적으로<br>실행 정의를 진행하실 수 있으니 유지 여부를 확인해 주세요.`,
-                placement: 'right-start',
-                allowHTML: true,
-                maxWidth: 500,
-              }"
-              ref="tooltipButton"
+            class="btn-info ml0"
+            v-tippy="{
+              content: `유지 사용을 해제하시면, 세그가 매 회자 변경됩니다.<br>CMS연동으로 타겟을 생성하시는 경우,<br>매 회차 CMS로 보내기를 진행해 주셔야 정상적으로<br>실행 정의를 진행하실 수 있으니 유지 여부를 확인해 주세요.`,
+              placement: 'right-start',
+              allowHTML: true,
+              maxWidth: 500,
+            }"
+            ref="tooltipButton"
           >
             <span>도움말</span>
           </button>

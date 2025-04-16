@@ -13,6 +13,9 @@
               </div>
             </div>
             <div class="table-controls__right">
+              <button class="btn-common" @click="onMarketingMapping">
+                마케팅활동 매핑 관리<i></i>
+              </button>
               <button class="btn-common add" @click="onAddMenu">
                 추가<i></i>
               </button>
@@ -141,12 +144,13 @@ import { randomKey } from '@/utils/utils';
 import { useSlider } from '@/composables/slider';
 import BasicTargetSearch from './components/basicTarget/BasicTargetSearch.vue';
 import BasicTargetDetail from './components/basicTarget/BasicTargetDetail.vue';
-import { computed } from 'vue';
+import { useRouter } from 'vue-router';
 
 const { setAlertStatus } = useAlert();
 const uiStore = useUiStore();
 const { getSideActive } = storeToRefs(uiStore);
 const { setSliderStatus } = useSlider();
+const router = useRouter();
 
 // 스크롤 유무 체크
 const scrollContainer = ref(null);
@@ -208,6 +212,10 @@ const onAddMenu = () => {
     useYn: '',
   });
   moveToScrollBottom();
+};
+
+const onMarketingMapping = () => {
+  router.push('/standard/basic/marketing');
 };
 
 const onSelectRow = id => {

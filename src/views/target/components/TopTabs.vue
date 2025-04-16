@@ -13,9 +13,9 @@
         <div class="label" v-html="tab.label"></div>
       </div>
     </div>
-    <div title="초기화" class="btn">
+    <!-- <div title="초기화" class="btn">
       <button class="btn-target"></button>
-    </div>
+    </div> -->
     <button class="btn-m target tab-right-btn">
       <div>신규 타겟팅</div>
       <i class="icon"></i>

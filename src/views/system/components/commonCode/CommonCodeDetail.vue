@@ -143,12 +143,14 @@ const commonCodeListRef = ref(null);
 
 const onSave = () => {
   console.log('저장');
-  if (commonCodeListRef.value.blankDataCheck()) {
-    setAlertStatus({
-      view: true,
-      message: '필수 입력 항목을 입력해 주세요',
-    });
-    return;
+  if (props.currentState === 'edit') {
+    if (commonCodeListRef.value.blankDataCheck()) {
+      setAlertStatus({
+        view: true,
+        message: '필수 입력 항목을 입력해 주세요',
+      });
+      return;
+    }
   }
 
   const sampleData = {

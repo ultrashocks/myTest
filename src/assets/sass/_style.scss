@@ -220,7 +220,7 @@
         box-sizing: border-box;
         //background-color: modules.$color_blueG_200;
         border-bottom: 1px solid modules.$color_blueG_400;
-        padding: 30px 0 0;
+        padding: 24px 0 0;
         display: flex;
         position: relative;
         //.tab-right-btn{
@@ -273,30 +273,12 @@
                 }
             }
         }
-        .btn {
-            margin-left: auto;
-            margin-right: 8px;
-            border-radius: 50%;
-            padding: 4px;
-            border: 1px solid #2b2d42;
-            background-color: #333;
-            cursor: pointer;
-            &:hover {
-                border: 1px solid #444;
-                color: #333;
-                background-color: #333;
-            }
-            .btn-target {
-                display: inline-block;
-                margin-left: auto;
-                width: 21px;
-                height: 21px;
-                background: url(../images/icon_circle_arrow.svg) no-repeat 50%;
-            }
-            &:hover {
-                background-color: modules.$color_secondary;
-            }
-        }
+
+        .tab-right-btn {
+            position:absolute;
+            top:30px;
+            right:0;
+        }       
     }
 
     .target-contents{
@@ -1789,21 +1771,7 @@ td{
                 }
             }
         }
-    }
-    .file-infos{
-        font-size: 12px;
-        color: modules.$color_blueG_600;
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        padding: 10px 0 5px 0;
-        .icon{
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            background: url(../images/icon_info_mark.svg) no-repeat 50%;
-        }
-    }
+    }    
     .bottom-btns__controls{
         button{
             &.black{
@@ -1815,6 +1783,29 @@ td{
                 }
             }
         }
+    }
+}
+
+.detail-infos__list{
+    padding-top: 5px;
+    li{
+        font-size: 12px;
+        color: modules.$color_blueG_600;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 5px 0 4px 0;
+        
+    }    
+    .icon{
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background: url(../images/icon_info_mark.svg) no-repeat 50%;
+    }
+    strong{
+        color: #F86800;
+        font-weight: 400;
     }
 }
 
@@ -2238,10 +2229,11 @@ td{
   }  
 }
 
-.data-table {    
+.data-table {
     border-top: 1px solid modules.$color_blueG_200;
     border-bottom: 1px solid modules.$color_blueG_200;
-    margin-top: 8px;
+    font-weight: 500;
+    line-height: 22px;
     table {
         table-layout: fixed;
     }
@@ -2256,5 +2248,146 @@ td{
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+    }
+}
+
+/* 타겟관리 상세 화면 관련 스타일 */
+.detail-view {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    @include modules.custom-scrollbar();
+
+    .sub-title{
+        @include modules.font-style(text_smb16);
+        color: modules.$color_secondary;
+        padding: 0 0 12px 16px;
+    }
+    .accordion{
+        .acc-container {
+            padding:0;
+        }
+    }
+    .inner-wrap {
+        padding: 30px 20px;
+        max-width: 1000px;
+        margin: auto;
+    }
+
+    .data-table{
+        border-bottom:none;
+        tr{
+            &:last-child {
+                th, td {
+                    border-bottom:none;
+                }
+            }
+        }
+    }
+}
+
+.targeting-wrap{
+    .detail-view {
+        .step-stage {
+            padding:0;
+            .stage-box{
+                border-radius: 0;
+            }
+        }
+    }
+}
+
+.market-mapping{    
+    padding-top: 17px;
+    .mapping-layout{
+        display: flex;
+        height: 590px;
+    }
+    .mapping-left, .mapping-right{
+        flex: 1;
+        height: 100%;
+    }
+    .mapping-box{
+        width: 100%;
+        height: 100%;
+        border: 1px solid modules.$color_blueG_300;
+        border-radius: 8px;
+        box-sizing: border-box;
+        padding: 0 20px ;
+    }
+    .mapping-center{
+        flex: 0 0 58px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        .btn-mapping{
+            width: 18px;
+            height: 40px;
+            box-sizing: border-box;
+            border: 1px solid modules.$color_blueG_400;
+            border-radius: 4px;
+            background-color: modules.$color_white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .icon{
+                display: block;
+                width: 100%;
+                height: 100%;    
+                background-color: modules.$color_blueG_600;            
+                mask: url(../images/icon_marketing_arrow.svg) no-repeat 50%;
+            }          
+            &.left{
+                .icon{
+                    transform: rotate(180deg);
+                }
+            }
+            &:hover{
+                border-color: modules.$color_blueG_600;
+                .icon{
+                    background-color: modules.$color_blueG_800;
+                }
+            }
+            &:disabled{
+                border-color: modules.$color_blueG_300;
+                .icon{
+                    background-color: modules.$color_blueG_100;
+                }
+            }
+        }
+    }
+    .table-controls{
+        padding-top: 21px;
+        padding-bottom: 10px;
+    }
+    .table-common__body{
+        table tr{
+            cursor: default;
+        }
+    } 
+}
+
+.input-wrap{
+    &.marketing-cms{
+        margin-top: 0;
+        .input-inner{
+            display: grid;
+            grid-template-columns: 150px repeat(1, 1fr) 73px;
+            gap: 16px;
+            width: 100%;
+        }        
+    }
+    &.marketing-target{
+         margin-top: 0;
+        .input-inner{
+            display: grid;
+            grid-template-columns: repeat(1, 1fr) 73px;
+            gap: 16px;
+            width: 100%;
+        }        
     }
 }

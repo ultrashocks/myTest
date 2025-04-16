@@ -99,6 +99,21 @@
         </tbody>
       </table>
     </div>
+    <div class="detail-infos__list">
+      <ul>
+        <li>
+          <i class="icon"></i> 타겟유형에 “성공/보조지표, 제외/제한 조건의 추천”
+          값이 필요하시면, SM에게 DB 정보 업데이트를 요청해 주십시오.
+        </li>
+        <li>
+          <i class="icon"></i>
+          <strong
+            >타겟유형 조합이 선택된 타겟이 있으면, ‘사용 여부’만 수정이
+            가능합니다.</strong
+          >
+        </li>
+      </ul>
+    </div>
     <div class="bottom-btns__controls footer-button-box">
       <div class="btn-l"><button @click="onCancel">취소</button></div>
       <div class="btn-r">
@@ -165,7 +180,6 @@ const businessDetailOptions = ref([
   { label: '선택', value: '' },
   { label: '가족추천', value: '가족추천' },
   { label: '적정 요금제', value: '적정 요금제' },
-  { label: '일반', value: '일반' },
 ]);
 
 const infoData = ref({

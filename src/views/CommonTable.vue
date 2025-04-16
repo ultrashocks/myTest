@@ -73,7 +73,13 @@
               <!-- 버튼인 경우 -->
               <button
                 v-if="row[header.key].type === 'button'"
-                @click="handleButtonClick(row[header.key].action)"
+                @click="
+                  header.key === 'segment_management'
+                    ? segmentButtonClick(row)
+                    : header.key === 'schedule_type'
+                    ? scheduleButtonClick(row)
+                    : ''
+                "
               >
                 {{ row[header.key].label }}
               </button>
@@ -134,6 +140,7 @@
 <script setup>
 import { ref, watch, onMounted, nextTick } from 'vue';
 import TablePaging from '@/views/TablePaging.vue';
+import router from '@/router';
 
 let currentPage = ref(1);
 const textElements = ref({});
@@ -214,9 +221,61 @@ const updateSelectedRows = () => {
 };
 
 // 가지고온 버튼 클릭 이벤트
-const handleButtonClick = action => {
-  if (typeof action === 'function') {
-    action();
+const scheduleButtonClick = rowData => {
+  const params = {
+    title: '타겟팅 일정 및 타겟 연동',
+    tName: rowData.target_name,
+    step: 8,
+  };
+
+  sessionStorage.setItem(
+    'targetParams',
+    encodeURIComponent(JSON.stringify(params)),
+  );
+
+  router.push({
+    name: 'TargetUpdate',
+    params: { id: rowData.target_id },
+  });
+};
+
+const segmentButtonClick = rowData => {
+  console.log(rowData);
+  // alert('1111');
+  // console.log(rowData.schedule_type);
+
+  if (rowData.segment_management.label === '세그확인') {
+    const params = {
+      title: '세그 확인',
+      tName: rowData.target_name,
+      step: 6,
+    };
+
+    sessionStorage.setItem(
+      'targetParams',
+      encodeURIComponent(JSON.stringify(params)),
+    );
+
+    router.push({
+      name: 'TargetUpdate',
+      params: { id: rowData.target_id },
+    });
+  } else if (rowData.segment_management.label === '수정') {
+    const params = {
+      title: '회차 타겟 정보 수정',
+      tName: rowData.target_name,
+      step: 4,
+    };
+
+    sessionStorage.setItem(
+      'targetParams',
+      encodeURIComponent(JSON.stringify(params)),
+    );
+
+    router.push({
+      name: 'TargetUpdate',
+      params: { id: rowData.target_id },
+    });
   }
 };
 </script>

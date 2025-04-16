@@ -34,6 +34,9 @@
       <div class="inner-item">
         <button class="btn-search"><i class="icon"></i>조회</button>
       </div>
+      <div title="초기화" class="btn">
+        <button class="btn-target">초기화</button>
+      </div>
     </div>
   </div>
 </template>

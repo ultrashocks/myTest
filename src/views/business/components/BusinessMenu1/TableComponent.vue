@@ -18,15 +18,21 @@
           <td class="td-center">
             {{ data.length - rowIndex }}
           </td>
+
           <td class="td-left">
-            <div class="icons">
-              <span v-if="row.importantYn" class="important">중요</span>
-              {{ row.boardName }}
-              <span v-if="row.securityYn" class="icon-inline lock">비노출</span
-              ><span v-if="row.fileYn" class="icon-inline attach">첨부파일</span
-              ><span v-if="row.newYn" class="new">N</span>
-            </div>
+            <router-link :to="`/business/menu1/${rowIndex}`" class="nav-link">
+              <div class="icons">
+                <span v-if="row.importantYn" class="important">중요</span>
+                <span class="font-secondary"> {{ row.boardName }} </span>
+                <span v-if="row.securityYn" class="icon-inline lock"
+                  >비노출</span
+                ><span v-if="row.fileYn" class="icon-inline attach"
+                  >첨부파일</span
+                ><span v-if="row.newYn" class="new">N</span>
+              </div>
+            </router-link>
           </td>
+
           <td class="td-center">
             {{ row.boardInputDate }}
           </td>
@@ -39,6 +45,8 @@
 <script setup>
 import { ref, watch, onMounted, nextTick } from 'vue';
 import TablePaging from '@/views/TablePaging.vue';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 
 let currentPage = ref(1);
 const textElements = ref({});
