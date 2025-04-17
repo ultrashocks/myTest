@@ -68,7 +68,7 @@
           </colgroup>
           <tbody>
             <tr
-              v-for="(item, rowIndex) in tableData"
+              v-for="(item, rowIndex) in modelValue"
               :key="item.id"
               :class="{
                 checked: item.checked,
@@ -96,7 +96,7 @@
           </tbody>
         </table>
         <!-- 조회 결과가 없는경우에 보이게 처리 -->
-        <div class="non-table__data" v-if="tableData.length < 1">
+        <div class="non-table__data" v-if="modelValue.length < 1">
           <div class="msg-box">
             <i class="icon"></i>
             <div class="msg">조회 정보가 없습니다.</div>
@@ -115,6 +115,15 @@ import { useScrollChecker } from '@/composables/useScrollChecker';
 import { useEllipsisChecker } from '@/composables/useEllipsisChecker';
 import { randomKey } from '@/utils/utils';
 
+const props = defineProps({
+  modelValue: {
+    type: Array,
+    default: () => [],
+  },
+});
+
+const emit = defineEmits(['update:modelValue']);
+
 // 스크롤 유무 체크
 const scrollContainer = ref(null);
 const { hasVerticalScroll, checkScroll } = useScrollChecker(scrollContainer);
@@ -122,7 +131,7 @@ const { hasVerticalScroll, checkScroll } = useScrollChecker(scrollContainer);
 // // 툴팁 유무 체크
 const { isEll, checkEllipsis } = useEllipsisChecker();
 
-const tableData = ref([]);
+// const tableData = ref([]);
 const total = ref(0);
 const attachData = async () => {
   let sampleData = [];
@@ -134,8 +143,8 @@ const attachData = async () => {
       marketingName: '인터넷_업셀_기가(1G)',
     });
   }
-  tableData.value = sampleData;
-  total.value = tableData.value.length;
+  emit('update:modelValue', sampleData);
+  total.value = sampleData.length;
   await nextTick();
   checkScroll();
 };

@@ -2367,6 +2367,9 @@ td{
     .table-common__body{
         table tr{
             cursor: default;
+            &.new-target{
+                background-color: #FDEDF6;
+            }
         }
     } 
 }

@@ -7,18 +7,31 @@
           <div class="market-mapping">
             <div class="mapping-layout">
               <div class="mapping-left">
-                <MarketingCms ref="marketingCmsRef" />
+                <MarketingCms
+                  v-model="marketingCmsData"
+                  ref="marketingCmsRef"
+                />
               </div>
               <div class="mapping-center">
-                <button class="btn-mapping right" :disabled="btnInActive">
+                <button
+                  class="btn-mapping right"
+                  :disabled="btnInActive"
+                  @click="onRightMove"
+                >
                   <i class="icon"></i>
                 </button>
-                <button class="btn-mapping left" :disabled="btnInActive">
+                <button
+                  class="btn-mapping left"
+                  :disabled="btnInActive"
+                  @click="onLeftMove"
+                >
                   <i class="icon"></i>
                 </button>
               </div>
               <div class="mapping-right">
                 <MarketingTarget
+                  v-model="marketingTargetData"
+                  v-model:newTargetAddData="newTargetAddData"
                   ref="marketingTargetRef"
                   @search="onTargetSearch"
                 />
@@ -27,7 +40,11 @@
             <div class="bottom-btns__controls footer-button-box">
               <div class="btn-l"><button @click="onCancel">취소</button></div>
               <div class="btn-r">
-                <button class="emph" @click="onSave" :disabled="!isFormValid">
+                <button
+                  class="emph"
+                  @click="onSave"
+                  :disabled="newTargetAddData.length < 1"
+                >
                   저장
                 </button>
               </div>
@@ -53,6 +70,8 @@ const router = useRouter();
 
 const marketingCmsRef = ref(null);
 const marketingTargetRef = ref(null);
+const marketingCmsData = ref([]);
+const marketingTargetData = ref([]);
 
 const btnInActive = ref(true);
 const onTargetSearch = () => {
@@ -60,17 +79,40 @@ const onTargetSearch = () => {
   btnInActive.value = false;
 };
 
-const isFormValid = computed(() => {
-  return (
-    // infoData.value.screenType.length > 0 &&
-    // infoData.value.useYn &&
-    // infoData.value.service.value &&
-    // infoData.value.businessType.value &&
-    // infoData.value.productType.value &&
-    // infoData.value.businessDetail.value
-    true
-  );
-});
+const newTargetAddData = ref([]);
+const onRightMove = () => {
+  console.log('오른쪽 이동');
+  marketingCmsData.value.forEach(item => {
+    if (item.checked) {
+      marketingTargetData.value.unshift(item);
+      newTargetAddData.value.push(item.id);
+      marketingCmsData.value = marketingCmsData.value.filter(
+        item => !item.checked,
+      );
+      marketingTargetData.value.forEach(targetItem => {
+        if (newTargetAddData.value.includes(targetItem.id)) {
+          targetItem.checked = false;
+        }
+      });
+    }
+  });
+};
+
+const onLeftMove = () => {
+  console.log('왼쪽 이동');
+  marketingTargetData.value.forEach(item => {
+    if (item.checked) {
+      marketingCmsData.value.unshift(item);
+      marketingTargetData.value = marketingTargetData.value.filter(
+        item => !item.checked,
+      );
+      item.checked = false;
+      newTargetAddData.value = newTargetAddData.value.filter(
+        id => id !== item.id,
+      );
+    }
+  });
+};
 
 const onCancel = () => {
   console.log('취소');
