@@ -24,8 +24,7 @@
               </div>
               <div class="times">
                 <div class="request">
-                  <span class="lsp">요청시간</span>
-                  <span>: {{ item.requestTime }}</span>
+                  추출요청시간 <span> : {{ item.requestTime }}</span>
                 </div>
                 <div class="end">
                   예상종료시간 <span>: {{ item.endTime }}</span>

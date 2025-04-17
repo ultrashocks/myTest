@@ -67,11 +67,24 @@
               </div>
             </template>
             <template v-else>
-              <div class="row mt16">
+              <div class="row mt16 position relative">
                 <AppInput
                   v-model="step3Data.success.detailStandard_select"
                   labelName="지표 상세 기준 (선택)"
+                  placeholder="예시 : 10% 이상, 이전대비 5,000d원 이상(100자 이내)"
                 />
+                <button
+                  class="btn-info position absolute"
+                  v-tippy="{
+                    content:
+                      '업셀성공률의 경우 순액기준으로 성공을 관리합니다. <br>성공으로 보는 이전대비 순증금액을 기입해주세요.',
+                    placement: 'right-start',
+                    allowHTML: true,
+                    maxWidth: 500,
+                  }"
+                >
+                  <span>도움말</span>
+                </button>
               </div>
             </template>
           </div>

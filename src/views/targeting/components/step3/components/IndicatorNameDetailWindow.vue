@@ -70,8 +70,8 @@
                   <col width="10%" />
                   <col width="16%" />
                   <col width="" />
-                  <col width="10%" />
                   <col width="25%" />
+                  <col width="10%" />
                 </colgroup>
                 <thead>
                   <tr>
@@ -79,8 +79,8 @@
                     <th>구분</th>
                     <th>상품코드</th>
                     <th>상품명</th>
-                    <th>기본료</th>
                     <th>그룹명</th>
+                    <th>기본료</th>
                   </tr>
                 </thead>
               </table>
@@ -92,8 +92,8 @@
                   <col width="10%" />
                   <col width="16%" />
                   <col width="" />
-                  <col width="10%" />
                   <col width="25%" />
+                  <col width="10%" />
                 </colgroup>
                 <tbody>
                   <tr
@@ -142,20 +142,20 @@
                         {{ item.prdName }}
                       </div>
                     </td>
-                    <td class="td-right">
-                      <div
-                        class="td-col"
-                        :title="isEll[rowIndex] ? item.price : ''"
-                      >
-                        {{ item.price }}
-                      </div>
-                    </td>
                     <td class="td-left">
                       <div
                         class="td-col"
                         :title="isEll[rowIndex] ? item.group : ''"
                       >
                         {{ item.group }}
+                      </div>
+                    </td>
+                    <td class="td-right">
+                      <div
+                        class="td-col"
+                        :title="isEll[rowIndex] ? item.price : ''"
+                      >
+                        {{ item.price }}
                       </div>
                     </td>
                   </tr>

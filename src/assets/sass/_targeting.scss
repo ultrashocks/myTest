@@ -230,6 +230,11 @@
 }
 
 // 타겟팅 상세 조건 (4단계) -- 추후 위 타겟랩 안쪽으로 이동하여야함 --> 이동할 필요없음!!
+.side-show{
+    .mosu-chk-btn-wrap {
+        margin-left: -33px !important;
+    }
+}
 .targeting-detail-condition-wrap {
     height: 100%;
     display: flex;
@@ -242,9 +247,10 @@
     .mosu-chk-btn-wrap {
         position: fixed;
         //z-index: 10;
-        bottom: 0;
+        bottom: 20px;
         left: 50%;
-        transform: translate(-10%, -25%);
+        margin-left: -151px;   
+        // transform: translate(-10%, -25%);
         width: 335px;
         height: 80px;
         //width: 263px;
@@ -316,17 +322,18 @@
         mask: url(../images/icon_plus.svg) no-repeat 50%;
     }
 
-    // 좌측 시작
-    .left-box-inner {
-        //border: 1px solid ;
-        padding: 16px 16px;
-        border-radius: 8px;
-        background-color: #FFFFFF;
-        border: 1px solid #D4D5D7;
-        height: 100%;
+    .left-box-inner, .right-box-inner {
         width: 100%;
         display: flex;
-        flex-direction: column;
+        flex-direction: column;                
+        background-color: modules.$color-white;
+        border: 1px solid modules.$color_blueG_300;
+        border-radius: 8px;        
+    }
+
+    // 좌측 시작
+    .left-box-inner {
+        padding: 16px 16px;
         
         .exc-body {
             height: calc(100% - 36px);
@@ -340,14 +347,7 @@
 
     // 우측 시작
     .right-box-inner {
-        border-radius: 8px;
-        background-color: #FFFFFF;
-        border: 1px solid #D4D5D7;
-        height: 100%;
-        width: 100%;
         padding: 0 16px 16px;
-        display: flex;
-        flex-direction: column;
         overflow-x: hidden;
         overflow-y: auto;
         @include modules.custom-scrollbar(round);
@@ -554,12 +554,19 @@
                             height: 100%;
                         }
                         .btn-chk-type01 {
+                            min-width: 42px;
                             &:hover {
                                 color: modules.$color_secondary;
                             }
                             &.active {
                                 background-color: modules.$color_bgRed;
                                 color: modules.$color_primary;
+                            }
+                            &.type-and {
+                                border-radius:18px 0 0 18px;
+                            }
+                            &.type-or {
+                                border-radius:0 18px 18px 0;
                             }
                         }
                     }
@@ -732,19 +739,21 @@
         height: 18px;
         padding: 0 8px 0 10px;
         background-color: modules.$color_blueG_100;
-        font-size: 12px;
-        font-weight: 600;
+        @include modules.font-style(text_smb12);
         display: flex;
         align-items: center;
         justify-content: center;
         color: modules.$color_blueG_600;
         cursor: pointer;
+        &:hover{
+            color: modules.$color_secondary;
+        }
         &.active {
             background-color: modules.$color_bgRed;
             color: modules.$color_primary;
             .tip-box {
                 display: block;
-            }
+            }        
         }
         .tip-box{
             display: none;
@@ -2033,25 +2042,27 @@
     overflow-x: hidden;
     overflow-y: auto;
     position: relative;
+    align-content: start;
     .item{
         height: 76px;
-        border: 1px solid modules.$color_blueG_400;
+        border: 2px solid modules.$color_blueG_300;
         border-radius: 4px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         box-sizing: border-box;
+        position: relative;
         cursor: pointer;
         .item-name{
             color: modules.$color_blueG_700;
-            font-weight: 600;
-            font-size: 16px;
+            @include modules.font-style(text_smb18);
+            padding-top: 8px;
         }
         .item-standard{
             color: modules.$color_blueG_600;
-            font-weight: 500;
-            font-size: 13px;
+            @include modules.font-style(text_m12);
+            padding-top: 4px;
         }
         &:hover, &.active{
             border: 2px solid modules.$color_primary;

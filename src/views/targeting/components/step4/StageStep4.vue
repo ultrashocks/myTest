@@ -15,7 +15,8 @@
             <button
               class="btn-info ml0"
               v-tippy="{
-                content: '타겟팅에서 반드시 제외되어야 할 조건입니다.',
+                content:
+                  '타겟팅 대상에서 반드시 제외되어야 할 조건입니다.<br>원하는 조건이 검색되지 않으면 SQL 등록으로 추가하시거나 <br>업무지원 &gt; Q&amp;A(소셜데스크 이동) &gt; [기준정보등록] 카테고리에 <br>요청해 주시기 바랍니다.',
                 placement: 'right-start',
                 allowHTML: true,
                 maxWidth: 500,
@@ -176,7 +177,7 @@
               class="btn-info ml0"
               v-tippy="{
                 content:
-                  '타겟팅의 범위를 설정하기 위한 조건으로<br> 너무 많으면 모수가 적어질 수 있습니다.',
+                  '타겟팅의 범위를 설정하기 위한 조건으로 너무 많으면 모수가 <br>적어질 수 있습니다.<br>원하는 조건이 검색되지 않으면 SQL 등록으로 추가하시거나<br>업무지원 &gt; Q&amp;A(소셜데스크 이동) &gt; [기준정보등록] 카테고리에 <br>요청해 주시기 바랍니다.',
                 placement: 'right-start',
                 allowHTML: true,
                 maxWidth: 500,
@@ -424,7 +425,7 @@
         </AppWindow>
 
         <!-- 모수 수정 모달 -->
-        <AppWindow
+        <!-- <AppWindow
           v-model:view="targetChangeModalView"
           width="516px"
           height="292px"
@@ -434,7 +435,7 @@
             @cancel="targetChangeModalView = false"
             @callback="targetChangeModalCallback"
           />
-        </AppWindow>
+        </AppWindow> -->
       </li>
     </ul>
   </StepStage>

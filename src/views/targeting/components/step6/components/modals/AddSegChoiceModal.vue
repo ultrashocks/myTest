@@ -2,17 +2,18 @@
   <div class="window-contents">
     <div class="window-header">
       세그 선택
-      <!-- <button
+      <button
         class="btn-info"
         v-tippy="{
-          content: '도움말 도움말',
+          content:
+            '원하는 조건이 검색되지 않으면 SQL 등록으로 추가하시거나<br>업무지원 &gt; Q&amp;A(소셜데스크 이동) &gt; [기준정보등록] 카테고리에 <br>요청해 주시기 바랍니다.',
           placement: 'right-start',
           allowHTML: true,
           maxWidth: 500,
         }"
       >
         <span>도움말</span>
-      </button> -->
+      </button>
     </div>
     <div class="window-body">
       <div class="search-table">
@@ -116,7 +117,17 @@
                           <td class="td-right">
                             <div class="td-col icon">
                               <span class="icon-inline info"></span>
-                              <div class="tip-box"><div class="tip-header">게임 관심 고객 <div class="btn-tip-close"></div></div><div class="tip-body">최근 한 달 게임 접속일수가 전체 평균 대비 1.8배 높고, 게임 웹앱 접속일 수도 평균 대비 1.2배 높아 상위 10%에 속하는 고객입니다.</div></div>
+                              <div class="tip-box">
+                                <div class="tip-header">
+                                  게임 관심 고객
+                                  <div class="btn-tip-close"></div>
+                                </div>
+                                <div class="tip-body">
+                                  최근 한 달 게임 접속일수가 전체 평균 대비
+                                  1.8배 높고, 게임 웹앱 접속일 수도 평균 대비
+                                  1.2배 높아 상위 10%에 속하는 고객입니다.
+                                </div>
+                              </div>
                             </div>
                           </td>
                         </tr>

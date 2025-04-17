@@ -139,8 +139,8 @@ hr {
   display: block;
   height: 1px;
   border: 0;
-  border-top: 1px solid #DEDEDE;
-  margin: 15px 0;
+  border-top: 1px solid modules.$color_blueG_300;
+  margin: 16px 0;
   padding: 0;
 }
 input,
@@ -1664,7 +1664,7 @@ input::-webkit-inner-spin-button {
   }
 }
 
-// 공지사항 중요, New 아이콘
+// 공지사항 중요, New 아이콘, 추천 아이콘
 .icons {
     display: inline-flex;
     gap: 4px;
@@ -1681,12 +1681,25 @@ input::-webkit-inner-spin-button {
             align-items: center;
             border-radius: 4px;
         }
-        .important{
-            width: 29px;
-        }
-        .new{
-            width: 17px;
-        }
+    .important{
+        width: 29px;
+    }
+    .new{
+        width: 17px;
+    }
+}
+
+.icon-recommand{
+  display: inline-block;
+  width: 29px;
+  height:38px;
+  background: url(../images/icon_recommand.svg) no-repeat 0 0;
+  @include modules.font-style(text_smb12);
+  color: modules.$color_primary;
+  position: absolute;
+  top: 0;
+  left: 5px;
+  padding-top: 1px;
 }
 
 .icon-inline{

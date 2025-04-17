@@ -75,7 +75,7 @@ const cmsTransInfoData = reactive({
   campaignName: '요금제업셀_넷플릭스 2025년 2Q',
   flowchartID: 'FC003',
   flowchartName: '혜택안내_3개월',
-  cycleInfo: '주기(월) - 15일',
+  cycleInfo: '주기(월) - 15일 11:00',
   exePeriod: '2025-05-15 ~ 2026-04-30',
   targetState: '실행중',
   targetChannel: '고객센터',

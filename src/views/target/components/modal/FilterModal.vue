@@ -19,7 +19,7 @@
             :class="{ active: item.open }"
             @click="item.open = !item.open"
           >
-            {{ item.itemtype }}<i class="icon"></i>
+            <span>{{ item.itemtype }}<i class="icon"></i></span>
           </div>
           <div class="acc-container">
             <div
