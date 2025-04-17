@@ -105,7 +105,7 @@
           <i class="icon"></i> 타겟유형에 “성공/보조지표, 제외/제한 조건의 추천”
           값이 필요하시면, SM에게 DB 정보 업데이트를 요청해 주십시오.
         </li>
-        <li>
+        <li v-if="props.currentState === 'edit'">
           <i class="icon"></i>
           <strong
             >타겟유형 조합이 선택된 타겟이 있으면, ‘사용 여부’만 수정이
