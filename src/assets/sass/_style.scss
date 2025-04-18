@@ -2554,3 +2554,36 @@ td{
         }        
     }
 }
+
+//입력 폼
+.stage-items{
+    &.content-inputs{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        .item-row{
+            &.input-rows{
+                width: 680px;
+                // width: 100%;
+                margin-bottom: 0;
+                .item-row{
+                    width: 100%;
+                    margin-bottom: 48px;
+                    .title-item{
+                        color: modules.$color_secondary;
+                        font-size: 18px;
+                        font-weight: 600;
+                        margin-bottom: 20px;
+                        .title-s{
+                            font-size: 14px;
+                            color: modules.$color_secondary;
+                            font-weight: 400;
+                            margin-left: 4px;
+                        }
+                    }
+                }                
+            }          
+        }
+    }
+}

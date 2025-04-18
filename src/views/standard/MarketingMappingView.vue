@@ -64,9 +64,24 @@ import { useRouter } from 'vue-router';
 import MarketingCms from './components/marketing/MarketingCms.vue';
 import MarketingTarget from './components/marketing/MarketingTarget.vue';
 import { ref } from 'vue';
+import { useAlert } from '@/composables/alert';
+import { useSlider } from '@/composables/slider';
+
 const uiStore = useUiStore();
 const { getSideActive } = storeToRefs(uiStore);
 const router = useRouter();
+
+// Alert창
+const { setAlertStatus } = useAlert();
+
+const { setSliderStatus } = useSlider();
+
+const alertView = msg => {
+  setAlertStatus({
+    view: true,
+    message: `${msg} 항목을 한개 이상 선택해주세요.`,
+  });
+};
 
 const marketingCmsRef = ref(null);
 const marketingTargetRef = ref(null);
@@ -82,6 +97,10 @@ const onTargetSearch = () => {
 const newTargetAddData = ref([]);
 const onRightMove = () => {
   console.log('오른쪽 이동');
+  if (marketingCmsData.value.filter(item => item.checked).length === 0) {
+    alertView('이동CMS 마케팅활동');
+    return;
+  }
   marketingCmsData.value.forEach(item => {
     if (item.checked) {
       marketingTargetData.value.unshift(item);
@@ -100,6 +119,10 @@ const onRightMove = () => {
 
 const onLeftMove = () => {
   console.log('왼쪽 이동');
+  if (marketingTargetData.value.filter(item => item.checked).length === 0) {
+    alertView('타겟 유형조합');
+    return;
+  }
   marketingTargetData.value.forEach(item => {
     if (item.checked) {
       marketingCmsData.value.unshift(item);
@@ -121,5 +144,9 @@ const onCancel = () => {
 
 const onSave = () => {
   console.log('저장');
+  setSliderStatus({
+    view: true,
+    message: '저장되었습니다.',
+  });
 };
 </script>

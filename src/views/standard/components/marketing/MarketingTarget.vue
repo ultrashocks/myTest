@@ -2,7 +2,7 @@
   <div class="mapping-box">
     <div class="table-controls">
       <div class="table-controls__left">
-        <div class="sub-title">CMS 마케팅활동 조회</div>
+        <div class="sub-title">타겟유형 조합</div>
       </div>
       <div class="table-controls__right"></div>
     </div>
