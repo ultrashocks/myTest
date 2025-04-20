@@ -239,11 +239,8 @@ const scheduleButtonClick = rowData => {
   });
 };
 
+// 주는쪽
 const segmentButtonClick = rowData => {
-  console.log(rowData);
-  // alert('1111');
-  // console.log(rowData.schedule_type);
-
   if (rowData.segment_management.label === '세그확인') {
     const params = {
       title: '세그 확인',

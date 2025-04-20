@@ -112,7 +112,7 @@
 </template>
 
 <script setup>
-import { reactive, ref, nextTick, onMounted } from 'vue';
+import { reactive, ref, nextTick } from 'vue';
 import AppSelectBox from '@/components/ui/AppSelectBox.vue';
 import { useScrollChecker } from '@/composables/useScrollChecker';
 import { useEllipsisChecker } from '@/composables/useEllipsisChecker';
@@ -141,7 +141,6 @@ const { hasVerticalScroll, checkScroll } = useScrollChecker(scrollContainer);
 // // 툴팁 유무 체크
 const { isEll, checkEllipsis } = useEllipsisChecker();
 
-// const tableData = ref([]);
 const total = ref(0);
 const attachData = async () => {
   let sampleData = [];
@@ -158,10 +157,6 @@ const attachData = async () => {
   await nextTick();
   checkScroll();
 };
-
-// onMounted(() => {
-//   attachData();
-// });
 
 // 사용유무
 const selectOptions = reactive([

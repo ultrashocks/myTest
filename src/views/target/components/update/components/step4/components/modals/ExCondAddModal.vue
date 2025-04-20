@@ -5,7 +5,8 @@
       <button
         class="btn-info"
         v-tippy="{
-          content: '도움말 도움말',
+          content:
+            '원하는 조건이 검색되지 않으면 SQL등록으로 추가하시거나<br>업무지원 &gt; Q&amp;A(소셜데스크 이동) &gt; [기준정보등록] 카테고리에 <br>요청해 주시기 바랍니다.',
           placement: 'right-start',
           allowHTML: true,
           maxWidth: 500,
@@ -206,7 +207,8 @@
                 <button
                   class="btn-info"
                   v-tippy="{
-                    content: '도움말 도움말',
+                    content:
+                      '조건명 작성 시 주의사항<br>1) 조건명을 기재하고 [입력] 버튼을 누르셔야 SQL 입력이 가능합니다.<br>2) 조건명은 중복되지 않도록 작성되어야 합니다.',
                     placement: 'right-start',
                     allowHTML: true,
                     maxWidth: 500,
@@ -246,7 +248,8 @@
                     <button
                       class="btn-info"
                       v-tippy="{
-                        content: '도움말 도움말',
+                        content:
+                          'SQL 작성 시 주의사항<br>1) SELECT 절에는 최종적으로 ENTRE_NO, CUST_NO컬럼만 있어야 합니다.<br>(타사고객의 경우 ENTR_NO 대신 OCMP_CUST_ID)<br>2) From 절에는 &quot;qcp-prod-edp-lake&quot;의 데이블만 사용 가능합니다.',
                         placement: 'right-start',
                         allowHTML: true,
                         maxWidth: 500,

@@ -96,6 +96,7 @@ onUnmounted(() => {
   window.removeEventListener('resize', handleResize);
 });
 
+//받는쪽
 const UpdatePageInit = () => {
   const storedData = sessionStorage.getItem('targetParams');
   let params = {};

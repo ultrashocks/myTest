@@ -1,11 +1,11 @@
 <template>
-  <div v-if="view" class="sql-view-modal" style="position: absolute; right: 0; top: 0; width: 100%; height: 100%; background-color: #fff; z-index: 3000;">
-    <div class="m-auto" style="border-radius: 4px; border: 1px solid #333; height: 100%; padding: 16px 28px">
-      <div class="window-contents m-auto  position relative" style="border-radius: 4px; border: 1px solid #333; height: 100%">
+  <div v-if="view" class="sql-view-modal">
+    <div class="m-auto">
+      <div class="window-contents m-auto position relative">
         <span class="btn-close" @click="onCancel">닫기</span>
-        <div class="window-header"> SQL 확인 </div>
-        <div class="window-header"> {{ targetName }} </div>
-        <div class="window-body" style="height: 100%">
+        <div class="window-header">SQL 확인</div>
+        <div class="window-header">{{ targetName }}</div>
+        <div class="window-body">
           <div class="sqlAddMid">
             <textarea :value="sqlText"></textarea>
           </div>

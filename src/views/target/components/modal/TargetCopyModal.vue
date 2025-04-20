@@ -82,7 +82,7 @@ const onDuplicationCheck = () => {
   // 타겟 이름 조회 실행
 
   // 실행후 결과값 처리
-  if (modelValue === '테스트') {
+  if (props.modelValue === '테스트') {
     checkMsg.message = '이미 사용 중인 타겟 이름입니다.';
     checkMsg.state = 'error';
   } else {

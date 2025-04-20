@@ -598,6 +598,7 @@
         }
 
         .icon {
+            position:absolute;
             top: 50%;
             left: 8px;
             margin-top: -10px;
@@ -613,9 +614,14 @@
     background-color: modules.$color_blueG_800;
     border-radius: 4px;
     color: modules.$color_white;
-    @include modules.font-style(text_body14_B);
+    @include modules.font-style(text_smb14);
     gap: 6px;
     transition: background-color ease 0.4s;
+    &.w-53px {
+        max-width: 69px;
+        width: 100%;
+        justify-content: center;
+    }
     .icon{
         display: inline-block;
         width: 18px;
@@ -2228,13 +2234,18 @@ td{
     background-color: modules.$color_blueG_100;
     border-bottom: 1px solid modules.$color_blueG_400;
     justify-content: center;
+
+    &.detail{
+        .inner-block{
+            margin-left: -162px;
+        }
+    }
     .inner-block {
         display: flex;
         align-items: center;
         width: 1400px;
         height:100%;
         position: relative;
-        margin-left: -162px;
 
         .title {
             width: 100%;
@@ -2564,7 +2575,7 @@ td{
         position: relative;
         .item-row{
             &.input-rows{
-                width: 680px;
+                width: 750px;
                 // width: 100%;
                 margin-bottom: 0;
                 .item-row{
@@ -2584,6 +2595,68 @@ td{
                     }
                 }                
             }          
+        }
+    }
+}
+
+.content-inputs{
+    .seg-radios{
+        gap: 16px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+    }
+    .item-row{
+        &.flex{
+            display: flex;
+            .item-col{
+                flex: 1;
+            }
+        }
+    }
+}
+.seg-name__list{
+    ul{
+        li{
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            + li{
+                margin-top: 5px;
+            }
+        }
+    }
+}
+.seg-inputs__wrap{
+    .seg-inputs__header{
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        padding-bottom: 5px;
+        .select-label__comp{
+            margin-bottom: 0;
+        }
+    }
+    .seg-name__list{
+        li{
+            display: flex;
+        }
+    }
+    .btn-delete {
+        padding: 0;
+        width: 37px;
+        height: 18px;
+        text-align: center;
+        border-radius: 4px;
+        font-size: 12px;
+        border: 1px solid modules.$color_blueG_600;
+        color: modules.$color_white;
+        background-color: modules.$color_blueG_600;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        &:hover {
+            background-color: modules.$color_secondary;
+            border-color: modules.$color_secondary;
         }
     }
 }

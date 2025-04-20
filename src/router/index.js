@@ -283,37 +283,86 @@ export const getRoutes = [
           },
         ],
       },
-
       {
         path: '/standard/success',
-        component: () => import('@/views/standard/SuccessAssistanceView.vue'),
-        name: 'Success',
+        component: () => import('@/views/SubRouterInnerView.vue'),
+        redirect: '/standard/success/write',
+        name: '성공/보조지표 관리',
         meta: {
           auth: false,
           navi: true,
           title: '성공/보조지표 관리',
         },
+        children: [
+          {
+            path: '/standard/success/write',
+            component: () =>
+              import('@/views/standard/SuccessAssistanceView.vue'),
+            name: '성공/보조지표 등록',
+            meta: {
+              auth: false,
+              navi: true,
+              title: '성공/보조지표 등록',
+            },
+          },
+        ],
       },
       {
         path: '/standard/exclude',
-        component: () => import('@/views/standard/ExcludeLimitsView.vue'),
-        name: 'Exclude',
+        component: () => import('@/views/SubRouterInnerView.vue'),
+        redirect: '/standard/exclude/write',
+        name: '제외/제한조건 관리',
         meta: {
           auth: false,
           navi: true,
           title: '제외/제한조건 관리',
         },
+        children: [
+          {
+            path: '/standard/exclude/write',
+            component: () => import('@/views/standard/ExcludeLimitsView.vue'),
+            name: '제외/제한조건 등록',
+            meta: {
+              auth: false,
+              navi: true,
+              title: '제외/제한조건 등록',
+            },
+          },
+        ],
       },
       {
         path: '/standard/seg',
-        component: () => import('@/views/standard/SegmentationView.vue'),
-        name: 'Seg',
+        component: () => import('@/views/SubRouterInnerView.vue'),
+        redirect: '/standard/seg/write',
+        name: '세그구분 관리',
         meta: {
           auth: false,
           navi: true,
           title: '세그구분 관리',
         },
+        children: [
+          {
+            path: '/standard/seg/write',
+            component: () => import('@/views/standard/SegmentationView.vue'),
+            name: '세그 등록',
+            meta: {
+              auth: false,
+              navi: true,
+              title: '세그 등록',
+            },
+          },
+        ],
       },
+      // {
+      //   path: '/standard/seg',
+      //   component: () => import('@/views/standard/SegmentationView.vue'),
+      //   name: 'Seg',
+      //   meta: {
+      //     auth: false,
+      //     navi: true,
+      //     title: '세그구분 관리',
+      //   },
+      // },
     ],
   },
   {
@@ -330,7 +379,7 @@ export const getRoutes = [
       {
         path: '/system/notice/',
         component: () => import('@/views/SubRouterInnerView.vue'),
-        redirect: '/system/notice/view',
+        redirect: '/system/notice/list',
         name: '공지사항',
         meta: {
           auth: false,
@@ -339,9 +388,10 @@ export const getRoutes = [
         },
         children: [
           {
-            path: '/system/notice/view',
-            component: () => import('@/views/system/NoticeDetailView.vue'),
-            name: '공지사항 보기',
+            path: '/system/notice/list',
+            component: () =>
+              import('@/views/system/components/notice/NoticeMngList.vue'),
+            name: '공지사항 관리',
             meta: {
               auth: false,
               navi: true,
@@ -349,26 +399,74 @@ export const getRoutes = [
             },
           },
           {
+            path: '/system/notice/view/:id',
+            component: () =>
+              import('@/views/system/components/notice/NoticeDetailView.vue'),
+            name: '공지사항 보기',
+            meta: {
+              auth: false,
+              navi: true,
+              title: '공지사항 보기',
+            },
+          },
+          {
             path: '/system/notice/write',
-            component: () => import('@/views/system/NoticeWriteView.vue'),
+            component: () =>
+              import('@/views/system/components/notice/NoticeWriteView.vue'),
             name: '공지사항 등록/수정',
             meta: {
               auth: false,
               navi: false,
-              title: '공지사항 관리',
+              title: '공지사항 수정',
             },
           },
         ],
       },
       {
-        path: '/system/manual',
-        component: () => import('@/views/system/ManualMngView.vue'),
+        path: '/system/manual/',
+        component: () => import('@/views/SubRouterInnerView.vue'),
+        redirect: '/system/manual/list',
         name: 'Manual',
         meta: {
           auth: false,
           navi: true,
           title: '메뉴얼 관리',
         },
+        children: [
+          {
+            path: '/system/manual/list',
+            component: () =>
+              import('@/views/system/components/manual/ManualMngList.vue'),
+            name: '메뉴얼 관리 목록',
+            meta: {
+              auth: false,
+              navi: true,
+              title: '메뉴얼 관리',
+            },
+          },
+          {
+            path: '/system/manual/view/:id',
+            component: () =>
+              import('@/views/system/components/manual/NoticeDetailView.vue'),
+            name: '메뉴얼 보기',
+            meta: {
+              auth: false,
+              navi: false,
+              title: '메뉴얼 보기',
+            },
+          },
+          {
+            path: '/system/manual/write',
+            component: () =>
+              import('@/views/system/components/manual/NoticeWriteView.vue'),
+            name: '메뉴얼 등록/수정',
+            meta: {
+              auth: false,
+              navi: false,
+              title: '메뉴얼 수정',
+            },
+          },
+        ],
       },
       {
         path: '/system/user',

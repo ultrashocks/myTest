@@ -52,10 +52,11 @@
   &::-webkit-scrollbar {
     width: 8px;
     height: 8px;
-    background-color: #fff;
+    background-color: transparent;
   }
   &::-webkit-scrollbar-track {
-    background-color: $bgColor;
+    // background-color: $bgColor;
+    background-color: transparent;
   }
   &::-webkit-scrollbar-thumb {
     background-color: #c7c7c7;
@@ -63,5 +64,7 @@
   }
   &::-webkit-scrollbar-thumb:hover {
     background-color: #929292;
+    cursor: default;
   }
+  @content;
 }

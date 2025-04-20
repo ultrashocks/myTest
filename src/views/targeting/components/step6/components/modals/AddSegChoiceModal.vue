@@ -295,7 +295,7 @@
                       class="btn-info"
                       v-tippy="{
                         content:
-                          'SQL 작성 시 주의 사항 <br><br> 1) SELECT 절에는 최종적으로 ENTR_NO, CUST_NO 컬럼만 있어야 합니다.<br>&nbsp;(타사 고객의 경우 ENTR_NO 대신 DCMP_CUST_ID) <br><br>2) From절에는 “qcp-prod-edp-lake” 의 테이블만 사용가능합니다.<br><br>',
+                          'SQL 작성 시 주의사항<br>1) SELECT 절에는 최종적으로 ENTRE_NO, CUST_NO컬럼만 있어야 합니다.<br>(타사고객의 경우 ENTR_NO 대신 OCMP_CUST_ID)<br>2) From 절에는 &quot;qcp-prod-edp-lake&quot;의 데이블만 사용 가능합니다.',
                         placement: 'right-start',
                         allowHTML: true,
                         maxWidth: 500,

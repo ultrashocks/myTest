@@ -216,7 +216,6 @@
                 border: 1px solid modules.$color_blueG_300;
                 height: 100%;
                 box-sizing: border-box;
-                padding: 0 4px;
                 position: relative;
                 .content-area{
                     height: 100%;
@@ -232,7 +231,10 @@
 // 타겟팅 상세 조건 (4단계) -- 추후 위 타겟랩 안쪽으로 이동하여야함 --> 이동할 필요없음!!
 .side-show{
     .mosu-chk-btn-wrap {
-        margin-left: -33px !important;
+        margin-left: -32px !important;
+        @include modules.breakpoint{
+            left: 721px !important;
+        }
     }
 }
 .targeting-detail-condition-wrap {
@@ -242,21 +244,17 @@
     gap: 10px;
     background: #F3F5F6;
     position: relative;
-    //padding: 16px 16px;
+
     // 모수 체크 버튼
     .mosu-chk-btn-wrap {
         position: fixed;
-        //z-index: 10;
-        bottom: 20px;
+        bottom: 22px;
         left: 50%;
-        margin-left: -151px;   
-        // transform: translate(-10%, -25%);
+        margin-left: -160px;
         width: 335px;
         height: 80px;
-        //width: 263px;
-        //height: 64px;
         padding: 8px 36px;
-        border-radius: 100px;
+        border-radius: 40px;
         border: 1px solid modules.$color_blueG_300;
         background-color: modules.$color_white;
         display: flex;
@@ -266,6 +264,11 @@
         gap: 8px;
         opacity: 0;
         transition: 0.4s ease-in;
+
+        @include modules.breakpoint{
+            left: 560px;
+            margin-left: 0;
+        }
         .mosu-chk-btn {
             background-color: modules.$color_primary;
             //width: 100%;
@@ -538,7 +541,7 @@
                         height: calc(100% - 36px);
                         overflow-x: hidden;
                         overflow-y: auto;
-                        @include modules.custom-scrollbar(round);
+                        @include modules.custom-scrollbar();
                     }
                     .limit-group-item {
                         position: relative;
@@ -554,7 +557,7 @@
                             height: 100%;
                         }
                         .btn-chk-type01 {
-                            min-width: 42px;
+                            min-width: 45px;
                             &:hover {
                                 color: modules.$color_secondary;
                             }
@@ -590,7 +593,7 @@
         }
         // 상세조건에서 쓰는 모달창 일부 class
         .add-box {
-            width: 698px;
+            width: 714px;
             height: 455px;
             margin: 30px auto 0;
             //border: 1px solid;
@@ -601,14 +604,12 @@
                 flex-direction: column;
                 .sqlAddMid {
                     border: 1px solid modules.$color_blueG_400;
-                    padding: 7px 16px;
                     width: 100%;
                     height: 225px;
                     border-radius: 4px;
                     textarea {
                         height: 100%;
                         width: 100%;
-                        padding: 0;
                         border: none;
                         outline: none;
                         resize: none;
@@ -619,6 +620,11 @@
                             border: none !important;
                             outline: none !important;
                             box-shadow: none !important;
+                        }
+
+                        &:disabled {
+                            background-color: modules.$color_blueG_100;
+                            border-color: modules.$color_blueG_400;
                         }
                     }
                 }
@@ -1138,7 +1144,7 @@
     }
     // 상세조건에서 쓰는 모달창 일부 class
     .add-box {
-        width: 698px;
+        width: 714px;
         height: 455px;
         margin: 30px auto 0;
         //border: 1px solid;
@@ -2161,5 +2167,21 @@
         font-weight: 600;
         padding-bottom: 10px;
         text-align: left;
+    }
+}
+
+.sql-view-modal {
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background-color: modules.$color-white;
+    z-index:2;
+    border-radius: 8px;
+    border: 1px solid modules.$color_blueG_700;
+
+    .m-auto {
+        height:100%;
     }
 }

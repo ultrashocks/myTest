@@ -5,6 +5,7 @@ $max-width: 1920px;
 $min-width: 1440px;
 $max-height: 945px;
 $side-width: 272px;
+$break-point: 1399px;
 
 $focus-color: #E30084;
 $over-color: #f3269e;
@@ -40,19 +41,17 @@ $color_link_hover: #003E6D;
 
 $font-styles: (
   text_body14: (size: 14px, weight: 400),
-  text_body14_B: (size: 14px, weight: 600),
   text_smb12: (size: 12px, weight: 600),
-  text_label_Wbtn14: (size: 14px, weight: 700),
   text_smb13: (size: 13px, weight: 600),
   text_smb14: (size: 14px, weight: 600),
+  text_smb16: (size: 16px, weight: 600),
   text_smb18: (size: 18px, weight: 600),
   text_smb20: (size: 20px, weight: 600),
+  text_smb24: (size: 24px, weight: 600),
   text_m12: (size: 12px, weight: 500),
   text_m13: (size: 13px, weight: 500),
   text_R12: (size: 12px, weight: 400),
   text_R24: (size: 24px, weight: 400),
-  text_smb24: (size: 24px, weight: 600),
-  text_smb16: (size: 16px, weight: 600),
 );
 
 @mixin font-style($size) {
@@ -63,3 +62,9 @@ $font-styles: (
 
 // @include modules.font-style(text_body14);
 // font-color: modules.$color_blueG_600;
+
+@mixin breakpoint{
+  @media (max-width: $break-point){
+    @content;
+  }
+}
