@@ -11,23 +11,23 @@
               </div>
               <div class="header-bottom">
                 <ul>
-                  <li class="user">{{ noticeData.user }}</li>
+                  <!-- <li class="user">{{ noticeData.user }}</li>
                   <li class="views">
                     조회수
                     <span class="views-value">{{ noticeData.views }}</span>
-                  </li>
+                  </li> -->
                   <li class="date">
                     작성일
                     <span class="date-value">{{ noticeData.writeDate }}</span>
                   </li>
-                  <li class="period" v-if="noticeData.important">
+                  <!-- <li class="period" v-if="noticeData.important">
                     <span class="status-icon">중요</span>
                     게시기간
                     <span class="period-value">{{ noticeData.period }}</span>
                   </li>
                   <li class="exposure" v-if="noticeData.exposure">
                     <i class="exposure-icon"></i>
-                  </li>
+                  </li> -->
                 </ul>
               </div>
             </div>
@@ -78,10 +78,10 @@
               <div class="btn-l">
                 <button @click="onList">목록</button>
               </div>
-              <div class="btn-r">
+              <!-- <div class="btn-r">
                 <button @click="onDelete">삭제</button>
                 <button @click="onEdit">수정</button>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

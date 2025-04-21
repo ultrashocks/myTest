@@ -243,7 +243,7 @@ select {
   padding-left: 10px;
 }
 textarea {
-  padding: 8px 16px;
+  padding: 8px;
   overflow-y: auto;
   outline: none;
   border: 1px solid modules.$color_blueG_500;
@@ -252,11 +252,7 @@ textarea {
   box-sizing: border-box;
   border-radius: 4px;
 
-  @include modules.custom-scrollbar{
-      &::-webkit-scrollbar-track {
-          border-radius: 0 4px 4px 0;
-      }
-  }
+  @include modules.custom-scrollbar(round);
 
   &:disabled {
     background-color: modules.$color_blueG_100;
@@ -1099,7 +1095,7 @@ input::-webkit-inner-spin-button {
   color: modules.$color_statesSuccess;
 }
 .font-secondary {
-  color: modules.$color_secondary
+  color: modules.$color_secondary;
 }
 
 // 폰트 정렬
@@ -1176,6 +1172,7 @@ input::-webkit-inner-spin-button {
   //max-height: 20vw;
   max-height:calc(100% - 224px);
   position:relative;
+  @include modules.custom-scrollbar();
   .table {
     width: 100%;
     border-collapse: collapse;
@@ -1193,28 +1190,24 @@ input::-webkit-inner-spin-button {
   }
 
   .table th {
-    padding: 7px 6px;
+    height: 35px;
+    padding: 0 8px;
     background-color: modules.$color_secondary;
     border-left: 1px solid modules.$color_blueG_200;
     border-right: 1px solid modules.$color_blueG_200;
-    //height: 36px;
-    font-size: 13px;
-    font-weight:500;
+    @include modules.font-style(text_smb13);
     color: modules.$color_white;
   }
 
   .table td {
-    padding: 7px 8px;
+    height: 35px;
+    padding: 0 8px;
     border: 1px solid modules.$color_blueG_200;
     border-right: 1px solid transparent;
-    //height: 36px;
-    font-size: 13px;
+    @include modules.font-style(text_m13);
     text-align: center;
     &:last-child {
       border-right: 1px solid modules.$color_blueG_200;
-    }
-    &.td-left {
-      text-align: start;
     }
     &.td-right {
       text-align: end;
@@ -1231,15 +1224,28 @@ input::-webkit-inner-spin-button {
   .table td > a {
     display: block;
     width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+
+    .icons {
+      width: 100%;
+    }
+
+    .font-secondary{
+      color : modules.$color_blueG_800;
+      display:inline-block;
+      max-width: calc(100% - modules.$iwidth1 + modules.$iwidth2 + modules.$iwidth3 - 8px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &:hover {
+      .font-secondary {
+        text-decoration: underline;
+        color : modules.$color_link;
+      }
+    }
   }
 
-  //.table button {
-  //  font-size: 12px;
-  //  font-weight: 600;
-  //}
 
   .table tr:hover td {
     background-color: modules.$color_blueG_100;

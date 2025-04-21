@@ -1,5 +1,5 @@
 <template>
-  <div class="table-container" style="max-height: 378px">
+  <div class="table-container" style="max-height: 561px">
     <table class="table">
       <colgroup>
         <col width="10%" />

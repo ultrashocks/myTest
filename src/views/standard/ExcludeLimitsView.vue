@@ -35,7 +35,62 @@
                           제한조건
                         </label>
                       </div>
+                      <div class="custom-radio label">
+                        <label>
+                          <input
+                            type="radio"
+                            name="excludeLimitRadio"
+                            v-model="data.excludeLimit"
+                            :value="3"
+                          />
+                          <i class="icon"></i>
+                          공용
+                        </label>
+                      </div>
                     </div>
+                    <!-- 제외/제한조건 수정에서 제외.제한조건 구분 read only 예시-->
+                    <!-- <div class="seg-radios">
+                      <div class="custom-radio label">
+                        <label>
+                          <input
+                            type="radio"
+                            name="excludeLimitRadio"
+                            v-model="data.excludeLimit"
+                            :value="1"
+                            :checked="true"
+                            :readonly="true"
+                          />
+                          <i class="icon readonly"></i>
+                          제외조건
+                        </label>
+                      </div>
+                      <div class="custom-radio label">
+                        <label>
+                          <input
+                            type="radio"
+                            name="excludeLimitRadio"
+                            v-model="data.excludeLimit"
+                            :value="2"
+                            :disabled="true"
+                          />
+                          <i class="icon"></i>
+                          제한조건
+                        </label>
+                      </div>
+                      <div class="custom-radio label">
+                        <label>
+                          <input
+                            type="radio"
+                            name="excludeLimitRadio"
+                            v-model="data.excludeLimit"
+                            :value="3"
+                            :disabled="true"
+                          />
+                          <i class="icon"></i>
+                          공용
+                        </label>
+                      </div>
+                    </div> -->
                   </div>
                   <div class="item-col">
                     <div class="title-item">사용 여부 (사용자 화면 노출)</div>
@@ -66,6 +121,7 @@
                       </div>
                     </div>
                   </div>
+                  <!-- 화면설계 ver 1.4 삭제
                   <div class="item-col">
                     <div class="title-item">기본 여부</div>
                     <div class="seg-radios">
@@ -94,7 +150,7 @@
                         </label>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
 
                 <div class="item-row mb0">
@@ -105,14 +161,14 @@
                       labelName="조건코드"
                       :readonly="true"
                       v-model="data.conditionCode"
-                      placeholder="생성시 자동 부여"
+                      placeholder="생성 시 자동 부여"
                       style="flex: 0 0 205px"
                     />
                     <AppInput
                       type="text"
                       labelName="조건명"
-                      placeholder="최대 20자 이내"
-                      :maxLength="20"
+                      placeholder="최대 50자 이내"
+                      :maxLength="50"
                       v-model="data.conditionName"
                       style="flex: 1"
                     />
@@ -151,7 +207,7 @@
                       labelName="조건그룹"
                       :options="conditionGroupOptions"
                       v-model:optionsSelected="data.conditionGroup"
-                      style="flex: 0 0 205px"
+                      style="flex: 0 0 537px"
                     />
                   </div>
                   <div class="row-flex flex-1 mt16">
@@ -162,18 +218,21 @@
                       @remove="onTargetTableRemove"
                       placeholder="조회"
                       :readonly="true"
-                      style="flex: 0 0 205px"
+                      style="flex: 0 0 750px"
                     />
                   </div>
+                  <!-- 대상 테이블 선택 전 : :disabled="true" :readonly="false" -->
+                  <!-- 대상 테이블 선택 후 : :disabled="false" :readonly="true" -->
                   <div class="row-flex flex-1 mt16">
                     <AppSelectCode
                       labelName="컬럼 이름"
                       v-model="data.columName.code"
                       @search="onColumNameSearch"
                       @remove="onColumNameRemove"
-                      placeholder="조회"
-                      :readonly="true"
-                      style="flex: 0 0 205px"
+                      placeholder="대상 테이블 선택 후 조회"
+                      :disabled="true"
+                      :readonly="false"
+                      style="flex: 0 0 537px"
                     />
                     <AppSelectBox
                       labelName="연산자 선택"

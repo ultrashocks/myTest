@@ -3,7 +3,11 @@
     <div class="input-inner gap-32">
       <div class="inner-item">
         <label>자사/타사 구분</label>
-        <AppInput v-model="searchData.company" style="width: 250px" />
+        <AppSelectBox
+          :options="companyOptions"
+          v-model:optionsSelected="searchData.company"
+          style="width: 114px"
+        />
       </div>
       <div class="inner-item">
         <label>타겟유형</label>
@@ -40,8 +44,14 @@ const useYnOptions = reactive([
   { label: '미사용', value: 'N' },
 ]);
 
+const companyOptions = reactive([
+  { label: '전체', value: '전체' },
+  { label: '자사', value: '자사' },
+  { label: '타사', value: '타사' },
+]);
+
 const searchData = reactive({
-  company: '',
+  company: { label: '전체', value: '전체' },
   targetType: '',
   useYnSelected: { label: '전체', value: '전체' },
 });

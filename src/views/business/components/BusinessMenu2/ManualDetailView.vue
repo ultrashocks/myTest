@@ -78,10 +78,10 @@
               <div class="btn-l">
                 <button @click="onList">목록</button>
               </div>
-              <div class="btn-r">
+              <!-- <div class="btn-r">
                 <button @click="onDelete">삭제</button>
                 <button @click="onEdit">수정</button>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

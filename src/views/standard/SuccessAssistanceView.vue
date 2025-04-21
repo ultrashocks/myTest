@@ -9,7 +9,7 @@
               <div class="item-row input-rows">
                 <div class="item-row flex">
                   <div class="item-col">
-                    <div class="title-item">성공/보조지표 구분</div>
+                    <div class="title-item">채널구분</div>
                     <div class="seg-radios">
                       <div class="custom-radio label">
                         <label>
@@ -20,7 +20,7 @@
                             :value="1"
                           />
                           <i class="icon"></i>
-                          성공지표
+                          디지털
                         </label>
                       </div>
                       <div class="custom-radio label">
@@ -32,10 +32,65 @@
                             :value="2"
                           />
                           <i class="icon"></i>
-                          보조지표
+                          고객센터
+                        </label>
+                      </div>
+                      <div class="custom-radio label">
+                        <label>
+                          <input
+                            type="radio"
+                            name="indicatorRadio"
+                            v-model="data.indicatorType"
+                            :value="3"
+                          />
+                          <i class="icon"></i>
+                          매장
                         </label>
                       </div>
                     </div>
+                    <!-- 성공/보조지표 수정에서 채널 구분 read only 예시-->
+                    <!-- <div class="seg-radios">
+                      <div class="custom-radio label">
+                        <label>
+                          <input
+                            type="radio"
+                            name="indicatorRadio"
+                            v-model="data.indicatorType"
+                            :value="1"
+                            :checked="true"
+                            :readonly="true"
+                          />
+                          <i class="icon readonly"></i>
+                          디지털
+                        </label>
+                      </div>
+                      <div class="custom-radio label">
+                        <label>
+                          <input
+                            type="radio"
+                            name="indicatorRadio"
+                            v-model="data.indicatorType"
+                            :value="2"
+                            :disabled="true"
+                          />
+                          <i class="icon"></i>
+                          고객센터
+                        </label>
+                      </div>
+                      <div class="custom-radio label">
+                        <label>
+                          <input
+                            type="radio"
+                            name="indicatorRadio"
+                            v-model="data.indicatorType"
+                            :value="3"
+                            :disabled="true"
+                          />
+                          <i class="icon"></i>
+                          매장
+                        </label>
+                      </div>
+                    </div> -->
                   </div>
                   <div class="item-col">
                     <div class="title-item">사용 여부(사용자 화면 노출)</div>
@@ -76,7 +131,7 @@
                       labelName="지표코드"
                       :readonly="true"
                       v-model="data.indicatorCode"
-                      placeholder="생성시 자동 부여"
+                      placeholder="생성 시 자동 부여"
                       style="flex: 0 0 205px"
                     />
                     <AppInput
@@ -133,8 +188,8 @@
                       지표 설명(사용자 툴팁 내용)
                     </div>
                     <textarea
-                      placeholder="최대 200자 이내"
-                      :maxLength="200"
+                      placeholder="최대 400자 이내"
+                      :maxLength="400"
                       style="height: 100px"
                       v-model="data.indicatorExplain"
                     ></textarea>

@@ -48,7 +48,7 @@
                 v-html="noticeData.content"
               ></div>
             </div>
-            <div class="notice-view-footer">
+            <!-- <div class="notice-view-footer">
               <div class="footer-next">
                 <div class="label">다음</div>
                 <div class="title">
@@ -73,7 +73,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
             <div class="bottom-btns__controls footer-button-box">
               <div class="btn-l">
                 <button @click="onList">목록</button>

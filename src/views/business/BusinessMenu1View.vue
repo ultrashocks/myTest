@@ -26,12 +26,12 @@
               :perPage="15"
               @update:current="updateCurrentPage"
             />
-            <ul class="footer-button-box">
+            <!-- <ul class="footer-button-box">
               <li></li>
               <li class="footer-button-last-box">
-                <button>글쓰기</button>
+                <button class="emph">글작성</button>
               </li>
-            </ul>
+            </ul> -->
           </div>
         </div>
       </section>

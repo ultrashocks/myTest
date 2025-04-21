@@ -69,7 +69,7 @@
               :key="item.id"
               :class="{
                 checked: item.checked,
-                'new-target': newTargetAddData.includes(item.id),
+                // 'new-target': newTargetAddData.includes(item.id),
               }"
               @mouseover="checkEllipsis($event, rowIndex)"
             >
@@ -124,10 +124,10 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
-  newTargetAddData: {
-    type: Array,
-    default: () => [],
-  },
+  // newTargetAddData: {
+  //   type: Array,
+  //   default: () => [],
+  // },
 });
 
 const emit = defineEmits(['update:modelValue', 'search']);

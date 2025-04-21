@@ -29,9 +29,9 @@
                 </button>
               </div>
               <div class="mapping-right">
+                <!-- v-model:newTargetAddData="newTargetAddData" -->
                 <MarketingTarget
                   v-model="marketingTargetData"
-                  v-model:newTargetAddData="newTargetAddData"
                   ref="marketingTargetRef"
                   @search="onTargetSearch"
                 />

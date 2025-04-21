@@ -159,7 +159,7 @@ export const getRoutes = [
         meta: {
           auth: false,
           navi: true,
-          title: '메뉴얼',
+          title: '매뉴얼',
         },
         children: [
           {
@@ -169,7 +169,7 @@ export const getRoutes = [
             meta: {
               auth: false,
               navi: true,
-              title: '메뉴얼',
+              title: '매뉴얼',
             },
           },
           {
@@ -182,7 +182,7 @@ export const getRoutes = [
             meta: {
               auth: false,
               navi: false,
-              title: '메뉴얼 상세',
+              title: '매뉴얼 상세',
             },
           },
         ],
@@ -430,40 +430,40 @@ export const getRoutes = [
         meta: {
           auth: false,
           navi: true,
-          title: '메뉴얼 관리',
+          title: '매뉴얼 관리',
         },
         children: [
           {
             path: '/system/manual/list',
             component: () =>
               import('@/views/system/components/manual/ManualMngList.vue'),
-            name: '메뉴얼 관리 목록',
+            name: '매뉴얼 관리 목록',
             meta: {
               auth: false,
               navi: true,
-              title: '메뉴얼 관리',
+              title: '매뉴얼 관리',
             },
           },
           {
             path: '/system/manual/view/:id',
             component: () =>
               import('@/views/system/components/manual/NoticeDetailView.vue'),
-            name: '메뉴얼 보기',
+            name: '매뉴얼 보기',
             meta: {
               auth: false,
               navi: false,
-              title: '메뉴얼 보기',
+              title: '매뉴얼 보기',
             },
           },
           {
             path: '/system/manual/write',
             component: () =>
               import('@/views/system/components/manual/NoticeWriteView.vue'),
-            name: '메뉴얼 등록/수정',
+            name: '매뉴얼 등록/수정',
             meta: {
               auth: false,
               navi: false,
-              title: '메뉴얼 수정',
+              title: '매뉴얼 수정',
             },
           },
         ],

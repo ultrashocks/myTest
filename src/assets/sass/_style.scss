@@ -80,11 +80,11 @@
         }
         &:disabled{
             border: 1px solid modules.$color_blueG_600;
-            background-color: modules.$color_white;
+            background-color: modules.$color_blueG_200;
             color: #181A1B;
             &:hover{
-               border: 1px solid modules.$color_blueG_600;
-               background-color: modules.$color_white;
+               border: 1px solid modules.$color_blueG_600 !important;
+               background-color: modules.$color_blueG_200;
             }  
         }
     }
@@ -159,6 +159,7 @@
         &:disabled{
             cursor: default;
             opacity: 0.5 !important;
+            background-color: transparent !important;
             &:hover{
                 opacity: 0.3 !important;
             }
@@ -352,8 +353,8 @@
                 }
             }
             &.selected {
-                border-color: modules.$color_secondary;
-                color: modules.$color_secondary;
+                border-color: modules.$color_primary;
+                color: modules.$color_primary;
                 .cnt {
                     color: modules.$color_primary;
                 }
@@ -1151,7 +1152,7 @@ td{
         display: none; 
         &:checked + .icon { 
             background: modules.$color_primary; 
-            border-color: modules.$color_primary; 
+            border-color: modules.$color_primary;
             &::after{
                 content:'';
                 display: inline-block;
@@ -1163,7 +1164,12 @@ td{
                 top: 0;
                 z-index: 2;
             }
-        }   
+            &.readonly{
+                background: modules.$color_blueG_400; 
+                border-color: modules.$color_blueG_400;
+                cursor: default;
+            }
+        }
         &:disabled{
             + .icon{
                 background-color: modules.$color_blueG_300;
@@ -1188,7 +1194,9 @@ td{
         top: 0;
     }
     &.label{
-        width: auto;
+        width: auto;        
+        position: relative;
+        overflow:hidden;
         label{
             display: inline-flex;
             align-items: center;
@@ -1428,9 +1436,9 @@ td{
 }
 .input-inner {
     display: flex;
-    gap: 8px ;
+    gap: 16px ;
     &.gap-32{
-        gap: 32px;
+        gap: 16px;
     }
     .inner-item {
         color: modules.$color_secondary;
@@ -1457,17 +1465,16 @@ td{
 // 공지사항
 .notice-view-header{
     background-color: modules.$color_blueG_100;
-    height: 107px;
     border-radius: 8px;
     margin-top: 16px;
     box-sizing: border-box;
-    padding: 20px 30px 0 30px;
+    padding: 20px 30px 16px 30px;
     .heaer-top {
         margin-bottom: 35px;
         .title{
             color: modules.$color_secondary;
-            font-weight: 600;
-            font-size: 18px;
+            @include modules.font-style(text_smb18);
+            line-height: 130%;
         }
     }
     .header-bottom{
@@ -1479,7 +1486,7 @@ td{
             font-size: 12px;
             color: modules.$color_blueG_800;
             display: inline-flex;
-            align-items: center;
+            align-items: baseline;
             &::after{
                 content:'';
                 display: block;
@@ -1497,6 +1504,7 @@ td{
         .views-value, .date-value, .period-value{
             font-weight: 500;
             font-size: 13px;
+            margin-left: 4px;
         }
         .period{
             .status-icon{
@@ -1964,7 +1972,7 @@ td{
         table-layout: fixed;
         width: 100%;
         th{
-            height: 35px;
+            height: 36px;
             color: modules.$color_white;
             font-size: 13px;
             font-weight: 600;
@@ -2053,9 +2061,17 @@ td{
             color: modules.$color_secondary;
             text-align: left;
             padding: 0 16px;
+
+            &:first-child {
+                border-left: none;
+            }
         }
         td{
             padding: 0 10px;
+
+            &:last-child {
+                border-right: none;
+            }
         }
         th,td{
             border: 1px solid modules.$color_blueG_300;
@@ -2280,7 +2296,8 @@ td{
 
         input[type="checkbox"]:disabled{
             + .icon{
-                opacity: .5;
+                background: modules.$color_blueG_400; 
+                border-color: modules.$color_blueG_400;
                 cursor: default;
             }
         }
@@ -2657,6 +2674,25 @@ td{
         &:hover {
             background-color: modules.$color_secondary;
             border-color: modules.$color_secondary;
+        }
+    }
+}
+
+.contents-layout{
+    &.seg-write{
+        overflow: hidden;
+        .contents-view{
+            height: calc(100% - 143px);
+            overflow-x: hidden;
+            overflow-y: auto;
+            @include modules.custom-scrollbar();
+        }
+        .seg-detail__row{
+            padding-bottom: 10px;
+            + .seg-detail__row{
+                padding-top: 10px;
+                border-top: 1px solid rgb(214, 214, 214);
+            }
         }
     }
 }

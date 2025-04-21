@@ -10,7 +10,7 @@
             <div class="filter-container">
               <div class="d-flex align-center">
                 <div class="inner-item">
-                  <div>전체 <span class="font-primary">19</span></div>
+                  <div>전체 <span class="font-primary">15</span></div>
                 </div>
               </div>
             </div>
@@ -26,12 +26,12 @@
               :perPage="15"
               @update:current="updateCurrentPage"
             />
-            <ul class="footer-button-box">
+            <!-- <ul class="footer-button-box">
               <li></li>
               <li class="footer-button-last-box">
-                <button>글쓰기</button>
+                <button class="emph">글작성</button>
               </li>
-            </ul>
+            </ul> -->
           </div>
         </div>
       </section>
@@ -201,11 +201,11 @@ const updateCurrentPage = page => {
 };
 
 watch(
-    () => currentPage.value,
-    (newPage, oldPage) => {
-      console.log(`currentPage 변경됨: ${oldPage} -> ${newPage}`);
-      /*페이지변경 감지 될떄 다시한번 목록 조회 api호출 하면 됩니다!!*/
-    },
-    { immediate: true },
+  () => currentPage.value,
+  (newPage, oldPage) => {
+    console.log(`currentPage 변경됨: ${oldPage} -> ${newPage}`);
+    /*페이지변경 감지 될떄 다시한번 목록 조회 api호출 하면 됩니다!!*/
+  },
+  { immediate: true },
 );
 </script>

@@ -1,9 +1,12 @@
 <template>
   <div class="contents-wrap">
-    <div class="contents-layout" :class="{ 'side-active': getSideActive }">
+    <div
+      class="contents-layout seg-write"
+      :class="{ 'side-active': getSideActive }"
+    >
       <section class="contents-section">
         <ContentHeader />
-        <div class="contents-view">
+        <div class="contents-view" ref="scrollContainer">
           <div class="stage-area">
             <div class="stage-items content-inputs">
               <div class="item-row input-rows">
@@ -47,14 +50,14 @@
                       labelName="세그코드"
                       :readonly="true"
                       v-model="data.segCode"
-                      placeholder="생성시 자동 부여"
+                      placeholder="생성 시 자동 부여"
                       style="flex: 0 0 205px"
                     />
                     <AppInput
                       type="text"
                       labelName="세그명"
-                      placeholder="최대 20자 이내"
-                      :maxLength="20"
+                      placeholder="최대 50자 이내"
+                      :maxLength="50"
                       v-model="data.segName"
                       style="flex: 1"
                     />
@@ -93,7 +96,7 @@
                       labelName="세그그룹"
                       :options="segGroupOptions"
                       v-model:optionsSelected="data.segGroup"
-                      style="flex: 0 0 205px"
+                      style="flex: 0 0 537px"
                     />
                   </div>
                   <div class="row-flex flex-1 mt16">
@@ -101,18 +104,21 @@
                       labelName="대상 테이블"
                       :options="targetTableOptions"
                       v-model:optionsSelected="data.targetTable"
-                      style="flex: 0 0 205px"
+                      style="flex: 0 0 750px"
                     />
                   </div>
+                  <!-- 대상 테이블 선택 전 : :disabled="true" :readonly="false" -->
+                  <!-- 대상 테이블 선택 후 : :disabled="false" :readonly="true" -->
                   <div class="row-flex flex-1 mt16">
                     <AppSelectCode
                       labelName="컬럼 이름"
                       v-model="data.columName.code"
                       @search="onColumNameSearch"
                       @remove="onColumNameRemove"
-                      placeholder="조회"
-                      :readonly="true"
-                      style="flex: 0 0 205px"
+                      placeholder="대상 테이블 선택 후 조회"
+                      :disabled="true"
+                      :readonly="false"
+                      style="flex: 0 0 750px"
                     />
                   </div>
                   <div class="row mt16">
@@ -134,71 +140,69 @@
                     </button>
                   </div>
                   <div class="row">
-                    <div class="seg-name__list">
-                      <ul>
-                        <li
-                          v-for="item in data.segInfos.segName"
-                          :key="item.id"
-                        >
-                          <AppInput
-                            type="text"
-                            placeholder="최대 20자 이내"
-                            :maxLength="20"
-                            v-model="item.name"
-                            style="flex: 1"
-                          />
-                          <div class="order-control">
-                            <button
-                              class="btn-common up"
-                              @click="onMoveUp(item.id)"
-                            >
-                              <i class="icon"></i></button
-                            ><button
-                              class="btn-common down"
-                              @click="onMoveDown(item.id)"
-                            >
-                              <i class="icon"></i>
-                            </button>
-                          </div>
-                          <button
-                            class="btn-delete"
-                            @click="onDeleteSegName(item.id)"
-                            :disabled="data.segInfos.segName.length === 1"
-                          >
-                            삭제
-                          </button>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="row mt16">
-                    <div class="row-flex seg-inputs__header">
-                      <div class="select-label__comp">SQL</div>
-                      <button class="btn-s red">SQL 검증</button>
-                    </div>
-                    <textarea
-                      style="height: 200px"
-                      v-model="data.segInfos.sql"
-                    ></textarea>
-                  </div>
-                </div>
-                <div class="bottom-btns__controls footer-button-box">
-                  <div class="btn-l">
-                    <button @click="onCancel">취소</button>
-                  </div>
-
-                  <div class="btn-r">
-                    <button
-                      class="emph"
-                      @click="onSave"
-                      :disabled="!isFormValid"
+                    <div
+                      class="seg-detail__row"
+                      v-for="item in data.segInfos"
+                      :key="item.id"
                     >
-                      저장
-                    </button>
+                      <div class="seg-name__list">
+                        <ul>
+                          <li>
+                            <AppInput
+                              type="text"
+                              placeholder="최대 20자 이내"
+                              :maxLength="20"
+                              v-model="item.name"
+                              style="flex: 1"
+                            />
+                            <div class="order-control">
+                              <button
+                                class="btn-common up"
+                                @click="onMoveUp(item.id)"
+                              >
+                                <i class="icon"></i></button
+                              ><button
+                                class="btn-common down"
+                                @click="onMoveDown(item.id)"
+                              >
+                                <i class="icon"></i>
+                              </button>
+                            </div>
+                            <button
+                              class="btn-delete"
+                              @click="onDeleteSegName(item.id)"
+                              :disabled="data.segInfos.length === 1"
+                            >
+                              삭제
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="row mt8">
+                        <div class="row-flex seg-inputs__header">
+                          <div class="select-label__comp">SQL</div>
+                          <button class="btn-s red">SQL 검증</button>
+                        </div>
+                        <textarea
+                          style="height: 150px"
+                          v-model="item.sql"
+                        ></textarea>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+        <div class="bottom-btns__controls footer-button-box">
+          <div class="btn-l">
+            <button @click="onCancel">취소</button>
+          </div>
+          <div class="btn-r">
+            <button class="emph" @click="onSave" :disabled="!isFormValid">
+              저장
+            </button>
           </div>
         </div>
       </section>
@@ -233,15 +237,13 @@ const data = ref({
     name: '',
   },
   segExplain: '',
-  segInfos: {
-    segName: [
-      {
-        id: randomKey(),
-        name: '',
-      },
-    ],
-    sql: '',
-  },
+  segInfos: [
+    {
+      id: randomKey(),
+      name: '',
+      sql: '',
+    },
+  ],
 });
 
 //세그 그룹
@@ -270,35 +272,35 @@ const onColumNameRemove = () => {
 
 const onDeleteSegName = id => {
   // if (data.value.segInfos.segName.length === 1) return;
-  data.value.segInfos.segName = data.value.segInfos.segName.filter(
-    item => item.id !== id,
-  );
+  data.value.segInfos = data.value.segInfos.filter(item => item.id !== id);
 };
 
 const onAddSegName = () => {
-  data.value.segInfos.segName.push({
+  data.value.segInfos.push({
     id: randomKey(),
     name: '',
+    sql: '',
   });
+  moveToScrollBottom();
 };
 
 const onMoveUp = id => {
   console.log('위로 이동');
-  const index = data.value.segInfos.segName.findIndex(item => item.id === id);
+  const index = data.value.segInfos.findIndex(item => item.id === id);
   if (index > 0) {
-    const temp = data.value.segInfos.segName[index - 1];
-    data.value.segInfos.segName[index - 1] = data.value.segInfos.segName[index];
-    data.value.segInfos.segName[index] = temp;
+    const temp = data.value.segInfos[index - 1];
+    data.value.segInfos[index - 1] = data.value.segInfos[index];
+    data.value.segInfos[index] = temp;
   }
 };
 
 const onMoveDown = id => {
   console.log('아래로 이동');
-  const index = data.value.segInfos.segName.findIndex(item => item.id === id);
-  if (index < data.value.segInfos.segName.length - 1) {
-    const temp = data.value.segInfos.segName[index + 1];
-    data.value.segInfos.segName[index + 1] = data.value.segInfos.segName[index];
-    data.value.segInfos.segName[index] = temp;
+  const index = data.value.segInfos.findIndex(item => item.id === id);
+  if (index < data.value.segInfos.length - 1) {
+    const temp = data.value.segInfos[index + 1];
+    data.value.segInfos[index + 1] = data.value.segInfos[index];
+    data.value.segInfos[index] = temp;
   }
 };
 
@@ -314,6 +316,18 @@ const onCancel = () => {
   console.log('취소');
 };
 
+const scrollContainer = ref(null);
+const moveToScrollBottom = () => {
+  if (scrollContainer.value) {
+    setTimeout(() => {
+      scrollContainer.value.scrollTo({
+        top: scrollContainer.value.scrollHeight,
+        behavior: 'smooth',
+      });
+    });
+  }
+};
+
 const isFormValid = computed(() => {
   return (
     // data.value.segCode !== '' &&
@@ -323,8 +337,8 @@ const isFormValid = computed(() => {
     data.value.targetTable.value !== '' &&
     // data.value.columName.value !== '' &&
     data.value.segExplain !== '' &&
-    data.value.segInfos.segName.every(item => item.name !== '') &&
-    data.value.segInfos.sql !== ''
+    data.value.segInfos.every(item => item.name !== '') &&
+    data.value.segInfos.every(item => item.sql !== '')
   );
 });
 </script>
